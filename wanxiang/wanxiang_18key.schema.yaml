@@ -1,0 +1,382 @@
+# @format
+
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: wanxiang_18key
+  name: 自然万象·18键
+  version: "LTS"
+  author: amzxyz & Carlson24
+  description: 魔然+万象拼音Pro
+  dependencies:
+    - wanxiang_mixedcode
+    - wanxiang_reverse
+    - wanxiang_english
+
+grammar:
+  language: wanxiang-lts-zh-hans
+  collocation_max_length: 6
+  collocation_min_length: 2
+  collocation_penalty: -14
+  non_collocation_penalty: -6
+  weak_collocation_penalty: -100
+  rear_penalty: -18
+
+switches:
+  - name: ascii_mode
+    states: [, ]
+    reset: 0
+  - name: ascii_punct
+    states: [, ]
+    reset: 0
+  - name: full_shape
+    states: [, ]
+    reset: 0
+  - name: emoji
+    states: [, ]
+    reset: 0
+  - name: super_tips
+    states: [提示关, 提示开]
+    reset: 1
+  - name: prediction
+    states: [预测关, 预测开]
+    reset: 1
+  - name: chinese_english
+    states: [翻译关, 翻译开]
+    reset: 0
+  - options: [raw_input, tone_display, full_pinyin]
+    states: [原编码, 有声调, 无声调]
+    reset: 0
+  - options: [comment_off, fuzhu_hint, tone_hint]
+    states: [注释关, 辅助开, 读音开]
+    reset: 2
+  - options: [s2s, s2t, s2hk, s2tw]
+    states: [简体, 通繁, 港繁, 臺繁]
+    reset: 0
+
+engine:
+  processors:
+    - lua_processor@*wanxiang.user_predict*P
+    - lua_processor@*wanxiang.super_processor
+    - lua_processor@*wanxiang.super_sequence*P
+    - lua_processor@*wanxiang.super_tips
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - lua_processor@*wanxiang.key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - affix_segmentor@wanxiang_reverse
+    - affix_segmentor@add_user_dict
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - lua_translator@*wanxiang.user_predict*T
+    - lua_translator@*wanxiang.shijian
+    - lua_translator@*wanxiang.number_translator
+    - lua_translator@*wanxiang.super_calculator
+    - lua_translator@*wanxiang.input_statistics
+    - lua_translator@*unicode
+    - lua_translator@*uuid
+    - table_translator@custom_phrase
+    - table_translator@wanxiang_english
+    - table_translator@wanxiang_mixedcode
+    - reverse_lookup_translator@wanxiang_reverse
+    - script_translator@user_dict_set
+    - script_translator@add_user_dict
+  filters:
+    - lua_filter@*wanxiang.auto_phrase
+    - lua_filter@*wanxiang.super_lookup
+    - lua_filter@*wanxiang.super_english
+    - lua_filter@*wanxiang.super_comment_preedit
+    - lua_filter@*wanxiang.super_replacer
+    - lua_filter@*wanxiang.super_filter
+    - lua_filter@*wanxiang.super_sequence*F
+    - lua_filter@*wanxiang.user_predict*F
+    - uniquifier
+
+super_comment:
+  candidate_length: 8
+  cand_type:
+    user_phrase: " "
+    sentence: " "
+    phrase: " ▪"
+    table: " ✬"
+    user_table: " "
+    completion: " ⋙"
+    abbrev: " "
+    predict: " ∞"
+    fallback: " ~"
+
+super_processor:
+  enable_backspace_limit: true
+  enable_seg_loop: true
+  enable_tone_fallback: true
+  enable_predict_space: false
+  kp_number_mode: auto
+  limit_repeated: "16,64"
+  select_character: "bracketleft, bracketright"
+
+user_predict:
+  mobile_predict_style: post
+  max_candidates: 5
+  max_predictions: 10
+  expiry_days: 90
+  activation_days: 7
+  max_memory_branches: 15
+  decay_rate: 0.85
+  enable_predict_space: true
+  context_timeout: 5000
+
+super_tips:
+  tips_key: "comma"
+  files:
+    - lua/data/tips_show.txt
+    - lua/data/tips_moran_chaifen.txt
+
+super_replacer:
+  db_name: "lua/userdata/replacer_18key"
+  comment_format: "〔%s〕"
+  chain: true
+  rules:
+    - option: emoji
+      mode: append
+      comment_mode: none
+      tags: [abc]
+      prefix: "_em_"
+      files:
+        - lua/data/emoji.txt
+    - option: chinese_english
+      mode: append
+      comment_mode: none
+      tags: [abc]
+      prefix: "_en_"
+      files:
+        - lua/data/english_chinese.txt
+        - lua/data/chinese_english.txt
+    - option: true
+      mode: append
+      comment_mode: none
+      tags: [abc]
+      prefix: "_ot_"
+      files:
+        - lua/data/others.txt
+    - option: [s2t, s2hk, s2tw]
+      mode: replace
+      comment_mode: append
+      sentence: true
+      tags: [abc]
+      prefix: "_s2t_"
+      files:
+        - lua/data/STCharacters.txt
+        - lua/data/STPhrases.txt
+    - option: s2hk
+      mode: replace
+      comment_mode: append
+      sentence: true
+      tags: [abc]
+      prefix: "_s2hk_"
+      files:
+        - lua/data/HKVariants.txt
+    - option: s2tw
+      mode: replace
+      comment_mode: append
+      sentence: true
+      tags: [abc]
+      prefix: "_s2tw_"
+      files:
+        - lua/data/TWVariants.txt
+    - option: true
+      exclude_types: [pinyin]
+      mode: abbrev
+      tags: [abc]
+      prefix: "_abbr_"
+      abbrev_rule: "100,1"
+      files:
+        - user_abbrev.txt
+        - lua/data/moran_fixed.txt
+    - option: true
+      mode: comment
+      comment_mode: none
+      tags: [abc]
+      prefix: "_comt_"
+      files:
+        - lua/data/english_chinese.txt
+        - lua/data/moran_commit.txt
+
+translator:
+  dictionary: wanxiang
+  prism: wanxiang_18key
+  enable_completion: true
+  enable_user_dict: false
+  contextual_suggestions: true
+  max_sentences: 3
+  max_homophones: 8
+  enable_correction: false
+  initial_quality: 4
+  spelling_hints: 50
+  always_show_comments: true
+  comment_format:
+
+custom_phrase:
+  dictionary: ""
+  user_dict: user_phrase
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: 99
+
+wanxiang_english:
+  dictionary: wanxiang_english
+  user_dict: wanxiang_en
+  enable_completion: true
+  initial_quality: 2.1
+  comment_format:
+    - xform/^~.+$//
+  english_spacing: off
+  spacing_timeout: 5
+  max_candidates: 0
+  trigger: "\\"
+
+wanxiang_mixedcode:
+  dictionary: wanxiang_mixedcode
+  db_class: stabledb
+  enable_completion: true
+  enable_sentence: false
+  initial_quality: 2
+  comment_format:
+    - xform/.*//
+
+wanxiang_reverse:
+  tag: wanxiang_reverse
+  dictionary: wanxiang_reverse
+  enable_completion: true
+  prefix: "`"
+  tips: "〔反查：拆分|笔画〕"
+
+wanxiang_lookup:
+  tags: [abc, add_user_dict]
+  key: "`"
+  lookup: [wanxiang_reverse]
+  enable_tone: true
+  data_source: ["aux", "db"]
+
+recognizer:
+  patterns:
+    punct: "^/([0-9]|10|[A-Za-z]+)$"
+    wanxiang_reverse: "^`[A-Za-z;]*$"
+    add_user_dict: "^``[A-Za-z/`']*$"
+    unicode: "^U[a-f0-9]+"
+    number: "^R[0-9]+[.]?[0-9]*"
+    sjc: "^[/o]rc\\d+[-+=op]?$"
+    yr1: "^N0[1-9]?0?[1-9]?"
+    yr2: "^N1[02]?0?[1-9]?"
+    yr3: "^N0[1-9]?[1-2]?[1-9]?"
+    yr4: "^N1[02]?[1-2]?[1-9]?"
+    yr5: "^N0[1-9]?3?[01]?"
+    yr6: "^N1[02]?3?[01]?"
+    nyr1: "^N19?[0-9]?[0-9]?[0-1]?[0-9]?[0-9]?[0-9]?"
+    nyr2: "^N20?[0-9]?[0-9]?[0-1]?[0-9]?[0-9]?[0-9]?"
+    calculator: "^=.*$"
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$"
+    htj: "^/htj.*$"
+
+punctuator:
+  digit_separators: ":,."
+  __include: wanxiang_symbols:/symbol_table
+
+key_binder:
+  import_preset: default
+  shijian_keys: ["/", "o"]
+  bindings:
+    - { when: has_menu, accept: minus, send: Page_Up }
+    - { when: has_menu, accept: equal, send: Page_Down }
+    - { when: always, toggle: ascii_punct, accept: Control+Shift+3 }
+    - { when: always, toggle: ascii_punct, accept: Control+Shift+numbersign }
+    - { when: composing, accept: Alt+Left, send: Shift+Left }
+    - { when: composing, accept: Alt+Right, send: Shift+Right }
+    - { when: composing, accept: Control+w, send: Control+BackSpace }
+    - { when: has_menu, accept: semicolon, send: 2 }
+    - { when: has_menu, accept: "Control+e", toggle: chinese_english }
+    - { when: has_menu, accept: "Tab", send: "Control+Right" }
+    - { when: composing, accept: "Tab", send: "Control+Right" }
+    - { when: composing, accept: "Control+Tab", send_sequence: "{Home}{Shift+Right}{1}{Shift+Right}" }
+    - { match: "^.*`$", accept: "`", send_sequence: "{BackSpace}{Home}{`}{`}{End}" }
+    - { match: "^/$", accept: "/", send_sequence: "{space}" }
+    - { match: "^\\|$", accept: "|", send_sequence: "{space}" }
+    - { match: "^›+$", accept: "backslash", send_sequence: "{Clear}{backslash}" }
+    - { match: "^›+$", accept: "comma", send_sequence: "{Clear}{comma}" }
+    - { match: "^›+$", accept: "period", send_sequence: "{Clear}{period}" }
+    - { match: "^›+$", accept: "Return", send_sequence: "{Clear}{Return}" }
+
+editor:
+  bindings:
+    space: confirm
+    Return: commit_raw_input
+    Control+Return: commit_script_text
+    Control+Shift+Return: commit_comment
+    BackSpace: revert
+    Delete: delete
+    Control+BackSpace: back_syllable
+    Control+Delete: delete_candidate
+    Escape: cancel
+
+navigator:
+  bindings:
+    Left: left_by_char_no_loop
+    Right: right_by_char_no_loop
+    Shift+Left: left_by_syllable
+    Shift+Right: right_by_syllable
+
+speller:
+  auto_select: true
+  auto_select_pattern: ^@(\w|@)+|^\w{3}\w+
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA1234567890`;/\@|›
+  initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/@|›
+  delimiter: " '"
+  visual_delimiter: " "
+  algebra:
+    __patch:
+      - "wanxiang_algebra:/模糊音/in_ing"
+      - "wanxiang_algebra:/zrm_pro"
+      - "wanxiang_algebra:/18key"
+
+user_dict_set:
+  dictionary: wanxiang
+  prism: wanxiang_18key
+  initial_quality: 2.5
+  enable_completion: false
+  enable_sentence: false
+  core_word_length: 4
+  max_word_length: 7
+  contextual_suggestions: false
+  max_homophones: 8
+  spelling_hints: 50
+  comment_format:
+  enable_user_dict: true
+  user_dict: wanxiang_zrm
+
+add_user_dict:
+  tag: add_user_dict
+  dictionary: wanxiang
+  prism: wanxiang_18key
+  initial_quality: -1
+  user_dict: wanxiang_zrm
+  enable_completion: true
+  enable_user_dict: true
+  spelling_hints: 50
+  enable_auto_phrase: true
+  comment_format:
+  prefix: "``"
+  tips: "〔开始造词〕"

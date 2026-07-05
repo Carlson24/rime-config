@@ -1,0 +1,10 @@
+**/build
+**/dicts/*
+**/sync/*
+**/dist/*
+**/*.userdb
+**/user.yaml
+**/installation.yaml
+**/user_*.txt
+**/*.gram
+**/*.custom.yaml

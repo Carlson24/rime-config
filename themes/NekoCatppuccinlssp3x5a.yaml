@@ -1,0 +1,3088 @@
+# @format
+
+preset_keyboards:
+  triple_pinyin_lssp:
+    __include: "NekoCatppuccin.trime.yaml:/global_offset"
+    lock: false
+    ascii_mode: 0
+    label_transform: none
+    rows:
+      - height: 0.13
+        keys:
+          - { click: "1", label_symbol: "!", swipe_up: "!", __include: "NekoCatppuccin.trime.yaml:/key_style/sj" }
+          - { click: "2", label_symbol: "@", swipe_up: "@", __include: "NekoCatppuccin.trime.yaml:/key_style/sj" }
+          - { click: "3", label_symbol: "#", swipe_up: "#", __include: "NekoCatppuccin.trime.yaml:/key_style/sj" }
+          - { click: "4", label_symbol: "$", swipe_up: "$", __include: "NekoCatppuccin.trime.yaml:/key_style/sj" }
+          - { click: "5", label_symbol: "%", swipe_up: "%", __include: "NekoCatppuccin.trime.yaml:/key_style/sj" }
+          - { click: "6", label_symbol: "^", swipe_up: "^", __include: "NekoCatppuccin.trime.yaml:/key_style/sj" }
+          - { click: "7", label_symbol: "&", swipe_up: "&", __include: "NekoCatppuccin.trime.yaml:/key_style/sj" }
+          - { click: "8", label_symbol: "*", swipe_up: "*", __include: "NekoCatppuccin.trime.yaml:/key_style/sj" }
+          - { click: "9", label_symbol: "(", swipe_up: "(", __include: "NekoCatppuccin.trime.yaml:/key_style/sj" }
+          - { click: "0", label_symbol: ")", swipe_up: ")", __include: "NekoCatppuccin.trime.yaml:/key_style/sj" }
+      - keys:
+          - { width: 0.125, click: "fancha", __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+          - { click: "q", label: "b", label_symbol: "<l> B/A</l><r>~ </r>", swipe_up: "~", popup: ["B", "A"], hint: "a,an,ang", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "w", label: "p", label_symbol: "<l> P/E</l><r>\\< </r>", swipe_up: "<", popup: ["P", "E"], hint: "ai,ei,ao", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "e", label: "m", label_symbol: "<l> M/O</l><r>\\ </r>", swipe_up: "\\", popup: ["M", "O"], hint: "o,ou,ong", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "r", label: "r <b>f</b>", label_symbol: "<l> R/F</l><r>> </r>", swipe_up: ">", popup: ["R", "F"], hint: "e,en,eng", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "t", label: "zh <b>z</b>", label_symbol: "<l> V/Z</l><r>+ </r>", swipe_up: "+", popup: ["V", "Z"], hint: "er,üan", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { width: 0.125, click: "BackSpace", label: "ic@backspace_outline", key_text_size: 20, __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+      - keys:
+          - { width: 0.125, click: "Up", __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+          - { click: "a", label: "d", label_symbol: "<l> D/<c=mauve><b>一</b></c></l><r>_ </r>", swipe_up: "_", popup: ["D"], hint: "ia,ian,iang", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "s", label: "t", label_symbol: "<l> T/<c=mauve><b>丨</b></c></l><r>; </r>", swipe_up: ";", popup: ["T", "·", "§"], hint: "iai,i,iao", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "d", label: "n", label_symbol: "<l> N/<c=mauve><b>丿</b></c></l><r>| </r>", swipe_up: "|", popup: ["N"], hint: "io,iu,iong", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "f", label: "l", label_symbol: "<l> L/<c=mauve><b>丶</b></c></l><r>? </r>", swipe_up: "?", popup: ["L", "?", "¿"], hint: "ie,in,ing", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "g", label: "ch <b>c</b>", label_symbol: "<l> I/C/<c=mauve><b>𠃋</b></c></l><r>- </r>", swipe_up: "-", popup: ["I", "C"], hint: "ü", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { width: 0.125, click: "Left", __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+      - keys:
+          - { width: 0.125, click: "Down", __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+          - { click: "z", label: "g <b>j</b>", label_symbol: "<l> G/J</l><r>: </r>", swipe_up: ":", popup: ["G", "J"], hint: "ua,uan,uang", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "x", label: "k <b>q</b>", label_symbol: "<l> K/Q</l><r>'ic@content_copy' </r>", popup: ["K", "Q", "copy"], hint: "uai,ui", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "c", label: "h <b>x</b>", label_symbol: "<l> H/X</l><r>'ic@content_paste' </r>", popup: ["H", "X", "paste"], hint: "uo,u", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "v", label: "w <b>y</b>", label_symbol: "<l> W/Y</l><r>/ </r>", swipe_up: "/", popup: ["W", "Y"], hint: "∅,un,ueng", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { click: "b", label: "sh <b>s</b>", label_symbol: "<l> U/S</l><r>= </r>", swipe_up: "=", popup: ["U", "S"], hint: "üe,ün", __include: "NekoCatppuccin.trime.yaml:/key_style/lssp_zj" }
+          - { width: 0.125, click: "Right", __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+      - keys:
+          - { width: 0.125, click: "Keyboard_number", label_symbol: "ic@calculator_variant_outline", popup: ["wxcalc", "Refresh", "Deploy"], has_menu: Tab, key_text_size: 20, __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+          - { click: "'", label_symbol: '"', swipe_up: '"', hint: "ic@lightbulb_outline", swipe_down: "{Hint_switch}", __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+          - { click: ",", label: "，", label_symbol: "[", swipe_up: "[", hint: "ic@web", swipe_down: IME_switch, __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+          - { width: 0.35, click: "Space", long_click: "VOICE_ASSIST", hint: "◕‿◕", swipe_down: "liquid_keyboard_switch", key_text_offset_y: 1 }
+          - { click: ".", label: "。", label_symbol: "]", swipe_up: "]", hint: "ic@list_box_outline", swipe_down: Menu, __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+          - { click: "Mode_switch", label_symbol: "ic@keyboard_settings_outline", popup: ["Keyboard_wanxiang_zrm", "Keyboard_wanxiang_yoemin", "Keyboard_wanxiang_english", "Keyboard_wanxiang_18key", "Keyboard_wanxiang_t9"], hint: "ic@palette_swatch_outline", swipe_down: Theme_settings, has_menu: "has_menu_semicolon", __include: "NekoCatppuccin.trime.yaml:/key_style/功能" }
+          - { width: 0.125, click: "Return", label: "enter_labels", __include: "NekoCatppuccin.trime.yaml:/key_style/回车" }
+
+  wanxiang_yoemin:
+    __include: "preset_keyboards/triple_pinyin_lssp"
+    __patch:
+      dynamic_mode: true
+      dynamic_original: "wanxiang_yoemin"
+      "rows/@1/keys/@1/+": { dynamic: lssp_two_b }
+      "rows/@1/keys/@2/+": { dynamic: lssp_two_p }
+      "rows/@1/keys/@3/+": { dynamic: lssp_two_m }
+      "rows/@1/keys/@4/+": { dynamic: lssp_two_rf }
+      "rows/@1/keys/@5/+": { dynamic: lssp_two_zhz }
+      "rows/@2/keys/@1/+": { dynamic: lssp_two_d }
+      "rows/@2/keys/@2/+": { dynamic: lssp_two_t }
+      "rows/@2/keys/@3/+": { dynamic: lssp_two_n }
+      "rows/@2/keys/@4/+": { dynamic: lssp_two_l }
+      "rows/@2/keys/@5/+": { dynamic: lssp_two_chc }
+      "rows/@3/keys/@1/+": { dynamic: lssp_two_gj }
+      "rows/@3/keys/@2/+": { dynamic: lssp_two_kq }
+      "rows/@3/keys/@3/+": { dynamic: lssp_two_hx }
+      "rows/@3/keys/@4/+": { dynamic: lssp_two_wy }
+      "rows/@3/keys/@5/+": { dynamic: lssp_two_shs }
+
+  lssp_two_temp:
+    __include: "preset_keyboards/wanxiang_yoemin"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_aanang_default, key_text_size: 14 }
+      "rows/@1/keys/@2/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_aieiao_default, key_text_size: 14 }
+      "rows/@1/keys/@3/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_oouong_default, key_text_size: 14 }
+      "rows/@1/keys/@4/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_eeneng_default, key_text_size: 14 }
+      "rows/@1/keys/@5/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_ervan_default, key_text_size: 14 }
+      "rows/@2/keys/@1/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_iaianiang_default, key_text_size: 14 }
+      "rows/@2/keys/@2/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_iaiiiao_default, key_text_size: 14 }
+      "rows/@2/keys/@3/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_ioiuiong_default, key_text_size: 14 }
+      "rows/@2/keys/@4/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_ieining_default, key_text_size: 14 }
+      "rows/@2/keys/@5/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_v_default, key_text_size: 14 }
+      "rows/@3/keys/@1/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_uauanuang_default, key_text_size: 14 }
+      "rows/@3/keys/@2/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_uaiui_default, key_text_size: 14 }
+      "rows/@3/keys/@3/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_uou_default, key_text_size: 14 }
+      "rows/@3/keys/@4/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_unueng_default, key_text_size: 14 }
+      "rows/@3/keys/@5/+": { label: "<c=overlay1>∅</c>", dynamic: lssp_three_vevn_default, key_text_size: 14 }
+
+  lssp_three_temp:
+    __include: "preset_keyboards/wanxiang_yoemin"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@1/keys/@2/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@1/keys/@3/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@1/keys/@4/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@1/keys/@5/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@2/keys/@1/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@2/keys/@2/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@2/keys/@3/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@2/keys/@4/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@2/keys/@5/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@3/keys/@1/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@3/keys/@2/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@3/keys/@3/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@3/keys/@4/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+      "rows/@3/keys/@5/+": { label: "<c=overlay1>∅</c>", dynamic: .original, key_text_size: 18 }
+
+  lssp_three_aanang_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ā" }
+      "rows/@1/keys/@2/+": { label: "á" }
+      "rows/@1/keys/@3/+": { label: "ǎ" }
+      "rows/@1/keys/@4/+": { label: "à" }
+      "rows/@1/keys/@5/+": { label: "a" }
+      "rows/@2/keys/@1/+": { label: "ān" }
+      "rows/@2/keys/@2/+": { label: "án" }
+      "rows/@2/keys/@3/+": { label: "ǎn" }
+      "rows/@2/keys/@4/+": { label: "àn" }
+      "rows/@2/keys/@5/+": { label: "an" }
+      "rows/@3/keys/@1/+": { label: "āng" }
+      "rows/@3/keys/@2/+": { label: "áng" }
+      "rows/@3/keys/@3/+": { label: "ǎng" }
+      "rows/@3/keys/@4/+": { label: "àng" }
+      "rows/@3/keys/@5/+": { label: "ang" }
+
+  lssp_three_aieiao_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "āi" }
+      "rows/@1/keys/@2/+": { label: "ái" }
+      "rows/@1/keys/@3/+": { label: "ǎi" }
+      "rows/@1/keys/@4/+": { label: "ài" }
+      "rows/@1/keys/@5/+": { label: "ai" }
+      "rows/@2/keys/@1/+": { label: "ê̄" }
+      "rows/@2/keys/@2/+": { label: "ế" }
+      "rows/@2/keys/@3/+": { label: "ê̌" }
+      "rows/@2/keys/@4/+": { label: "ề" }
+      "rows/@2/keys/@5/+": { label: "ê" }
+      "rows/@3/keys/@1/+": { label: "āo" }
+      "rows/@3/keys/@2/+": { label: "áo" }
+      "rows/@3/keys/@3/+": { label: "ǎo" }
+      "rows/@3/keys/@4/+": { label: "ào" }
+      "rows/@3/keys/@5/+": { label: "ao" }
+
+  lssp_three_oouong_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ō" }
+      "rows/@1/keys/@2/+": { label: "ó" }
+      "rows/@1/keys/@3/+": { label: "ǒ" }
+      "rows/@1/keys/@4/+": { label: "ò" }
+      "rows/@1/keys/@5/+": { label: "o" }
+      "rows/@2/keys/@1/+": { label: "ōu" }
+      "rows/@2/keys/@2/+": { label: "óu" }
+      "rows/@2/keys/@3/+": { label: "ǒu" }
+      "rows/@2/keys/@4/+": { label: "òu" }
+      "rows/@2/keys/@5/+": { label: "ou" }
+      "rows/@3/keys/@1/+": { label: "ōng" }
+      "rows/@3/keys/@2/+": { label: "óng" }
+      "rows/@3/keys/@3/+": { label: "ǒng" }
+      "rows/@3/keys/@4/+": { label: "òng" }
+      "rows/@3/keys/@5/+": { label: "ong" }
+
+  lssp_three_eeneng_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ē" }
+      "rows/@1/keys/@2/+": { label: "é" }
+      "rows/@1/keys/@3/+": { label: "ě" }
+      "rows/@1/keys/@4/+": { label: "è" }
+      "rows/@1/keys/@5/+": { label: "e" }
+      "rows/@2/keys/@1/+": { label: "ēn" }
+      "rows/@2/keys/@2/+": { label: "én" }
+      "rows/@2/keys/@3/+": { label: "ěn" }
+      "rows/@2/keys/@4/+": { label: "èn" }
+      "rows/@2/keys/@5/+": { label: "en" }
+      "rows/@3/keys/@1/+": { label: "ēng" }
+      "rows/@3/keys/@2/+": { label: "éng" }
+      "rows/@3/keys/@3/+": { label: "ěng" }
+      "rows/@3/keys/@4/+": { label: "èng" }
+      "rows/@3/keys/@5/+": { label: "eng" }
+
+  lssp_three_ervan_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ēr" }
+      "rows/@1/keys/@2/+": { label: "ér" }
+      "rows/@1/keys/@3/+": { label: "ěr" }
+      "rows/@1/keys/@4/+": { label: "èr" }
+      "rows/@1/keys/@5/+": { label: "er" }
+      "rows/@2/keys/@1/+": { label: "üān" }
+      "rows/@2/keys/@2/+": { label: "üán" }
+      "rows/@2/keys/@3/+": { label: "üǎn" }
+      "rows/@2/keys/@4/+": { label: "üàn" }
+      "rows/@2/keys/@5/+": { label: "üan" }
+
+  lssp_three_iaianiang_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "iā" }
+      "rows/@1/keys/@2/+": { label: "iá" }
+      "rows/@1/keys/@3/+": { label: "iǎ" }
+      "rows/@1/keys/@4/+": { label: "ià" }
+      "rows/@1/keys/@5/+": { label: "ia" }
+      "rows/@2/keys/@1/+": { label: "iān" }
+      "rows/@2/keys/@2/+": { label: "ián" }
+      "rows/@2/keys/@3/+": { label: "iǎn" }
+      "rows/@2/keys/@4/+": { label: "iàn" }
+      "rows/@2/keys/@5/+": { label: "ian" }
+      "rows/@3/keys/@1/+": { label: "iāng" }
+      "rows/@3/keys/@2/+": { label: "iáng" }
+      "rows/@3/keys/@3/+": { label: "iǎng" }
+      "rows/@3/keys/@4/+": { label: "iàng" }
+      "rows/@3/keys/@5/+": { label: "iang" }
+
+  lssp_three_iaiiiao_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "iāi" }
+      "rows/@1/keys/@2/+": { label: "iái" }
+      "rows/@1/keys/@3/+": { label: "iǎi" }
+      "rows/@1/keys/@4/+": { label: "iài" }
+      "rows/@1/keys/@5/+": { label: "iai" }
+      "rows/@2/keys/@1/+": { label: "ī" }
+      "rows/@2/keys/@2/+": { label: "í" }
+      "rows/@2/keys/@3/+": { label: "ǐ" }
+      "rows/@2/keys/@4/+": { label: "ì" }
+      "rows/@2/keys/@5/+": { label: "i" }
+      "rows/@3/keys/@1/+": { label: "iāo" }
+      "rows/@3/keys/@2/+": { label: "iáo" }
+      "rows/@3/keys/@3/+": { label: "iǎo" }
+      "rows/@3/keys/@4/+": { label: "iào" }
+      "rows/@3/keys/@5/+": { label: "iao" }
+
+  lssp_three_ioiuiong_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "iō" }
+      "rows/@1/keys/@2/+": { label: "ió" }
+      "rows/@1/keys/@3/+": { label: "iǒ" }
+      "rows/@1/keys/@4/+": { label: "iò" }
+      "rows/@1/keys/@5/+": { label: "io" }
+      "rows/@2/keys/@1/+": { label: "iū" }
+      "rows/@2/keys/@2/+": { label: "iú" }
+      "rows/@2/keys/@3/+": { label: "iǔ" }
+      "rows/@2/keys/@4/+": { label: "iù" }
+      "rows/@2/keys/@5/+": { label: "iu" }
+      "rows/@3/keys/@1/+": { label: "iōng" }
+      "rows/@3/keys/@2/+": { label: "ióng" }
+      "rows/@3/keys/@3/+": { label: "iǒng" }
+      "rows/@3/keys/@4/+": { label: "iòng" }
+      "rows/@3/keys/@5/+": { label: "iong" }
+
+  lssp_three_ieining_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "iē" }
+      "rows/@1/keys/@2/+": { label: "ié" }
+      "rows/@1/keys/@3/+": { label: "iě" }
+      "rows/@1/keys/@4/+": { label: "iè" }
+      "rows/@1/keys/@5/+": { label: "ie" }
+      "rows/@2/keys/@1/+": { label: "īn" }
+      "rows/@2/keys/@2/+": { label: "ín" }
+      "rows/@2/keys/@3/+": { label: "ǐn" }
+      "rows/@2/keys/@4/+": { label: "ìn" }
+      "rows/@2/keys/@5/+": { label: "in" }
+      "rows/@3/keys/@1/+": { label: "īng" }
+      "rows/@3/keys/@2/+": { label: "íng" }
+      "rows/@3/keys/@3/+": { label: "ǐng" }
+      "rows/@3/keys/@4/+": { label: "ìng" }
+      "rows/@3/keys/@5/+": { label: "ing" }
+
+  lssp_three_v_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@1/+": { label: "ǖ" }
+      "rows/@3/keys/@2/+": { label: "ǘ" }
+      "rows/@3/keys/@3/+": { label: "ǚ" }
+      "rows/@3/keys/@4/+": { label: "ǜ" }
+      "rows/@3/keys/@5/+": { label: "ü" }
+
+  lssp_three_uauanuang_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "uā" }
+      "rows/@1/keys/@2/+": { label: "uá" }
+      "rows/@1/keys/@3/+": { label: "uǎ" }
+      "rows/@1/keys/@4/+": { label: "uà" }
+      "rows/@1/keys/@5/+": { label: "ua" }
+      "rows/@2/keys/@1/+": { label: "uān" }
+      "rows/@2/keys/@2/+": { label: "uán" }
+      "rows/@2/keys/@3/+": { label: "uǎn" }
+      "rows/@2/keys/@4/+": { label: "uàn" }
+      "rows/@2/keys/@5/+": { label: "uan" }
+      "rows/@3/keys/@1/+": { label: "uāng" }
+      "rows/@3/keys/@2/+": { label: "uáng" }
+      "rows/@3/keys/@3/+": { label: "uǎng" }
+      "rows/@3/keys/@4/+": { label: "uàng" }
+      "rows/@3/keys/@5/+": { label: "uang" }
+
+  lssp_three_uaiui_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "uāi" }
+      "rows/@1/keys/@2/+": { label: "uái" }
+      "rows/@1/keys/@3/+": { label: "uǎi" }
+      "rows/@1/keys/@4/+": { label: "uài" }
+      "rows/@1/keys/@5/+": { label: "uai" }
+      "rows/@2/keys/@1/+": { label: "uī" }
+      "rows/@2/keys/@2/+": { label: "uí" }
+      "rows/@2/keys/@3/+": { label: "uǐ" }
+      "rows/@2/keys/@4/+": { label: "uì" }
+      "rows/@2/keys/@5/+": { label: "ui" }
+
+  lssp_three_uou_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "uō" }
+      "rows/@1/keys/@2/+": { label: "uó" }
+      "rows/@1/keys/@3/+": { label: "uǒ" }
+      "rows/@1/keys/@4/+": { label: "uò" }
+      "rows/@1/keys/@5/+": { label: "uo" }
+      "rows/@3/keys/@1/+": { label: "ū" }
+      "rows/@3/keys/@2/+": { label: "ú" }
+      "rows/@3/keys/@3/+": { label: "ǔ" }
+      "rows/@3/keys/@4/+": { label: "ù" }
+      "rows/@3/keys/@5/+": { label: "u" }
+
+  lssp_three_unueng_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "ūn" }
+      "rows/@2/keys/@2/+": { label: "ún" }
+      "rows/@2/keys/@3/+": { label: "ǔn" }
+      "rows/@2/keys/@4/+": { label: "ùn" }
+      "rows/@2/keys/@5/+": { label: "un" }
+      "rows/@3/keys/@1/+": { label: "uēng" }
+      "rows/@3/keys/@2/+": { label: "uéng" }
+      "rows/@3/keys/@3/+": { label: "uěng" }
+      "rows/@3/keys/@4/+": { label: "uèng" }
+      "rows/@3/keys/@5/+": { label: "ueng" }
+
+  lssp_three_vevn_default:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "üē" }
+      "rows/@1/keys/@2/+": { label: "üé" }
+      "rows/@1/keys/@3/+": { label: "üě" }
+      "rows/@1/keys/@4/+": { label: "üè" }
+      "rows/@1/keys/@5/+": { label: "üe" }
+      "rows/@2/keys/@1/+": { label: "ǖn" }
+      "rows/@2/keys/@2/+": { label: "ǘn" }
+      "rows/@2/keys/@3/+": { label: "ǚn" }
+      "rows/@2/keys/@4/+": { label: "ǜn" }
+      "rows/@2/keys/@5/+": { label: "ün" }
+
+  lssp_two_b:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ba ban\nbang", dynamic: lssp_three_baanang }
+      "rows/@1/keys/@2/+": { label: "bai bei\nbao", dynamic: lssp_three_baieiao }
+      "rows/@1/keys/@3/+": { label: "bo", dynamic: lssp_three_bo }
+      "rows/@1/keys/@4/+": { label: "ben beng", dynamic: lssp_three_beneng }
+      "rows/@2/keys/@1/+": { label: "bian\nbiang", dynamic: lssp_three_bianiang }
+      "rows/@2/keys/@2/+": { label: "bi biao", dynamic: lssp_three_biiao }
+      "rows/@2/keys/@4/+": { label: "bie bin\nbing", dynamic: lssp_three_bieining }
+      "rows/@3/keys/@3/+": { label: "bu", dynamic: lssp_three_bu }
+
+  lssp_two_p:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "pa pan\npang", dynamic: lssp_three_paanang }
+      "rows/@1/keys/@2/+": { label: "pai pei\npao", dynamic: lssp_three_paieiao }
+      "rows/@1/keys/@3/+": { label: "po pou", dynamic: lssp_three_poou }
+      "rows/@1/keys/@4/+": { label: "pen peng", dynamic: lssp_three_peneng }
+      "rows/@2/keys/@1/+": { label: "pian", dynamic: lssp_three_pian }
+      "rows/@2/keys/@2/+": { label: "pi piao", dynamic: lssp_three_piiao }
+      "rows/@2/keys/@4/+": { label: "pie pin\nping", dynamic: lssp_three_pieining }
+      "rows/@3/keys/@3/+": { label: "pu", dynamic: lssp_three_pu }
+
+  lssp_two_m:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ma man\nmang", dynamic: lssp_three_maanang }
+      "rows/@1/keys/@2/+": { label: "mai mei\nmao", dynamic: lssp_three_maieiao }
+      "rows/@1/keys/@3/+": { label: "mo mou", dynamic: lssp_three_moou }
+      "rows/@1/keys/@4/+": { label: "me men\nmeng", dynamic: lssp_three_meeneng }
+      "rows/@2/keys/@1/+": { label: "mian", dynamic: lssp_three_mian }
+      "rows/@2/keys/@2/+": { label: "mi miao", dynamic: lssp_three_miiao }
+      "rows/@2/keys/@3/+": { label: "miu", dynamic: lssp_three_miu }
+      "rows/@2/keys/@4/+": { label: "mie min\nming", dynamic: lssp_three_mieining }
+      "rows/@3/keys/@3/+": { label: "mu", dynamic: lssp_three_mu }
+
+  lssp_two_rf:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ran rang", dynamic: lssp_three_ranang }
+      "rows/@1/keys/@2/+": { label: "rao", dynamic: lssp_three_rao }
+      "rows/@1/keys/@3/+": { label: "ri rou\nrong", dynamic: lssp_three_riouong }
+      "rows/@1/keys/@4/+": { label: "re ren\nreng", dynamic: lssp_three_reeneng }
+      "rows/@2/keys/@1/+": { label: "fa fan\nfang", dynamic: lssp_three_faanang }
+      "rows/@2/keys/@2/+": { label: "fei fiao", dynamic: lssp_three_feiiao }
+      "rows/@2/keys/@3/+": { label: "fo fou", dynamic: lssp_three_foou }
+      "rows/@2/keys/@4/+": { label: "fen feng", dynamic: lssp_three_feneng }
+      "rows/@2/keys/@5/+": { label: "fu", dynamic: lssp_three_fu }
+      "rows/@3/keys/@1/+": { label: "rua ruan", dynamic: lssp_three_ruauan }
+      "rows/@3/keys/@2/+": { label: "rui", dynamic: lssp_three_rui }
+      "rows/@3/keys/@3/+": { label: "ruo ru", dynamic: lssp_three_ruou }
+      "rows/@3/keys/@4/+": { label: "run", dynamic: lssp_three_run }
+
+  lssp_two_zhz:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zha zhan\nzhang", dynamic: lssp_three_zhaanang }
+      "rows/@1/keys/@2/+": { label: "zhai zhei\nzhao", dynamic: lssp_three_zhaieiao }
+      "rows/@1/keys/@3/+": { label: "zhi zhou\nzhong", dynamic: lssp_three_zhiouong }
+      "rows/@1/keys/@4/+": { label: "zhe zhen\nzheng", dynamic: lssp_three_zheeneng }
+      "rows/@1/keys/@5/+": { label: "zuan", dynamic: lssp_three_zuan }
+      "rows/@2/keys/@1/+": { label: "za zan\nzang", dynamic: lssp_three_zaanang }
+      "rows/@2/keys/@2/+": { label: "zai zei\nzao", dynamic: lssp_three_zaieiao }
+      "rows/@2/keys/@3/+": { label: "zi zou\nzong", dynamic: lssp_three_ziouong }
+      "rows/@2/keys/@4/+": { label: "ze zen\nzeng", dynamic: lssp_three_zeeneng }
+      "rows/@2/keys/@5/+": { label: "zuo zui\nzu", dynamic: lssp_three_zuouiu }
+      "rows/@3/keys/@1/+": { label: "zhua|uan\nzhuang", dynamic: lssp_three_zhuauanuang }
+      "rows/@3/keys/@2/+": { label: "zhuai\nzhui", dynamic: lssp_three_zhuaiui }
+      "rows/@3/keys/@3/+": { label: "zhuo zhu", dynamic: lssp_three_zhuou }
+      "rows/@3/keys/@4/+": { label: "zhun", dynamic: lssp_three_zhun }
+      "rows/@3/keys/@5/+": { label: "zun", dynamic: lssp_three_zun }
+
+  lssp_two_d:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "da dan\ndang", dynamic: lssp_three_daanang }
+      "rows/@1/keys/@2/+": { label: "dai dei\ndao", dynamic: lssp_three_daieiao }
+      "rows/@1/keys/@3/+": { label: "dou dong", dynamic: lssp_three_douong }
+      "rows/@1/keys/@4/+": { label: "de den\ndeng", dynamic: lssp_three_deeneng }
+      "rows/@2/keys/@1/+": { label: "dia dian", dynamic: lssp_three_diaian }
+      "rows/@2/keys/@2/+": { label: "di diao", dynamic: lssp_three_diiao }
+      "rows/@2/keys/@3/+": { label: "diu", dynamic: lssp_three_diu }
+      "rows/@2/keys/@4/+": { label: "die ding", dynamic: lssp_three_dieing }
+      "rows/@3/keys/@1/+": { label: "duan", dynamic: lssp_three_duan }
+      "rows/@3/keys/@2/+": { label: "dui", dynamic: lssp_three_dui }
+      "rows/@3/keys/@3/+": { label: "duo du", dynamic: lssp_three_duou }
+      "rows/@3/keys/@4/+": { label: "dun", dynamic: lssp_three_dun }
+
+  lssp_two_t:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ta tan\ntang", dynamic: lssp_three_taanang }
+      "rows/@1/keys/@2/+": { label: "tai tei\ntao", dynamic: lssp_three_taieiao }
+      "rows/@1/keys/@3/+": { label: "tou tong", dynamic: lssp_three_touong }
+      "rows/@1/keys/@4/+": { label: "te teng", dynamic: lssp_three_teeng }
+      "rows/@2/keys/@1/+": { label: "tian", dynamic: lssp_three_tian }
+      "rows/@2/keys/@2/+": { label: "ti tiao", dynamic: lssp_three_tiiao }
+      "rows/@2/keys/@4/+": { label: "ie ting", dynamic: lssp_three_tieing }
+      "rows/@3/keys/@1/+": { label: "tuan", dynamic: lssp_three_tuan }
+      "rows/@3/keys/@2/+": { label: "tui", dynamic: lssp_three_tui }
+      "rows/@3/keys/@3/+": { label: "tuo tu", dynamic: lssp_three_tuou }
+      "rows/@3/keys/@4/+": { label: "tun", dynamic: lssp_three_tun }
+
+  lssp_two_n:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "na nan\nnang", dynamic: lssp_three_naanang }
+      "rows/@1/keys/@2/+": { label: "nai nei\nnao", dynamic: lssp_three_naieiao }
+      "rows/@1/keys/@3/+": { label: "nou nong", dynamic: lssp_three_nouong }
+      "rows/@1/keys/@4/+": { label: "ne nen\nneng", dynamic: lssp_three_neeneng }
+      "rows/@2/keys/@1/+": { label: "nian\nniang", dynamic: lssp_three_nianiang }
+      "rows/@2/keys/@2/+": { label: "ni niao", dynamic: lssp_three_niiao }
+      "rows/@2/keys/@3/+": { label: "niu", dynamic: lssp_three_niu }
+      "rows/@2/keys/@4/+": { label: "nie nin\nning", dynamic: lssp_three_nieining }
+      "rows/@2/keys/@5/+": { label: "nü", dynamic: lssp_three_nv }
+      "rows/@3/keys/@1/+": { label: "nuan", dynamic: lssp_three_nuan }
+      "rows/@3/keys/@3/+": { label: "nuo nu", dynamic: lssp_three_nuou }
+      "rows/@3/keys/@4/+": { label: "nun", dynamic: lssp_three_nun }
+      "rows/@3/keys/@5/+": { label: "nüe", dynamic: lssp_three_nve }
+
+  lssp_two_l:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "la lan\nlang", dynamic: lssp_three_laanang }
+      "rows/@1/keys/@2/+": { label: "lai lei\nlao", dynamic: lssp_three_laieiao }
+      "rows/@1/keys/@3/+": { label: "lo lou\nlong", dynamic: lssp_three_laieiao }
+      "rows/@1/keys/@4/+": { label: "le leng", dynamic: lssp_three_leeng }
+      "rows/@2/keys/@1/+": { label: "lia lian\nliang", dynamic: lssp_three_liaianiang }
+      "rows/@2/keys/@2/+": { label: "li liao", dynamic: lssp_three_liiao }
+      "rows/@2/keys/@3/+": { label: "liu", dynamic: lssp_three_liu }
+      "rows/@2/keys/@4/+": { label: "lie lin\nling", dynamic: lssp_three_lieining }
+      "rows/@2/keys/@5/+": { label: "lü", dynamic: lssp_three_lv }
+      "rows/@3/keys/@1/+": { label: "luan", dynamic: lssp_three_luan }
+      "rows/@3/keys/@3/+": { label: "luo lu", dynamic: lssp_three_luou }
+      "rows/@3/keys/@4/+": { label: "lun", dynamic: lssp_three_lun }
+      "rows/@3/keys/@5/+": { label: "lüe", dynamic: lssp_three_lve }
+
+  lssp_two_chc:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "cha chan\nchang", dynamic: lssp_three_chaanang }
+      "rows/@1/keys/@2/+": { label: "chai chao", dynamic: lssp_three_chaiao }
+      "rows/@1/keys/@3/+": { label: "chi chou\nchong", dynamic: lssp_three_chiouong }
+      "rows/@1/keys/@4/+": { label: "che chen\ncheng", dynamic: lssp_three_cheeneng }
+      "rows/@1/keys/@5/+": { label: "cuan", dynamic: lssp_three_cuan }
+      "rows/@2/keys/@1/+": { label: "ca can\ncang", dynamic: lssp_three_caanang }
+      "rows/@2/keys/@2/+": { label: "cai cao", dynamic: lssp_three_caiao }
+      "rows/@2/keys/@3/+": { label: "ci cou\ncong", dynamic: lssp_three_ciouong }
+      "rows/@2/keys/@4/+": { label: "ce cen\nceng", dynamic: lssp_three_ceeneng }
+      "rows/@2/keys/@5/+": { label: "cuo cui\ncu", dynamic: lssp_three_cuouiu }
+      "rows/@3/keys/@1/+": { label: "chua|uan\nchuang", dynamic: lssp_three_chuauanuang }
+      "rows/@3/keys/@2/+": { label: "chuai\nchui", dynamic: lssp_three_chuaiui }
+      "rows/@3/keys/@3/+": { label: "chuo chu", dynamic: lssp_three_chuou }
+      "rows/@3/keys/@4/+": { label: "chun", dynamic: lssp_three_chun }
+      "rows/@3/keys/@5/+": { label: "cun", dynamic: lssp_three_cun }
+
+  lssp_two_gj:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ga gan\ngang", dynamic: lssp_three_gaanang }
+      "rows/@1/keys/@2/+": { label: "gai gei\ngao", dynamic: lssp_three_gaieiao }
+      "rows/@1/keys/@3/+": { label: "gou gong", dynamic: lssp_three_gouong }
+      "rows/@1/keys/@4/+": { label: "ge gen\ngeng", dynamic: lssp_three_geeneng }
+      "rows/@1/keys/@5/+": { label: "juan", dynamic: lssp_three_jvan }
+      "rows/@2/keys/@1/+": { label: "jia jian\njiang", dynamic: lssp_three_jiaianiang }
+      "rows/@2/keys/@2/+": { label: "ji jiao", dynamic: lssp_three_jiiao }
+      "rows/@2/keys/@3/+": { label: "jiu\njiong", dynamic: lssp_three_jiuiong }
+      "rows/@2/keys/@4/+": { label: "jie jin\njing", dynamic: lssp_three_jieining }
+      "rows/@2/keys/@5/+": { label: "ju", dynamic: lssp_three_jv }
+      "rows/@3/keys/@1/+": { label: "gua guan\nguang", dynamic: lssp_three_guauanuang }
+      "rows/@3/keys/@2/+": { label: "guai gui", dynamic: lssp_three_guaiui }
+      "rows/@3/keys/@3/+": { label: "guo gu", dynamic: lssp_three_guou }
+      "rows/@3/keys/@4/+": { label: "gun", dynamic: lssp_three_gun }
+      "rows/@3/keys/@5/+": { label: "jue jun", dynamic: lssp_three_jvevn }
+
+  lssp_two_kq:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ka kan\nkang", dynamic: lssp_three_kaanang }
+      "rows/@1/keys/@2/+": { label: "kai kei\nkao", dynamic: lssp_three_kaieiao }
+      "rows/@1/keys/@3/+": { label: "kou kong", dynamic: lssp_three_kouong }
+      "rows/@1/keys/@4/+": { label: "ke ken\nkeng", dynamic: lssp_three_keeneng }
+      "rows/@1/keys/@5/+": { label: "quan", dynamic: lssp_three_qvan }
+      "rows/@2/keys/@1/+": { label: "qia qian\nqiang", dynamic: lssp_three_qiaianiang }
+      "rows/@2/keys/@2/+": { label: "qi qiao", dynamic: lssp_three_qiiao }
+      "rows/@2/keys/@3/+": { label: "qiu\nqiong", dynamic: lssp_three_qiuiong }
+      "rows/@2/keys/@4/+": { label: "qie qin\nqing", dynamic: lssp_three_qieining }
+      "rows/@2/keys/@5/+": { label: "qu", dynamic: lssp_three_qv }
+      "rows/@3/keys/@1/+": { label: "kua kuan\nkuang", dynamic: lssp_three_kuauanuang }
+      "rows/@3/keys/@2/+": { label: "kuai kui", dynamic: lssp_three_kuaiui }
+      "rows/@3/keys/@3/+": { label: "kuo ku", dynamic: lssp_three_kuou }
+      "rows/@3/keys/@4/+": { label: "kun", dynamic: lssp_three_kun }
+      "rows/@3/keys/@5/+": { label: "que qun", dynamic: lssp_three_qvevn }
+
+  lssp_two_hx:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ha han\nhang", dynamic: lssp_three_haanang }
+      "rows/@1/keys/@2/+": { label: "hai hei\nhao", dynamic: lssp_three_haieiao }
+      "rows/@1/keys/@3/+": { label: "hou hong", dynamic: lssp_three_houong }
+      "rows/@1/keys/@4/+": { label: "he hen\nheng", dynamic: lssp_three_heeneng }
+      "rows/@1/keys/@5/+": { label: "xuan", dynamic: lssp_three_xvan }
+      "rows/@2/keys/@1/+": { label: "xia xian\nxiang", dynamic: lssp_three_xiaianiang }
+      "rows/@2/keys/@2/+": { label: "xi xiao", dynamic: lssp_three_xiiao }
+      "rows/@2/keys/@3/+": { label: "xiu\nxiong", dynamic: lssp_three_xiuiong }
+      "rows/@2/keys/@4/+": { label: "xie xin\nxing", dynamic: lssp_three_xieining }
+      "rows/@2/keys/@5/+": { label: "xu", dynamic: lssp_three_xv }
+      "rows/@3/keys/@1/+": { label: "hua huan\nhuang", dynamic: lssp_three_huauanuang }
+      "rows/@3/keys/@2/+": { label: "huai hui", dynamic: lssp_three_huaiui }
+      "rows/@3/keys/@3/+": { label: "huo hu", dynamic: lssp_three_huou }
+      "rows/@3/keys/@4/+": { label: "hun", dynamic: lssp_three_hun }
+      "rows/@3/keys/@5/+": { label: "xue xun", dynamic: lssp_three_xvevn }
+
+  lssp_two_wy:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "a an\nang", dynamic: lssp_three_aanang }
+      "rows/@1/keys/@2/+": { label: "ai ê\nao", dynamic: lssp_three_aieiao }
+      "rows/@1/keys/@3/+": { label: "o ou", dynamic: lssp_three_oou }
+      "rows/@1/keys/@4/+": { label: "e en\neng", dynamic: lssp_three_eeneng }
+      "rows/@1/keys/@5/+": { label: "er yuan", dynamic: lssp_three_eryvan }
+      "rows/@2/keys/@1/+": { label: "ya yan\nyang", dynamic: lssp_three_yaanang }
+      "rows/@2/keys/@2/+": { label: "yi yao", dynamic: lssp_three_yiao }
+      "rows/@2/keys/@3/+": { label: "yo you \nyong", dynamic: lssp_three_yoouong }
+      "rows/@2/keys/@4/+": { label: "ye yin\nying", dynamic: lssp_three_yeining }
+      "rows/@2/keys/@5/+": { label: "yu", dynamic: lssp_three_yv }
+      "rows/@3/keys/@1/+": { label: "wa wan\nwang", dynamic: lssp_three_waanang }
+      "rows/@3/keys/@2/+": { label: "wai wei", dynamic: lssp_three_waiei }
+      "rows/@3/keys/@3/+": { label: "wo wu", dynamic: lssp_three_wou }
+      "rows/@3/keys/@4/+": { label: "wen weng", dynamic: lssp_three_weneng }
+      "rows/@3/keys/@5/+": { label: "yue yun", dynamic: lssp_three_yvevn }
+
+  lssp_two_shs:
+    __include: "preset_keyboards/lssp_two_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "sha shan\nshang", dynamic: lssp_three_shaanang }
+      "rows/@1/keys/@2/+": { label: "shai shei\nshao", dynamic: lssp_three_shaieiao }
+      "rows/@1/keys/@3/+": { label: "shi shou", dynamic: lssp_three_shiou }
+      "rows/@1/keys/@4/+": { label: "she shen\nsheng", dynamic: lssp_three_sheeneng }
+      "rows/@1/keys/@5/+": { label: "suan", dynamic: lssp_three_suan }
+      "rows/@2/keys/@1/+": { label: "sa san\nsang", dynamic: lssp_three_saanang }
+      "rows/@2/keys/@2/+": { label: "sai sao", dynamic: lssp_three_saiao }
+      "rows/@2/keys/@3/+": { label: "si sou\nsong", dynamic: lssp_three_siouong }
+      "rows/@2/keys/@4/+": { label: "se sen\nseng", dynamic: lssp_three_seeneng }
+      "rows/@2/keys/@5/+": { label: "suo sui\nsu", dynamic: lssp_three_suouiu }
+      "rows/@3/keys/@1/+": { label: "shua|uan\nshuang", dynamic: lssp_three_shuauanuang }
+      "rows/@3/keys/@2/+": { label: "shuai\nshui", dynamic: lssp_three_shuaiui }
+      "rows/@3/keys/@3/+": { label: "shuo shu", dynamic: lssp_three_shuou }
+      "rows/@3/keys/@4/+": { label: "shun", dynamic: lssp_three_shun }
+      "rows/@3/keys/@5/+": { label: "sun", dynamic: lssp_three_sun }
+
+  lssp_three_baanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "bā" }
+      "rows/@1/keys/@2/+": { label: "bá" }
+      "rows/@1/keys/@3/+": { label: "bǎ" }
+      "rows/@1/keys/@4/+": { label: "bà" }
+      "rows/@1/keys/@5/+": { label: "ba" }
+      "rows/@2/keys/@1/+": { label: "bān" }
+      "rows/@2/keys/@3/+": { label: "bǎn" }
+      "rows/@2/keys/@4/+": { label: "bàn" }
+      "rows/@2/keys/@5/+": { label: "ban" }
+      "rows/@3/keys/@1/+": { label: "bāng" }
+      "rows/@3/keys/@3/+": { label: "bǎng" }
+      "rows/@3/keys/@4/+": { label: "bàng" }
+      "rows/@3/keys/@5/+": { label: "bang" }
+
+  lssp_three_baieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "bāi" }
+      "rows/@1/keys/@2/+": { label: "bái" }
+      "rows/@1/keys/@3/+": { label: "bǎi" }
+      "rows/@1/keys/@4/+": { label: "bài" }
+      "rows/@1/keys/@5/+": { label: "bai" }
+      "rows/@2/keys/@1/+": { label: "bēi" }
+      "rows/@2/keys/@3/+": { label: "běi" }
+      "rows/@2/keys/@4/+": { label: "bèi" }
+      "rows/@2/keys/@5/+": { label: "bei" }
+      "rows/@3/keys/@1/+": { label: "bāo" }
+      "rows/@3/keys/@2/+": { label: "báo" }
+      "rows/@3/keys/@3/+": { label: "bǎo" }
+      "rows/@3/keys/@4/+": { label: "bào" }
+      "rows/@3/keys/@5/+": { label: "bao" }
+
+  lssp_three_bo:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "bō" }
+      "rows/@1/keys/@2/+": { label: "bó" }
+      "rows/@1/keys/@3/+": { label: "bǒ" }
+      "rows/@1/keys/@4/+": { label: "bò" }
+      "rows/@1/keys/@5/+": { label: "bo" }
+
+  lssp_three_beneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "bēn" }
+      "rows/@2/keys/@3/+": { label: "běn" }
+      "rows/@2/keys/@4/+": { label: "bèn" }
+      "rows/@2/keys/@5/+": { label: "ben" }
+      "rows/@3/keys/@1/+": { label: "bēng" }
+      "rows/@3/keys/@2/+": { label: "béng" }
+      "rows/@3/keys/@3/+": { label: "běng" }
+      "rows/@3/keys/@4/+": { label: "bèng" }
+      "rows/@3/keys/@5/+": { label: "beng" }
+
+  lssp_three_bianiang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "biān" }
+      "rows/@2/keys/@3/+": { label: "biǎn" }
+      "rows/@2/keys/@4/+": { label: "biàn" }
+      "rows/@2/keys/@5/+": { label: "bian" }
+      "rows/@3/keys/@2/+": { label: "biáng" }
+      "rows/@3/keys/@5/+": { label: "biang" }
+
+  lssp_three_biiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "bī" }
+      "rows/@2/keys/@2/+": { label: "bí" }
+      "rows/@2/keys/@3/+": { label: "bǐ" }
+      "rows/@2/keys/@4/+": { label: "bì" }
+      "rows/@2/keys/@5/+": { label: "bi" }
+      "rows/@3/keys/@1/+": { label: "biāo" }
+      "rows/@3/keys/@3/+": { label: "biǎo" }
+      "rows/@3/keys/@4/+": { label: "biào" }
+      "rows/@3/keys/@5/+": { label: "biao" }
+
+  lssp_three_bieining:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "biē" }
+      "rows/@1/keys/@2/+": { label: "bié" }
+      "rows/@1/keys/@3/+": { label: "biě" }
+      "rows/@1/keys/@4/+": { label: "biè" }
+      "rows/@1/keys/@5/+": { label: "bie" }
+      "rows/@2/keys/@1/+": { label: "bīn" }
+      "rows/@2/keys/@4/+": { label: "bìn" }
+      "rows/@2/keys/@5/+": { label: "bin" }
+      "rows/@3/keys/@1/+": { label: "bīng" }
+      "rows/@3/keys/@3/+": { label: "bǐng" }
+      "rows/@3/keys/@4/+": { label: "bìng" }
+      "rows/@3/keys/@5/+": { label: "bing" }
+
+  lssp_three_bu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@1/+": { label: "bū" }
+      "rows/@3/keys/@2/+": { label: "bú" }
+      "rows/@3/keys/@3/+": { label: "bǔ" }
+      "rows/@3/keys/@4/+": { label: "bù" }
+      "rows/@3/keys/@5/+": { label: "bu" }
+
+  lssp_three_paanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "pā" }
+      "rows/@1/keys/@2/+": { label: "pá" }
+      "rows/@1/keys/@4/+": { label: "pà" }
+      "rows/@1/keys/@5/+": { label: "pa" }
+      "rows/@2/keys/@1/+": { label: "pān" }
+      "rows/@2/keys/@2/+": { label: "pán" }
+      "rows/@2/keys/@4/+": { label: "pàn" }
+      "rows/@2/keys/@5/+": { label: "pan" }
+      "rows/@3/keys/@1/+": { label: "pāng" }
+      "rows/@3/keys/@2/+": { label: "páng" }
+      "rows/@3/keys/@3/+": { label: "pǎng" }
+      "rows/@3/keys/@4/+": { label: "pàng" }
+      "rows/@3/keys/@5/+": { label: "pang" }
+
+  lssp_three_paieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "pāi" }
+      "rows/@1/keys/@2/+": { label: "pái" }
+      "rows/@1/keys/@3/+": { label: "pǎi" }
+      "rows/@1/keys/@4/+": { label: "pài" }
+      "rows/@1/keys/@5/+": { label: "pai" }
+      "rows/@2/keys/@1/+": { label: "pēi" }
+      "rows/@2/keys/@2/+": { label: "péi" }
+      "rows/@2/keys/@4/+": { label: "pèi" }
+      "rows/@2/keys/@5/+": { label: "pei" }
+      "rows/@3/keys/@1/+": { label: "pāo" }
+      "rows/@3/keys/@2/+": { label: "páo" }
+      "rows/@3/keys/@3/+": { label: "pǎo" }
+      "rows/@3/keys/@4/+": { label: "pào" }
+      "rows/@3/keys/@5/+": { label: "pao" }
+
+  lssp_three_poou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "pō" }
+      "rows/@1/keys/@2/+": { label: "pó" }
+      "rows/@1/keys/@3/+": { label: "pǒ" }
+      "rows/@1/keys/@4/+": { label: "pò" }
+      "rows/@1/keys/@5/+": { label: "po" }
+      "rows/@2/keys/@1/+": { label: "pōu" }
+      "rows/@2/keys/@2/+": { label: "póu" }
+      "rows/@2/keys/@3/+": { label: "pǒu" }
+      "rows/@2/keys/@5/+": { label: "pou" }
+
+  lssp_three_peneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "pēn" }
+      "rows/@2/keys/@2/+": { label: "pén" }
+      "rows/@2/keys/@4/+": { label: "pèn" }
+      "rows/@2/keys/@5/+": { label: "pen" }
+      "rows/@3/keys/@1/+": { label: "pēng" }
+      "rows/@3/keys/@2/+": { label: "péng" }
+      "rows/@3/keys/@3/+": { label: "pěng" }
+      "rows/@3/keys/@4/+": { label: "pèng" }
+      "rows/@3/keys/@5/+": { label: "peng" }
+
+  lssp_three_pian:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "piān" }
+      "rows/@2/keys/@2/+": { label: "pián" }
+      "rows/@2/keys/@3/+": { label: "piǎn" }
+      "rows/@2/keys/@4/+": { label: "piàn" }
+      "rows/@2/keys/@5/+": { label: "pian" }
+
+  lssp_three_piiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "pī" }
+      "rows/@2/keys/@2/+": { label: "pí" }
+      "rows/@2/keys/@3/+": { label: "pǐ" }
+      "rows/@2/keys/@4/+": { label: "pì" }
+      "rows/@2/keys/@5/+": { label: "pi" }
+      "rows/@3/keys/@1/+": { label: "piāo" }
+      "rows/@3/keys/@2/+": { label: "piáo" }
+      "rows/@3/keys/@3/+": { label: "piǎo" }
+      "rows/@3/keys/@4/+": { label: "piào" }
+      "rows/@3/keys/@5/+": { label: "piao" }
+
+  lssp_three_pieining:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "piē" }
+      "rows/@1/keys/@3/+": { label: "piě" }
+      "rows/@1/keys/@4/+": { label: "piè" }
+      "rows/@1/keys/@5/+": { label: "pie" }
+      "rows/@2/keys/@1/+": { label: "pīn" }
+      "rows/@2/keys/@2/+": { label: "pín" }
+      "rows/@2/keys/@3/+": { label: "pǐn" }
+      "rows/@2/keys/@4/+": { label: "pìn" }
+      "rows/@2/keys/@5/+": { label: "pin" }
+      "rows/@3/keys/@1/+": { label: "pīng" }
+      "rows/@3/keys/@2/+": { label: "píng" }
+      "rows/@3/keys/@5/+": { label: "ping" }
+
+  lssp_three_pu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@1/+": { label: "pū" }
+      "rows/@3/keys/@2/+": { label: "pú" }
+      "rows/@3/keys/@3/+": { label: "pǔ" }
+      "rows/@3/keys/@4/+": { label: "pù" }
+      "rows/@3/keys/@5/+": { label: "pu" }
+
+  lssp_three_maanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "mā" }
+      "rows/@1/keys/@2/+": { label: "má" }
+      "rows/@1/keys/@3/+": { label: "mǎ" }
+      "rows/@1/keys/@4/+": { label: "mà" }
+      "rows/@1/keys/@5/+": { label: "ma" }
+      "rows/@2/keys/@1/+": { label: "mān" }
+      "rows/@2/keys/@2/+": { label: "mán" }
+      "rows/@2/keys/@3/+": { label: "mǎn" }
+      "rows/@2/keys/@4/+": { label: "màn" }
+      "rows/@2/keys/@5/+": { label: "man" }
+      "rows/@3/keys/@1/+": { label: "māng" }
+      "rows/@3/keys/@2/+": { label: "máng" }
+      "rows/@3/keys/@3/+": { label: "mǎng" }
+      "rows/@3/keys/@5/+": { label: "mang" }
+
+  lssp_three_maieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "mái" }
+      "rows/@1/keys/@3/+": { label: "mǎi" }
+      "rows/@1/keys/@4/+": { label: "mài" }
+      "rows/@1/keys/@5/+": { label: "mai" }
+      "rows/@2/keys/@2/+": { label: "méi" }
+      "rows/@2/keys/@3/+": { label: "měi" }
+      "rows/@2/keys/@4/+": { label: "mèi" }
+      "rows/@2/keys/@5/+": { label: "mei" }
+      "rows/@3/keys/@1/+": { label: "māo" }
+      "rows/@3/keys/@2/+": { label: "máo" }
+      "rows/@3/keys/@3/+": { label: "mǎo" }
+      "rows/@3/keys/@4/+": { label: "mào" }
+      "rows/@3/keys/@5/+": { label: "mao" }
+
+  lssp_three_moou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "mō" }
+      "rows/@1/keys/@2/+": { label: "mó" }
+      "rows/@1/keys/@3/+": { label: "mǒ" }
+      "rows/@1/keys/@4/+": { label: "mò" }
+      "rows/@1/keys/@5/+": { label: "mo" }
+      "rows/@2/keys/@1/+": { label: "mōu" }
+      "rows/@2/keys/@2/+": { label: "móu" }
+      "rows/@2/keys/@3/+": { label: "mǒu" }
+      "rows/@2/keys/@5/+": { label: "mou" }
+
+  lssp_three_meeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "mē" }
+      "rows/@1/keys/@2/+": { label: "mé" }
+      "rows/@1/keys/@4/+": { label: "mè" }
+      "rows/@1/keys/@5/+": { label: "me" }
+      "rows/@2/keys/@1/+": { label: "mēn" }
+      "rows/@2/keys/@2/+": { label: "mén" }
+      "rows/@2/keys/@4/+": { label: "mèn" }
+      "rows/@2/keys/@5/+": { label: "men" }
+      "rows/@3/keys/@1/+": { label: "mēng" }
+      "rows/@3/keys/@2/+": { label: "méng" }
+      "rows/@3/keys/@3/+": { label: "měng" }
+      "rows/@3/keys/@4/+": { label: "mèng" }
+      "rows/@3/keys/@5/+": { label: "meng" }
+
+  lssp_three_mian:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "miān" }
+      "rows/@2/keys/@3/+": { label: "miǎn" }
+      "rows/@2/keys/@4/+": { label: "miàn" }
+      "rows/@2/keys/@5/+": { label: "mian" }
+
+  lssp_three_miiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "mī" }
+      "rows/@2/keys/@2/+": { label: "mí" }
+      "rows/@2/keys/@3/+": { label: "mǐ" }
+      "rows/@2/keys/@4/+": { label: "mì" }
+      "rows/@2/keys/@5/+": { label: "mi" }
+      "rows/@3/keys/@1/+": { label: "miāo" }
+      "rows/@3/keys/@2/+": { label: "miáo" }
+      "rows/@3/keys/@3/+": { label: "miǎo" }
+      "rows/@3/keys/@4/+": { label: "miào" }
+      "rows/@3/keys/@5/+": { label: "miao" }
+
+  lssp_three_miu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@4/+": { label: "miù" }
+      "rows/@2/keys/@5/+": { label: "miu" }
+
+  lssp_three_mieining:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "miē" }
+      "rows/@1/keys/@4/+": { label: "miè" }
+      "rows/@1/keys/@5/+": { label: "mie" }
+      "rows/@2/keys/@2/+": { label: "mín" }
+      "rows/@2/keys/@3/+": { label: "mǐn" }
+      "rows/@2/keys/@5/+": { label: "min" }
+      "rows/@3/keys/@2/+": { label: "míng" }
+      "rows/@3/keys/@3/+": { label: "mǐng" }
+      "rows/@3/keys/@4/+": { label: "mìng" }
+      "rows/@3/keys/@5/+": { label: "ming" }
+
+  lssp_three_mu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@2/+": { label: "mú" }
+      "rows/@3/keys/@3/+": { label: "mǔ" }
+      "rows/@3/keys/@4/+": { label: "mù" }
+      "rows/@3/keys/@5/+": { label: "mu" }
+
+  lssp_three_faanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "fā" }
+      "rows/@1/keys/@2/+": { label: "fá" }
+      "rows/@1/keys/@3/+": { label: "fǎ" }
+      "rows/@1/keys/@4/+": { label: "fà" }
+      "rows/@1/keys/@5/+": { label: "fa" }
+      "rows/@2/keys/@1/+": { label: "fān" }
+      "rows/@2/keys/@2/+": { label: "fán" }
+      "rows/@2/keys/@3/+": { label: "fǎn" }
+      "rows/@2/keys/@4/+": { label: "fàn" }
+      "rows/@2/keys/@5/+": { label: "fan" }
+      "rows/@3/keys/@1/+": { label: "fāng" }
+      "rows/@3/keys/@2/+": { label: "fáng" }
+      "rows/@3/keys/@3/+": { label: "fǎng" }
+      "rows/@3/keys/@4/+": { label: "fàng" }
+      "rows/@3/keys/@5/+": { label: "fang" }
+
+  lssp_three_feiiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "fēi" }
+      "rows/@2/keys/@2/+": { label: "féi" }
+      "rows/@2/keys/@3/+": { label: "fěi" }
+      "rows/@2/keys/@4/+": { label: "fèi" }
+      "rows/@2/keys/@5/+": { label: "fei" }
+      "rows/@3/keys/@4/+": { label: "fiào" }
+      "rows/@3/keys/@5/+": { label: "fiao" }
+
+  lssp_three_foou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "fó" }
+      "rows/@1/keys/@5/+": { label: "fo" }
+      "rows/@2/keys/@3/+": { label: "fǒu" }
+      "rows/@2/keys/@5/+": { label: "fou" }
+
+  lssp_three_feneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "fēn" }
+      "rows/@2/keys/@2/+": { label: "fén" }
+      "rows/@2/keys/@3/+": { label: "fěn" }
+      "rows/@2/keys/@4/+": { label: "fèn" }
+      "rows/@2/keys/@5/+": { label: "fen" }
+      "rows/@3/keys/@1/+": { label: "fēng" }
+      "rows/@3/keys/@2/+": { label: "féng" }
+      "rows/@3/keys/@3/+": { label: "fěng" }
+      "rows/@3/keys/@4/+": { label: "fèng" }
+      "rows/@3/keys/@5/+": { label: "feng" }
+
+  lssp_three_fu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@1/+": { label: "fū" }
+      "rows/@3/keys/@2/+": { label: "fú" }
+      "rows/@3/keys/@3/+": { label: "fǔ" }
+      "rows/@3/keys/@4/+": { label: "fù" }
+      "rows/@3/keys/@5/+": { label: "fu" }
+
+  lssp_three_ranang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@2/+": { label: "rán" }
+      "rows/@2/keys/@3/+": { label: "rǎn" }
+      "rows/@2/keys/@5/+": { label: "ran" }
+      "rows/@3/keys/@1/+": { label: "rāng" }
+      "rows/@3/keys/@2/+": { label: "ráng" }
+      "rows/@3/keys/@3/+": { label: "rǎng" }
+      "rows/@3/keys/@4/+": { label: "ràng" }
+      "rows/@3/keys/@5/+": { label: "rang" }
+
+  lssp_three_rao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@2/+": { label: "ráo" }
+      "rows/@3/keys/@3/+": { label: "rǎo" }
+      "rows/@3/keys/@4/+": { label: "rào" }
+      "rows/@3/keys/@5/+": { label: "rao" }
+
+  lssp_three_riouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@4/+": { label: "rì" }
+      "rows/@1/keys/@5/+": { label: "ri" }
+      "rows/@2/keys/@2/+": { label: "róu" }
+      "rows/@2/keys/@4/+": { label: "ròu" }
+      "rows/@2/keys/@5/+": { label: "rou" }
+      "rows/@3/keys/@2/+": { label: "róng" }
+      "rows/@3/keys/@3/+": { label: "rǒng" }
+      "rows/@3/keys/@5/+": { label: "rong" }
+
+  lssp_three_reeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@3/+": { label: "rě" }
+      "rows/@1/keys/@4/+": { label: "rè" }
+      "rows/@1/keys/@5/+": { label: "re" }
+      "rows/@2/keys/@2/+": { label: "rén" }
+      "rows/@2/keys/@3/+": { label: "rěn" }
+      "rows/@2/keys/@4/+": { label: "rèn" }
+      "rows/@2/keys/@5/+": { label: "ren" }
+      "rows/@3/keys/@1/+": { label: "rēng" }
+      "rows/@3/keys/@2/+": { label: "réng" }
+      "rows/@3/keys/@5/+": { label: "reng" }
+
+  lssp_three_ruauan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "ruá" }
+      "rows/@1/keys/@5/+": { label: "rua" }
+      "rows/@2/keys/@2/+": { label: "ruán" }
+      "rows/@2/keys/@3/+": { label: "ruǎn" }
+      "rows/@2/keys/@5/+": { label: "ruan" }
+
+  lssp_three_rui:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@2/+": { label: "ruí" }
+      "rows/@2/keys/@3/+": { label: "ruǐ" }
+      "rows/@2/keys/@4/+": { label: "ruì" }
+      "rows/@2/keys/@5/+": { label: "rui" }
+
+  lssp_three_ruou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "ruó" }
+      "rows/@1/keys/@4/+": { label: "ruò" }
+      "rows/@1/keys/@5/+": { label: "ruo" }
+      "rows/@3/keys/@2/+": { label: "rú" }
+      "rows/@3/keys/@3/+": { label: "rǔ" }
+      "rows/@3/keys/@4/+": { label: "rù" }
+      "rows/@3/keys/@5/+": { label: "ru" }
+
+  lssp_three_run:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@2/+": { label: "rún" }
+      "rows/@2/keys/@4/+": { label: "rùn" }
+      "rows/@2/keys/@5/+": { label: "run" }
+
+  lssp_three_zhaanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zhā" }
+      "rows/@1/keys/@2/+": { label: "zhá" }
+      "rows/@1/keys/@3/+": { label: "zhǎ" }
+      "rows/@1/keys/@4/+": { label: "zhà" }
+      "rows/@1/keys/@5/+": { label: "zha" }
+      "rows/@2/keys/@1/+": { label: "zhān" }
+      "rows/@2/keys/@3/+": { label: "zhǎn" }
+      "rows/@2/keys/@4/+": { label: "zhàn" }
+      "rows/@2/keys/@5/+": { label: "zhan" }
+      "rows/@3/keys/@1/+": { label: "zhāng" }
+      "rows/@3/keys/@3/+": { label: "zhǎng" }
+      "rows/@3/keys/@4/+": { label: "zhàng" }
+      "rows/@3/keys/@5/+": { label: "zhang" }
+
+  lssp_three_zhaieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zhāi" }
+      "rows/@1/keys/@2/+": { label: "zhái" }
+      "rows/@1/keys/@3/+": { label: "zhǎi" }
+      "rows/@1/keys/@4/+": { label: "zhài" }
+      "rows/@1/keys/@5/+": { label: "zhai" }
+      "rows/@2/keys/@4/+": { label: "zhèi" }
+      "rows/@2/keys/@5/+": { label: "zhei" }
+      "rows/@3/keys/@1/+": { label: "zhāo" }
+      "rows/@3/keys/@2/+": { label: "zháo" }
+      "rows/@3/keys/@3/+": { label: "zhǎo" }
+      "rows/@3/keys/@4/+": { label: "zhào" }
+      "rows/@3/keys/@5/+": { label: "zhao" }
+
+  lssp_three_zhiouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zhī" }
+      "rows/@1/keys/@2/+": { label: "zhí" }
+      "rows/@1/keys/@3/+": { label: "zhǐ" }
+      "rows/@1/keys/@4/+": { label: "zhì" }
+      "rows/@1/keys/@5/+": { label: "zhi" }
+      "rows/@2/keys/@1/+": { label: "zhōu" }
+      "rows/@2/keys/@2/+": { label: "zhóu" }
+      "rows/@2/keys/@3/+": { label: "zhǒu" }
+      "rows/@2/keys/@4/+": { label: "zhòu" }
+      "rows/@2/keys/@5/+": { label: "zhou" }
+      "rows/@3/keys/@1/+": { label: "zhōng" }
+      "rows/@3/keys/@3/+": { label: "zhǒng" }
+      "rows/@3/keys/@4/+": { label: "zhòng" }
+      "rows/@3/keys/@5/+": { label: "zhong" }
+
+  lssp_three_zheeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zhē" }
+      "rows/@1/keys/@2/+": { label: "zhé" }
+      "rows/@1/keys/@3/+": { label: "zhě" }
+      "rows/@1/keys/@4/+": { label: "zhè" }
+      "rows/@1/keys/@5/+": { label: "zhe" }
+      "rows/@2/keys/@1/+": { label: "zhēn" }
+      "rows/@2/keys/@3/+": { label: "zhěn" }
+      "rows/@2/keys/@4/+": { label: "zhèn" }
+      "rows/@2/keys/@5/+": { label: "zhen" }
+      "rows/@3/keys/@1/+": { label: "zhēng" }
+      "rows/@3/keys/@3/+": { label: "zhěng" }
+      "rows/@3/keys/@4/+": { label: "zhèng" }
+      "rows/@3/keys/@5/+": { label: "zheng" }
+
+  lssp_three_zhuauanuang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zhuā" }
+      "rows/@1/keys/@3/+": { label: "zhuǎ" }
+      "rows/@1/keys/@5/+": { label: "zhua" }
+      "rows/@2/keys/@1/+": { label: "zhuān" }
+      "rows/@2/keys/@3/+": { label: "zhuǎn" }
+      "rows/@2/keys/@4/+": { label: "zhuàn" }
+      "rows/@2/keys/@5/+": { label: "zhuan" }
+      "rows/@3/keys/@1/+": { label: "zhuāng" }
+      "rows/@3/keys/@3/+": { label: "zhuǎng" }
+      "rows/@3/keys/@4/+": { label: "zhuàng" }
+      "rows/@3/keys/@5/+": { label: "zhuang" }
+
+  lssp_three_zhuaiui:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zhuāi" }
+      "rows/@1/keys/@3/+": { label: "zhuǎi" }
+      "rows/@1/keys/@4/+": { label: "zhuài" }
+      "rows/@1/keys/@5/+": { label: "zhuai" }
+      "rows/@2/keys/@1/+": { label: "zhuī" }
+      "rows/@2/keys/@4/+": { label: "zhuì" }
+      "rows/@2/keys/@5/+": { label: "zhui" }
+
+  lssp_three_zhuou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zhuō" }
+      "rows/@1/keys/@2/+": { label: "zhuó" }
+      "rows/@1/keys/@5/+": { label: "zhuo" }
+      "rows/@3/keys/@1/+": { label: "zhū" }
+      "rows/@3/keys/@2/+": { label: "zhú" }
+      "rows/@3/keys/@3/+": { label: "zhǔ" }
+      "rows/@3/keys/@4/+": { label: "zhù" }
+      "rows/@3/keys/@5/+": { label: "zhu" }
+
+  lssp_three_zhun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "zhūn" }
+      "rows/@2/keys/@3/+": { label: "zhǔn" }
+      "rows/@2/keys/@5/+": { label: "zhun" }
+
+  lssp_three_zaanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zā" }
+      "rows/@1/keys/@2/+": { label: "zá" }
+      "rows/@1/keys/@3/+": { label: "zǎ" }
+      "rows/@1/keys/@5/+": { label: "za" }
+      "rows/@2/keys/@1/+": { label: "zān" }
+      "rows/@2/keys/@2/+": { label: "zán" }
+      "rows/@2/keys/@3/+": { label: "zǎn" }
+      "rows/@2/keys/@4/+": { label: "zàn" }
+      "rows/@2/keys/@5/+": { label: "zan" }
+      "rows/@3/keys/@1/+": { label: "zāng" }
+      "rows/@3/keys/@3/+": { label: "zǎng" }
+      "rows/@3/keys/@4/+": { label: "zàng" }
+      "rows/@3/keys/@5/+": { label: "zang" }
+
+  lssp_three_zaieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zāi" }
+      "rows/@1/keys/@3/+": { label: "zǎi" }
+      "rows/@1/keys/@4/+": { label: "zài" }
+      "rows/@1/keys/@5/+": { label: "zai" }
+      "rows/@2/keys/@2/+": { label: "zéi" }
+      "rows/@2/keys/@5/+": { label: "zei" }
+      "rows/@3/keys/@2/+": { label: "záo" }
+      "rows/@3/keys/@3/+": { label: "zǎo" }
+      "rows/@3/keys/@4/+": { label: "zào" }
+      "rows/@3/keys/@5/+": { label: "zao" }
+
+  lssp_three_ziouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zī" }
+      "rows/@1/keys/@3/+": { label: "zǐ" }
+      "rows/@1/keys/@4/+": { label: "zì" }
+      "rows/@1/keys/@5/+": { label: "zi" }
+      "rows/@2/keys/@1/+": { label: "zōu" }
+      "rows/@2/keys/@3/+": { label: "zǒu" }
+      "rows/@2/keys/@4/+": { label: "zòu" }
+      "rows/@2/keys/@5/+": { label: "zou" }
+      "rows/@3/keys/@1/+": { label: "zōng" }
+      "rows/@3/keys/@3/+": { label: "zǒng" }
+      "rows/@3/keys/@4/+": { label: "zòng" }
+      "rows/@3/keys/@5/+": { label: "zong" }
+
+  lssp_three_zeeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "zé" }
+      "rows/@1/keys/@4/+": { label: "zè" }
+      "rows/@1/keys/@5/+": { label: "ze" }
+      "rows/@2/keys/@3/+": { label: "zěn" }
+      "rows/@2/keys/@4/+": { label: "zèn" }
+      "rows/@2/keys/@5/+": { label: "zen" }
+      "rows/@3/keys/@1/+": { label: "zēng" }
+      "rows/@3/keys/@4/+": { label: "zèng" }
+      "rows/@3/keys/@5/+": { label: "zeng" }
+
+  lssp_three_zuan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "zuān" }
+      "rows/@2/keys/@3/+": { label: "zuǎn" }
+      "rows/@2/keys/@4/+": { label: "zuàn" }
+      "rows/@2/keys/@5/+": { label: "zuan" }
+
+  lssp_three_zuouiu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "zuō" }
+      "rows/@1/keys/@2/+": { label: "zuó" }
+      "rows/@1/keys/@3/+": { label: "zuǒ" }
+      "rows/@1/keys/@4/+": { label: "zuò" }
+      "rows/@1/keys/@5/+": { label: "zuo" }
+      "rows/@2/keys/@1/+": { label: "zuī" }
+      "rows/@2/keys/@3/+": { label: "zuǐ" }
+      "rows/@2/keys/@4/+": { label: "zuì" }
+      "rows/@2/keys/@5/+": { label: "zui" }
+      "rows/@3/keys/@1/+": { label: "zū" }
+      "rows/@3/keys/@2/+": { label: "zú" }
+      "rows/@3/keys/@3/+": { label: "zǔ" }
+      "rows/@3/keys/@5/+": { label: "zu" }
+
+  lssp_three_zun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "zūn" }
+      "rows/@2/keys/@3/+": { label: "zǔn" }
+      "rows/@2/keys/@4/+": { label: "zùn" }
+      "rows/@2/keys/@5/+": { label: "zun" }
+
+  lssp_three_daanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "dā" }
+      "rows/@1/keys/@2/+": { label: "dá" }
+      "rows/@1/keys/@3/+": { label: "dǎ" }
+      "rows/@1/keys/@4/+": { label: "dà" }
+      "rows/@1/keys/@5/+": { label: "da" }
+      "rows/@2/keys/@1/+": { label: "dān" }
+      "rows/@2/keys/@3/+": { label: "dǎn" }
+      "rows/@2/keys/@4/+": { label: "dàn" }
+      "rows/@2/keys/@5/+": { label: "dan" }
+      "rows/@3/keys/@1/+": { label: "dāng" }
+      "rows/@3/keys/@3/+": { label: "dǎng" }
+      "rows/@3/keys/@4/+": { label: "dàng" }
+      "rows/@3/keys/@5/+": { label: "dang" }
+
+  lssp_three_daieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "dāi" }
+      "rows/@1/keys/@3/+": { label: "dǎi" }
+      "rows/@1/keys/@4/+": { label: "dài" }
+      "rows/@1/keys/@5/+": { label: "dai" }
+      "rows/@2/keys/@1/+": { label: "dēi" }
+      "rows/@2/keys/@3/+": { label: "děi" }
+      "rows/@2/keys/@5/+": { label: "dei" }
+      "rows/@3/keys/@1/+": { label: "dāo" }
+      "rows/@3/keys/@2/+": { label: "dáo" }
+      "rows/@3/keys/@3/+": { label: "dǎo" }
+      "rows/@3/keys/@4/+": { label: "dào" }
+      "rows/@3/keys/@5/+": { label: "dao" }
+
+  lssp_three_douong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "dōu" }
+      "rows/@2/keys/@3/+": { label: "dǒu" }
+      "rows/@2/keys/@4/+": { label: "dòu" }
+      "rows/@2/keys/@5/+": { label: "dou" }
+      "rows/@3/keys/@1/+": { label: "dōng" }
+      "rows/@3/keys/@3/+": { label: "dǒng" }
+      "rows/@3/keys/@4/+": { label: "dòng" }
+      "rows/@3/keys/@5/+": { label: "dong" }
+
+  lssp_three_deeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "dē" }
+      "rows/@1/keys/@2/+": { label: "dé" }
+      "rows/@1/keys/@4/+": { label: "dè" }
+      "rows/@1/keys/@5/+": { label: "de" }
+      "rows/@2/keys/@4/+": { label: "dèn" }
+      "rows/@2/keys/@5/+": { label: "den" }
+      "rows/@3/keys/@1/+": { label: "dēng" }
+      "rows/@3/keys/@3/+": { label: "děng" }
+      "rows/@3/keys/@4/+": { label: "dèng" }
+      "rows/@3/keys/@5/+": { label: "deng" }
+
+  lssp_three_diaian:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@3/+": { label: "diǎ" }
+      "rows/@1/keys/@5/+": { label: "dia" }
+      "rows/@2/keys/@1/+": { label: "diān" }
+      "rows/@2/keys/@3/+": { label: "diǎn" }
+      "rows/@2/keys/@4/+": { label: "diàn" }
+      "rows/@2/keys/@5/+": { label: "dian" }
+
+  lssp_three_diiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "dī" }
+      "rows/@2/keys/@2/+": { label: "dí" }
+      "rows/@2/keys/@3/+": { label: "dǐ" }
+      "rows/@2/keys/@4/+": { label: "dì" }
+      "rows/@2/keys/@5/+": { label: "di" }
+      "rows/@3/keys/@1/+": { label: "diāo" }
+      "rows/@3/keys/@3/+": { label: "diǎo" }
+      "rows/@3/keys/@4/+": { label: "diào" }
+      "rows/@3/keys/@5/+": { label: "diao" }
+
+  lssp_three_diu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "diū" }
+      "rows/@2/keys/@5/+": { label: "diu" }
+
+  lssp_three_dieing:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "diē" }
+      "rows/@1/keys/@2/+": { label: "dié" }
+      "rows/@1/keys/@5/+": { label: "die" }
+      "rows/@3/keys/@1/+": { label: "dīng" }
+      "rows/@3/keys/@3/+": { label: "dǐng" }
+      "rows/@3/keys/@4/+": { label: "dìng" }
+      "rows/@3/keys/@5/+": { label: "ding" }
+
+  lssp_three_duan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "duān" }
+      "rows/@2/keys/@3/+": { label: "duǎn" }
+      "rows/@2/keys/@4/+": { label: "duàn" }
+      "rows/@2/keys/@5/+": { label: "duan" }
+
+  lssp_three_dui:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "duī" }
+      "rows/@2/keys/@4/+": { label: "duì" }
+      "rows/@2/keys/@5/+": { label: "dui" }
+
+  lssp_three_duou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "duō" }
+      "rows/@1/keys/@2/+": { label: "duó" }
+      "rows/@1/keys/@3/+": { label: "duǒ" }
+      "rows/@1/keys/@4/+": { label: "duò" }
+      "rows/@1/keys/@5/+": { label: "duo" }
+      "rows/@3/keys/@1/+": { label: "dū" }
+      "rows/@3/keys/@2/+": { label: "dú" }
+      "rows/@3/keys/@3/+": { label: "dǔ" }
+      "rows/@3/keys/@4/+": { label: "dù" }
+      "rows/@3/keys/@5/+": { label: "du" }
+
+  lssp_three_dun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "dūn" }
+      "rows/@2/keys/@3/+": { label: "dǔn" }
+      "rows/@2/keys/@4/+": { label: "dùn" }
+      "rows/@2/keys/@5/+": { label: "dun" }
+
+  lssp_three_taanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "tā" }
+      "rows/@1/keys/@3/+": { label: "tǎ" }
+      "rows/@1/keys/@4/+": { label: "tà" }
+      "rows/@1/keys/@5/+": { label: "ta" }
+      "rows/@2/keys/@1/+": { label: "tān" }
+      "rows/@2/keys/@2/+": { label: "tán" }
+      "rows/@2/keys/@3/+": { label: "tǎn" }
+      "rows/@2/keys/@4/+": { label: "tàn" }
+      "rows/@2/keys/@5/+": { label: "tan" }
+      "rows/@3/keys/@1/+": { label: "tāng" }
+      "rows/@3/keys/@2/+": { label: "táng" }
+      "rows/@3/keys/@3/+": { label: "tǎng" }
+      "rows/@3/keys/@4/+": { label: "tàng" }
+      "rows/@3/keys/@5/+": { label: "tang" }
+
+  lssp_three_taieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "tāi" }
+      "rows/@1/keys/@2/+": { label: "tái" }
+      "rows/@1/keys/@3/+": { label: "tǎi" }
+      "rows/@1/keys/@4/+": { label: "tài" }
+      "rows/@1/keys/@5/+": { label: "tai" }
+      "rows/@2/keys/@1/+": { label: "tēi" }
+      "rows/@2/keys/@5/+": { label: "tei" }
+      "rows/@3/keys/@1/+": { label: "tāo" }
+      "rows/@3/keys/@2/+": { label: "táo" }
+      "rows/@3/keys/@3/+": { label: "tǎo" }
+      "rows/@3/keys/@4/+": { label: "tào" }
+      "rows/@3/keys/@5/+": { label: "tao" }
+
+  lssp_three_touong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "tōu" }
+      "rows/@2/keys/@2/+": { label: "tóu" }
+      "rows/@2/keys/@3/+": { label: "tǒu" }
+      "rows/@2/keys/@4/+": { label: "tòu" }
+      "rows/@2/keys/@5/+": { label: "tou" }
+      "rows/@3/keys/@1/+": { label: "tōng" }
+      "rows/@3/keys/@2/+": { label: "tóng" }
+      "rows/@3/keys/@3/+": { label: "tǒng" }
+      "rows/@3/keys/@4/+": { label: "tòng" }
+      "rows/@3/keys/@5/+": { label: "tong" }
+
+  lssp_three_teeng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@4/+": { label: "tè" }
+      "rows/@1/keys/@5/+": { label: "te" }
+      "rows/@3/keys/@1/+": { label: "tēng" }
+      "rows/@3/keys/@2/+": { label: "téng" }
+      "rows/@3/keys/@5/+": { label: "teng" }
+
+  lssp_three_tian:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "tiān" }
+      "rows/@2/keys/@2/+": { label: "tián" }
+      "rows/@2/keys/@3/+": { label: "tiǎn" }
+      "rows/@2/keys/@4/+": { label: "tiàn" }
+      "rows/@2/keys/@5/+": { label: "tian" }
+
+  lssp_three_tiiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "tī" }
+      "rows/@2/keys/@2/+": { label: "tí" }
+      "rows/@2/keys/@3/+": { label: "tǐ" }
+      "rows/@2/keys/@4/+": { label: "tì" }
+      "rows/@2/keys/@5/+": { label: "ti" }
+      "rows/@3/keys/@1/+": { label: "tiāo" }
+      "rows/@3/keys/@2/+": { label: "tiáo" }
+      "rows/@3/keys/@3/+": { label: "tiǎo" }
+      "rows/@3/keys/@4/+": { label: "tiào" }
+      "rows/@3/keys/@5/+": { label: "tiao" }
+
+  lssp_three_tieing:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "tiē" }
+      "rows/@1/keys/@3/+": { label: "tiě" }
+      "rows/@1/keys/@4/+": { label: "tiè" }
+      "rows/@1/keys/@5/+": { label: "tie" }
+      "rows/@3/keys/@1/+": { label: "tīng" }
+      "rows/@3/keys/@2/+": { label: "tíng" }
+      "rows/@3/keys/@3/+": { label: "tǐng" }
+      "rows/@3/keys/@4/+": { label: "tìng" }
+      "rows/@3/keys/@5/+": { label: "ting" }
+
+  lssp_three_tuan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "tuān" }
+      "rows/@2/keys/@2/+": { label: "tuán" }
+      "rows/@2/keys/@3/+": { label: "tuǎn" }
+      "rows/@2/keys/@4/+": { label: "tuàn" }
+      "rows/@2/keys/@5/+": { label: "tuan" }
+
+  lssp_three_tui:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "tuī" }
+      "rows/@2/keys/@2/+": { label: "tuí" }
+      "rows/@2/keys/@3/+": { label: "tuǐ" }
+      "rows/@2/keys/@4/+": { label: "tuì" }
+      "rows/@2/keys/@5/+": { label: "tui" }
+
+  lssp_three_tuou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "tuō" }
+      "rows/@1/keys/@2/+": { label: "tuó" }
+      "rows/@1/keys/@3/+": { label: "tuǒ" }
+      "rows/@1/keys/@4/+": { label: "tuò" }
+      "rows/@1/keys/@5/+": { label: "tuo" }
+      "rows/@3/keys/@1/+": { label: "tū" }
+      "rows/@3/keys/@2/+": { label: "tú" }
+      "rows/@3/keys/@3/+": { label: "tǔ" }
+      "rows/@3/keys/@4/+": { label: "tù" }
+      "rows/@3/keys/@5/+": { label: "tu" }
+
+  lssp_three_tun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "tūn" }
+      "rows/@2/keys/@2/+": { label: "tún" }
+      "rows/@2/keys/@3/+": { label: "tǔn" }
+      "rows/@2/keys/@4/+": { label: "tùn" }
+      "rows/@2/keys/@5/+": { label: "tun" }
+
+  lssp_three_naanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "nā" }
+      "rows/@1/keys/@2/+": { label: "ná" }
+      "rows/@1/keys/@3/+": { label: "nǎ" }
+      "rows/@1/keys/@4/+": { label: "nà" }
+      "rows/@1/keys/@5/+": { label: "na" }
+      "rows/@2/keys/@1/+": { label: "nān" }
+      "rows/@2/keys/@2/+": { label: "nán" }
+      "rows/@2/keys/@3/+": { label: "nǎn" }
+      "rows/@2/keys/@4/+": { label: "nàn" }
+      "rows/@2/keys/@5/+": { label: "nan" }
+      "rows/@3/keys/@1/+": { label: "nāng" }
+      "rows/@3/keys/@2/+": { label: "náng" }
+      "rows/@3/keys/@3/+": { label: "nǎng" }
+      "rows/@3/keys/@4/+": { label: "nàng" }
+      "rows/@3/keys/@5/+": { label: "nang" }
+
+  lssp_three_naieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@3/+": { label: "nǎi" }
+      "rows/@1/keys/@4/+": { label: "nài" }
+      "rows/@1/keys/@5/+": { label: "nai" }
+      "rows/@2/keys/@3/+": { label: "něi" }
+      "rows/@2/keys/@4/+": { label: "nèi" }
+      "rows/@2/keys/@5/+": { label: "nei" }
+      "rows/@3/keys/@1/+": { label: "nāo" }
+      "rows/@3/keys/@2/+": { label: "náo" }
+      "rows/@3/keys/@3/+": { label: "nǎo" }
+      "rows/@3/keys/@4/+": { label: "nào" }
+      "rows/@3/keys/@5/+": { label: "nao" }
+
+  lssp_three_nouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "nóu" }
+      "rows/@1/keys/@3/+": { label: "nǒu" }
+      "rows/@1/keys/@4/+": { label: "nòu" }
+      "rows/@1/keys/@5/+": { label: "nou" }
+      "rows/@3/keys/@2/+": { label: "nóng" }
+      "rows/@3/keys/@4/+": { label: "nòng" }
+      "rows/@3/keys/@5/+": { label: "nong" }
+
+  lssp_three_neeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "né" }
+      "rows/@1/keys/@4/+": { label: "nè" }
+      "rows/@1/keys/@5/+": { label: "ne" }
+      "rows/@2/keys/@4/+": { label: "nèn" }
+      "rows/@2/keys/@5/+": { label: "nen" }
+      "rows/@3/keys/@2/+": { label: "néng" }
+      "rows/@3/keys/@5/+": { label: "neng" }
+
+  lssp_three_nianiang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "niān" }
+      "rows/@2/keys/@2/+": { label: "nián" }
+      "rows/@2/keys/@3/+": { label: "niǎn" }
+      "rows/@2/keys/@4/+": { label: "niàn" }
+      "rows/@2/keys/@5/+": { label: "nian" }
+      "rows/@3/keys/@2/+": { label: "niáng" }
+      "rows/@3/keys/@4/+": { label: "niàng" }
+      "rows/@3/keys/@5/+": { label: "niang" }
+
+  lssp_three_niiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "nī" }
+      "rows/@2/keys/@2/+": { label: "ní" }
+      "rows/@2/keys/@3/+": { label: "nǐ" }
+      "rows/@2/keys/@4/+": { label: "nì" }
+      "rows/@2/keys/@5/+": { label: "ni" }
+      "rows/@3/keys/@3/+": { label: "niǎo" }
+      "rows/@3/keys/@4/+": { label: "niào" }
+      "rows/@3/keys/@5/+": { label: "niao" }
+
+  lssp_three_niu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "niū" }
+      "rows/@2/keys/@2/+": { label: "niú" }
+      "rows/@2/keys/@3/+": { label: "niǔ" }
+      "rows/@2/keys/@4/+": { label: "niù" }
+      "rows/@2/keys/@5/+": { label: "niu" }
+
+  lssp_three_nieining:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "niē" }
+      "rows/@1/keys/@2/+": { label: "nié" }
+      "rows/@1/keys/@4/+": { label: "niè" }
+      "rows/@1/keys/@5/+": { label: "nie" }
+      "rows/@2/keys/@2/+": { label: "nín" }
+      "rows/@2/keys/@5/+": { label: "nin" }
+      "rows/@3/keys/@1/+": { label: "nīng" }
+      "rows/@3/keys/@3/+": { label: "nǐng" }
+      "rows/@3/keys/@4/+": { label: "nìng" }
+      "rows/@3/keys/@5/+": { label: "ning" }
+
+  lssp_three_nv:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@3/+": { label: "nǚ" }
+      "rows/@3/keys/@4/+": { label: "nǜ" }
+      "rows/@3/keys/@5/+": { label: "nü" }
+
+  lssp_three_nuan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@3/+": { label: "nuǎn" }
+      "rows/@2/keys/@5/+": { label: "nuan" }
+
+  lssp_three_nuou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "nuó" }
+      "rows/@1/keys/@4/+": { label: "nuò" }
+      "rows/@1/keys/@5/+": { label: "nuo" }
+      "rows/@3/keys/@2/+": { label: "nú" }
+      "rows/@3/keys/@3/+": { label: "nǔ" }
+      "rows/@3/keys/@4/+": { label: "nù" }
+      "rows/@3/keys/@5/+": { label: "nu" }
+
+  lssp_three_nun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@2/+": { label: "nún" }
+      "rows/@2/keys/@5/+": { label: "nun" }
+
+  lssp_three_nve:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@4/+": { label: "nǜe" }
+      "rows/@1/keys/@5/+": { label: "nüe" }
+
+  lssp_three_laanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "lā" }
+      "rows/@1/keys/@2/+": { label: "lá" }
+      "rows/@1/keys/@3/+": { label: "lǎ" }
+      "rows/@1/keys/@4/+": { label: "là" }
+      "rows/@1/keys/@5/+": { label: "la" }
+      "rows/@2/keys/@2/+": { label: "lán" }
+      "rows/@2/keys/@3/+": { label: "lǎn" }
+      "rows/@2/keys/@4/+": { label: "làn" }
+      "rows/@2/keys/@5/+": { label: "lan" }
+      "rows/@3/keys/@1/+": { label: "lāng" }
+      "rows/@3/keys/@2/+": { label: "láng" }
+      "rows/@3/keys/@3/+": { label: "lǎng" }
+      "rows/@3/keys/@4/+": { label: "làng" }
+      "rows/@3/keys/@5/+": { label: "lang" }
+
+  lssp_three_laieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "lái" }
+      "rows/@1/keys/@4/+": { label: "lài" }
+      "rows/@1/keys/@5/+": { label: "lai" }
+      "rows/@2/keys/@1/+": { label: "lēi" }
+      "rows/@2/keys/@2/+": { label: "léi" }
+      "rows/@2/keys/@3/+": { label: "lěi" }
+      "rows/@2/keys/@4/+": { label: "lèi" }
+      "rows/@2/keys/@5/+": { label: "lei" }
+      "rows/@3/keys/@1/+": { label: "lāo" }
+      "rows/@3/keys/@2/+": { label: "láo" }
+      "rows/@3/keys/@3/+": { label: "lǎo" }
+      "rows/@3/keys/@4/+": { label: "lào" }
+      "rows/@3/keys/@5/+": { label: "lao" }
+
+  lssp_three_loouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@5/+": { label: "lo" }
+      "rows/@2/keys/@1/+": { label: "lōu" }
+      "rows/@2/keys/@2/+": { label: "lóu" }
+      "rows/@2/keys/@3/+": { label: "lǒu" }
+      "rows/@2/keys/@4/+": { label: "lòu" }
+      "rows/@2/keys/@5/+": { label: "lou" }
+      "rows/@3/keys/@1/+": { label: "lōng" }
+      "rows/@3/keys/@2/+": { label: "lóng" }
+      "rows/@3/keys/@3/+": { label: "lǒng" }
+      "rows/@3/keys/@4/+": { label: "lòng" }
+      "rows/@3/keys/@5/+": { label: "long" }
+
+  lssp_three_leeng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "lē" }
+      "rows/@1/keys/@4/+": { label: "lè" }
+      "rows/@1/keys/@5/+": { label: "le" }
+      "rows/@3/keys/@1/+": { label: "lēng" }
+      "rows/@3/keys/@2/+": { label: "léng" }
+      "rows/@3/keys/@3/+": { label: "lěng" }
+      "rows/@3/keys/@4/+": { label: "lèng" }
+      "rows/@3/keys/@5/+": { label: "leng" }
+
+  lssp_three_liaianiang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@3/+": { label: "liǎ" }
+      "rows/@1/keys/@5/+": { label: "lia" }
+      "rows/@2/keys/@2/+": { label: "lián" }
+      "rows/@2/keys/@3/+": { label: "liǎn" }
+      "rows/@2/keys/@4/+": { label: "liàn" }
+      "rows/@2/keys/@5/+": { label: "lian" }
+      "rows/@3/keys/@2/+": { label: "liáng" }
+      "rows/@3/keys/@3/+": { label: "liǎng" }
+      "rows/@3/keys/@4/+": { label: "liàng" }
+      "rows/@3/keys/@5/+": { label: "liang" }
+
+  lssp_three_liiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "lī" }
+      "rows/@2/keys/@2/+": { label: "lí" }
+      "rows/@2/keys/@3/+": { label: "lǐ" }
+      "rows/@2/keys/@4/+": { label: "lì" }
+      "rows/@2/keys/@5/+": { label: "li" }
+      "rows/@3/keys/@1/+": { label: "liāo" }
+      "rows/@3/keys/@2/+": { label: "liáo" }
+      "rows/@3/keys/@3/+": { label: "liǎo" }
+      "rows/@3/keys/@4/+": { label: "liào" }
+      "rows/@3/keys/@5/+": { label: "liao" }
+
+  lssp_three_liu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "liū" }
+      "rows/@2/keys/@2/+": { label: "liú" }
+      "rows/@2/keys/@3/+": { label: "liǔ" }
+      "rows/@2/keys/@4/+": { label: "liù" }
+      "rows/@2/keys/@5/+": { label: "liu" }
+
+  lssp_three_lieining:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "liē" }
+      "rows/@1/keys/@3/+": { label: "liě" }
+      "rows/@1/keys/@4/+": { label: "liè" }
+      "rows/@1/keys/@5/+": { label: "lie" }
+      "rows/@2/keys/@1/+": { label: "līn" }
+      "rows/@2/keys/@2/+": { label: "lín" }
+      "rows/@2/keys/@3/+": { label: "lǐn" }
+      "rows/@2/keys/@4/+": { label: "lìn" }
+      "rows/@2/keys/@5/+": { label: "lin" }
+      "rows/@3/keys/@2/+": { label: "líng" }
+      "rows/@3/keys/@3/+": { label: "lǐng" }
+      "rows/@3/keys/@4/+": { label: "lìng" }
+      "rows/@3/keys/@5/+": { label: "ling" }
+
+  lssp_three_lv:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@2/+": { label: "lǘ" }
+      "rows/@3/keys/@3/+": { label: "lǚ" }
+      "rows/@3/keys/@4/+": { label: "lǜ" }
+      "rows/@3/keys/@5/+": { label: "lü" }
+
+  lssp_three_luan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@2/+": { label: "luán" }
+      "rows/@2/keys/@3/+": { label: "luǎn" }
+      "rows/@2/keys/@4/+": { label: "luàn" }
+      "rows/@2/keys/@5/+": { label: "luan" }
+
+  lssp_three_luou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "luō" }
+      "rows/@1/keys/@2/+": { label: "luó" }
+      "rows/@1/keys/@3/+": { label: "luǒ" }
+      "rows/@1/keys/@4/+": { label: "luò" }
+      "rows/@1/keys/@5/+": { label: "luo" }
+      "rows/@3/keys/@1/+": { label: "lū" }
+      "rows/@3/keys/@2/+": { label: "lú" }
+      "rows/@3/keys/@3/+": { label: "lǔ" }
+      "rows/@3/keys/@4/+": { label: "lù" }
+      "rows/@3/keys/@5/+": { label: "lu" }
+
+  lssp_three_lun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "lūn" }
+      "rows/@2/keys/@2/+": { label: "lún" }
+      "rows/@2/keys/@3/+": { label: "lǔn" }
+      "rows/@2/keys/@4/+": { label: "lùn" }
+      "rows/@2/keys/@5/+": { label: "lun" }
+
+  lssp_three_lve:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@4/+": { label: "lüè" }
+      "rows/@1/keys/@5/+": { label: "lüe" }
+
+  lssp_three_chaanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "chā" }
+      "rows/@1/keys/@2/+": { label: "chá" }
+      "rows/@1/keys/@3/+": { label: "chǎ" }
+      "rows/@1/keys/@4/+": { label: "chà" }
+      "rows/@1/keys/@5/+": { label: "cha" }
+      "rows/@2/keys/@1/+": { label: "chān" }
+      "rows/@2/keys/@2/+": { label: "chán" }
+      "rows/@2/keys/@3/+": { label: "chǎn" }
+      "rows/@2/keys/@4/+": { label: "chàn" }
+      "rows/@2/keys/@5/+": { label: "chan" }
+      "rows/@3/keys/@1/+": { label: "chāng" }
+      "rows/@3/keys/@2/+": { label: "cháng" }
+      "rows/@3/keys/@3/+": { label: "chǎng" }
+      "rows/@3/keys/@4/+": { label: "chàng" }
+      "rows/@3/keys/@5/+": { label: "chang" }
+
+  lssp_three_chaiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "chāi" }
+      "rows/@1/keys/@2/+": { label: "chái" }
+      "rows/@1/keys/@3/+": { label: "chǎi" }
+      "rows/@1/keys/@4/+": { label: "chài" }
+      "rows/@1/keys/@5/+": { label: "chai" }
+      "rows/@3/keys/@1/+": { label: "chāo" }
+      "rows/@3/keys/@2/+": { label: "cháo" }
+      "rows/@3/keys/@3/+": { label: "chǎo" }
+      "rows/@3/keys/@4/+": { label: "chào" }
+      "rows/@3/keys/@5/+": { label: "chao" }
+
+  lssp_three_chiouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "chī" }
+      "rows/@1/keys/@2/+": { label: "chí" }
+      "rows/@1/keys/@3/+": { label: "chǐ" }
+      "rows/@1/keys/@4/+": { label: "chì" }
+      "rows/@1/keys/@5/+": { label: "chi" }
+      "rows/@2/keys/@1/+": { label: "chōu" }
+      "rows/@2/keys/@2/+": { label: "chóu" }
+      "rows/@2/keys/@3/+": { label: "chǒu" }
+      "rows/@2/keys/@4/+": { label: "chòu" }
+      "rows/@2/keys/@5/+": { label: "chou" }
+      "rows/@3/keys/@1/+": { label: "chōng" }
+      "rows/@3/keys/@2/+": { label: "chóng" }
+      "rows/@3/keys/@3/+": { label: "chǒng" }
+      "rows/@3/keys/@4/+": { label: "chòng" }
+      "rows/@3/keys/@5/+": { label: "chong" }
+
+  lssp_three_cheeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "chē" }
+      "rows/@1/keys/@3/+": { label: "chě" }
+      "rows/@1/keys/@4/+": { label: "chè" }
+      "rows/@1/keys/@5/+": { label: "che" }
+      "rows/@2/keys/@1/+": { label: "chēn" }
+      "rows/@2/keys/@2/+": { label: "chén" }
+      "rows/@2/keys/@3/+": { label: "chěn" }
+      "rows/@2/keys/@4/+": { label: "chèn" }
+      "rows/@2/keys/@5/+": { label: "chen" }
+      "rows/@3/keys/@1/+": { label: "chēng" }
+      "rows/@3/keys/@2/+": { label: "chéng" }
+      "rows/@3/keys/@3/+": { label: "chěng" }
+      "rows/@3/keys/@4/+": { label: "chèng" }
+      "rows/@3/keys/@5/+": { label: "cheng" }
+
+  lssp_three_chuauanuang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "chuā" }
+      "rows/@1/keys/@5/+": { label: "chua" }
+      "rows/@2/keys/@1/+": { label: "chuān" }
+      "rows/@2/keys/@2/+": { label: "chuán" }
+      "rows/@2/keys/@3/+": { label: "chuǎn" }
+      "rows/@2/keys/@4/+": { label: "chuàn" }
+      "rows/@2/keys/@5/+": { label: "chuan" }
+      "rows/@3/keys/@1/+": { label: "chuāng" }
+      "rows/@3/keys/@2/+": { label: "chuáng" }
+      "rows/@3/keys/@3/+": { label: "chuǎng" }
+      "rows/@3/keys/@4/+": { label: "chuàng" }
+      "rows/@3/keys/@5/+": { label: "chuang" }
+
+  lssp_three_chuaiui:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "chuāi" }
+      "rows/@1/keys/@2/+": { label: "chuái" }
+      "rows/@1/keys/@3/+": { label: "chuǎi" }
+      "rows/@1/keys/@4/+": { label: "chuài" }
+      "rows/@1/keys/@5/+": { label: "chuai" }
+      "rows/@2/keys/@1/+": { label: "chuī" }
+      "rows/@2/keys/@2/+": { label: "chuí" }
+      "rows/@2/keys/@5/+": { label: "chui" }
+
+  lssp_three_chuou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "chuō" }
+      "rows/@1/keys/@4/+": { label: "chuò" }
+      "rows/@1/keys/@5/+": { label: "chuo" }
+      "rows/@3/keys/@1/+": { label: "chū" }
+      "rows/@3/keys/@2/+": { label: "chú" }
+      "rows/@3/keys/@3/+": { label: "chǔ" }
+      "rows/@3/keys/@4/+": { label: "chù" }
+      "rows/@3/keys/@5/+": { label: "chu" }
+
+  lssp_three_chun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "chūn" }
+      "rows/@2/keys/@2/+": { label: "chún" }
+      "rows/@2/keys/@3/+": { label: "chǔn" }
+      "rows/@2/keys/@5/+": { label: "chun" }
+
+  lssp_three_caanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "cā" }
+      "rows/@1/keys/@3/+": { label: "cǎ" }
+      "rows/@1/keys/@5/+": { label: "ca" }
+      "rows/@2/keys/@1/+": { label: "cān" }
+      "rows/@2/keys/@2/+": { label: "cán" }
+      "rows/@2/keys/@3/+": { label: "cǎn" }
+      "rows/@2/keys/@4/+": { label: "càn" }
+      "rows/@2/keys/@5/+": { label: "can" }
+      "rows/@3/keys/@1/+": { label: "cāng" }
+      "rows/@3/keys/@2/+": { label: "cáng" }
+      "rows/@3/keys/@5/+": { label: "cang" }
+
+  lssp_three_caiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "cāi" }
+      "rows/@1/keys/@2/+": { label: "cái" }
+      "rows/@1/keys/@3/+": { label: "cǎi" }
+      "rows/@1/keys/@4/+": { label: "cài" }
+      "rows/@1/keys/@5/+": { label: "cai" }
+      "rows/@3/keys/@1/+": { label: "cāo" }
+      "rows/@3/keys/@2/+": { label: "cáo" }
+      "rows/@3/keys/@3/+": { label: "cǎo" }
+      "rows/@3/keys/@4/+": { label: "cào" }
+      "rows/@3/keys/@5/+": { label: "cao" }
+
+  lssp_three_ciouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "cī" }
+      "rows/@1/keys/@2/+": { label: "cí" }
+      "rows/@1/keys/@3/+": { label: "cǐ" }
+      "rows/@1/keys/@4/+": { label: "cì" }
+      "rows/@1/keys/@5/+": { label: "ci" }
+      "rows/@2/keys/@4/+": { label: "còu" }
+      "rows/@2/keys/@5/+": { label: "cou" }
+      "rows/@3/keys/@1/+": { label: "cōng" }
+      "rows/@3/keys/@2/+": { label: "cóng" }
+      "rows/@3/keys/@5/+": { label: "cong" }
+
+  lssp_three_ceeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@4/+": { label: "cè" }
+      "rows/@1/keys/@5/+": { label: "ce" }
+      "rows/@2/keys/@1/+": { label: "cēn" }
+      "rows/@2/keys/@2/+": { label: "cén" }
+      "rows/@2/keys/@5/+": { label: "cen" }
+      "rows/@3/keys/@1/+": { label: "cēng" }
+      "rows/@3/keys/@2/+": { label: "céng" }
+      "rows/@3/keys/@4/+": { label: "cèng" }
+      "rows/@3/keys/@5/+": { label: "ceng" }
+
+  lssp_three_cuan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "cuān" }
+      "rows/@2/keys/@2/+": { label: "cuán" }
+      "rows/@2/keys/@4/+": { label: "cuàn" }
+      "rows/@2/keys/@5/+": { label: "cuan" }
+
+  lssp_three_cuouiu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "cuō" }
+      "rows/@1/keys/@2/+": { label: "cuó" }
+      "rows/@1/keys/@3/+": { label: "cuǒ" }
+      "rows/@1/keys/@4/+": { label: "cuò" }
+      "rows/@1/keys/@5/+": { label: "cuo" }
+      "rows/@2/keys/@1/+": { label: "cuī" }
+      "rows/@2/keys/@3/+": { label: "cuǐ" }
+      "rows/@2/keys/@4/+": { label: "cuì" }
+      "rows/@2/keys/@5/+": { label: "cui" }
+      "rows/@3/keys/@1/+": { label: "cū" }
+      "rows/@3/keys/@2/+": { label: "cú" }
+      "rows/@3/keys/@4/+": { label: "cù" }
+      "rows/@3/keys/@5/+": { label: "cu" }
+
+  lssp_three_cun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "cūn" }
+      "rows/@2/keys/@2/+": { label: "cún" }
+      "rows/@2/keys/@3/+": { label: "cǔn" }
+      "rows/@2/keys/@4/+": { label: "cùn" }
+      "rows/@2/keys/@5/+": { label: "cun" }
+
+  lssp_three_gaanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "gā" }
+      "rows/@1/keys/@2/+": { label: "gá" }
+      "rows/@1/keys/@3/+": { label: "gǎ" }
+      "rows/@1/keys/@4/+": { label: "gà" }
+      "rows/@1/keys/@5/+": { label: "ga" }
+      "rows/@2/keys/@1/+": { label: "gān" }
+      "rows/@2/keys/@3/+": { label: "gǎn" }
+      "rows/@2/keys/@4/+": { label: "gàn" }
+      "rows/@2/keys/@5/+": { label: "gan" }
+      "rows/@3/keys/@1/+": { label: "gāng" }
+      "rows/@3/keys/@3/+": { label: "gǎng" }
+      "rows/@3/keys/@4/+": { label: "gàng" }
+      "rows/@3/keys/@5/+": { label: "gang" }
+
+  lssp_three_gaieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "gāi" }
+      "rows/@1/keys/@3/+": { label: "gǎi" }
+      "rows/@1/keys/@4/+": { label: "gài" }
+      "rows/@1/keys/@5/+": { label: "gai" }
+      "rows/@2/keys/@3/+": { label: "gěi" }
+      "rows/@2/keys/@5/+": { label: "gei" }
+      "rows/@3/keys/@1/+": { label: "gāo" }
+      "rows/@3/keys/@3/+": { label: "gǎo" }
+      "rows/@3/keys/@4/+": { label: "gào" }
+      "rows/@3/keys/@5/+": { label: "gao" }
+
+  lssp_three_gouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "gōu" }
+      "rows/@2/keys/@3/+": { label: "gǒu" }
+      "rows/@2/keys/@4/+": { label: "gòu" }
+      "rows/@2/keys/@5/+": { label: "gou" }
+      "rows/@3/keys/@1/+": { label: "gōng" }
+      "rows/@3/keys/@3/+": { label: "gǒng" }
+      "rows/@3/keys/@4/+": { label: "gòng" }
+      "rows/@3/keys/@5/+": { label: "gong" }
+
+  lssp_three_geeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "gē" }
+      "rows/@1/keys/@2/+": { label: "gé" }
+      "rows/@1/keys/@3/+": { label: "gě" }
+      "rows/@1/keys/@4/+": { label: "gè" }
+      "rows/@1/keys/@5/+": { label: "ge" }
+      "rows/@2/keys/@1/+": { label: "gēn" }
+      "rows/@2/keys/@2/+": { label: "gén" }
+      "rows/@2/keys/@3/+": { label: "gěn" }
+      "rows/@2/keys/@4/+": { label: "gèn" }
+      "rows/@2/keys/@5/+": { label: "gen" }
+      "rows/@3/keys/@1/+": { label: "gēng" }
+      "rows/@3/keys/@3/+": { label: "gěng" }
+      "rows/@3/keys/@4/+": { label: "gèng" }
+      "rows/@3/keys/@5/+": { label: "geng" }
+
+  lssp_three_jvan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "juān" }
+      "rows/@2/keys/@3/+": { label: "juǎn" }
+      "rows/@2/keys/@4/+": { label: "juàn" }
+      "rows/@2/keys/@5/+": { label: "juan" }
+
+  lssp_three_jiaianiang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "jiā" }
+      "rows/@1/keys/@2/+": { label: "jiá" }
+      "rows/@1/keys/@3/+": { label: "jiǎ" }
+      "rows/@1/keys/@4/+": { label: "jià" }
+      "rows/@1/keys/@5/+": { label: "jia" }
+      "rows/@2/keys/@1/+": { label: "jiān" }
+      "rows/@2/keys/@3/+": { label: "jiǎn" }
+      "rows/@2/keys/@4/+": { label: "jiàn" }
+      "rows/@2/keys/@5/+": { label: "jian" }
+      "rows/@3/keys/@1/+": { label: "jiāng" }
+      "rows/@3/keys/@3/+": { label: "jiǎng" }
+      "rows/@3/keys/@4/+": { label: "jiàng" }
+      "rows/@3/keys/@5/+": { label: "jiang" }
+
+  lssp_three_jiiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "jī" }
+      "rows/@2/keys/@2/+": { label: "jí" }
+      "rows/@2/keys/@3/+": { label: "jǐ" }
+      "rows/@2/keys/@4/+": { label: "jì" }
+      "rows/@2/keys/@5/+": { label: "ji" }
+      "rows/@3/keys/@1/+": { label: "jiāo" }
+      "rows/@3/keys/@2/+": { label: "jiáo" }
+      "rows/@3/keys/@3/+": { label: "jiǎo" }
+      "rows/@3/keys/@4/+": { label: "jiào" }
+      "rows/@3/keys/@5/+": { label: "jiao" }
+
+  lssp_three_jiuiong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "jiū" }
+      "rows/@2/keys/@3/+": { label: "jiǔ" }
+      "rows/@2/keys/@4/+": { label: "jiù" }
+      "rows/@2/keys/@5/+": { label: "jiu" }
+      "rows/@3/keys/@1/+": { label: "jiōng" }
+      "rows/@3/keys/@3/+": { label: "jiǒng" }
+      "rows/@3/keys/@5/+": { label: "jiong" }
+
+  lssp_three_jieining:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "jiē" }
+      "rows/@1/keys/@2/+": { label: "jié" }
+      "rows/@1/keys/@3/+": { label: "jiě" }
+      "rows/@1/keys/@4/+": { label: "jiè" }
+      "rows/@1/keys/@5/+": { label: "jie" }
+      "rows/@2/keys/@1/+": { label: "jīn" }
+      "rows/@2/keys/@3/+": { label: "jǐn" }
+      "rows/@2/keys/@4/+": { label: "jìn" }
+      "rows/@2/keys/@5/+": { label: "jin" }
+      "rows/@3/keys/@1/+": { label: "jīng" }
+      "rows/@3/keys/@3/+": { label: "jǐng" }
+      "rows/@3/keys/@4/+": { label: "jìng" }
+      "rows/@3/keys/@5/+": { label: "jing" }
+
+  lssp_three_jv:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@1/+": { label: "jū" }
+      "rows/@3/keys/@2/+": { label: "jú" }
+      "rows/@3/keys/@3/+": { label: "jǔ" }
+      "rows/@3/keys/@4/+": { label: "jù" }
+      "rows/@3/keys/@5/+": { label: "ju" }
+
+  lssp_three_guauanuang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "guā" }
+      "rows/@1/keys/@3/+": { label: "guǎ" }
+      "rows/@1/keys/@4/+": { label: "guà" }
+      "rows/@1/keys/@5/+": { label: "gua" }
+      "rows/@2/keys/@1/+": { label: "guān" }
+      "rows/@2/keys/@3/+": { label: "guǎn" }
+      "rows/@2/keys/@4/+": { label: "guàn" }
+      "rows/@2/keys/@5/+": { label: "guan" }
+      "rows/@3/keys/@1/+": { label: "guāng" }
+      "rows/@3/keys/@3/+": { label: "guǎng" }
+      "rows/@3/keys/@4/+": { label: "guàng" }
+      "rows/@3/keys/@5/+": { label: "guang" }
+
+  lssp_three_guaiui:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "guāi" }
+      "rows/@1/keys/@3/+": { label: "guǎi" }
+      "rows/@1/keys/@4/+": { label: "guài" }
+      "rows/@1/keys/@5/+": { label: "guai" }
+      "rows/@2/keys/@1/+": { label: "guī" }
+      "rows/@2/keys/@3/+": { label: "guǐ" }
+      "rows/@2/keys/@4/+": { label: "guì" }
+      "rows/@2/keys/@5/+": { label: "gui" }
+
+  lssp_three_guou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "guō" }
+      "rows/@1/keys/@2/+": { label: "guó" }
+      "rows/@1/keys/@3/+": { label: "guǒ" }
+      "rows/@1/keys/@4/+": { label: "guò" }
+      "rows/@1/keys/@5/+": { label: "guo" }
+      "rows/@3/keys/@1/+": { label: "gū" }
+      "rows/@3/keys/@3/+": { label: "gǔ" }
+      "rows/@3/keys/@4/+": { label: "gù" }
+      "rows/@3/keys/@5/+": { label: "gu" }
+
+  lssp_three_gun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@3/+": { label: "gǔn" }
+      "rows/@2/keys/@4/+": { label: "gùn" }
+      "rows/@2/keys/@5/+": { label: "gun" }
+
+  lssp_three_jvevn:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "juē" }
+      "rows/@1/keys/@2/+": { label: "jué" }
+      "rows/@1/keys/@3/+": { label: "juě" }
+      "rows/@1/keys/@4/+": { label: "juè" }
+      "rows/@1/keys/@5/+": { label: "jue" }
+      "rows/@2/keys/@1/+": { label: "jūn" }
+      "rows/@2/keys/@4/+": { label: "jùn" }
+      "rows/@2/keys/@5/+": { label: "jun" }
+
+  lssp_three_kaanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "kā" }
+      "rows/@1/keys/@3/+": { label: "kǎ" }
+      "rows/@1/keys/@5/+": { label: "ka" }
+      "rows/@2/keys/@1/+": { label: "kān" }
+      "rows/@2/keys/@3/+": { label: "kǎn" }
+      "rows/@2/keys/@4/+": { label: "kàn" }
+      "rows/@2/keys/@5/+": { label: "kan" }
+      "rows/@3/keys/@1/+": { label: "kāng" }
+      "rows/@3/keys/@2/+": { label: "káng" }
+      "rows/@3/keys/@4/+": { label: "kàng" }
+      "rows/@3/keys/@5/+": { label: "kang" }
+
+  lssp_three_kaieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "kāi" }
+      "rows/@1/keys/@3/+": { label: "kǎi" }
+      "rows/@1/keys/@4/+": { label: "kài" }
+      "rows/@1/keys/@5/+": { label: "kai" }
+      "rows/@2/keys/@1/+": { label: "kēi" }
+      "rows/@2/keys/@5/+": { label: "kei" }
+      "rows/@3/keys/@1/+": { label: "kāo" }
+      "rows/@3/keys/@3/+": { label: "kǎo" }
+      "rows/@3/keys/@4/+": { label: "kào" }
+      "rows/@3/keys/@5/+": { label: "kao" }
+
+  lssp_three_kouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "kōu" }
+      "rows/@2/keys/@3/+": { label: "kǒu" }
+      "rows/@2/keys/@4/+": { label: "kòu" }
+      "rows/@2/keys/@5/+": { label: "kou" }
+      "rows/@3/keys/@1/+": { label: "kōng" }
+      "rows/@3/keys/@3/+": { label: "kǒng" }
+      "rows/@3/keys/@4/+": { label: "kòng" }
+      "rows/@3/keys/@5/+": { label: "kong" }
+
+  lssp_three_keeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "kē" }
+      "rows/@1/keys/@2/+": { label: "ké" }
+      "rows/@1/keys/@3/+": { label: "kě" }
+      "rows/@1/keys/@4/+": { label: "kè" }
+      "rows/@1/keys/@5/+": { label: "ke" }
+      "rows/@2/keys/@3/+": { label: "kěn" }
+      "rows/@2/keys/@4/+": { label: "kèn" }
+      "rows/@2/keys/@5/+": { label: "ken" }
+      "rows/@3/keys/@1/+": { label: "kēng" }
+      "rows/@3/keys/@5/+": { label: "keng" }
+
+  lssp_three_qvan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "quān" }
+      "rows/@2/keys/@2/+": { label: "quán" }
+      "rows/@2/keys/@3/+": { label: "quǎn" }
+      "rows/@2/keys/@4/+": { label: "quàn" }
+      "rows/@2/keys/@5/+": { label: "quan" }
+
+  lssp_three_qiaianiang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "qiā" }
+      "rows/@1/keys/@2/+": { label: "qiá" }
+      "rows/@1/keys/@3/+": { label: "qiǎ" }
+      "rows/@1/keys/@4/+": { label: "qià" }
+      "rows/@1/keys/@5/+": { label: "qia" }
+      "rows/@2/keys/@1/+": { label: "qiān" }
+      "rows/@2/keys/@2/+": { label: "qián" }
+      "rows/@2/keys/@3/+": { label: "qiǎn" }
+      "rows/@2/keys/@4/+": { label: "qiàn" }
+      "rows/@2/keys/@5/+": { label: "qian" }
+      "rows/@3/keys/@1/+": { label: "qiāng" }
+      "rows/@3/keys/@2/+": { label: "qiáng" }
+      "rows/@3/keys/@3/+": { label: "qiǎng" }
+      "rows/@3/keys/@4/+": { label: "qiàng" }
+      "rows/@3/keys/@5/+": { label: "qiang" }
+
+  lssp_three_qiiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "qī" }
+      "rows/@2/keys/@2/+": { label: "qí" }
+      "rows/@2/keys/@3/+": { label: "qǐ" }
+      "rows/@2/keys/@4/+": { label: "qì" }
+      "rows/@2/keys/@5/+": { label: "qi" }
+      "rows/@3/keys/@1/+": { label: "qiāo" }
+      "rows/@3/keys/@2/+": { label: "qiáo" }
+      "rows/@3/keys/@3/+": { label: "qiǎo" }
+      "rows/@3/keys/@4/+": { label: "qiào" }
+      "rows/@3/keys/@5/+": { label: "qiao" }
+
+  lssp_three_qiuiong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "qiū" }
+      "rows/@2/keys/@2/+": { label: "qiú" }
+      "rows/@2/keys/@3/+": { label: "qiǔ" }
+      "rows/@2/keys/@5/+": { label: "qiu" }
+      "rows/@3/keys/@2/+": { label: "qióng" }
+      "rows/@3/keys/@5/+": { label: "qiong" }
+
+  lssp_three_qieining:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "qiē" }
+      "rows/@1/keys/@2/+": { label: "qié" }
+      "rows/@1/keys/@3/+": { label: "qiě" }
+      "rows/@1/keys/@4/+": { label: "qiè" }
+      "rows/@1/keys/@5/+": { label: "qie" }
+      "rows/@2/keys/@1/+": { label: "qīn" }
+      "rows/@2/keys/@2/+": { label: "qín" }
+      "rows/@2/keys/@3/+": { label: "qǐn" }
+      "rows/@2/keys/@4/+": { label: "qìn" }
+      "rows/@2/keys/@5/+": { label: "qin" }
+      "rows/@3/keys/@1/+": { label: "qīng" }
+      "rows/@3/keys/@2/+": { label: "qíng" }
+      "rows/@3/keys/@3/+": { label: "qǐng" }
+      "rows/@3/keys/@4/+": { label: "qìng" }
+      "rows/@3/keys/@5/+": { label: "qing" }
+
+  lssp_three_qv:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@1/+": { label: "qū" }
+      "rows/@3/keys/@2/+": { label: "qú" }
+      "rows/@3/keys/@3/+": { label: "qǔ" }
+      "rows/@3/keys/@4/+": { label: "qù" }
+      "rows/@3/keys/@5/+": { label: "qu" }
+
+  lssp_three_kuauanuang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "kuā" }
+      "rows/@1/keys/@3/+": { label: "kuǎ" }
+      "rows/@1/keys/@4/+": { label: "kuà" }
+      "rows/@1/keys/@5/+": { label: "kua" }
+      "rows/@2/keys/@1/+": { label: "kuān" }
+      "rows/@2/keys/@3/+": { label: "kuǎn" }
+      "rows/@2/keys/@5/+": { label: "kuan" }
+      "rows/@3/keys/@1/+": { label: "kuāng" }
+      "rows/@3/keys/@2/+": { label: "kuáng" }
+      "rows/@3/keys/@3/+": { label: "kuǎng" }
+      "rows/@3/keys/@4/+": { label: "kuàng" }
+      "rows/@3/keys/@5/+": { label: "kuang" }
+
+  lssp_three_kuaiui:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@3/+": { label: "kuǎi" }
+      "rows/@1/keys/@4/+": { label: "kuài" }
+      "rows/@1/keys/@5/+": { label: "kuai" }
+      "rows/@2/keys/@1/+": { label: "kuī" }
+      "rows/@2/keys/@2/+": { label: "kuí" }
+      "rows/@2/keys/@3/+": { label: "kuǐ" }
+      "rows/@2/keys/@4/+": { label: "kuì" }
+      "rows/@2/keys/@5/+": { label: "kui" }
+
+  lssp_three_kuou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@4/+": { label: "kuò" }
+      "rows/@1/keys/@5/+": { label: "kuo" }
+      "rows/@3/keys/@1/+": { label: "kū" }
+      "rows/@3/keys/@3/+": { label: "kǔ" }
+      "rows/@3/keys/@4/+": { label: "kù" }
+      "rows/@3/keys/@5/+": { label: "ku" }
+
+  lssp_three_kun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "kūn" }
+      "rows/@2/keys/@3/+": { label: "kǔn" }
+      "rows/@2/keys/@4/+": { label: "kùn" }
+      "rows/@2/keys/@5/+": { label: "kun" }
+
+  lssp_three_qvevn:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "quē" }
+      "rows/@1/keys/@2/+": { label: "qué" }
+      "rows/@1/keys/@4/+": { label: "què" }
+      "rows/@1/keys/@5/+": { label: "que" }
+      "rows/@2/keys/@1/+": { label: "qūn" }
+      "rows/@2/keys/@2/+": { label: "qún" }
+      "rows/@2/keys/@5/+": { label: "qun" }
+
+  lssp_three_haanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "hā" }
+      "rows/@1/keys/@2/+": { label: "há" }
+      "rows/@1/keys/@3/+": { label: "hǎ" }
+      "rows/@1/keys/@4/+": { label: "hà" }
+      "rows/@1/keys/@5/+": { label: "ha" }
+      "rows/@2/keys/@1/+": { label: "hān" }
+      "rows/@2/keys/@2/+": { label: "hán" }
+      "rows/@2/keys/@3/+": { label: "hǎn" }
+      "rows/@2/keys/@4/+": { label: "hàn" }
+      "rows/@2/keys/@5/+": { label: "han" }
+      "rows/@3/keys/@1/+": { label: "hāng" }
+      "rows/@3/keys/@2/+": { label: "háng" }
+      "rows/@3/keys/@4/+": { label: "hàng" }
+      "rows/@3/keys/@5/+": { label: "hang" }
+
+  lssp_three_haieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "hāi" }
+      "rows/@1/keys/@2/+": { label: "hái" }
+      "rows/@1/keys/@3/+": { label: "hǎi" }
+      "rows/@1/keys/@4/+": { label: "hài" }
+      "rows/@1/keys/@5/+": { label: "hai" }
+      "rows/@2/keys/@1/+": { label: "hēi" }
+      "rows/@2/keys/@5/+": { label: "hei" }
+      "rows/@3/keys/@1/+": { label: "hāo" }
+      "rows/@3/keys/@2/+": { label: "háo" }
+      "rows/@3/keys/@3/+": { label: "hǎo" }
+      "rows/@3/keys/@4/+": { label: "hào" }
+      "rows/@3/keys/@5/+": { label: "hao" }
+
+  lssp_three_houong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "hōu" }
+      "rows/@2/keys/@2/+": { label: "hóu" }
+      "rows/@2/keys/@3/+": { label: "hǒu" }
+      "rows/@2/keys/@4/+": { label: "hòu" }
+      "rows/@2/keys/@5/+": { label: "hou" }
+      "rows/@3/keys/@1/+": { label: "hōng" }
+      "rows/@3/keys/@2/+": { label: "hóng" }
+      "rows/@3/keys/@3/+": { label: "hǒng" }
+      "rows/@3/keys/@4/+": { label: "hòng" }
+      "rows/@3/keys/@5/+": { label: "hong" }
+
+  lssp_three_heeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "hē" }
+      "rows/@1/keys/@2/+": { label: "hé" }
+      "rows/@1/keys/@4/+": { label: "hè" }
+      "rows/@1/keys/@5/+": { label: "he" }
+      "rows/@2/keys/@1/+": { label: "hēn" }
+      "rows/@2/keys/@2/+": { label: "hén" }
+      "rows/@2/keys/@3/+": { label: "hěn" }
+      "rows/@2/keys/@4/+": { label: "hèn" }
+      "rows/@2/keys/@5/+": { label: "hen" }
+      "rows/@3/keys/@1/+": { label: "hēng" }
+      "rows/@3/keys/@2/+": { label: "héng" }
+      "rows/@3/keys/@4/+": { label: "hèng" }
+      "rows/@3/keys/@5/+": { label: "heng" }
+
+  lssp_three_xvan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "xuān" }
+      "rows/@2/keys/@2/+": { label: "xuán" }
+      "rows/@2/keys/@3/+": { label: "xuǎn" }
+      "rows/@2/keys/@4/+": { label: "xuàn" }
+      "rows/@2/keys/@5/+": { label: "xuan" }
+
+  lssp_three_xiaianiang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "xiā" }
+      "rows/@1/keys/@2/+": { label: "xiá" }
+      "rows/@1/keys/@4/+": { label: "xià" }
+      "rows/@1/keys/@5/+": { label: "xia" }
+      "rows/@2/keys/@1/+": { label: "xiān" }
+      "rows/@2/keys/@2/+": { label: "xián" }
+      "rows/@2/keys/@3/+": { label: "xiǎn" }
+      "rows/@2/keys/@4/+": { label: "xiàn" }
+      "rows/@2/keys/@5/+": { label: "xian" }
+      "rows/@3/keys/@1/+": { label: "xiāng" }
+      "rows/@3/keys/@2/+": { label: "xiáng" }
+      "rows/@3/keys/@3/+": { label: "xiǎng" }
+      "rows/@3/keys/@4/+": { label: "xiàng" }
+      "rows/@3/keys/@5/+": { label: "xiang" }
+
+  lssp_three_xiiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "xī" }
+      "rows/@2/keys/@2/+": { label: "xí" }
+      "rows/@2/keys/@3/+": { label: "xǐ" }
+      "rows/@2/keys/@4/+": { label: "xì" }
+      "rows/@2/keys/@5/+": { label: "xi" }
+      "rows/@3/keys/@1/+": { label: "xiāo" }
+      "rows/@3/keys/@2/+": { label: "xiáo" }
+      "rows/@3/keys/@3/+": { label: "xiǎo" }
+      "rows/@3/keys/@4/+": { label: "xiào" }
+      "rows/@3/keys/@5/+": { label: "xiao" }
+
+  lssp_three_xiuiong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "xiū" }
+      "rows/@2/keys/@3/+": { label: "xiǔ" }
+      "rows/@2/keys/@4/+": { label: "xiù" }
+      "rows/@2/keys/@5/+": { label: "xiu" }
+      "rows/@3/keys/@1/+": { label: "xiōng" }
+      "rows/@3/keys/@2/+": { label: "xióng" }
+      "rows/@3/keys/@4/+": { label: "xiòng" }
+      "rows/@3/keys/@5/+": { label: "xiong" }
+
+  lssp_three_xieining:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "xiē" }
+      "rows/@1/keys/@2/+": { label: "xié" }
+      "rows/@1/keys/@3/+": { label: "xiě" }
+      "rows/@1/keys/@4/+": { label: "xiè" }
+      "rows/@1/keys/@5/+": { label: "xie" }
+      "rows/@2/keys/@1/+": { label: "xīn" }
+      "rows/@2/keys/@2/+": { label: "xín" }
+      "rows/@2/keys/@3/+": { label: "xǐn" }
+      "rows/@2/keys/@4/+": { label: "xìn" }
+      "rows/@2/keys/@5/+": { label: "xin" }
+      "rows/@3/keys/@1/+": { label: "xīng" }
+      "rows/@3/keys/@2/+": { label: "xíng" }
+      "rows/@3/keys/@3/+": { label: "xǐng" }
+      "rows/@3/keys/@4/+": { label: "xìng" }
+      "rows/@3/keys/@5/+": { label: "xing" }
+
+  lssp_three_xv:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@1/+": { label: "xū" }
+      "rows/@3/keys/@2/+": { label: "xú" }
+      "rows/@3/keys/@3/+": { label: "xǔ" }
+      "rows/@3/keys/@4/+": { label: "xù" }
+      "rows/@3/keys/@5/+": { label: "xu" }
+
+  lssp_three_huauanuang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "huā" }
+      "rows/@1/keys/@2/+": { label: "huá" }
+      "rows/@1/keys/@4/+": { label: "huà" }
+      "rows/@1/keys/@5/+": { label: "hua" }
+      "rows/@2/keys/@1/+": { label: "huān" }
+      "rows/@2/keys/@2/+": { label: "huán" }
+      "rows/@2/keys/@3/+": { label: "huǎn" }
+      "rows/@2/keys/@4/+": { label: "huàn" }
+      "rows/@2/keys/@5/+": { label: "huan" }
+      "rows/@3/keys/@1/+": { label: "huāng" }
+      "rows/@3/keys/@2/+": { label: "huáng" }
+      "rows/@3/keys/@3/+": { label: "huǎng" }
+      "rows/@3/keys/@4/+": { label: "huàng" }
+      "rows/@3/keys/@5/+": { label: "huang" }
+
+  lssp_three_huaiui:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "huái" }
+      "rows/@1/keys/@4/+": { label: "huài" }
+      "rows/@1/keys/@5/+": { label: "huai" }
+      "rows/@2/keys/@1/+": { label: "huī" }
+      "rows/@2/keys/@2/+": { label: "huí" }
+      "rows/@2/keys/@3/+": { label: "huǐ" }
+      "rows/@2/keys/@4/+": { label: "huì" }
+      "rows/@2/keys/@5/+": { label: "hui" }
+
+  lssp_three_huou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "huō" }
+      "rows/@1/keys/@2/+": { label: "huó" }
+      "rows/@1/keys/@3/+": { label: "huǒ" }
+      "rows/@1/keys/@4/+": { label: "huò" }
+      "rows/@1/keys/@5/+": { label: "huo" }
+      "rows/@3/keys/@1/+": { label: "hū" }
+      "rows/@3/keys/@2/+": { label: "hú" }
+      "rows/@3/keys/@3/+": { label: "hǔ" }
+      "rows/@3/keys/@4/+": { label: "hù" }
+      "rows/@3/keys/@5/+": { label: "hu" }
+
+  lssp_three_hun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "hūn" }
+      "rows/@2/keys/@2/+": { label: "hún" }
+      "rows/@2/keys/@4/+": { label: "hùn" }
+      "rows/@2/keys/@5/+": { label: "hun" }
+
+  lssp_three_xvevn:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "xuē" }
+      "rows/@1/keys/@2/+": { label: "xué" }
+      "rows/@1/keys/@3/+": { label: "xuě" }
+      "rows/@1/keys/@4/+": { label: "xuè" }
+      "rows/@1/keys/@5/+": { label: "xue" }
+      "rows/@2/keys/@1/+": { label: "xūn" }
+      "rows/@2/keys/@2/+": { label: "xún" }
+      "rows/@2/keys/@4/+": { label: "xùn" }
+      "rows/@2/keys/@5/+": { label: "xun" }
+
+  lssp_three_aanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ā" }
+      "rows/@1/keys/@2/+": { label: "á" }
+      "rows/@1/keys/@3/+": { label: "ǎ" }
+      "rows/@1/keys/@4/+": { label: "à" }
+      "rows/@1/keys/@5/+": { label: "a" }
+      "rows/@2/keys/@1/+": { label: "ān" }
+      "rows/@2/keys/@3/+": { label: "ǎn" }
+      "rows/@2/keys/@4/+": { label: "àn" }
+      "rows/@2/keys/@5/+": { label: "an" }
+      "rows/@3/keys/@1/+": { label: "āng" }
+      "rows/@3/keys/@2/+": { label: "áng" }
+      "rows/@3/keys/@4/+": { label: "àng" }
+      "rows/@3/keys/@5/+": { label: "ang" }
+
+  lssp_three_aieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "āi" }
+      "rows/@1/keys/@2/+": { label: "ái" }
+      "rows/@1/keys/@3/+": { label: "ǎi" }
+      "rows/@1/keys/@4/+": { label: "ài" }
+      "rows/@1/keys/@5/+": { label: "ai" }
+      "rows/@2/keys/@1/+": { label: "ê̄" }
+      "rows/@2/keys/@2/+": { label: "ế" }
+      "rows/@2/keys/@3/+": { label: "ê̌" }
+      "rows/@2/keys/@4/+": { label: "ề" }
+      "rows/@2/keys/@5/+": { label: "ê" }
+      "rows/@3/keys/@1/+": { label: "āo" }
+      "rows/@3/keys/@2/+": { label: "áo" }
+      "rows/@3/keys/@3/+": { label: "ǎo" }
+      "rows/@3/keys/@4/+": { label: "ào" }
+      "rows/@3/keys/@5/+": { label: "ao" }
+
+  lssp_three_oou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ō" }
+      "rows/@1/keys/@2/+": { label: "ó" }
+      "rows/@1/keys/@3/+": { label: "ǒ" }
+      "rows/@1/keys/@4/+": { label: "ò" }
+      "rows/@1/keys/@5/+": { label: "o" }
+      "rows/@2/keys/@1/+": { label: "ōu" }
+      "rows/@2/keys/@2/+": { label: "óu" }
+      "rows/@2/keys/@3/+": { label: "ǒu" }
+      "rows/@2/keys/@4/+": { label: "òu" }
+      "rows/@2/keys/@5/+": { label: "ou" }
+
+  lssp_three_eeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "ē" }
+      "rows/@1/keys/@2/+": { label: "é" }
+      "rows/@1/keys/@3/+": { label: "ě" }
+      "rows/@1/keys/@4/+": { label: "è" }
+      "rows/@1/keys/@5/+": { label: "e" }
+      "rows/@2/keys/@1/+": { label: "ēn" }
+      "rows/@2/keys/@4/+": { label: "èn" }
+      "rows/@2/keys/@5/+": { label: "en" }
+      "rows/@3/keys/@1/+": { label: "ēng" }
+      "rows/@3/keys/@5/+": { label: "eng" }
+
+  lssp_three_eryvan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@2/+": { label: "ér" }
+      "rows/@1/keys/@3/+": { label: "ěr" }
+      "rows/@1/keys/@4/+": { label: "èr" }
+      "rows/@1/keys/@5/+": { label: "er" }
+      "rows/@2/keys/@1/+": { label: "yuān" }
+      "rows/@2/keys/@2/+": { label: "yuán" }
+      "rows/@2/keys/@3/+": { label: "yuǎn" }
+      "rows/@2/keys/@4/+": { label: "yuàn" }
+      "rows/@2/keys/@5/+": { label: "yuan" }
+
+  lssp_three_yaanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "yā" }
+      "rows/@1/keys/@2/+": { label: "yá" }
+      "rows/@1/keys/@3/+": { label: "yǎ" }
+      "rows/@1/keys/@4/+": { label: "yà" }
+      "rows/@1/keys/@5/+": { label: "ya" }
+      "rows/@2/keys/@1/+": { label: "yān" }
+      "rows/@2/keys/@2/+": { label: "yán" }
+      "rows/@2/keys/@3/+": { label: "yǎn" }
+      "rows/@2/keys/@4/+": { label: "yàn" }
+      "rows/@2/keys/@5/+": { label: "yan" }
+      "rows/@3/keys/@1/+": { label: "yāng" }
+      "rows/@3/keys/@2/+": { label: "yáng" }
+      "rows/@3/keys/@3/+": { label: "yǎng" }
+      "rows/@3/keys/@4/+": { label: "yàng" }
+      "rows/@3/keys/@5/+": { label: "yang" }
+
+  lssp_three_yiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "yī" }
+      "rows/@2/keys/@2/+": { label: "yí" }
+      "rows/@2/keys/@3/+": { label: "yǐ" }
+      "rows/@2/keys/@4/+": { label: "yì" }
+      "rows/@2/keys/@5/+": { label: "yi" }
+      "rows/@3/keys/@1/+": { label: "yāo" }
+      "rows/@3/keys/@2/+": { label: "yáo" }
+      "rows/@3/keys/@3/+": { label: "yǎo" }
+      "rows/@3/keys/@4/+": { label: "yào" }
+      "rows/@3/keys/@5/+": { label: "yao" }
+
+  lssp_three_yoouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "yō" }
+      "rows/@1/keys/@5/+": { label: "yo" }
+      "rows/@2/keys/@1/+": { label: "yōu" }
+      "rows/@2/keys/@2/+": { label: "yóu" }
+      "rows/@2/keys/@3/+": { label: "yǒu" }
+      "rows/@2/keys/@4/+": { label: "yòu" }
+      "rows/@2/keys/@5/+": { label: "you" }
+      "rows/@3/keys/@1/+": { label: "yōng" }
+      "rows/@3/keys/@2/+": { label: "yóng" }
+      "rows/@3/keys/@3/+": { label: "yǒng" }
+      "rows/@3/keys/@4/+": { label: "yòng" }
+      "rows/@3/keys/@5/+": { label: "yong" }
+
+  lssp_three_yeining:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "yē" }
+      "rows/@1/keys/@2/+": { label: "yé" }
+      "rows/@1/keys/@3/+": { label: "yě" }
+      "rows/@1/keys/@4/+": { label: "yè" }
+      "rows/@1/keys/@5/+": { label: "ye" }
+      "rows/@2/keys/@1/+": { label: "yīn" }
+      "rows/@2/keys/@2/+": { label: "yín" }
+      "rows/@2/keys/@3/+": { label: "yǐn" }
+      "rows/@2/keys/@4/+": { label: "yìn" }
+      "rows/@2/keys/@5/+": { label: "yin" }
+      "rows/@3/keys/@1/+": { label: "yīng" }
+      "rows/@3/keys/@2/+": { label: "yíng" }
+      "rows/@3/keys/@3/+": { label: "yǐng" }
+      "rows/@3/keys/@4/+": { label: "yìng" }
+      "rows/@3/keys/@5/+": { label: "ying" }
+
+  lssp_three_yv:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@3/keys/@1/+": { label: "yū" }
+      "rows/@3/keys/@2/+": { label: "yú" }
+      "rows/@3/keys/@3/+": { label: "yǔ" }
+      "rows/@3/keys/@4/+": { label: "yù" }
+      "rows/@3/keys/@5/+": { label: "yu" }
+
+  lssp_three_waanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "wā" }
+      "rows/@1/keys/@2/+": { label: "wá" }
+      "rows/@1/keys/@3/+": { label: "wǎ" }
+      "rows/@1/keys/@4/+": { label: "wà" }
+      "rows/@1/keys/@5/+": { label: "wa" }
+      "rows/@2/keys/@1/+": { label: "wān" }
+      "rows/@2/keys/@2/+": { label: "wán" }
+      "rows/@2/keys/@3/+": { label: "wǎn" }
+      "rows/@2/keys/@4/+": { label: "wàn" }
+      "rows/@2/keys/@5/+": { label: "wan" }
+      "rows/@3/keys/@1/+": { label: "wāng" }
+      "rows/@3/keys/@2/+": { label: "wáng" }
+      "rows/@3/keys/@3/+": { label: "wǎng" }
+      "rows/@3/keys/@4/+": { label: "wàng" }
+      "rows/@3/keys/@5/+": { label: "wang" }
+
+  lssp_three_waiei:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "wāi" }
+      "rows/@1/keys/@3/+": { label: "wǎi" }
+      "rows/@1/keys/@4/+": { label: "wài" }
+      "rows/@1/keys/@5/+": { label: "wai" }
+      "rows/@2/keys/@1/+": { label: "wēi" }
+      "rows/@2/keys/@2/+": { label: "wéi" }
+      "rows/@2/keys/@3/+": { label: "wěi" }
+      "rows/@2/keys/@4/+": { label: "wèi" }
+      "rows/@2/keys/@5/+": { label: "wei" }
+
+  lssp_three_wou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "wō" }
+      "rows/@1/keys/@3/+": { label: "wǒ" }
+      "rows/@1/keys/@4/+": { label: "wò" }
+      "rows/@1/keys/@5/+": { label: "wo" }
+      "rows/@3/keys/@1/+": { label: "wū" }
+      "rows/@3/keys/@2/+": { label: "wú" }
+      "rows/@3/keys/@3/+": { label: "wǔ" }
+      "rows/@3/keys/@4/+": { label: "wù" }
+      "rows/@3/keys/@5/+": { label: "wu" }
+
+  lssp_three_weneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "wēn" }
+      "rows/@2/keys/@2/+": { label: "wén" }
+      "rows/@2/keys/@3/+": { label: "wěn" }
+      "rows/@2/keys/@4/+": { label: "wèn" }
+      "rows/@2/keys/@5/+": { label: "wen" }
+      "rows/@3/keys/@1/+": { label: "wēng" }
+      "rows/@3/keys/@3/+": { label: "wěng" }
+      "rows/@3/keys/@4/+": { label: "wèng" }
+      "rows/@3/keys/@5/+": { label: "weng" }
+
+  lssp_three_yvevn:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "yuē" }
+      "rows/@1/keys/@3/+": { label: "yuě" }
+      "rows/@1/keys/@4/+": { label: "yuè" }
+      "rows/@1/keys/@5/+": { label: "yue" }
+      "rows/@2/keys/@1/+": { label: "yūn" }
+      "rows/@2/keys/@2/+": { label: "yún" }
+      "rows/@2/keys/@3/+": { label: "yǔn" }
+      "rows/@2/keys/@4/+": { label: "yùn" }
+      "rows/@2/keys/@5/+": { label: "yun" }
+
+  lssp_three_shaanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "shā" }
+      "rows/@1/keys/@2/+": { label: "shá" }
+      "rows/@1/keys/@3/+": { label: "shǎ" }
+      "rows/@1/keys/@4/+": { label: "shà" }
+      "rows/@1/keys/@5/+": { label: "sha" }
+      "rows/@2/keys/@1/+": { label: "shān" }
+      "rows/@2/keys/@3/+": { label: "shǎn" }
+      "rows/@2/keys/@4/+": { label: "shàn" }
+      "rows/@2/keys/@5/+": { label: "shan" }
+      "rows/@3/keys/@1/+": { label: "shāng" }
+      "rows/@3/keys/@3/+": { label: "shǎng" }
+      "rows/@3/keys/@4/+": { label: "shàng" }
+      "rows/@3/keys/@5/+": { label: "shang" }
+
+  lssp_three_shaieiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "shāi" }
+      "rows/@1/keys/@3/+": { label: "shǎi" }
+      "rows/@1/keys/@4/+": { label: "shài" }
+      "rows/@1/keys/@5/+": { label: "shai" }
+      "rows/@2/keys/@2/+": { label: "shéi" }
+      "rows/@2/keys/@5/+": { label: "shei" }
+      "rows/@3/keys/@1/+": { label: "shāo" }
+      "rows/@3/keys/@2/+": { label: "sháo" }
+      "rows/@3/keys/@3/+": { label: "shǎo" }
+      "rows/@3/keys/@4/+": { label: "shào" }
+      "rows/@3/keys/@5/+": { label: "shao" }
+
+  lssp_three_shiou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "shī" }
+      "rows/@1/keys/@2/+": { label: "shí" }
+      "rows/@1/keys/@3/+": { label: "shǐ" }
+      "rows/@1/keys/@4/+": { label: "shì" }
+      "rows/@1/keys/@5/+": { label: "shi" }
+      "rows/@2/keys/@1/+": { label: "shōu" }
+      "rows/@2/keys/@2/+": { label: "shóu" }
+      "rows/@2/keys/@3/+": { label: "shǒu" }
+      "rows/@2/keys/@4/+": { label: "shòu" }
+      "rows/@2/keys/@5/+": { label: "shou" }
+
+  lssp_three_sheeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "shē" }
+      "rows/@1/keys/@2/+": { label: "shé" }
+      "rows/@1/keys/@3/+": { label: "shě" }
+      "rows/@1/keys/@4/+": { label: "shè" }
+      "rows/@1/keys/@5/+": { label: "she" }
+      "rows/@2/keys/@1/+": { label: "shēn" }
+      "rows/@2/keys/@2/+": { label: "shén" }
+      "rows/@2/keys/@3/+": { label: "shěn" }
+      "rows/@2/keys/@4/+": { label: "shèn" }
+      "rows/@2/keys/@5/+": { label: "shen" }
+      "rows/@3/keys/@1/+": { label: "shēng" }
+      "rows/@3/keys/@2/+": { label: "shéng" }
+      "rows/@3/keys/@3/+": { label: "shěng" }
+      "rows/@3/keys/@4/+": { label: "shèng" }
+      "rows/@3/keys/@5/+": { label: "sheng" }
+
+  lssp_three_shuauanuang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "shuā" }
+      "rows/@1/keys/@3/+": { label: "shuǎ" }
+      "rows/@1/keys/@4/+": { label: "shuà" }
+      "rows/@1/keys/@5/+": { label: "shua" }
+      "rows/@2/keys/@1/+": { label: "shuān" }
+      "rows/@2/keys/@4/+": { label: "shuàn" }
+      "rows/@2/keys/@5/+": { label: "shuan" }
+      "rows/@3/keys/@1/+": { label: "shuāng" }
+      "rows/@3/keys/@3/+": { label: "shuǎng" }
+      "rows/@3/keys/@5/+": { label: "shuang" }
+
+  lssp_three_shuaiui:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "shuāi" }
+      "rows/@1/keys/@3/+": { label: "shuǎi" }
+      "rows/@1/keys/@4/+": { label: "shuài" }
+      "rows/@1/keys/@5/+": { label: "shuai" }
+      "rows/@2/keys/@2/+": { label: "shuí" }
+      "rows/@2/keys/@3/+": { label: "shuǐ" }
+      "rows/@2/keys/@4/+": { label: "shuì" }
+      "rows/@2/keys/@5/+": { label: "shui" }
+
+  lssp_three_shuou:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "shuō" }
+      "rows/@1/keys/@4/+": { label: "shuò" }
+      "rows/@1/keys/@5/+": { label: "shuo" }
+      "rows/@3/keys/@1/+": { label: "shū" }
+      "rows/@3/keys/@2/+": { label: "shú" }
+      "rows/@3/keys/@3/+": { label: "shǔ" }
+      "rows/@3/keys/@4/+": { label: "shù" }
+      "rows/@3/keys/@5/+": { label: "shu" }
+
+  lssp_three_shun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@3/+": { label: "shǔn" }
+      "rows/@2/keys/@4/+": { label: "shùn" }
+      "rows/@2/keys/@5/+": { label: "shun" }
+
+  lssp_three_saanang:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "sā" }
+      "rows/@1/keys/@3/+": { label: "sǎ" }
+      "rows/@1/keys/@4/+": { label: "sà" }
+      "rows/@1/keys/@5/+": { label: "sa" }
+      "rows/@2/keys/@1/+": { label: "sān" }
+      "rows/@2/keys/@3/+": { label: "sǎn" }
+      "rows/@2/keys/@4/+": { label: "sàn" }
+      "rows/@2/keys/@5/+": { label: "san" }
+      "rows/@3/keys/@1/+": { label: "sāng" }
+      "rows/@3/keys/@3/+": { label: "sǎng" }
+      "rows/@3/keys/@4/+": { label: "sàng" }
+      "rows/@3/keys/@5/+": { label: "sang" }
+
+  lssp_three_saiao:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "sāi" }
+      "rows/@1/keys/@4/+": { label: "sài" }
+      "rows/@1/keys/@5/+": { label: "sai" }
+      "rows/@3/keys/@1/+": { label: "sāo" }
+      "rows/@3/keys/@3/+": { label: "sǎo" }
+      "rows/@3/keys/@4/+": { label: "sào" }
+      "rows/@3/keys/@5/+": { label: "sao" }
+
+  lssp_three_siouong:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "sī" }
+      "rows/@1/keys/@3/+": { label: "sǐ" }
+      "rows/@1/keys/@4/+": { label: "sì" }
+      "rows/@1/keys/@5/+": { label: "si" }
+      "rows/@2/keys/@1/+": { label: "sōu" }
+      "rows/@2/keys/@3/+": { label: "sǒu" }
+      "rows/@2/keys/@4/+": { label: "sòu" }
+      "rows/@2/keys/@5/+": { label: "sou" }
+      "rows/@3/keys/@1/+": { label: "sōng" }
+      "rows/@3/keys/@2/+": { label: "sóng" }
+      "rows/@3/keys/@3/+": { label: "sǒng" }
+      "rows/@3/keys/@4/+": { label: "sòng" }
+      "rows/@3/keys/@5/+": { label: "song" }
+
+  lssp_three_seeneng:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@4/+": { label: "sè" }
+      "rows/@1/keys/@5/+": { label: "se" }
+      "rows/@2/keys/@1/+": { label: "sēn" }
+      "rows/@2/keys/@5/+": { label: "sen" }
+      "rows/@3/keys/@1/+": { label: "sēng" }
+      "rows/@3/keys/@5/+": { label: "seng" }
+
+  lssp_three_suan:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "suān" }
+      "rows/@2/keys/@4/+": { label: "suàn" }
+      "rows/@2/keys/@5/+": { label: "suan" }
+
+  lssp_three_suouiu:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@1/keys/@1/+": { label: "suō" }
+      "rows/@1/keys/@3/+": { label: "suǒ" }
+      "rows/@1/keys/@5/+": { label: "suo" }
+      "rows/@2/keys/@1/+": { label: "suī" }
+      "rows/@2/keys/@2/+": { label: "suí" }
+      "rows/@2/keys/@3/+": { label: "suǐ" }
+      "rows/@2/keys/@4/+": { label: "suì" }
+      "rows/@2/keys/@5/+": { label: "sui" }
+      "rows/@3/keys/@1/+": { label: "sū" }
+      "rows/@3/keys/@2/+": { label: "sú" }
+      "rows/@3/keys/@4/+": { label: "sù" }
+      "rows/@3/keys/@5/+": { label: "su" }
+
+  lssp_three_sun:
+    __include: "preset_keyboards/lssp_three_temp"
+    __patch:
+      "rows/@2/keys/@1/+": { label: "sūn" }
+      "rows/@2/keys/@3/+": { label: "sǔn" }
+      "rows/@2/keys/@5/+": { label: "sun" }

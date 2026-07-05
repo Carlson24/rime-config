@@ -1,0 +1,543 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: triple_pinyin_lishi26
+  name: 廿六三拼
+  version: "3.5"
+  author:
+    - 佛振 <chen.sst@gmail.com>
+    - 阿森納裡 <15678407@qq.com>
+  description: |
+    26鍵內實現三碼輸入一個帶調音節；
+    前兩碼為雙拼，第三碼以oeway輸入五聲調，聲調可省略；
+    雙拼方案基於自然碼，y,w,零聲母分別以j/f,q,x輸入；
+    可用HSPNZ（橫豎撇捺折）連續輸入筆畫輔助碼進行逐字篩選；
+    上屏碼和提示碼有全拼（無調拼音）、帶調拼音、注音符號和國語羅馬字四種形式，可任意切換。
+  dependencies:
+    - luna_pinyin
+    - stroke
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 英文 ]
+    
+  - name: simplification
+    states: [ 繁體, 简体 ]
+    
+  - name: full_shape
+    states: [ 半角, 全角 ]
+    
+  - options: [ lishi26_quanpin, lishi26_ddpy, lishi26_zhuyin, lishi26_guoluo, lishi26_translator ]
+    states: [ 全拼, 拼音, 注音, 国罗, 原码 ]
+    
+  - name: small_mode
+    states: [ 双手, 单手 ]
+    
+  - name: ascii_punct
+    states: [ ，。, ，． ]
+    
+  - options: [ VOICE_ASSIST ]
+    states: [ "🎙" ]
+    
+  - options: [ _Keyboard_emoji ]
+    states: [ "😊" ]
+    
+  - options: [ _Keyboard_symbols ]
+    states: [ "🔣" ]
+    
+  - options: [ _Keyboard_clip ]
+    states: [ "📋" ]
+    
+  # - options: [ Keyboard_ls26, Keyboard_ls26zy ]
+    # states: [ ⌨拼音, ⌨注音 ]
+    
+  - options: [ Menu ]
+    states: [ "方案" ]
+    
+  - options: [ Theme_settings ]
+    states: [ "主题" ]
+    
+  - options: [ Color_switch ]
+    states: [ "配色" ]
+    
+  - options: [ Hint_switch ]
+    states: [ "助记" ]
+    
+  - options: [ IME_switch ]
+    states: [ "🌐" ]
+
+engine:
+  processors:
+    - lua_processor@*limited
+    - lua_processor@*lssp_processor
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor  # 編輯器
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - echo_translator  # 沒有其他結果時，創建一個與編碼串一樣的候選項
+    - punct_translator
+    - reverse_lookup_translator@luna_pinyin_lookup
+    - reverse_lookup_translator@stroke_lookup
+    - lua_translator@*triple_pinyin_lishi26
+    - script_translator
+  filters:
+    - simplifier
+    - lua_filter@*aux_code_stroke
+    - uniquifier
+
+speller:             # 拼寫處理器：詞典編碼->輸入碼
+  alphabet: 'zyxwvutsrqponmlkjihgfedcbaHSPNZ'
+  initials: 'zxvutsrqpnmlkjihgfdcb'
+  delimiter: " ;'"
+  # auto_clear: auto # manual|auto|max_length 空碼按下一鍵確認清屏|空碼自動清屏|達到最長碼時後碼頂上清屏
+  algebra:                             # 詞典編碼->輸入碼
+   # 萬象詞庫處理
+    - xform/^([a-zāōēīūǖáóéíúǘǎǒěǐǔǚàòèìùǜüńňǹ]+);[;,a-z]+$/$1/        # 刪除輔助碼
+    - xform/ā(\w*)/a$1\x31/
+    - xform/ō(\w*)/o$1\x31/
+    - xform/ē(\w*)/e$1\x31/
+    - xform/ī(\w*)/i$1\x31/
+    - xform/ū(\w*)/u$1\x31/
+    - xform/ǖ(\w*)/v$1\x31/
+    - xform/á(\w*)/a$1\x32/
+    - xform/ó(\w*)/o$1\x32/
+    - xform/é(\w*)/e$1\x32/
+    - xform/í(\w*)/i$1\x32/
+    - xform/ú(\w*)/u$1\x32/
+    - xform/ǘ(\w*)/v$1\x32/
+    - xform/ǎ(\w*)/a$1\x33/
+    - xform/ǒ(\w*)/o$1\x33/
+    - xform/ě(\w*)/e$1\x33/
+    - xform/ǐ(\w*)/i$1\x33/
+    - xform/ǔ(\w*)/u$1\x33/
+    - xform/ǚ(\w*)/v$1\x33/
+    - xform/à(\w*)/a$1\x34/
+    - xform/ò(\w*)/o$1\x34/
+    - xform/è(\w*)/e$1\x34/
+    - xform/ì(\w*)/i$1\x34/
+    - xform/ù(\w*)/u$1\x34/
+    - xform/ǜ(\w*)/v$1\x34/
+    - xform/ü/v/
+    - xform/^([a-z]+)$/$1\x35/      # 未標調音節統一轉換為輕聲
+   # 1  音節修正合併
+    - erase/^xx$/
+    - xform/^m([1-5])$/mu$1/        # 鼻音m（呣）轉化爲mu
+    - xform/^r5$/er5/               # r5（兒）轉化爲er5
+    - xform/^eh([1-5])$/e$1/        # 模糊音：eh（誒欸）、e合併
+   # 2  拼音完整形式
+    - xform/^([jqxy])u/$1v/
+   # 3  異拼
+    - derive/([jx])v([1-5])$/$1u$2/
+    - erase/[bpm]?i?ong[1-5]$/
+    - erase/f(e|ong|iao|u[a-z]+)[1-5]$/
+    - erase/[dt](o|i[ao]ng|va?n|ve?)[1-5]$|[nl](ui|iong)[1-5]$|[gkh]o[1-5]$/
+   # 4  尖音處理
+    - xform/^zii([1-5])$/gi$1/
+    - xform/^z(?!ve)(v[a-z]*|iong)([1-5])$/b$1$2/
+    - derive/^z(ve[1-5])$/b$1/
+    - xform/^cii([1-5])$/ki$1/
+    - xform/^c(?!ve)(v[a-z]*|iong)([1-5])$/p$1$2/
+    - derive/^c(ve[1-5])$/p$1/
+    - xform/^sii([1-5])$/hi$1/
+    - xform/^s(?!ve)(v[a-z]*|iong)([1-5])$/m$1$2/
+    - derive/^s(ve[1-5])$/m$1/
+   # 5  音節合併
+    - xform/^er([1-5])$/fe$1/
+    - derive/^y([ae])(?!i)/fi$1/
+    - derive/^you/fiu/
+    - derive/^yin/yen/
+    - xform/^y([iv]\w*|ong)([1-5])$/f$1$2/
+    - xform/^y/j/
+    - xform/^w/q/
+    - xform/^([aoe]\w*)/x$1/
+    
+   # 6  雙拼處理
+    - xform/iu([1-5])$/Q$1/
+    - xform/ia(?=[1-5]$)|(?<=[gkhr])ua(?=[1-5]$)/W/
+    - xform/[uv]an([1-5])$/R$1/
+    - xform/ve([1-5])$/T$1/
+    - xform/ing(?=[1-5]$)|(?<=[gkhr])uai(?=[1-5]$)/Y/
+    - xform/uo([1-5])$/O$1/
+    - xform/[uv]n([1-5])$/P$1/
+    - xform/i?ong([1-5])$/S$1/
+    - xform/iang(?=[1-5]$)|(?<=[dtgkhr])uang(?=[1-5]$)/D/
+    - xform/en([1-5])$/F$1/
+    - xform/eng([1-5])$/G$1/
+    - xform/ang([1-5])$/H$1/
+    - xform/(?<!i)an([1-5])$/J$1/
+    - xform/(?<!i)ao([1-5])$/K$1/
+    - xform/ai([1-5])$/L$1/
+    - xform/ei([1-5])$/Z$1/
+    - xform/ie([1-5])$/X$1/
+    - xform/iao([1-5])$/C$1/
+    - xform/ui([1-5])$/V$1/
+    - xform/ou([1-5])$/B$1/
+    - xform/in([1-5])$/N$1/
+    - xform/ian([1-5])$/M$1/
+    - xform/^zh/V/
+    - xform/^ch/I/
+    - xform/^sh/U/
+    
+    - erase/^([A-Za-z]|[A-Za-z]{3,})([1-5])$/
+    - xlit/QWERTYUIOPASDFGHJKLZXCVBNM/qwertyuiopasdfghjklzxcvbnm/
+    - erase/^[oeway]\w*/
+    
+   # 7  簡拼
+    - derive/^([a-z])([a-z])([1-5])$/$1$2/                  # 無聲調
+    - abbrev/^([a-z])([a-z])([1-5])$/$1/                    # 聲母
+    # - abbrev/^([a-z])([a-z])([1-5])$/$1$3/                  # 聲母+聲調
+    # - abbrev/^([a-z])([a-z])([1-5])$/$1$3$2/                # 聲母+聲調+韻母
+    
+   # 8  變形
+    - xlit/12345/oeway/
+
+quanpin:             # 輸入翻譯器：輸入碼->上屏碼：漢語拼音全拼
+  dictionary: terra_pinyin.extended
+  prism: triple_pinyin_lishi26
+  spelling_hints: 5 # ～字以內候選標註完整提示碼
+  always_show_comments: true           # 始終顯示提示碼
+  preedit_format:                      # 輸入碼->上屏碼
+   __patch: &translator_preedit            # 第1步：輸入碼->詞典編碼
+    __append:
+   # 1.1  變形
+    - xform/\<([a-z]{2})o/$1\x31/                           # 連續3碼中的第3碼oeway作12345聲
+    - xform/\<([a-z]{2})e/$1\x32/
+    - xform/\<([a-z]{2})w/$1\x33/
+    - xform/\<([a-z]{2})a/$1\x34/
+    - xform/\<([a-z]{2})y/$1\x35/
+    
+   # 1.2  雙拼處理
+    - xform/\<([^oeway])q/$1Iu/
+    - xform/\<([bpmfdtnljqxzcs])w/$1Ia/
+    - xform/\<([gkhviur])w/$1Ua/
+    - xform/\<([bpmfjqx])r/$1Van/
+    - xform/\<([dtnlgkhviurzcs])r/$1Uan/
+    - xform/\<([bpmfnljqxzcs])t/$1Ve/
+    - xform/\<([dtgkhviur])t/$1Ue/
+    - xform/\<([bpmfdtnljqxzcs])y/$1Ing/
+    - xform/\<([gkhviur])y/$1Uai/
+    - xform/\<([dtnlgkhviurzcs])o/$1Uo/
+    - xform/\<([bpmfjqx])p/$1Vn/
+    - xform/\<([dtnlgkhviurzcs])p/$1Un/
+    - xform/\<([bpmfjqx])s/$1Iong/
+    - xform/\<([dtnlgkhviurzcs])s/$1Ong/
+    - xform/\<([bpmfnljqxzcs])d/$1Iang/
+    - xform/\<([dtgkhviur])d/$1Uang/
+    - xform/\<([^oeway])f/$1En/
+    - xform/\<([^oeway])g/$1Eng/
+    - xform/\<([^oeway])h/$1Ang/
+    - xform/\<([^oeway])j/$1An/
+    - xform/\<([^oeway])k/$1Ao/
+    - xform/\<([^oeway])l/$1Ai/
+    - xform/\<([^oeway])z/$1Ei/
+    - xform/\<([^oeway])x/$1Ie/
+    - xform/\<([^oeway])c/$1Iao/
+    - xform/\<([dtgkhviurzcs])v/$1Ui/
+    - xform/\<([^oeway])b/$1Ou/
+    - xform/\<([^oeway])n/$1In/
+    - xform/\<([^oeway])m/$1Ian/
+    - xform/\<v/Zh/
+    - xform/\<i/Ch/
+    - xform/\<u/Sh/
+    
+   # 1.3  音節合併
+    - xform/\<fe/er/
+    - xform/\<fIu/you/
+    - xform/\<f([iv]|[IV]\w+)/Y$1/
+    - xform/\<YI([aoe]\w*)/y$1/
+    - xform/\<jEn/yin/
+    - xform/\<j([aoe]|[AOE]\w+)/Y$1/
+    - xform/\<q([aoeu]|[AOE]\w+)/W$1/
+    - xform/\<x([aoe]|[AOE]\w+)/$1/
+   # 1.4  尖音處理
+    - xform/\<gi([1-5])?\>/Zii$1/
+    - xform/\<b(v|V[a-z]+|Iong)([1-5])?\>/Z$1$2/
+    - xform/\<ki([1-5])?\>/Cii$1/
+    - xform/\<p(v|V[a-z]+|Iong)([1-5])?\>/C$1$2/
+    - xform/\<hi([1-5])?\>/Sii$1/
+    - xform/\<m(v|V[a-z]+|Iong)([1-5])?\>/S$1$2/
+   # 1.5  異拼
+    - xform/\<([jx])u/$1v/
+   # 1.6  拼音完整形式
+    - xlit/QWERTYUIOPASDFGHJKLZXCVBNM/qwertyuiopasdfghjklzxcvbnm/
+    - xform/\<([jqxy])v/$1u/
+    
+   # 1.7  簡拼處理
+    - xform/f(?!\w)/f\x2Fy/                                 # 首碼簡拼
+    - xform/j(?!\w)/j\x2Fy/
+    - xform/q(?!\w)/q\x2Fw/
+    - xform/x(?!\w)/´\x2Fx/
+   __patch:                                # 第2步：詞典編碼->上屏碼
+    __append: {__include: triple_pinyin:/translator/preedit_format_2_pinyin_to_quanpin}  # 漢語拼音全拼(quanpin) / 帶調拼音(ddpy) / 注音符號(zhuyin) / 國語羅馬字(guoluo)
+  comment_format: &translator_comment  # 詞典編碼->提示碼
+   __patch:                                # 萬象詞庫處理
+    __append:
+    - xform/\<([a-zāōēīūǖáóéíúǘǎǒěǐǔǚàòèìùǜüńňǹ]+);[;,a-z]+\>/$1/        # 刪除輔助碼
+    - xform/ā(\w*)/a$1\x31/
+    - xform/ō(\w*)/o$1\x31/
+    - xform/ē(\w*)/e$1\x31/
+    - xform/ī(\w*)/i$1\x31/
+    - xform/ū(\w*)/u$1\x31/
+    - xform/ǖ(\w*)/v$1\x31/
+    - xform/á(\w*)/a$1\x32/
+    - xform/ó(\w*)/o$1\x32/
+    - xform/é(\w*)/e$1\x32/
+    - xform/í(\w*)/i$1\x32/
+    - xform/ú(\w*)/u$1\x32/
+    - xform/ǘ(\w*)/v$1\x32/
+    - xform/ǎ(\w*)/a$1\x33/
+    - xform/ǒ(\w*)/o$1\x33/
+    - xform/ě(\w*)/e$1\x33/
+    - xform/ǐ(\w*)/i$1\x33/
+    - xform/ǔ(\w*)/u$1\x33/
+    - xform/ǚ(\w*)/v$1\x33/
+    - xform/à(\w*)/a$1\x34/
+    - xform/ò(\w*)/o$1\x34/
+    - xform/è(\w*)/e$1\x34/
+    - xform/ì(\w*)/i$1\x34/
+    - xform/ù(\w*)/u$1\x34/
+    - xform/ǜ(\w*)/v$1\x34/
+    - xform/ü/v/
+    - xform/\<([a-z]+)\>/$1\x30/      # 未標調音節聲調標記為0，目前全拼寫法和輕聲相同，帶調拼音寫法和輕聲相同，注音符號寫法和輕聲不同，未標調音節不標調，但與後一個音節之間用'隔開，國語羅馬字把非mnlr開頭的未標調音節轉換為1聲，mnlr開頭的未標調音節轉換為2聲
+   # __patch:                                # 詞典編碼->提示碼：分兩段1
+    # __append: {__include: triple_pinyin:/translator/comment_format_copy1}
+   # __patch:                                # 詞典編碼->提示碼：分兩段2
+     # __append:
+      # __include: triple_pinyin_lishi26.schema:/luna_pinyin_lookup/comment_format?  # 輸入碼（方案編碼）：李氏三拼(lssp) / 李氏三拼aeo(lsspaeo) / 李氏注音(bopomofo) / 廿六三拼(lishi26)
+      # __append: {__include: triple_pinyin:/translator/comment_format_copy2}
+   __patch:                                # 詞典編碼->提示碼：分兩段3
+      __append:
+       __include: triple_pinyin:/translator/comment_format_pinyin_to_ddpy  # 漢語拼音全拼(quanpin) / 帶調拼音(ddpy) / 注音符號(zhuyin) / 國語羅馬字(guoluo)
+       __append: {__include: triple_pinyin:/translator/comment_format_copy3}
+
+ddpy:                # 輸入翻譯器：輸入碼->上屏碼：帶調拼音
+  dictionary: terra_pinyin.extended
+  prism: triple_pinyin_lishi26
+  spelling_hints: 5 # ～字以內候選標註完整提示碼
+  always_show_comments: true           # 始終顯示提示碼
+  preedit_format:                      # 輸入碼->上屏碼
+   __patch: *translator_preedit            # 第1步：輸入碼->詞典編碼
+   __patch:                                # 第2步：詞典編碼->上屏碼
+    __append: {__include: triple_pinyin:/translator/preedit_format_2_pinyin_to_ddpy}  # 漢語拼音全拼(quanpin) / 帶調拼音(ddpy) / 注音符號(zhuyin) / 國語羅馬字(guoluo)
+  comment_format: *translator_comment  # 詞典編碼->提示碼
+
+zhuyin:              # 輸入翻譯器：輸入碼->上屏碼：注音符號
+  dictionary: terra_pinyin.extended
+  prism: triple_pinyin_lishi26
+  spelling_hints: 5 # ～字以內候選標註完整提示碼
+  always_show_comments: true           # 始終顯示提示碼
+  preedit_format:                      # 輸入碼->上屏碼
+   __patch: *translator_preedit            # 第1步：輸入碼->詞典編碼
+   __patch:                                # 第2步：詞典編碼->上屏碼
+    __append: {__include: triple_pinyin:/translator/preedit_format_2_pinyin_to_zhuyin}  # 漢語拼音全拼(quanpin) / 帶調拼音(ddpy) / 注音符號(zhuyin) / 國語羅馬字(guoluo)
+  comment_format: *translator_comment  # 詞典編碼->提示碼
+
+guoluo:              # 輸入翻譯器：輸入碼->上屏碼：國語羅馬字
+  dictionary: terra_pinyin.extended
+  prism: triple_pinyin_lishi26
+  spelling_hints: 5 # ～字以內候選標註完整提示碼
+  always_show_comments: true           # 始終顯示提示碼
+  preedit_format:                      # 輸入碼->上屏碼
+   __patch: *translator_preedit            # 第1步：輸入碼->詞典編碼
+   __patch:                                # 第2步：詞典編碼->上屏碼
+    __append: {__include: triple_pinyin:/translator/preedit_format_2_pinyin_to_guoluo}  # 漢語拼音全拼(quanpin) / 帶調拼音(ddpy) / 注音符號(zhuyin) / 國語羅馬字(guoluo)
+  comment_format: *translator_comment  # 詞典編碼->提示碼
+
+translator:          # 主翻譯器，不轉換輸入碼
+  dictionary: terra_pinyin.extended
+  prism: triple_pinyin_lishi26
+  spelling_hints: 5 # ～字以內候選標註完整提示碼
+  always_show_comments: true           # 始終顯示提示碼
+  preedit_format:                      # 輸入碼->上屏碼
+   # 隔音符處理
+    - xform/'/"/                                            # 輸入的隔音符號'變換為"
+    # - xform/ /'/                                            # 刪除自動生成的隔音符空格，替換為'
+    - xlit|;"| '|                                           # 把;替換為空格，恢復輸入的隔音符號'
+  comment_format: *translator_comment  # 詞典編碼->提示碼
+
+luna_pinyin_lookup:  # 拼音反查
+  tag: luna_pinyin_lookup
+  dictionary: luna_pinyin
+  enable_completion: true
+  always_show_comments: true           # 始終顯示提示碼
+  prefix: "`"
+  suffix: "'"
+  tips: 〔拼音反查〕
+  preedit_format:  #  反查方案輸入碼->上屏碼：漢語拼音全拼
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+  comment_format: &reverse_lookup_comment  # 本方案詞典編碼->提示碼：本方案輸入碼
+   # 萬象詞庫處理
+    - xform/\<([a-zāōēīūǖáóéíúǘǎǒěǐǔǚàòèìùǜüńňǹ]+);[;,a-z]+\>/$1/        # 刪除輔助碼
+    - xform/ā(\w*)/a$1\x31/
+    - xform/ō(\w*)/o$1\x31/
+    - xform/ē(\w*)/e$1\x31/
+    - xform/ī(\w*)/i$1\x31/
+    - xform/ū(\w*)/u$1\x31/
+    - xform/ǖ(\w*)/v$1\x31/
+    - xform/á(\w*)/a$1\x32/
+    - xform/ó(\w*)/o$1\x32/
+    - xform/é(\w*)/e$1\x32/
+    - xform/í(\w*)/i$1\x32/
+    - xform/ú(\w*)/u$1\x32/
+    - xform/ǘ(\w*)/v$1\x32/
+    - xform/ǎ(\w*)/a$1\x33/
+    - xform/ǒ(\w*)/o$1\x33/
+    - xform/ě(\w*)/e$1\x33/
+    - xform/ǐ(\w*)/i$1\x33/
+    - xform/ǔ(\w*)/u$1\x33/
+    - xform/ǚ(\w*)/v$1\x33/
+    - xform/à(\w*)/a$1\x34/
+    - xform/ò(\w*)/o$1\x34/
+    - xform/è(\w*)/e$1\x34/
+    - xform/ì(\w*)/i$1\x34/
+    - xform/ù(\w*)/u$1\x34/
+    - xform/ǜ(\w*)/v$1\x34/
+    - xform/ü/v/
+    - xform/\<([a-z]+)\>/$1\x35/      # 未標調音節統一轉換為輕聲
+   # 1  音節修正合併
+    - erase/\<xx\>/
+    - xform/\<m([1-5])\>/mu$1/        # 鼻音m（呣）轉化爲mu
+    - xform/\<r5\>/er5/               # r5（兒）轉化爲er5
+    - xform/\<eh([1-5])\>/e$1/        # 模糊音：eh（誒欸）、e合併
+   # 2  拼音完整形式
+    - xform/\<([jqxy])u/$1v/
+   # 3  異拼
+    # - derive/([jx])v([1-5])\>/$1u$2/
+    - erase/[bpm]?i?ong[1-5]\>/
+    - erase/f(e|ong|iao|u[a-z]+)[1-5]\>/
+    - erase/[dt](o|i[ao]ng|va?n|ve?)[1-5]\>|[nl](ui|iong)[1-5]\>|[gkh]o[1-5]\>/
+   # 4  尖音處理
+    - xform/\<zii([1-5])\>/gi$1/
+    - xform/\<z(?!ve)(v[a-z]*|iong)([1-5])\>/b$1$2/
+    # - derive/\<z(ve[1-5])\>/b$1/
+    - xform/\<cii([1-5])\>/ki$1/
+    - xform/\<c(?!ve)(v[a-z]*|iong)([1-5])\>/p$1$2/
+    # - derive/\<c(ve[1-5])\>/p$1/
+    - xform/\<sii([1-5])\>/hi$1/
+    - xform/\<s(?!ve)(v[a-z]*|iong)([1-5])\>/m$1$2/
+    # - derive/\<s(ve[1-5])\>/m$1/
+   # 5  音節合併
+    - xform/\<er([1-5])\>/fe$1/
+    # - derive/\<y([ae])(?!i)/fi$1/
+    # - derive/\<you/fiu/
+    # - derive/\<yin/yen/
+    - xform/\<y([iv]\w*|ong)([1-5])\>/f$1$2/
+    - xform/\<y/j/
+    - xform/\<w/q/
+    - xform/\<([aoe]\w*)/x$1/
+    
+   # 6  雙拼處理
+    - xform/iu([1-5])\>/Q$1/
+    - xform/ia(?=[1-5]\>)|(?<=[gkhr])ua(?=[1-5]\>)/W/
+    - xform/[uv]an([1-5])\>/R$1/
+    - xform/ve([1-5])\>/T$1/
+    - xform/ing(?=[1-5]\>)|(?<=[gkhr])uai(?=[1-5]\>)/Y/
+    - xform/uo([1-5])\>/O$1/
+    - xform/[uv]n([1-5])\>/P$1/
+    - xform/i?ong([1-5])\>/S$1/
+    - xform/iang(?=[1-5]\>)|(?<=[dtgkhr])uang(?=[1-5]\>)/D/
+    - xform/en([1-5])\>/F$1/
+    - xform/eng([1-5])\>/G$1/
+    - xform/ang([1-5])\>/H$1/
+    - xform/(?<!i)an([1-5])\>/J$1/
+    - xform/(?<!i)ao([1-5])\>/K$1/
+    - xform/ai([1-5])\>/L$1/
+    - xform/ei([1-5])\>/Z$1/
+    - xform/ie([1-5])\>/X$1/
+    - xform/iao([1-5])\>/C$1/
+    - xform/ui([1-5])\>/V$1/
+    - xform/ou([1-5])\>/B$1/
+    - xform/in([1-5])\>/N$1/
+    - xform/ian([1-5])\>/M$1/
+    - xform/\<zh/V/
+    - xform/\<ch/I/
+    - xform/\<sh/U/
+    
+    - erase/\<([A-Za-z]|[A-Za-z]{3,})([1-5])\>/
+    - xlit/QWERTYUIOPASDFGHJKLZXCVBNM/qwertyuiopasdfghjklzxcvbnm/
+    - erase/\<[oeway]\w*/
+    
+   # 7  簡拼
+    # - derive/\<([a-z])([a-z])([1-5])\>/$1$2/                  # 無聲調
+    # - abbrev/\<([a-z])([a-z])([1-5])\>/$1/                    # 聲母
+    # - abbrev/\<([a-z])([a-z])([1-5])\>/$1$3/                  # 聲母+聲調
+    # - abbrev/\<([a-z])([a-z])([1-5])\>/$1$3$2/                # 聲母+聲調+韻母
+    
+   # 8  變形
+    - xlit/12345/oeway/
+
+stroke_lookup:       # 筆畫反查
+  tag: stroke_lookup
+  dictionary: stroke
+  enable_completion: true
+  always_show_comments: true           # 始終顯示提示碼
+  prefix: "~"
+  suffix: "'"
+  tips: 〔笔画反查〕
+  preedit_format:  #  反查方案輸入碼->上屏碼：五筆畫形式
+    - xlit/hspnz/一丨丿丶フ/
+  comment_format: *reverse_lookup_comment  # 本方案詞典編碼->提示碼：本方案輸入碼
+
+punctuator:
+  import_preset: symbols
+
+key_binder:
+  import_preset: default
+  bindings:
+    - { accept: "Control+q", when: always, send: "" }  # 保留给 Lua 处理器使用
+    - { accept: "Control+l", when: always, send: "" }  # 保留给 Lua 处理器使用
+    - { accept: "Control+m", when: always, send: "" }  # 保留给 Lua 处理器使用
+  
+    - { accept: Return, send: "Shift+Return", when: composing }
+    - { accept: "Shift+Return", send: Return, when: composing }
+    
+    - { accept: minus, send: minus, when: has_menu }
+    - { accept: minus, send: Page_Up, when: paging }
+    # - { accept: minus, send: Page_Up, when: has_menu }
+    # - { accept: equal, send: Page_Down, when: has_menu }
+    
+    - { accept: comma, send: comma, when: paging }
+    # - { accept: comma, send: Page_Up, when: paging }
+    - { accept: period, send: period, when: has_menu }
+    # - { accept: period, send: Page_Down, when: has_menu }
+    
+    # - { accept: semicolon, send: 2, when: has_menu }
+    # - { accept: apostrophe, send: 3, when: has_menu }
+    
+    - {accept: "Control+Shift+5", toggle: ascii_punct, when: always}
+    - {accept: "Control+Shift+percent", toggle: ascii_punct, when: always}
+    
+    - {accept: "Control+Shift+F", toggle: simplification, when: always}
+
+recognizer:
+  import_preset: default
+  patterns:
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+    punct: '^/([0-9]0?|[A-Za-z]+)$'
+    luna_pinyin_lookup: "`[a-z]*'?$"
+    stroke_lookup: "~[a-z]*'?$"
+
+__patch:             # 簡體詞庫轉換為繁體
+  switches/@after 1: {name: op_n, reset: 1}            # 添加簡轉繁開關並鎖定簡轉繁狀態，注意不寫states（不在開關菜單中顯示）
+  engine/filters/@before 0: simplifier@sc_tc           # 先加載簡轉繁過濾器
+  sc_tc: {option_name: op_n, opencc_config: s2t.json}  # s2t 通用繁體/s2hk 香港繁體/s2tw 台灣繁體
+
+__patch:             # 使用語言模型
+  - grammar:/wanxiang-lts-zh-hans?

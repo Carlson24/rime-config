@@ -149,16 +149,22 @@ zrm_pro:
     - derive/^qx(\d?)/qo$1/
     - derive/^xq(\d?)/xo$1/
     - derive/^wz(\d?)/wk$1/
-    - derive/^([a-z◯]+)\d?;.*$/$1/
-    - derive/^([a-z◯]+)(\d?);.*$/$1$2/
-    - derive/^([a-z◯]+)(\d?);([a-z]).*$/$1\u$3/
-    - derive/^([a-z◯]+)(\d?);([a-z]).*$/$1$2\u$3/
-    - derive/^([a-z◯]+)(\d?);([a-z])([a-z]).*$/$1\u$3\u$4/
-    - derive/^([a-z◯]+)(\d?);([a-z])([a-z]).*$/$1$2\u$3\u$4/
+    - derive/^([a-z◯]+)\d?;.*$/$1/  # 曦 xi6;og -> xiog
+    - derive/^([a-z◯]+)(\d?);.*$/$1$2/ # 曦 xi6;og -> xi6
+    - derive/^([a-z◯]+)(\d?);([a-z]).*$/$1\u$3/ # 曦 xi6;og -> xiO
+    - derive/^([a-z◯]+)(\d?);([a-z]).*$/$1$2\u$3/ # 曦 xi6;og -> xi6O
+    - derive/^([a-z◯]+)(\d?);([a-z]).*$/$1\u$3$2/ # 曦 xi6;og -> xiO6
+    - derive/^([a-z◯]+)(\d?);([a-z])([a-z]).*$/$1\u$3\u$4/ # 曦 xi6;og -> xiOG
+    - derive/^([a-z◯]+)(\d?);([a-z])([a-z]).*$/$1$2\u$3\u$4/ # 曦 xi6;og -> xi6OG
+    - derive/^([a-z◯]+)(\d?);([a-z])([a-z]).*$/$1\u$3$2\u$4/ # 曦 xi6;og -> xiO6G
+    - derive/^([a-z◯]+)(\d?);([a-z])([a-z]).*$/$1\u$3\u$4$2 / # 曦 xi6;og -> xiOG6
     - derive/^([a-z◯]+)(\d?);[^,]*,([a-z]).*$/$1\u$3/
     - derive/^([a-z◯]+)(\d?);[^,]*,([a-z]).*$/$1$2\u$3/
+    - derive/^([a-z◯]+)(\d?);[^,]*,([a-z]).*$/$1\u$3$2/
     - derive/^([a-z◯]+)(\d?);[^,]*,([a-z])([a-z]).*$/$1\u$3\u$4/
     - derive/^([a-z◯]+)(\d?);[^,]*,([a-z])([a-z]).*$/$1$2\u$3\u$4/
+    - derive/^([a-z◯]+)(\d?);[^,]*,([a-z])([a-z]).*$/$1\u$3$2\u$4/
+    - derive/^([a-z◯]+)(\d?);[^,]*,([a-z])([a-z]).*$/$1\u$3\u$4$2/
     - erase/.*;.*/ # 移除所有带分号的编码
 
 zrm_reverse:
@@ -422,7 +428,10 @@ zrm_english:
 
 18key:
   __append:
-    - xlit/qwertyuiopasdfghjklzxcvbnm/qqeettuiopaaddggjklzzcvbbm
+    - xlit/qwertyuiopasdfghjklzxcvbnm/qwwrryuiipassffhjjlzxxvbbm
+14key:
+  __append:
+    - xlit/qwertyuiopasdfghjklzxcvbnm/qqeettuuooaaddggjjlzzccbbm
 
 t9:
   __append:

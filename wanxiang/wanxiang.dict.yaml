@@ -11,6 +11,7 @@ sort: by_weight #字典初始排序，可選original或by_weight
 use_preset_vocabulary: false
 import_tables:
   - dicts/zi.pro # 字表
+  - dicts/suzi.pro # 字表，各类简体字、民间俗字
   - dicts/jichu.pro # 基础词库
   - dicts/lianxiang.pro # 联想词库
   - dicts/cuoyin.pro # 错音错字
@@ -24,32 +25,9 @@ import_tables:
   - dicts/yiren.pro # 艺人
   - dicts/wuzhong.pro # 物种多样性
   - dicts/renming.pro # 高频人名
+  - dicts/taifeng.pro #最新台风表
+  - dicts/fangyan.pro #收集全国方言
   - dicts/zrm_moe # 萌娘百科
+  - dicts/yidu.pro # 异读词库，收录万象词库中不予收录的读音
+  - dicts/full_pinyin # 带调音节词库（含理论音节）
 ...
-# 大写字母参与造词
-A	A
-B	B
-C	C
-D	D
-E	E
-F	F
-G	G
-H	H
-I	I
-J	J
-K	K
-L	L
-M	M
-N	N
-O	O
-P	P
-Q	Q
-R	R
-S	S
-T	T
-U	U
-V	V
-W	W
-X	X
-Y	Y
-Z	Z

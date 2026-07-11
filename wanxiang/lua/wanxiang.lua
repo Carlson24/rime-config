@@ -5,16 +5,16 @@ local wanxiang = {}
 
 -- x-release-please-start-version
 
-wanxiang.version = "v15.16.0"
+wanxiang.version = "v16.0.1"
 
 -- x-release-please-end
 
 -- 全局内容
 ---@alias PROCESS_RESULT ProcessResult
 wanxiang.RIME_PROCESS_RESULTS = {
-  kRejected = 0,   -- 表示处理器明确拒绝了这个按键，停止处理链但不返回 true
-  kAccepted = 1,   -- 表示处理器成功处理了这个按键，停止处理链并返回 true
-  kNoop = 2,       -- 表示处理器没有处理这个按键，继续传递给下一个处理器
+  kRejected = 0, -- 表示处理器明确拒绝了这个按键，停止处理链但不返回 true
+  kAccepted = 1, -- 表示处理器成功处理了这个按键，停止处理链并返回 true
+  kNoop = 2,     -- 表示处理器没有处理这个按键，继续传递给下一个处理器
 }
 
 -- 整个生命周期内不变，缓存判断结果
@@ -101,12 +101,12 @@ function wanxiang.is_function_mode_active(context)
   local seg = context.composition:back()
   if not seg then return false end
 
-  return seg:has_tag("number") or    -- number_translator.lua 数字金额转换 R+数字
-      seg:has_tag("unicode") or      -- unicode.lua 输出 Unicode 字符 U+小写字母或数字
+  return seg:has_tag("number") or  -- number_translator.lua 数字金额转换 R+数字
+      seg:has_tag("unicode") or    -- unicode.lua 输出 Unicode 字符 U+小写字母或数字
       --seg:has_tag("punct") or      -- 标点符号 全角半角提示
-      seg:has_tag("calculator") or   -- super_calculator.lua V键计算器
-      seg:has_tag("shijian") or      -- shijian.lua /rq /sr 等与时间日期相关功能
-      seg:has_tag("Ndate")           -- shijian.lua N日期功能
+      seg:has_tag("calculator") or -- super_calculator.lua V键计算器
+      seg:has_tag("shijian") or    -- shijian.lua /rq /sr 等与时间日期相关功能
+      seg:has_tag("Ndate")         -- shijian.lua N日期功能
 end
 
 ---@param context Context | nil
@@ -119,12 +119,12 @@ function wanxiang.s2t_conversion(context)
   local seg = context.composition:back()
   if not seg then return false end
 
-  return seg:has_tag("number") or    -- number_translator.lua 数字金额转换 R+数字
-      seg:has_tag("unicode") or      -- unicode.lua 输出 Unicode 字符 U+小写字母或数字
-      seg:has_tag("punct") or        -- 标点符号 全角半角提示
-      seg:has_tag("calculator") or   -- super_calculator.lua V键计算器
-      seg:has_tag("shijian") or      -- shijian.lua /rq /sr 等与时间日期相关功能
-      seg:has_tag("Ndate") or        -- shijian.lua N日期功能
+  return seg:has_tag("number") or  -- number_translator.lua 数字金额转换 R+数字
+      seg:has_tag("unicode") or    -- unicode.lua 输出 Unicode 字符 U+小写字母或数字
+      seg:has_tag("punct") or      -- 标点符号 全角半角提示
+      seg:has_tag("calculator") or -- super_calculator.lua V键计算器
+      seg:has_tag("shijian") or    -- shijian.lua /rq /sr 等与时间日期相关功能
+      seg:has_tag("Ndate") or      -- shijian.lua N日期功能
       seg:has_tag("wanxiang_reverse")
 end
 
@@ -143,20 +143,20 @@ end
 function wanxiang.IsChineseCharacter(text)
   local codepoint = utf8.codepoint(text)
   return
-      (codepoint >= 0x4E00 and codepoint <= 0x9FFF)        -- Basic
-      or (codepoint >= 0x3400 and codepoint <= 0x4DBF)     -- Ext A
-      or (codepoint >= 0x20000 and codepoint <= 0x2A6DF)   -- Ext B
-      or (codepoint >= 0x2A700 and codepoint <= 0x2B73F)   -- Ext C
-      or (codepoint >= 0x2B740 and codepoint <= 0x2B81F)   -- Ext D
-      or (codepoint >= 0x2B820 and codepoint <= 0x2CEAF)   -- Ext E
-      or (codepoint >= 0x2CEB0 and codepoint <= 0x2EBEF)   -- Ext F
-      or (codepoint >= 0x30000 and codepoint <= 0x3134F)   -- Ext G
-      or (codepoint >= 0x31350 and codepoint <= 0x323AF)   -- Ext H
-      or (codepoint >= 0x2EBF0 and codepoint <= 0x2EE5F)   -- Ext I
-      or (codepoint >= 0xF900 and codepoint <= 0xFAFF)     -- Compatibility
-      or (codepoint >= 0x2F800 and codepoint <= 0x2FA1F)   -- Compatibility Supplement
-      or (codepoint >= 0x2E80 and codepoint <= 0x2EFF)     -- Radicals Supplement
-      or (codepoint >= 0x2F00 and codepoint <= 0x2FDF)     -- Kangxi Radicals
+      (codepoint >= 0x4E00 and codepoint <= 0x9FFF)      -- Basic
+      or (codepoint >= 0x3400 and codepoint <= 0x4DBF)   -- Ext A
+      or (codepoint >= 0x20000 and codepoint <= 0x2A6DF) -- Ext B
+      or (codepoint >= 0x2A700 and codepoint <= 0x2B73F) -- Ext C
+      or (codepoint >= 0x2B740 and codepoint <= 0x2B81F) -- Ext D
+      or (codepoint >= 0x2B820 and codepoint <= 0x2CEAF) -- Ext E
+      or (codepoint >= 0x2CEB0 and codepoint <= 0x2EBEF) -- Ext F
+      or (codepoint >= 0x30000 and codepoint <= 0x3134F) -- Ext G
+      or (codepoint >= 0x31350 and codepoint <= 0x323AF) -- Ext H
+      or (codepoint >= 0x2EBF0 and codepoint <= 0x2EE5F) -- Ext I
+      or (codepoint >= 0xF900 and codepoint <= 0xFAFF)   -- Compatibility
+      or (codepoint >= 0x2F800 and codepoint <= 0x2FA1F) -- Compatibility Supplement
+      or (codepoint >= 0x2E80 and codepoint <= 0x2EFF)   -- Radicals Supplement
+      or (codepoint >= 0x2F00 and codepoint <= 0x2FDF)   -- Kangxi Radicals
 end
 
 ---按照优先顺序获取文件：用户目录 > 系统目录
@@ -203,7 +203,7 @@ end
 ---@param filename string 相对路径
 ---@retur file* | nil, function
 function wanxiang.load_file_with_fallback(filename, mode)
-  mode = mode or "r"   -- 默认读取模式
+  mode = mode or "r" -- 默认读取模式
 
   local _filename = wanxiang.get_filename_with_fallback(filename)
 
@@ -283,15 +283,15 @@ function wanxiang.get_input_method_type(env)
   if cached_id then
     local cached_md = __input_md_cache[schema_id]
     if cached_md then
-      return cached_id, cached_md       -- 返回两个值：id, "ⅲ"
+      return cached_id, cached_md -- 返回两个值：id, "ⅲ"
     else
-      return cached_id                  -- 只返回 id
+      return cached_id            -- 只返回 id
     end
   end
 
   local cfg       = env.engine.schema.config
   local result_id = "unknown"
-  local md        = nil   -- 只有命中“ⅲ”时设为 "ⅲ"
+  local md        = nil -- 只有命中“ⅲ”时设为 "ⅲ"
 
   local n         = cfg:get_list_size("speller/algebra")
   for i = 0, n - 1 do
@@ -304,7 +304,7 @@ function wanxiang.get_input_method_type(env)
             md = "ⅲ" -- 记录辅助标记
           else
             if result_id == "unknown" then
-              result_id = id               -- 只记录第一个“正常映射”的 id
+              result_id = id -- 只记录第一个“正常映射”的 id
             end
           end
         end
@@ -314,7 +314,7 @@ function wanxiang.get_input_method_type(env)
 
   -- 写缓存
   __input_type_cache[schema_id] = result_id
-  __input_md_cache[schema_id]   = md   -- 命中则为 "ⅲ"，否则为 nil
+  __input_md_cache[schema_id]   = md -- 命中则为 "ⅲ"，否则为 nil
 
   -- 返回：命中“ⅲ”→两个值；否则一个值
   if md then
@@ -329,7 +329,7 @@ local RegexParser = {}
 
 function RegexParser.normalize(regex)
   local p = regex
-  p = p:gsub("%(%?%:", "%(")   -- 清理 (?:
+  p = p:gsub("%(%?%:", "%(") -- 清理 (?:
   -- 基础转义
   p = p:gsub("\\d", "%%d"); p = p:gsub("\\D", "%%D")
   p = p:gsub("\\w", "%%w"); p = p:gsub("\\W", "%%W")
@@ -381,7 +381,7 @@ local function expand_optional(pattern_list)
           atom_start = i
           atom_end = j
           q_idx = j + 1
-          break           -- 找到目标
+          break -- 找到目标
         end
         i = j + 1
       elseif char == "?" then

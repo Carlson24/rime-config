@@ -4,7 +4,7 @@
 # encoding: utf-8
 schema:
   schema_id: wanxiang_english
-  name: 自然万象·英文
+  name: 英文·自然万象
   version: "lts"
   author: amzxyz
   description: 支持整句输入英文的语句流方案，拥有更加智能的词组上屏加空格策略，支持单词组、语句任意词组中首字母大写或者全大写格式化。

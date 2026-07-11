@@ -1,4 +1,5 @@
 # @format
+# yaml-language-server: $schema=lyraime-schema.json
 
 default:
   # ===== Catppuccin Latte Palette =====
@@ -83,10 +84,6 @@ default:
   # ===== 长文本 (Long Text) =====
   long_text_color: *text
   long_text_back_color: *base
-  # ===== 回车键 (Enter) =====
-  enter_text: *base
-  enter_background: *lavender
-  off_enter_background: *overlay2
   # ===== T9 侧边栏 (Side) =====
   t9_side_back_color: *surface2
   t9_side_hilited_back_color: *base
@@ -99,6 +96,7 @@ default:
   clipboard_category_selected_text_color: *text
   clipboard_entry_back_color: *base
   clipboard_checkbox_color: *surface2
+  hilited_clipboard_entry_back_color: *surface2
 
 default_dark:
   # ===== Catppuccin Mocha Palette =====
@@ -183,10 +181,6 @@ default_dark:
   # ===== 长文本 (Long Text) =====
   long_text_color: *text
   long_text_back_color: *base
-  # ===== 回车键 (Enter) =====
-  enter_text: *base
-  enter_background: *lavender
-  off_enter_background: *overlay2
   # ===== T9 侧边栏 (Side) =====
   t9_side_back_color: *surface2
   t9_side_hilited_back_color: *base
@@ -198,3 +192,5 @@ default_dark:
   clipboard_category_selected_back_color: *surface2
   clipboard_category_selected_text_color: *text
   clipboard_entry_back_color: *base
+  clipboard_checkbox_color: *surface2
+  hilited_clipboard_entry_back_color: *surface2

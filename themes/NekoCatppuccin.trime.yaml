@@ -488,7 +488,7 @@ preset_keyboards:
           - { click: "l", label_symbol: "÷", swipe_up: "÷", popup: ["L"] }
           - { width: 0.05, spacer: true }
       - keys:
-          - { width: 0.15, click: "Shift_L", double_click: "Shift_L3", key_text_size: 20, __include: "key_style/功能" }
+          - { width: 0.15, click: "Shift_L", double_click: "Shift_L3", label_symbol: "ic@keyboard_caps", key_text_size: 20, __include: "key_style/功能" }
           - { click: "z", label_symbol: "\\", swipe_up: "\\", popup: ["Z"] }
           - { click: "x", label_symbol: "ic@content_cut", popup: ["X", "cut"] }
           - { click: "c", label_symbol: "ic@content_copy", popup: ["C", "copy"] }

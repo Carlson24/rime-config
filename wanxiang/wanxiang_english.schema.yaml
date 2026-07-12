@@ -73,7 +73,7 @@ wanxiang_english:
   spacing_timeout: 5
 
 super_replacer:
-  db_name: "lua/userdata/replacer_en"
+  db_name: "userdata/replacer_en"
   comment_format: "〔%s〕"
   chain: true
   rules:

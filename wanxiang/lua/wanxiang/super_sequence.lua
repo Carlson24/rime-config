@@ -470,7 +470,7 @@ function P.init(env)
 
   -- 实例化 LevelDB
   if not seq_db then
-    seq_db = userdb.LevelDb("lua/userdata/sequence")
+    seq_db = userdb.LevelDb("userdata/sequence")
   end
   seq_db:open()
   seq_data.device_name = _detect_device_name()
@@ -570,7 +570,7 @@ function F.init(env)
   env.page_size = cfg and cfg:get_int("menu/page_size") or 5
   -- 确保 Filter 也能正确初始化数据库
   if not seq_db then
-    seq_db = userdb.LevelDb("lua/userdata/sequence")
+    seq_db = userdb.LevelDb("userdata/sequence")
     seq_db:open()
   end
 end

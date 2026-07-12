@@ -57,10 +57,11 @@ switches:
 
 engine:
   processors:
-    - lua_processor@*wanxiang.user_predict*P
+    - user_predict_processor # 必须放在第一个
     - lua_processor@*wanxiang.super_processor
     - lua_processor@*wanxiang.super_sequence*P
     - lua_processor@*wanxiang.super_tips
+    - digit_catcher # 需要在 recognizer 之前
     - ascii_composer
     - recognizer
     - key_binder
@@ -81,10 +82,10 @@ engine:
   translators:
     - punct_translator
     - script_translator
-    - lua_translator@*wanxiang.user_predict*T
+    - user_predict_translator
+    - calculator_translator
     - lua_translator@*wanxiang.shijian
     - lua_translator@*wanxiang.number_translator
-    - lua_translator@*wanxiang.super_calculator
     - lua_translator@*wanxiang.input_statistics
     - lua_translator@*unicode
     - lua_translator@*uuid
@@ -102,7 +103,7 @@ engine:
     - lua_filter@*wanxiang.super_replacer
     - lua_filter@*wanxiang.super_filter
     - lua_filter@*wanxiang.super_sequence*F
-    - lua_filter@*wanxiang.user_predict*F
+    - user_predict_filter
     - uniquifier
 
 super_comment:
@@ -128,15 +129,13 @@ super_processor:
   select_character: "bracketleft, bracketright"
 
 user_predict:
-  mobile_predict_style: post
+  db_name: "userdata/user_predict"
+  predict_style: "post"
   max_candidates: 5
   max_predictions: 10
   expiry_days: 90
-  activation_days: 7
-  max_memory_branches: 15
   decay_rate: 0.85
-  enable_predict_space: true
-  context_timeout: 5000
+  context_timeout: 10000
 
 super_tips:
   tips_key: "comma"
@@ -145,7 +144,7 @@ super_tips:
     - lua/data/tips_moran_chaifen.txt
 
 super_replacer:
-  db_name: "lua/userdata/replacer_18key"
+  db_name: "userdata/replacer_18key"
   comment_format: "〔%s〕"
   chain: true
   rules:
@@ -287,10 +286,15 @@ recognizer:
     yr6: "^N1[02]?3?[01]?"
     nyr1: "^N19?[0-9]?[0-9]?[0-1]?[0-9]?[0-9]?[0-9]?"
     nyr2: "^N20?[0-9]?[0-9]?[0-1]?[0-9]?[0-9]?[0-9]?"
-    calculator: "^=.*$"
+    calculator: "^(V.*|[0-9]+[\\+\\-\\*/\\^÷].*|[\\+\\-\\*/\\^÷].*)$"
     email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
     url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$"
     htj: "^/htj.*$"
+
+calculator:
+  prefix: "V"
+  tag: calculator
+  tips: "计算器"
 
 punctuator:
   digit_separators: ":,."
@@ -315,10 +319,6 @@ key_binder:
     - { match: "^.*`$", accept: "`", send_sequence: "{BackSpace}{Home}{`}{`}{End}" }
     - { match: "^/$", accept: "/", send_sequence: "{space}" }
     - { match: "^\\|$", accept: "|", send_sequence: "{space}" }
-    - { match: "^›+$", accept: "backslash", send_sequence: "{Clear}{backslash}" }
-    - { match: "^›+$", accept: "comma", send_sequence: "{Clear}{comma}" }
-    - { match: "^›+$", accept: "period", send_sequence: "{Clear}{period}" }
-    - { match: "^›+$", accept: "Return", send_sequence: "{Clear}{Return}" }
 
 editor:
   bindings:

@@ -10,7 +10,7 @@ local _db_pool = {}
 local raw_software_name = rime_api.get_distribution_code_name()
 
 local function get_db(env)
-  local db_name = "lua/userdata/stats"
+  local db_name = "userdata/stats"
   if not _db_pool[db_name] then
     _db_pool[db_name] = userdb.LevelDb(db_name)
   end

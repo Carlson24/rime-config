@@ -4,7 +4,7 @@
 -- https://github.com/amzxyz/rime-wanxiang
 -- 配置示例：
 -- super_tips:
---   数据库路径: "lua/userdata/tips"
+--   数据库路径: "userdata/tips"
 --   tips_key: "slash"     # 上屏按键配置
 --   disabled_types: []    # 禁用的 tips 类型
 --   files:                # 可选，自定义数据文件列表，不配置时使用默认文件
@@ -124,7 +124,7 @@ function tips.init(config)
     local user_lua_dir = rime_api.get_user_data_dir() .. "/lua"
     tips.ensure_dir_exist(user_lua_dir .. "/userdata")
   end
-  tips_db = userdb.LevelDb("lua/userdata/tips")
+  tips_db = userdb.LevelDb("userdata/tips")
 
   -- 读取 disabled_types 配置
   local disabled_keys = {}

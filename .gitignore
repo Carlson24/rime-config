@@ -6,5 +6,8 @@
 **/user.yaml
 **/installation.yaml
 **/user_*.txt
+**/lua/clib/*.so
+**/lua/clib/*.dll
 **/*.gram
 **/*.custom.yaml
+**/predict_import.txt

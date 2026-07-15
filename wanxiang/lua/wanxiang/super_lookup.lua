@@ -450,22 +450,32 @@ end
 
 -- 4. 匹配判定引擎 (精准 / 模糊递归)
 local function check_char_fuma_match(env, pinyin, fuma, target_char)
+  local cache_key = pinyin .. fuma .. target_char
+  if env._fuma_match_cache[cache_key] ~= nil then
+    return env._fuma_match_cache[cache_key]
+  end
   local probe = pinyin .. fuma
+  local result = false
   if env.mem:dict_lookup(probe, true, 200) then
     for e in env.mem:iter_dict() do
       if e.text == target_char then
-        return true
+        result = true
+        break
       end
     end
   end
-  if env.mem:user_lookup(probe, true) then
-    for e in env.mem:iter_user() do
-      if e.text == target_char then
-        return true
+  if not result then
+    if env.mem:user_lookup(probe, true) then
+      for e in env.mem:iter_user() do
+        if e.text == target_char then
+          result = true
+          break
+        end
       end
     end
   end
-  return false
+  env._fuma_match_cache[cache_key] = result
+  return result
 end
 
 local function group_match(group, fuma)
@@ -655,7 +665,7 @@ end
 
 local function attempt_pure_tone_translation(cand, env, syllables, tone_filter_seq, current_syl_count, syl_offset)
   local tone_len = #tone_filter_seq
-  if current_syl_count ~= tone_len or not env.main_translator then
+  if current_syl_count ~= tone_len then
     return nil
   end
 
@@ -672,17 +682,10 @@ local function attempt_pure_tone_translation(cand, env, syllables, tone_filter_s
 
   if #pure_pinyin_parts == tone_len then
     local query_str = table.concat(pure_pinyin_parts, "")
-    local seg_trans = Segment(0, #query_str)
-    seg_trans.tags = Set({ "abc" })
-
-    local ok, translation = pcall(function()
-      return env.main_translator:query(query_str, seg_trans)
-    end)
-
-    if ok and translation then
-      for c in translation:iter() do
-        local custom_cand = Candidate(cand.type, cand.start, cand._end, c.text, c.comment)
-        custom_cand.quality = c.quality
+    if env.mem and env.mem:dict_lookup(query_str, true, 200) then
+      for e in env.mem:iter_dict() do
+        local custom_cand = Candidate(cand.type, cand.start, cand._end, e.text, e.comment)
+        custom_cand.quality = (e.weight or 0) + 4
         custom_cand.preedit = cand.preedit
         return custom_cand
       end
@@ -695,7 +698,7 @@ end
 -- [词组纠错] 1. 尝试长词组整体匹配
 local function try_match_long_phrase(current_text, cand_len, env, syllables, fuma_chunks, syl_offset)
   local fuma_len = #fuma_chunks
-  if fuma_len <= 1 or fuma_len > cand_len or not env.main_translator then
+  if fuma_len <= 1 or fuma_len > cand_len then
     return nil
   end
 
@@ -718,32 +721,36 @@ local function try_match_long_phrase(current_text, cand_len, env, syllables, fum
 
     if valid_window then
       local query_str = table.concat(pure_pinyin_parts, "")
-      local seg_trans = Segment(0, #query_str)
-      seg_trans.tags = Set({ "abc" })
-
-      local translation = env.main_translator:query(query_str, seg_trans)
       local orig_phrase_text = get_utf8_string_range(current_text, w_start, w_end)
 
-      if translation then
-        for c in translation:iter() do
-          local phrase_text = c.text
-          if get_utf8_len(phrase_text) == fuma_len and phrase_text ~= orig_phrase_text then
-            local match_all = true
-            local char_idx = 1
+      if not env._phrase_query_cache[query_str] then
+        local result = {}
+        if env.mem and env.mem:dict_lookup(query_str, true, 300) then
+          for e in env.mem:iter_dict() do
+            table.insert(result, {text = e.text, weight = e.weight or 0})
+          end
+        end
+        env._phrase_query_cache[query_str] = result
+      end
 
-            for _, code_pt in utf8.codes(phrase_text) do
-              local char = utf8.char(code_pt)
-              if not check_char_fuma_match(env, pure_pinyin_parts[char_idx], fuma_chunks[char_idx], char) then
-                match_all = false
-                break
-              end
-              char_idx = char_idx + 1
-            end
+      for _, entry in ipairs(env._phrase_query_cache[query_str]) do
+        local phrase_text = entry.text
+        if get_utf8_len(phrase_text) == fuma_len and phrase_text ~= orig_phrase_text then
+          local match_all = true
+          local char_idx = 1
 
-            if match_all then
-              local new_text = replace_text_range(current_text, w_start, w_end, phrase_text)
-              return new_text, fuma_len, w_start - 1
+          for _, code_pt in utf8.codes(phrase_text) do
+            local char = utf8.char(code_pt)
+            if not check_char_fuma_match(env, pure_pinyin_parts[char_idx], fuma_chunks[char_idx], char) then
+              match_all = false
+              break
             end
+            char_idx = char_idx + 1
+          end
+
+          if match_all then
+            local new_text = replace_text_range(current_text, w_start, w_end, phrase_text)
+            return new_text, fuma_len, w_start - 1
           end
         end
       end
@@ -755,7 +762,7 @@ end
 
 -- [词组纠错] 2. 尝试2字词双向辅助匹配
 local function try_match_two_char_phrase(current_text, search_end_idx, env, syllables, fuma_chunk, syl_offset)
-  if search_end_idx < 2 or not env.main_translator then
+  if search_end_idx < 2 then
     return nil
   end
 
@@ -778,36 +785,38 @@ local function try_match_two_char_phrase(current_text, search_end_idx, env, syll
 
     if valid_window then
       local query_str = pure_pinyin_parts[1] .. pure_pinyin_parts[2]
-      local seg_trans = Segment(0, #query_str)
-      seg_trans.tags = Set({ "abc" })
+      local orig_phrase_text = get_utf8_string_range(current_text, w_start, w_end)
 
-      local ok, translation = pcall(function()
-        return env.main_translator:query(query_str, seg_trans)
-      end)
+      if not env._phrase_query_cache[query_str] then
+        local result = {}
+        if env.mem and env.mem:dict_lookup(query_str, true, 300) then
+          for e in env.mem:iter_dict() do
+            table.insert(result, {text = e.text, weight = e.weight or 0})
+          end
+        end
+        env._phrase_query_cache[query_str] = result
+      end
 
-      if ok and translation then
-        local orig_phrase_text = get_utf8_string_range(current_text, w_start, w_end)
-        for c in translation:iter() do
-          if get_utf8_len(c.text) == 2 and c.text ~= orig_phrase_text then
-            local char1 = get_utf8_char_at(c.text, 1)
-            local char2 = get_utf8_char_at(c.text, 2)
-            local orig_char1 = get_utf8_char_at(orig_phrase_text, 1)
-            local orig_char2 = get_utf8_char_at(orig_phrase_text, 2)
+      for _, entry in ipairs(env._phrase_query_cache[query_str]) do
+        if get_utf8_len(entry.text) == 2 and entry.text ~= orig_phrase_text then
+          local char1 = get_utf8_char_at(entry.text, 1)
+          local char2 = get_utf8_char_at(entry.text, 2)
+          local orig_char1 = get_utf8_char_at(orig_phrase_text, 1)
+          local orig_char2 = get_utf8_char_at(orig_phrase_text, 2)
 
-            local case_a = false
-            if char2 == orig_char2 then
-              case_a = check_char_fuma_match(env, pure_pinyin_parts[1], fuma_chunk, char1)
-            end
+          local case_a = false
+          if char2 == orig_char2 then
+            case_a = check_char_fuma_match(env, pure_pinyin_parts[1], fuma_chunk, char1)
+          end
 
-            local case_b = false
-            if char1 == orig_char1 then
-              case_b = check_char_fuma_match(env, pure_pinyin_parts[2], fuma_chunk, char2)
-            end
+          local case_b = false
+          if char1 == orig_char1 then
+            case_b = check_char_fuma_match(env, pure_pinyin_parts[2], fuma_chunk, char2)
+          end
 
-            if case_a or case_b then
-              local new_text = replace_text_range(current_text, w_start, w_end, c.text)
-              return new_text, 1, w_start - 1
-            end
+          if case_a or case_b then
+            local new_text = replace_text_range(current_text, w_start, w_end, entry.text)
+            return new_text, 1, w_start - 1
           end
         end
       end
@@ -1092,12 +1101,6 @@ end
 local function handle_explicit_mode(input, env, ctx_input, pure_code, explicitly_fuma, s_end)
   if not env.mem then
     env.mem = Memory(env.engine, env.engine.schema)
-  end
-
-  if not env.main_translator and Component and Component.Translator then
-    pcall(function()
-      env.main_translator = Component.Translator(env.engine, "translator", "script_translator")
-    end)
   end
 
   local ctx = env.engine.context
@@ -1432,6 +1435,8 @@ function f.init(env)
   env._global_db_cache = {}
   env._global_comment_cache = {}
   env._cand_raw_cache = {}
+  env._fuma_match_cache = {}
+  env._phrase_query_cache = {}
   env.cache_size = 0
 
   -- 双轨缓存系统
@@ -1444,10 +1449,14 @@ function f.init(env)
     if not ctx:is_composing() then
       env.history_parts = {}
       env.history_input = ""
+      env._last_notify_input = nil
       return
     end
     local raw_in = ctx.input or ""
     if raw_in == "" then return end
+
+    if raw_in == env._last_notify_input then return end
+    env._last_notify_input = raw_in
 
     if env.search_key_str and raw_in:find(env.search_key_str, 1, true) then
       return

@@ -501,7 +501,7 @@ function M.func(input, env)
     env.last_2code_char = nil
     env.page_cache = {}
     for cand in input:iter() do
-      yield(cand)
+      yield(format_and_autocap(cand, env, current_dt))
     end
     return
   end

@@ -76,9 +76,9 @@ default:
   hilited_popup_back_color: *lavender
   hilited_popup_text_color: *base
   # ===== 键盘 (Keyboard) =====
-  keyboard_back_color: *crust
-  keyboard_background: *crust
-  liquid_keyboard_background: *crust
+  keyboard_back_color: *mantle
+  keyboard_background: *mantle
+  liquid_keyboard_background: *mantle
   shadow_color: *text
   root_background: *base
   # ===== 长文本 (Long Text) =====
@@ -97,6 +97,9 @@ default:
   clipboard_entry_back_color: *base
   clipboard_checkbox_color: *surface2
   hilited_clipboard_entry_back_color: *surface2
+  # ===== 自定义 (Custom) =====
+  fix_key_text_color: *text
+  fix_key_symbol_color: *text
 
 default_dark:
   # ===== Catppuccin Mocha Palette =====
@@ -173,9 +176,9 @@ default_dark:
   hilited_popup_back_color: *lavender
   hilited_popup_text_color: *base
   # ===== 键盘 (Keyboard) =====
-  keyboard_back_color: *crust
-  keyboard_background: *crust
-  liquid_keyboard_background: *crust
+  keyboard_back_color: *mantle
+  keyboard_background: *mantle
+  liquid_keyboard_background: *mantle
   shadow_color: *text
   root_background: *base
   # ===== 长文本 (Long Text) =====
@@ -194,3 +197,6 @@ default_dark:
   clipboard_entry_back_color: *base
   clipboard_checkbox_color: *surface2
   hilited_clipboard_entry_back_color: *surface2
+  # ===== 自定义 (Custom) =====
+  fix_key_text_color: *base
+  fix_key_symbol_color: *base

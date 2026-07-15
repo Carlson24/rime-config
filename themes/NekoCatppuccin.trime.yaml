@@ -143,15 +143,8 @@ preset_color_schemes:
     __include: NekoCatppuccinColor.yaml:/default_dark
 
 # ── 颜色回退 ──
-# 定义颜色键之间的回退链。以下仅覆盖程序内置回退未涵盖的字段
-fallback_colors:
-  # 按键符号色（程序内置未覆盖，手工指定回退）
-  off_key_symbol_color: key_symbol_color
-  on_key_symbol_color: hilited_key_symbol_color
-  hilited_off_key_symbol_color: hilited_key_symbol_color
-  hilited_on_key_symbol_color: hilited_key_symbol_color
-  # 候选边框（程序内置未覆盖）
-  candidate_border_color: border_color
+# 定义颜色键之间的回退链。可覆盖程序内置的字段
+# fallback_colors:
 
 # ── 预设按键 ──
 # 每个按键以唯一 ID 作为映射键名，可在键盘布局中通过 click/long_click/swipe_down 等行为键名引用
@@ -270,7 +263,7 @@ preset_keys:
   candleft: { label: "ic@pan_left", send: Control+j } # 候选提前
   candright: { label: "ic@pan_right", send: Control+k } # 候选推后
   candreset: { label: "ic@lock_reset", send: Control+l } # 候选排序重置
-  wxcalc: { label: "ic@calculator_variant_outline", text: "{Keyboard_jisuanqi}{=}" } # 弹出计算器并输出 =
+  wxcalc: { label: "ic@calculator_variant_outline", text: "{Keyboard_jisuanqi}{V}" } # 弹出计算器并输出 =
   yindiao1: { label: "\uF821", send: "6" } # 声调 1
   yindiao2: { label: "\uF822", send: "7" } # 声调 2
   yindiao3: { label: "\uF823", send: "8" } # 声调 3
@@ -363,6 +356,7 @@ candidates_tool:
   popup_width: 60 # 长按菜单最大宽度，dp（Int）
   popup_text_size: 18 # 长按菜单文字大小，sp（Float）
   popup_text_color: text # 长按菜单文字颜色（String，颜色键名）
+  popup_background_color: base # 长按菜单背景颜色（String，颜色键名）
   popup_font: *font_combo # 长按菜单字体（List<String>）
   buttons: # 侧边栏按钮列表，从上到下排列
     - action: "Up"
@@ -410,18 +404,64 @@ key_style:
     symbol_text_size: 8.5
     key_text_offset_y: 4
     key_symbol_offset_y: -0.5
-  回车: # 回车键样式
+  标点: # 标点键样式
+    __include: "key_style/功能"
+    key_text_color: fix_key_text_color
+    key_symbol_color: fix_key_symbol_color
+    key_back_color: rosewater
+    hilited_key_back_color: peach
+    key_border_color: rosewater
+  切换: # 中英切换样式
+    __include: "key_style/功能"
     key_text_size: 20
+    key_text_color: fix_key_text_color
+    key_symbol_color: fix_key_symbol_color
+    key_back_color: sapphire
+    hilited_key_back_color: peach
+    key_border_color: sapphire
+  字母行B:
+    key_back_color: base
+    hilited_key_back_color: surface1
+    key_border_color: surface1
+  字母行M:
+    key_back_color: mantle
+    hilited_key_back_color: surface2
+    key_border_color: surface2
+  字母行C:
+    key_back_color: crust
+    hilited_key_back_color: surface2
+    key_border_color: surface2
+  功能键:
+    __include: "key_style/功能"
+    key_text_size: 23
+    symbol_text_size: 8
+    key_text_offset_y: -1
+    key_text_color: fix_key_text_color
+    key_symbol_color: fix_key_symbol_color
+  回车: # 回车键样式
+    __include: "key_style/功能键"
     key_back_color: lavender
     hilited_key_back_color: overlay2
-    key_text_color: text
-    hilited_key_text_color: text
-    key_symbol_color: text
-    hilited_key_symbol_color: text
     key_border_color: lavender
+  退格: # 退格样式
+    __include: "key_style/功能键"
+    key_back_color: pink
+    hilited_key_back_color: flamingo
+    key_border_color: pink
+  大写: # Shift 样式
+    __include: "key_style/功能键"
+    key_back_color: sapphire
+    hilited_key_back_color: teal
+    key_border_color: sapphire
+  符号: # 符号键样式
+    __include: "key_style/功能键"
+    key_back_color: sky
+    hilited_key_back_color: blue
+    key_border_color: sky
   menu_key: # 菜单/设置大按钮样式
     key_text_size: 40
     symbol_text_size: 12
+    key_border_color: keyboard_background
     key_back_color: keyboard_background
   lssp_zj: # 李氏三拼主按键样式
     key_text_size: 22
@@ -465,45 +505,45 @@ preset_keyboards:
           - { click: "9", label_symbol: "(", swipe_up: "(", __include: "key_style/数字" }
           - { click: "0", label_symbol: ")", swipe_up: ")", __include: "key_style/数字" }
       - keys:
-          - { click: "q", label_symbol: "`", swipe_up: "`", popup: ["Q"] }
-          - { click: "w", label_symbol: "~", swipe_up: "~", popup: ["W"] }
-          - { click: "e", label_symbol: "+", swipe_up: "+", popup: ["E"] }
-          - { click: "r", label_symbol: "-", swipe_up: "-", popup: ["R"] }
-          - { click: "t", label_symbol: "=", swipe_up: "=", popup: ["T"] }
-          - { click: "y", label_symbol: "_", swipe_up: "_", popup: ["Y"] }
-          - { click: "u", label_symbol: "{", swipe_up: "{", popup: ["U"] }
-          - { click: "i", label_symbol: "}", swipe_up: "}", popup: ["I"] }
-          - { click: "o", label_symbol: "ic@delete_forever", popup: ["O", "DeleteCandidate"] }
-          - { click: "p", label_symbol: "×", swipe_up: "×", popup: ["P"] }
+          - { click: "q", label_symbol: "`", swipe_up: "`", popup: ["Q"], __include: "key_style/字母行B" }
+          - { click: "w", label_symbol: "~", swipe_up: "~", popup: ["W"], __include: "key_style/字母行B" }
+          - { click: "e", label_symbol: "+", swipe_up: "+", popup: ["E"], __include: "key_style/字母行B" }
+          - { click: "r", label_symbol: "-", swipe_up: "-", popup: ["R"], __include: "key_style/字母行B" }
+          - { click: "t", label_symbol: "=", swipe_up: "=", popup: ["T"], __include: "key_style/字母行B" }
+          - { click: "y", label_symbol: "_", swipe_up: "_", popup: ["Y"], __include: "key_style/字母行B" }
+          - { click: "u", label_symbol: "{", swipe_up: "{", popup: ["U"], __include: "key_style/字母行B" }
+          - { click: "i", label_symbol: "}", swipe_up: "}", popup: ["I"], __include: "key_style/字母行B" }
+          - { click: "o", label_symbol: "ic@delete_forever", popup: ["O", "DeleteCandidate"], __include: "key_style/字母行B" }
+          - { click: "p", label_symbol: "×", swipe_up: "×", popup: ["P"], __include: "key_style/字母行B" }
       - keys:
           - { width: 0.05, spacer: true }
-          - { click: "a", label_symbol: "ic@select_all", popup: ["A", "select_all"] }
-          - { click: "s", label_symbol: ":", swipe_up: ":", popup: ["S"] }
-          - { click: "d", label_symbol: "|", swipe_up: "|", popup: ["D"] }
-          - { click: "f", label_symbol: ";", swipe_up: ";", popup: ["F", "·", "§"] }
-          - { click: "g", label_symbol: "ic@apps", popup: ["G", "menu_keyboard"], hint: "ic@cursor_move", swipe_down: "Keyboard_edit" } # hint=助记提示；swipe_down=下滑动作
-          - { click: "h", label_symbol: "?", swipe_up: "?", popup: ["H", "?", "¿"] }
-          - { click: "j", label_symbol: "ic@pan_left", popup: ["J", "Page_Up"] }
-          - { click: "k", label_symbol: "ic@pan_right", popup: ["K", "Page_Down"] }
-          - { click: "l", label_symbol: "÷", swipe_up: "÷", popup: ["L"] }
+          - { click: "a", label_symbol: "ic@select_all", popup: ["A", "select_all"], __include: "key_style/字母行M" }
+          - { click: "s", label_symbol: ":", swipe_up: ":", popup: ["S"], __include: "key_style/字母行M" }
+          - { click: "d", label_symbol: "|", swipe_up: "|", popup: ["D"], __include: "key_style/字母行M" }
+          - { click: "f", label_symbol: ";", swipe_up: ";", popup: ["F", "·", "§"], __include: "key_style/字母行M" }
+          - { click: "g", label_symbol: "ic@apps", popup: ["G", "menu_keyboard"], hint: "ic@cursor_move", swipe_down: "Keyboard_edit", __include: "key_style/字母行M" } # hint=助记提示；swipe_down=下滑动作
+          - { click: "h", label_symbol: "?", swipe_up: "?", popup: ["H", "?", "¿"], __include: "key_style/字母行M" }
+          - { click: "j", label_symbol: "ic@pan_left", popup: ["J", "Page_Up"], __include: "key_style/字母行M" }
+          - { click: "k", label_symbol: "ic@pan_right", popup: ["K", "Page_Down"], __include: "key_style/字母行M" }
+          - { click: "l", label_symbol: "÷", swipe_up: "÷", popup: ["L"], __include: "key_style/字母行M" }
           - { width: 0.05, spacer: true }
       - keys:
-          - { width: 0.15, click: "Shift_L", double_click: "Shift_L3", label_symbol: "ic@keyboard_caps", key_text_size: 20, __include: "key_style/功能" }
-          - { click: "z", label_symbol: "\\", swipe_up: "\\", popup: ["Z"] }
-          - { click: "x", label_symbol: "ic@content_cut", popup: ["X", "cut"] }
-          - { click: "c", label_symbol: "ic@content_copy", popup: ["C", "copy"] }
-          - { click: "v", label_symbol: "ic@content_paste", popup: ["V", "paste"], hint: "ic@clipboard_list_outline", swipe_down: "Clipboard_window" }
-          - { click: "b", label_symbol: "/", swipe_up: "/", popup: ["B", "zitools"] }
-          - { click: "n", label_symbol: "<", swipe_up: "<", popup: ["N"] }
-          - { click: "m", label_symbol: ">", swipe_up: ">", popup: ["M"] }
-          - { width: 0.15, click: "BackSpace", label: "ic@backspace_outline", key_text_size: 20, __include: "key_style/功能" }
+          - { width: 0.15, click: "Shift_L", double_click: "Shift_L3", label_symbol: "ic@keyboard_caps", __include: "key_style/大写" }
+          - { click: "z", label_symbol: "\\", swipe_up: "\\", popup: ["Z"], __include: "key_style/字母行C" }
+          - { click: "x", label_symbol: "ic@content_cut", popup: ["X", "cut"], __include: "key_style/字母行C" }
+          - { click: "c", label_symbol: "ic@content_copy", popup: ["C", "copy"], __include: "key_style/字母行C" }
+          - { click: "v", label_symbol: "ic@content_paste", popup: ["V", "paste"], hint: "ic@clipboard_list_outline", swipe_down: "Clipboard_window", __include: "key_style/字母行C" }
+          - { click: "b", label_symbol: "/", swipe_up: "/", popup: ["B", "zitools"], __include: "key_style/字母行C" }
+          - { click: "n", label_symbol: "<", swipe_up: "<", popup: ["N"], __include: "key_style/字母行C" }
+          - { click: "m", label_symbol: ">", swipe_up: ">", popup: ["M"], __include: "key_style/字母行C" }
+          - { width: 0.15, click: "BackSpace", label: "ic@backspace_outline", __include: "key_style/退格" }
       - keys:
-          - { width: 0.15, click: "Keyboard_number", label_symbol: "ic@calculator_variant_outline", popup: ["wxcalc", "Refresh", "Deploy"], has_menu: Tab, key_text_size: 20, __include: "key_style/功能" } # has_menu=有候选菜单时触发
-          - { click: "'", label_symbol: '"', swipe_up: '"', hint: "ic@lightbulb_outline", swipe_down: "{Hint_switch}", __include: "key_style/功能" }
-          - { click: ",", label: "，", label_symbol: "[", swipe_up: "[", hint: "ic@web", swipe_down: IME_switch, __include: "key_style/功能" }
+          - { width: 0.15, click: "Keyboard_number", label_symbol: "ic@calculator_variant_outline", popup: ["wxcalc", "Refresh", "Deploy"], has_menu: Tab,  __include: "key_style/符号" } # has_menu=有候选菜单时触发
+          - { click: "'", label_symbol: '"', swipe_up: '"', hint: "ic@lightbulb_outline", swipe_down: "{Hint_switch}", __include: "key_style/标点" }
+          - { click: ",", label: "，", label_symbol: "[", swipe_up: "[", hint: "ic@web", swipe_down: IME_switch, __include: "key_style/标点" }
           - { width: 0.3, click: "Space", label: "天文馆的猫", long_click: "VOICE_ASSIST", hint: "◕‿◕", swipe_down: "liquid_keyboard_switch", key_text_offset_y: 1 } # long_click=长按动作
-          - { click: ".", label: "。", label_symbol: "]", swipe_up: "]", hint: "ic@list_box_outline", swipe_down: Menu, __include: "key_style/功能" }
-          - { click: "Mode_switch", label_symbol: "ic@keyboard_settings_outline", popup: ["Keyboard_wanxiang_zrm", "Keyboard_wanxiang_yoemin", "Keyboard_wanxiang_english", "Keyboard_wanxiang_18key", "Keyboard_wanxiang_t9"], hint: "ic@palette_swatch_outline", swipe_down: Theme_settings, has_menu: "has_menu_semicolon", key_text_size: 20, __include: "key_style/功能" }
+          - { click: ".", label: "。", label_symbol: "]", swipe_up: "]", hint: "ic@list_box_outline", swipe_down: Menu, __include: "key_style/标点" }
+          - { click: "Mode_switch", label_symbol: "ic@keyboard_settings_outline", popup: ["Keyboard_wanxiang_zrm", "Keyboard_wanxiang_yoemin", "Keyboard_wanxiang_english", "Keyboard_wanxiang_18key", "Keyboard_wanxiang_t9"], hint: "ic@palette_swatch_outline", swipe_down: Theme_settings, has_menu: "has_menu_semicolon", __include: "key_style/切换" }
           - { width: 0.15, click: "Return", label: "enter_labels", __include: "key_style/回车" }
 
   # 数字键盘
@@ -649,7 +689,6 @@ preset_keyboards:
     lock: false
     ascii_mode: 0
     navbar: true # 显示导航栏（Boolean）
-    key_border: 0
     keyboard_padding_top: 0
     rows:
       - height: 0.3
@@ -700,10 +739,6 @@ preset_keyboards:
     __patch:
       ascii_mode: 0
       label_transform: "uppercase"
-      "rows/@0/keys/@5/+": { has_menu: "yindiao1" } # 有候选菜单时输出声调 1
-      "rows/@0/keys/@6/+": { has_menu: "yindiao2" } # 声调 2
-      "rows/@0/keys/@7/+": { has_menu: "yindiao3" } # 声调 3
-      "rows/@0/keys/@8/+": { has_menu: "yindiao4" } # 声调 4
       "rows/@1/keys/@0/+": { __include: key_style/uphelp_offset, hint: "  <c=rosewater>犭䒑</c>\n<c=overlay2>丌欠且\n犬</c>  iu", label_symbol: "ic@magnify", popup: ["Q", "fancha"] }
       "rows/@1/keys/@1/+": { __include: key_style/uphelp_offset, hint: "  <c=rosewater>亠夂\n夊攵</c><c=overlay2>王</c>\n ia ua" }
       "rows/@1/keys/@2/+": { __include: key_style/uphelp_offset, hint: "  <c=rosewater>阝卩</c>\n<c=overlay2>二儿耳\n而尔</c> e" }
@@ -737,10 +772,6 @@ preset_keyboards:
     __patch:
       ascii_mode: 0
       label_transform: "uppercase"
-      "rows/@0/keys/@5/+": { has_menu: "yindiao1" } # 有候选菜单时输出声调 1
-      "rows/@0/keys/@6/+": { has_menu: "yindiao2" } # 声调 2
-      "rows/@0/keys/@7/+": { has_menu: "yindiao3" } # 声调 3
-      "rows/@0/keys/@8/+": { has_menu: "yindiao4" } # 声调 4
       "rows/@1/keys/@0/+": { __include: key_style/uphelp_offset, hint: "  <c=rosewater>\uF801\uF802</c>\n<c=overlay2>  犭求</c>\n    iu", label_symbol: "ic@magnify", popup: ["Q", "fancha"] }
       "rows/@1/keys/@1/+": { __include: key_style/uphelp_offset, hint: "  <c=overlay2>亠夂\n  攵文</c>\n    ei" }
       "rows/@1/keys/@2/+": { __include: key_style/uphelp_offset, hint: "  <c=rosewater>彐山</c>\n<c=pink>\uF803</c><c=overlay2>阝卩</c>\n     e" }

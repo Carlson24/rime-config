@@ -154,7 +154,7 @@ local function get_fz_comment(cand, env, initial_comment)
         if before and before ~= "" then
           table.insert(fuzhu_comments, before)
         end
-      else       -- "fuzhu"
+      else -- "fuzhu"
         -- 取第一个分号“后”的内容（到行尾）
         local after = segment:match(";(.+)$")
         if after and after ~= "" then
@@ -322,7 +322,7 @@ function ZH.func(input, env)
       for segment in string.gmatch(initial_comment, "[^" .. auto_delimiter .. manual_delimiter .. "]+") do
         local pinyin = segment:match("^[^;]+")
         if pinyin then
-          pinyin = pinyin:gsub("[%[%]]", "")           --去掉英文词库编码中的[]
+          pinyin = pinyin:gsub("[%[%]]", "") --去掉英文词库编码中的[]
           table.insert(pinyin_segments, pinyin)
         end
       end

@@ -61,8 +61,8 @@ engine:
     - lua_processor@*wanxiang.super_processor
     - lua_processor@*wanxiang.super_sequence*P
     - lua_processor@*wanxiang.super_tips
-    - digit_catcher # 需要在 recognizer 之前
     - ascii_composer
+    - digit_catcher # 需要在 ascii_composer 之后 recognizer 之前
     - recognizer
     - key_binder
     - lua_processor@*wanxiang.key_binder
@@ -103,8 +103,8 @@ engine:
     - lua_filter@*wanxiang.super_replacer
     - lua_filter@*wanxiang.super_filter
     - lua_filter@*wanxiang.super_sequence*F
-    - user_predict_filter
-    - uniquifier
+    - user_predict_filter # 去重之前
+    - uniquifier # 候选去重
 
 super_comment:
   candidate_length: 8
@@ -130,7 +130,8 @@ super_processor:
 
 user_predict:
   db_name: "userdata/user_predict"
-  predict_style: "post"
+  predict_style: "all"
+  use_space_to_commit: false
   max_candidates: 5
   max_predictions: 10
   expiry_days: 90
@@ -218,7 +219,7 @@ translator:
   enable_completion: true
   enable_user_dict: false
   contextual_suggestions: true
-  max_sentences: 3
+  max_sentences: 1 # 越多性能越差
   max_homophones: 8
   enable_correction: false
   initial_quality: 4
@@ -244,6 +245,7 @@ wanxiang_english:
   english_spacing: off
   spacing_timeout: 5
   max_candidates: 0
+  min_word_length: 2 # 最少两个字母才会查字典，防止巨量候选
   trigger: "\\"
 
 wanxiang_mixedcode:
@@ -252,6 +254,7 @@ wanxiang_mixedcode:
   enable_completion: true
   enable_sentence: false
   initial_quality: 2
+  min_word_length: 2 # 最少两个字母才会查字典，防止巨量候选
   comment_format:
     - xform/.*//
 
@@ -285,7 +288,7 @@ recognizer:
     yr6: "^N1[02]?3?[01]?"
     nyr1: "^N19?[0-9]?[0-9]?[0-1]?[0-9]?[0-9]?[0-9]?"
     nyr2: "^N20?[0-9]?[0-9]?[0-1]?[0-9]?[0-9]?[0-9]?"
-    calculator: "^(V.*|[0-9]+[\\+\\-\\*/\\^÷].*|[\\+\\-\\*/\\^÷].*)$"
+    calculator: "^(V.*|[0-9]+[\\+\\-\\*/\\^].*|[\\+\\-\\*/\\^](?![a-zA-Z]).*)$" # 放行 /sj 这样的命令
     email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
     url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$"
     htj: "^/htj.*$"
@@ -359,7 +362,8 @@ user_dict_set:
   core_word_length: 4
   max_word_length: 7
   contextual_suggestions: false
-  max_homophones: 8
+  max_homophones: 4
+  max_sentences: 0
   spelling_hints: 50
   comment_format:
   enable_user_dict: true

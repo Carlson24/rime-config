@@ -24,13 +24,15 @@ local find = string.find
 local gsub = string.gsub
 local upper = string.upper
 local sub = string.sub
-local utf8_codes = utf8.codes
-local utf8_len = utf8.len
+local utf8_codes  = utf8.codes
+local utf8_len    = utf8.len
+local utf8_offset = utf8.offset
+local utf8_char   = utf8.char
 
 local function get_first_utf8_char(s)
   if not s or s == "" then return "" end
-  local offset = utf8.offset(s, 2)
-  return offset and sub(s, 1, offset - 1) or s
+  local off = utf8_offset(s, 2)
+  return off and sub(s, 1, off - 1) or s
 end
 
 local function fast_type(c)
@@ -419,25 +421,16 @@ local function precompile_wrap_parts(wrap_map, delimiter)
           r = sub(wrap_str, pos + 1) or ""
         }
       else
-        local first, last
-        local count = 0
-
-        for _, cp in utf8_codes(wrap_str) do
-          local char = utf8.char(cp)
-          if count == 0 then
-            first = char
-          end
-          last = char
-          count = count + 1
-        end
-
+        local count = utf8_len(wrap_str)
         if count == 0 then
           parts[k] = { l = "", r = "" }
         elseif count == 1 then
-          parts[k] = { l = first, r = "" }
-        elseif count == 2 then
-          parts[k] = { l = first, r = last }
+          parts[k] = { l = wrap_str, r = "" }
         else
+          local p2 = utf8_offset(wrap_str, 2)
+          local first = sub(wrap_str, 1, p2 - 1)
+          local plast = utf8_offset(wrap_str, -1)
+          local last = sub(wrap_str, plast)
           parts[k] = { l = first, r = last }
         end
       end
@@ -705,7 +698,7 @@ function M.func(input, env)
 
       local seg_str = sub(code, start_pos + 1, end_pos)
       if #seg_str >= 3 then
-        local offset_2 = utf8.offset(seg_str, 3)
+        local offset_2 = utf8_offset(seg_str, 3)
         if offset_2 then
           nc.preedit = sub(seg_str, 1, offset_2 - 1) .. " " .. sub(seg_str, offset_2)
         else

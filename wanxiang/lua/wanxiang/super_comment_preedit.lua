@@ -3,6 +3,10 @@
 
 local wanxiang = require('wanxiang')
 
+local utf8_codepoint = utf8.codepoint
+local utf8_len       = utf8.len
+local utf8_offset    = utf8.offset
+
 local tone_map = {
   ['ā'] = 'a',
   ['á'] = 'a',
@@ -46,7 +50,7 @@ end
 -- ----------------------
 local function get_charset_label(text)
   if not text or text == "" then return nil end
-  local cp = utf8.codepoint(text)
+  local cp = utf8_codepoint(text)
   if not cp then return nil end
 
   -- 按照 Unicode 区块频率排序
@@ -125,7 +129,7 @@ end
 -- # 辅助码提示或带调全拼注释模块 (Fuzhu)
 -- ----------------------
 local function get_fz_comment(cand, env, initial_comment)
-  local length = utf8.len(cand.text)
+  local length = utf8_len(cand.text)
   if length > env.settings.candidate_length then
     return ""
   end
@@ -339,7 +343,7 @@ function ZH.func(input, env)
             if is_t9_key then
               -- 场景 A：九宫格 (T9) 数字输入逻辑
               local py_first_char = py:match("[%z\1-\127\194-\244][\128-\191]*") or ""
-              local part_offset = utf8.offset(part, 2)
+              local part_offset = utf8_offset(part, 2)
               local part_tail = part_offset and part:sub(part_offset) or ""
               part = py_first_char .. part_tail
 

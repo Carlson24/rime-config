@@ -6,6 +6,9 @@
 local userdb = require("wanxiang/userdb")
 local wanxiang = require("wanxiang")
 
+local utf8_codes = utf8.codes
+local utf8_len   = utf8.len
+
 local _db_pool = {}
 local raw_software_name = rime_api.get_distribution_code_name()
 
@@ -45,7 +48,7 @@ end
 
 local function get_pure_chinese_length(text)
   local count = 0
-  for _, code in utf8.codes(text) do
+  for _, code in utf8_codes(text) do
     if is_chinese_code(code) then count = count + 1 end
   end
   return count

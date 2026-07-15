@@ -218,13 +218,13 @@ translator:
   prism: wanxiang_zrm
   enable_completion: true
   enable_user_dict: false
-  contextual_suggestions: true
+  contextual_suggestions: false # 不好用，还严重影响性能
   max_sentences: 1 # 越多性能越差
   max_homophones: 8
   enable_correction: false
   initial_quality: 4
-  spelling_hints: 50
-  always_show_comments: true
+  spelling_hints: 10
+  always_show_comments: false
   comment_format:
 
 custom_phrase:
@@ -245,7 +245,7 @@ wanxiang_english:
   english_spacing: off
   spacing_timeout: 5
   max_candidates: 0
-  min_word_length: 2 # 最少两个字母才会查字典，防止巨量候选
+  min_word_length: 3 # 最少三个字母才会查字典，防止巨量候选
   trigger: "\\"
 
 wanxiang_mixedcode:
@@ -364,7 +364,7 @@ user_dict_set:
   contextual_suggestions: false
   max_homophones: 4
   max_sentences: 0
-  spelling_hints: 50
+  spelling_hints: 10
   comment_format:
   enable_user_dict: true
   user_dict: wanxiang_zrm
@@ -377,7 +377,7 @@ add_user_dict:
   user_dict: wanxiang_zrm
   enable_completion: true
   enable_user_dict: true
-  spelling_hints: 50
+  spelling_hints: 10
   enable_auto_phrase: true
   comment_format:
   prefix: "``"

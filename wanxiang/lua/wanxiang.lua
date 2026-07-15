@@ -3,6 +3,13 @@
 -- 万象的一些共用工具函数
 local wanxiang = {}
 
+local utf8_codepoint = utf8.codepoint
+local utf8_codes     = utf8.codes
+local utf8_len       = utf8.len
+local utf8_offset    = utf8.offset
+local utf8_char      = utf8.char
+local string_byte    = string.byte
+
 -- x-release-please-start-version
 
 wanxiang.version = "v17.0.0"
@@ -141,7 +148,9 @@ end
 
 -- 判断字符是否为汉字
 function wanxiang.IsChineseCharacter(text)
-  local codepoint = utf8.codepoint(text)
+  local b = string_byte(text, 1)
+  if b < 0xE0 or b > 0xF4 then return false end
+  local codepoint = utf8_codepoint(text)
   return
       (codepoint >= 0x4E00 and codepoint <= 0x9FFF)      -- Basic
       or (codepoint >= 0x3400 and codepoint <= 0x4DBF)   -- Ext A

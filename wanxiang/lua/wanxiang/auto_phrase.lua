@@ -2,6 +2,11 @@
 -- 自动造词
 local AP = {}
 
+local utf8_codes     = utf8.codes
+local utf8_len       = utf8.len
+local utf8_codepoint = utf8.codepoint
+local utf8_char      = utf8.char
+
 -- 注释缓存：text -> comment（只给中文造词用）
 local comment_cache = {}
 
@@ -35,7 +40,7 @@ function AP.is_chinese_only(text)
     return false
   end
 
-  for _, cp in utf8.codes(text) do
+  for _, cp in utf8_codes(text) do
     -- 常用汉字区 + 扩展 A/B/C/D/E/F/G
     if not (
           (cp >= 0x4E00 and cp <= 0x9FFF) or -- CJK Unified Ideographs
@@ -177,7 +182,7 @@ function AP.commit_handler(ctx, env)
   end
 
   -- 基础检查
-  if segments_count <= 1 or utf8.len(commit_text) <= 1 then
+  if segments_count <= 1 or utf8_len(commit_text) <= 1 then
     comment_cache = {}
     return
   end
@@ -189,7 +194,7 @@ function AP.commit_handler(ctx, env)
   local code_table = {}
   local config = env.engine.schema.config
   local delimiter = config:get_string("speller/delimiter") or " '"
-  local escaped_delimiter = utf8.char(utf8.codepoint(delimiter)):gsub("(%W)", "%%%1")
+  local escaped_delimiter = utf8_char(utf8_codepoint(delimiter)):gsub("(%W)", "%%%1")
 
   for i = 1, segments_count do
     local seg  = segments[i]
@@ -235,7 +240,7 @@ function AP.commit_handler(ctx, env)
   end
 
   -- 检查编码片段数量是否与 commit_text 的字数一致
-  local total_chars = utf8.len(commit_text)
+  local total_chars = utf8_len(commit_text)
   if #code_table ~= total_chars then
     comment_cache = {}
     return

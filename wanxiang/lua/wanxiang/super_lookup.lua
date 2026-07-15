@@ -9,6 +9,12 @@
 
 local wanxiang = require("wanxiang")
 
+local utf8_len       = utf8.len
+local utf8_codes     = utf8.codes
+local utf8_char      = utf8.char
+local utf8_offset    = utf8.offset
+local utf8_graphemes = utf8.grapheme_indices
+
 -- 1. 基础工具函数 (UTF8处理 / 字符串 / 声调)
 local function alt_lua_punc(s)
   if not s then
@@ -45,11 +51,7 @@ local tones_map = {
 }
 
 local function get_utf8_len(s)
-  if utf8 and utf8.len then
-    return utf8.len(s)
-  end
-  local _, count = string.gsub(s, "[^\128-\193]", "")
-  return count
+  return utf8_len(s)
 end
 
 local function get_tone_from_pinyin(pinyin)
@@ -65,31 +67,26 @@ local function get_tone_from_pinyin(pinyin)
 end
 
 local function get_utf8_char_at(text, idx)
-  local i = 1
-  for _, code in utf8.codes(text) do
-    if i == idx then
-      return utf8.char(code)
-    end
-    i = i + 1
-  end
-  return ""
+  local p1 = utf8_offset(text, idx)
+  if not p1 then return "" end
+  local p2 = utf8_offset(text, idx + 1)
+  return text:sub(p1, p2 and p2 - 1)
 end
 
 -- 提取一段 UTF8 字符片段
 local function get_utf8_string_range(text, start_idx, end_idx)
-  local res = ""
-  for k = start_idx, end_idx do
-    res = res .. get_utf8_char_at(text, k)
-  end
-  return res
+  local p1 = utf8_offset(text, start_idx)
+  if not p1 then return "" end
+  local p2 = utf8_offset(text, end_idx + 1)
+  return text:sub(p1, p2 and p2 - 1)
 end
 
 -- 将 UTF8 字符串转为字符数组
 local function text_to_chars(text)
   if not text or text == "" then return {} end
   local chars = {}
-  for _, cp in utf8.codes(text) do
-    table.insert(chars, utf8.char(cp))
+  for from, to in utf8_graphemes(text) do
+    table.insert(chars, text:sub(from, to))
   end
   return chars
 end
@@ -100,20 +97,8 @@ local function chars_to_text(chars)
 end
 
 -- 替换一段 UTF8 字符片段
-local function replace_text_range(current_text, start_idx, end_idx, new_str)
-  local out = {}
-  local char_idx = 1
-  for _, code_pt in utf8.codes(current_text) do
-    if char_idx >= start_idx and char_idx <= end_idx then
-      if char_idx == start_idx then
-        table.insert(out, new_str)
-      end
-    else
-      table.insert(out, utf8.char(code_pt))
-    end
-    char_idx = char_idx + 1
-  end
-  return table.concat(out)
+local function replace_text_range(text, start_idx, end_idx, new_str)
+  return utf8.insert(utf8.remove(text, start_idx, end_idx), start_idx, new_str)
 end
 
 local function list_contains(list, target)
@@ -601,10 +586,9 @@ local function build_candidate_raw_data(cand, cand_len, env)
 
   if env.has_db then
     raw_data.db = {}
-    local i = 0
-    for _, code_point in utf8.codes(cand_text) do
-      i = i + 1
-      local char_str = utf8.char(code_point)
+    local chars = text_to_chars(cand_text)
+    for i = 1, #chars do
+      local char_str = chars[i]
 
       if not db_cache[char_str] then
         local main_codes, xlit_codes = build_reverse_group(env.main_projection, env.xlit_projection, env.db_table,
@@ -737,15 +721,13 @@ local function try_match_long_phrase(current_text, cand_len, env, syllables, fum
         local phrase_text = entry.text
         if get_utf8_len(phrase_text) == fuma_len and phrase_text ~= orig_phrase_text then
           local match_all = true
-          local char_idx = 1
-
-          for _, code_pt in utf8.codes(phrase_text) do
-            local char = utf8.char(code_pt)
+          local phrase_chars = text_to_chars(phrase_text)
+          for char_idx = 1, #phrase_chars do
+            local char = phrase_chars[char_idx]
             if not check_char_fuma_match(env, pure_pinyin_parts[char_idx], fuma_chunks[char_idx], char) then
               match_all = false
               break
             end
-            char_idx = char_idx + 1
           end
 
           if match_all then

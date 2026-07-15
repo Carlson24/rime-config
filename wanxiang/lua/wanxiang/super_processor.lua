@@ -8,6 +8,9 @@
 local wanxiang = require("wanxiang")
 local M = {}
 
+local utf8_len    = utf8.len
+local utf8_offset = utf8.offset
+
 local K_REJECT, K_ACCEPT, K_NOOP = 0, 1, 2
 
 -- 1. 全局常量定义 (Constants)
@@ -160,16 +163,7 @@ end
 -- 增强版 UTF-8 长度计算 (Super Segmentation 使用)
 local function ulen(s)
   if not s or s == "" then return 0 end
-  if utf8 and utf8.len then
-    local ok, n = pcall(utf8.len, s)
-    if ok and n then return n end
-  end
-  local n = 0
-  if utf8 and utf8.codes then
-    for _ in utf8.codes(s) do n = n + 1 end
-    return n
-  end
-  return #s
+  return utf8_len(s)
 end
 
 -- 检查数字后是否紧跟功能编码 (KpNumber 使用)
@@ -661,15 +655,15 @@ local function handle_select_character(key, env, ctx)
   if cand then text = cand.text end
 
   -- 执行上屏
-  if utf8.len(text) > 1 then
+    if utf8_len(text) > 1 then
     if is_first then
       -- 上屏第一个字 (sub: 1 到 第二个字偏移量-1)
-      env.engine:commit_text(text:sub(1, utf8.offset(text, 2) - 1))
+      env.engine:commit_text(text:sub(1, utf8_offset(text, 2) - 1))
       ctx:clear()
       return true       -- Accepted
     elseif is_last then
       -- 上屏最后一个字 (sub: 最后一个字偏移量)
-      env.engine:commit_text(text:sub(utf8.offset(text, -1)))
+      env.engine:commit_text(text:sub(utf8_offset(text, -1)))
       ctx:clear()
       return true       -- Accepted
     end

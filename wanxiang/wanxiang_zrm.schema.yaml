@@ -10,7 +10,6 @@ schema:
   author: amzxyz & Carlson24
   description: 魔然+万象拼音Pro
   dependencies:
-    - wanxiang_mixedcode
     - wanxiang_reverse
     - wanxiang_english
 
@@ -41,6 +40,9 @@ switches:
     reset: 1
   - name: prediction
     states: [预测关, 预测开]
+    reset: 1
+  - name: corrector
+    states: [纠错关, 纠错开]
     reset: 1
   - name: chinese_english
     states: [翻译关, 翻译开]
@@ -91,7 +93,6 @@ engine:
     - lua_translator@*uuid
     - table_translator@custom_phrase
     - table_translator@wanxiang_english
-    - table_translator@wanxiang_mixedcode
     - reverse_lookup_translator@wanxiang_reverse
     - script_translator@user_dict_set
     - script_translator@add_user_dict
@@ -104,20 +105,51 @@ engine:
     - lua_filter@*wanxiang.super_filter
     - lua_filter@*wanxiang.super_sequence*F
     - user_predict_filter # 去重之前
+    - typo_filter # 输入纠错
     - uniquifier # 候选去重
 
+speller:
+  auto_select: true
+  auto_select_pattern: ^@(\w|@)+|^\w{3}\w+
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA1234567890`;/\@|›
+  initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/@|›
+  delimiter: " '"
+  visual_delimiter: " "
+  algebra:
+    __patch:
+      - "wanxiang_algebra:/模糊音/in_ing"
+      - "wanxiang_algebra:/zrm_pro"
+
+user_predict:
+  db_name: "userdata/user_predict" # 用户预测数据库
+  predict_style: "all" # 预测样式
+  use_space_to_commit: false # 是否使用空格提交预测
+  max_candidates: 5 # 最大预测候选数
+  max_predictions: 10 # 最大预测条数（S-Gram 不受限制）
+  expiry_days: 90 # 预测过期天数（S-Gram 永不过期）
+  decay_rate: 0.85 # 预测衰减率
+  context_timeout: 10000 # 上下文超时（毫秒）
+
+typo:
+  tags: [abc]
+  translator: translator # 主词库
+  show_corrected_preedit: false # 纠错时显示原始错误编码
+  input_type: "zrm" # 输入类型
+  max_scan_len: 6 # 最大纠错长度
+  custom_file: "" # 自定义纠错文件
+  correction_hint: "" # 纠错提示符号
+
 super_comment:
-  candidate_length: 8
+  candidate_length: 8 # 注释候选长度
   cand_type:
-    user_phrase: " "
-    sentence: " "
-    phrase: " ▪"
-    table: " ✬"
-    user_table: " "
-    completion: " ⋙"
-    abbrev: " "
-    predict: " ∞"
-    fallback: " ~"
+    user_phrase: "" # 用户自造词
+    sentence: "" # 整句
+    phrase: "▪" # 词组
+    table: "✬" # 系统码表词
+    user_table: "" # 用户码表词
+    completion: "⋙" # 编码补全
+    abbrev: "" # 简码
+    predict: "∞" # 预测候选
 
 super_processor:
   enable_backspace_limit: true
@@ -128,16 +160,6 @@ super_processor:
   limit_repeated: "16,64"
   select_character: "bracketleft, bracketright"
 
-user_predict:
-  db_name: "userdata/user_predict"
-  predict_style: "all"
-  use_space_to_commit: false
-  max_candidates: 5
-  max_predictions: 10
-  expiry_days: 90
-  decay_rate: 0.85
-  context_timeout: 10000
-
 super_tips:
   tips_key: "comma"
   files:
@@ -145,7 +167,7 @@ super_tips:
     - lua/data/tips_moran_chaifen.txt
 
 super_replacer:
-  db_name: "userdata/replacer_zrm"
+  db_name: "userdata/replacer_zrm" # 用户替换数据库
   comment_format: "〔%s〕"
   chain: true
   rules:
@@ -215,17 +237,47 @@ super_replacer:
 
 translator:
   dictionary: wanxiang
-  prism: wanxiang_zrm
-  enable_completion: true
-  enable_user_dict: false
+  prism: wanxiang_zrm # 多方案唯一标识
+  enable_completion: true # 开启编码补全
+  enable_user_dict: false # 关闭用户词典
   contextual_suggestions: false # 不好用，还严重影响性能
   max_sentences: 1 # 越多性能越差
   max_homophones: 8
-  enable_correction: false
+  enable_correction: false # 关闭输入纠错——使用 typo_filter 代替
   initial_quality: 4
   spelling_hints: 10
   always_show_comments: false
   comment_format:
+
+user_dict_set:
+  dictionary: wanxiang
+  prism: wanxiang_zrm # 多方案唯一
+  initial_quality: 2.5
+  enable_completion: false
+  enable_sentence: false
+  core_word_length: 4
+  max_word_length: 7
+  contextual_suggestions: false
+  max_homophones: 4
+  max_sentences: 0
+  spelling_hints: 10
+  comment_format:
+  enable_user_dict: true
+  user_dict: wanxiang_zrm
+
+add_user_dict:
+  tag: add_user_dict
+  dictionary: wanxiang
+  prism: wanxiang_zrm # 多方案唯一
+  initial_quality: -1
+  user_dict: wanxiang_zrm
+  enable_completion: true
+  enable_user_dict: true
+  spelling_hints: 10
+  enable_auto_phrase: true
+  comment_format:
+  prefix: "``"
+  tips: "〔开始造词〕"
 
 custom_phrase:
   dictionary: ""
@@ -247,16 +299,6 @@ wanxiang_english:
   max_candidates: 0
   min_word_length: 3 # 最少三个字母才会查字典，防止巨量候选
   trigger: "\\"
-
-wanxiang_mixedcode:
-  dictionary: wanxiang_mixedcode
-  db_class: stabledb
-  enable_completion: true
-  enable_sentence: false
-  initial_quality: 2
-  min_word_length: 2 # 最少两个字母才会查字典，防止巨量候选
-  comment_format:
-    - xform/.*//
 
 wanxiang_reverse:
   tag: wanxiang_reverse
@@ -340,45 +382,3 @@ navigator:
     Right: right_by_char_no_loop
     Shift+Left: left_by_syllable
     Shift+Right: right_by_syllable
-
-speller:
-  auto_select: true
-  auto_select_pattern: ^@(\w|@)+|^\w{3}\w+
-  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA1234567890`;/\@|›
-  initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/@|›
-  delimiter: " '"
-  visual_delimiter: " "
-  algebra:
-    __patch:
-      - "wanxiang_algebra:/模糊音/in_ing"
-      - "wanxiang_algebra:/zrm_pro"
-
-user_dict_set:
-  dictionary: wanxiang
-  prism: wanxiang_zrm
-  initial_quality: 2.5
-  enable_completion: false
-  enable_sentence: false
-  core_word_length: 4
-  max_word_length: 7
-  contextual_suggestions: false
-  max_homophones: 4
-  max_sentences: 0
-  spelling_hints: 10
-  comment_format:
-  enable_user_dict: true
-  user_dict: wanxiang_zrm
-
-add_user_dict:
-  tag: add_user_dict
-  dictionary: wanxiang
-  prism: wanxiang_zrm
-  initial_quality: -1
-  user_dict: wanxiang_zrm
-  enable_completion: true
-  enable_user_dict: true
-  spelling_hints: 10
-  enable_auto_phrase: true
-  comment_format:
-  prefix: "``"
-  tips: "〔开始造词〕"

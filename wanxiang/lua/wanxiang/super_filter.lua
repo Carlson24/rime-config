@@ -4,9 +4,7 @@
 --         将候选词中的 \n, \t, \s(空格) 等文本转义符格式化为实际效果。
 -- 功能 B：成对符号包裹与候选锁定
 --         输入 `\` 瞬间锁定并展示当前候选快照，追加对应字母即可为候选词快速穿上各类括号/引号（如【】、“”）。
--- 功能 C：三码空候选轻量兜底
---         后台静默记录 2 码时的首选单字；当输入 3 码导致系统无候选时，立刻将该单字吐出救场。
--- 功能 D：中英混输长句防污染
+-- 功能 C：中英混输长句防污染
 --         当首选词为有效的英文单词（≥4字母）时，自动斩断辅助码的无理派生，屏蔽毫无关联的凑数中文长句。
 
 local M = {}
@@ -43,11 +41,6 @@ local function fast_type(c)
 
   local g = c.get_genuine and c:get_genuine() or nil
   return (g and g.type) or ""
-end
-
-local function is_table_type(c)
-  local t = fast_type(c)
-  return t == "table" or t == "user_table" or t == "fixed"
 end
 
 local function has_english_token_fast(s)
@@ -230,7 +223,7 @@ local function apply_escape_fast(text, dt)
   return s, s ~= text
 end
 
-local function format_and_autocap(cand, env, dt)
+local function format_and_autocap(cand, env, dt, ctype)
   local text = cand.text
   if not text or text == "" then
     return cand
@@ -242,14 +235,18 @@ local function format_and_autocap(cand, env, dt)
   -- 2. 处理尾巴符号追加
   local genuine = cand:get_genuine()
   local current_comment = genuine.comment or ""
-  local symbol = env.cand_type_symbols[fast_type(cand)]
+  local symbol = env.cand_type_symbols[ctype or fast_type(cand)]
   local comment_changed = false
 
   if symbol and symbol ~= "" and current_comment ~= "~" then
     -- 防重判断，避免因为各种原因重复追加
     local escaped_symbol = symbol:gsub("[%-%^%$%(%)%%%.%[%]%*%+%?]", "%%%1")
     if not current_comment:match(escaped_symbol .. "$") then
-      current_comment = current_comment .. symbol
+      if current_comment ~= "" then
+        current_comment = current_comment .. " " .. symbol
+      else
+        current_comment = symbol
+      end
       comment_changed = true
     end
   end
@@ -464,7 +461,6 @@ function M.init(env)
 
   -- 状态初始化
   env.page_cache = {}
-  env.last_2code_char = nil
   -- 读取全局类型符号配置
   env.cand_type_symbols = {}
   local map = cfg and cfg:get_map("super_comment/cand_type")
@@ -481,7 +477,6 @@ end
 function M.fini(env)
   env.wrap_map = nil
   env.wrap_parts = nil
-  env.last_2code_char = nil
 end
 
 function M.func(input, env)
@@ -491,7 +486,6 @@ function M.func(input, env)
   local current_dt = os.date("*t")
   -- 1. 空环境清理
   if not code or code == "" or (comp and comp:empty()) then
-    env.last_2code_char = nil
     env.page_cache = {}
     for cand in input:iter() do
       yield(format_and_autocap(cand, env, current_dt))
@@ -503,11 +497,6 @@ function M.func(input, env)
   local code_len = #code
   local seg_len = last_seg and (last_seg._end - last_seg.start) or code_len
   local enable_taichi = env.enable_taichi_filter
-
-  -- 及时清理兜数据
-  if seg_len < 2 then
-    env.last_2code_char = nil
-  end
 
   -- 2. 探查触发符号（斜杠 \）
   local symbol = env.symbol
@@ -613,15 +602,11 @@ function M.func(input, env)
   for cand in input:iter() do
     idx = idx + 1
     local text = cand.text
-    local is_table = is_table_type(cand)
+    local ctype = fast_type(cand)
+    local is_table = (ctype == "table" or ctype == "user_table" or ctype == "fixed")
     local has_eng = has_english_token_fast(text)
 
-    -- 首选特殊处理
     if idx == 1 then
-      if seg_len == 2 and (utf8_len(text) or 0) == 1 and not has_eng then
-        env.last_2code_char = text
-      end
-
       if is_table and #text >= 4 and has_eng then
         drop_sentence = true
       end
@@ -644,7 +629,7 @@ function M.func(input, env)
     if not should_skip then
       suppress_set[text] = true
 
-      local formatted_cand = format_and_autocap(cand, env, current_dt)
+      local formatted_cand = format_and_autocap(cand, env, current_dt, ctype)
       if not code_has_symbol and #env.page_cache < wrap_limit then
         table.insert(env.page_cache, clone_candidate(formatted_cand))
       end
@@ -679,36 +664,8 @@ function M.func(input, env)
 
     if not should_skip then
       suppress_set[text] = true
-      yield(format_and_autocap(cand, env, current_dt))
-    end
-  end
-  -- PHASE 3: 三码空候选兜底
-  if idx == 0 and seg_len == 3 then
-    local fallback_text = env.last_2code_char
-
-    if fallback_text then
-      local start_pos = last_seg and last_seg.start or (#code - 3)
-      if start_pos < 0 then
-        start_pos = 0
-      end
-      local end_pos = last_seg and last_seg._end or #code
-      local c_type = "fallback"
-      local symbol = env.cand_type_symbols[c_type] or ""
-      local nc = Candidate(c_type, start_pos, end_pos, fallback_text, symbol)
-
-      local seg_str = sub(code, start_pos + 1, end_pos)
-      if #seg_str >= 3 then
-        local offset_2 = utf8_offset(seg_str, 3)
-        if offset_2 then
-          nc.preedit = sub(seg_str, 1, offset_2 - 1) .. " " .. sub(seg_str, offset_2)
-        else
-          nc.preedit = seg_str
-        end
-      else
-        nc.preedit = seg_str
-      end
-
-      yield(nc)
+      local ctype = fast_type(cand)
+      yield(format_and_autocap(cand, env, current_dt, ctype))
     end
   end
 end

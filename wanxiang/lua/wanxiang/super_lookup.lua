@@ -24,35 +24,31 @@ local function alt_lua_punc(s)
 end
 
 local tones_map = {
-  ["ā"] = "7",
-  ["á"] = "8",
-  ["ǎ"] = "9",
-  ["à"] = "0",
-  ["ō"] = "7",
-  ["ó"] = "8",
-  ["ǒ"] = "9",
-  ["ò"] = "0",
-  ["ē"] = "7",
-  ["é"] = "8",
-  ["ě"] = "9",
-  ["è"] = "0",
-  ["ī"] = "7",
-  ["í"] = "8",
-  ["ǐ"] = "9",
-  ["ì"] = "0",
-  ["ū"] = "7",
-  ["ú"] = "8",
-  ["ǔ"] = "9",
-  ["ù"] = "0",
-  ["ǖ"] = "7",
-  ["ǘ"] = "8",
-  ["ǚ"] = "9",
-  ["ǜ"] = "0"
+  ["ā"] = "6",
+  ["á"] = "7",
+  ["ǎ"] = "8",
+  ["à"] = "9",
+  ["ō"] = "6",
+  ["ó"] = "7",
+  ["ǒ"] = "8",
+  ["ò"] = "9",
+  ["ē"] = "6",
+  ["é"] = "7",
+  ["ě"] = "8",
+  ["è"] = "9",
+  ["ī"] = "6",
+  ["í"] = "7",
+  ["ǐ"] = "8",
+  ["ì"] = "9",
+  ["ū"] = "6",
+  ["ú"] = "7",
+  ["ǔ"] = "8",
+  ["ù"] = "9",
+  ["ǖ"] = "6",
+  ["ǘ"] = "7",
+  ["ǚ"] = "8",
+  ["ǜ"] = "9"
 }
-
-local function get_utf8_len(s)
-  return utf8_len(s)
-end
 
 local function get_tone_from_pinyin(pinyin)
   if not pinyin or #pinyin == 0 then
@@ -63,7 +59,7 @@ local function get_tone_from_pinyin(pinyin)
       return tone
     end
   end
-  return "0"
+  return "9"
 end
 
 local function get_utf8_char_at(text, idx)
@@ -150,7 +146,7 @@ local function split_lookup_input(input, key, bypass_prefix)
   return input:sub(1, s_start - 1), input:sub(s_end + 1), s_start, s_end
 end
 
--- 解析输入的辅码，仅将 7,8,9,0 视为声调，其余为常规辅码
+-- 解析输入的辅码，仅将 6,7,8,9 视为声调，其余为常规辅码
 local function parse_fuma_rules(fuma)
   local tone_filter_seq = {}
   local fuma_chunks = {}
@@ -158,7 +154,7 @@ local function parse_fuma_rules(fuma)
 
   for i = 1, #fuma do
     local char = fuma:sub(i, i)
-    if char == "7" or char == "8" or char == "9" or char == "0" then
+    if char == "6" or char == "7" or char == "8" or char == "9" then
       table.insert(tone_filter_seq, char)
     else
       clean_fuma = clean_fuma .. char
@@ -719,7 +715,7 @@ local function try_match_long_phrase(current_text, cand_len, env, syllables, fum
 
       for _, entry in ipairs(env._phrase_query_cache[query_str]) do
         local phrase_text = entry.text
-        if get_utf8_len(phrase_text) == fuma_len and phrase_text ~= orig_phrase_text then
+        if utf8_len(phrase_text) == fuma_len and phrase_text ~= orig_phrase_text then
           local match_all = true
           local phrase_chars = text_to_chars(phrase_text)
           for char_idx = 1, #phrase_chars do
@@ -780,7 +776,7 @@ local function try_match_two_char_phrase(current_text, search_end_idx, env, syll
       end
 
       for _, entry in ipairs(env._phrase_query_cache[query_str]) do
-        if get_utf8_len(entry.text) == 2 and entry.text ~= orig_phrase_text then
+        if utf8_len(entry.text) == 2 and entry.text ~= orig_phrase_text then
           local char1 = get_utf8_char_at(entry.text, 1)
           local char2 = get_utf8_char_at(entry.text, 2)
           local orig_char1 = get_utf8_char_at(orig_phrase_text, 1)
@@ -841,7 +837,7 @@ local function try_match_single_chars(current_text, search_end_idx, env, syllabl
 
       if env.mem:dict_lookup(probe_code, true, 200) then
         for entry in env.mem:iter_dict() do
-          if get_utf8_len(entry.text) == 1 then
+          if utf8_len(entry.text) == 1 then
             if entry.text == orig_char then
               is_orig_valid = true
               break
@@ -856,7 +852,7 @@ local function try_match_single_chars(current_text, search_end_idx, env, syllabl
 
       if not is_orig_valid and env.mem:user_lookup(probe_code, true) then
         for entry in env.mem:iter_user() do
-          if get_utf8_len(entry.text) == 1 then
+          if utf8_len(entry.text) == 1 then
             if entry.text == orig_char then
               is_orig_valid = true
               break
@@ -1116,7 +1112,7 @@ local function handle_explicit_mode(input, env, ctx_input, pure_code, explicitly
 
   for cand in input:iter() do
     cand_idx = cand_idx + 1
-    local cand_len = get_utf8_len(cand.text)
+    local cand_len = utf8_len(cand.text)
 
     -- 首个候选修正：纯声调翻译与多字纠错
     if is_first_cand then
@@ -1224,7 +1220,7 @@ local function handle_direct_mode(input, env, ctx_input)
   for cand in input:iter() do
     table.insert(all_cands, cand)
 
-    if get_utf8_len(cand.text) == 2 and cand._end == #ctx_input then
+    if utf8_len(cand.text) == 2 and cand._end == #ctx_input then
       is_perfect_two_syl = true
       break
     end
@@ -1242,7 +1238,7 @@ local function handle_direct_mode(input, env, ctx_input)
   local matched_f_len = 0
 
   for _, cand in ipairs(all_cands) do
-    local cand_len = get_utf8_len(cand.text)
+    local cand_len = utf8_len(cand.text)
     if cand.type == 'sentence' or string.byte(cand.text, 1) < 128 or cand_len ~= 2 then
       table.insert(normal_cands, cand)
       goto skip
@@ -1253,7 +1249,7 @@ local function handle_direct_mode(input, env, ctx_input)
     if tail_len > 0 and tail_len <= 2 then
       local fuma = ctx_input:sub(cand._end + 1):gsub("['%s]", "")
       local pure_code = ctx_input:sub(1, cand._end)
-      local clean_fuma = fuma:gsub("[7890]", "")
+      local clean_fuma = fuma:gsub("[6789]", "")
 
       local raw_data = build_candidate_raw_data(cand, cand_len, env)
       local matched = check_direct_match(raw_data, cand_len, clean_fuma, env.data_sources)
@@ -1281,7 +1277,7 @@ local function handle_direct_mode(input, env, ctx_input)
       end
     elseif matched_f_len == 2 then
       while #normal_cands > 0 do
-        if get_utf8_len(normal_cands[1].text) >= 3 then yield(table.remove(normal_cands, 1)) else break end
+        if utf8_len(normal_cands[1].text) >= 3 then yield(table.remove(normal_cands, 1)) else break end
       end
       if buckets[2] then
         for _, c in ipairs(buckets[2]) do yield(c) end; buckets[2] = nil
@@ -1490,7 +1486,7 @@ function f.func(input, env)
       for cand in input:iter() do
         yield(cand)
         if warm then
-          local cand_len = get_utf8_len(cand.text)
+          local cand_len = utf8_len(cand.text)
           if cand.type ~= 'sentence' and cand_len and cand_len > 0
               and not (string.byte(cand.text, 1) and string.byte(cand.text, 1) < 128) then
             warm[cand.text] = build_candidate_raw_data(cand, cand_len, env)

@@ -100,17 +100,17 @@ engine:
     - lua_filter@*wanxiang.auto_phrase
     - lua_filter@*wanxiang.super_lookup
     - lua_filter@*wanxiang.super_english
+    - typo_filter # 输入纠错
     - lua_filter@*wanxiang.super_comment_preedit
     - lua_filter@*wanxiang.super_replacer
     - lua_filter@*wanxiang.super_filter
     - lua_filter@*wanxiang.super_sequence*F
     - user_predict_filter # 去重之前
-    - typo_filter # 输入纠错
     - uniquifier # 候选去重
 
 speller:
-  auto_select: true
-  auto_select_pattern: ^@(\w|@)+|^\w{3}\w+
+  # auto_select: true # 自动上屏
+  # auto_select_pattern: ^@(\w|@)+|^\w{3}\w+ # 自动上屏规则
   alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA1234567890`;/\@|›
   initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/@|›
   delimiter: " '"
@@ -135,9 +135,8 @@ typo:
   translator: translator # 主词库
   show_corrected_preedit: false # 纠错时显示原始错误编码
   input_type: "zrm" # 输入类型
-  max_scan_len: 6 # 最大纠错长度
+  max_scan_len: 4 # 最大纠错长度，双拼只需要4
   custom_file: "" # 自定义纠错文件
-  correction_hint: "" # 纠错提示符号
 
 super_comment:
   candidate_length: 8 # 注释候选长度
@@ -146,6 +145,7 @@ super_comment:
     sentence: "" # 整句
     phrase: "▪" # 词组
     table: "✬" # 系统码表词
+    typo: "" # 纠错
     user_table: "" # 用户码表词
     completion: "⋙" # 编码补全
     abbrev: "" # 简码

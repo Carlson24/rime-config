@@ -1,13 +1,13 @@
 --@amzxyz https://github.com/amzxyz/rime-wanxiang
 
 
-local wanxiang = require('wanxiang')
+local wanxiang       = require('wanxiang')
 
 local utf8_codepoint = utf8.codepoint
 local utf8_len       = utf8.len
 local utf8_offset    = utf8.offset
 
-local tone_map = {
+local tone_map       = {
   ['ā'] = 'a',
   ['á'] = 'a',
   ['ǎ'] = 'a',
@@ -457,7 +457,14 @@ function ZH.func(input, env)
       genuine_cand.comment = final_comment
     end
 
-    yield(genuine_cand)
+    if cand.type ~= genuine_cand.type then
+      local nc = Candidate(cand.type, cand.start, cand._end, genuine_cand.text, genuine_cand.comment)
+      nc.preedit = genuine_cand.preedit
+      nc.quality = cand.quality
+      yield(nc)
+    else
+      yield(genuine_cand)
+    end
     ::continue::
   end
 end

@@ -64,7 +64,7 @@ engine:
     - lua_processor@*wanxiang.super_sequence*P
     - lua_processor@*wanxiang.super_tips
     - ascii_composer
-    - digit_catcher # 需要在 ascii_composer 之后 recognizer 之前
+    # - digit_catcher # 需要在 ascii_composer 之后 recognizer 之前
     - recognizer
     - key_binder
     - lua_processor@*wanxiang.key_binder

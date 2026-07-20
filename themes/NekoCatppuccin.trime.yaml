@@ -1,5 +1,5 @@
 # @format
-# yaml-language-server: $schema=lyraime-schema.json
+# yaml-language-server: $schema=doc/lyraime-schema.json
 
 # SPDX-FileCopyrightText: 2015 - 2026 Rime community
 #
@@ -21,8 +21,6 @@ style:
   keyboard_padding: 2 # 竖屏键盘左右边距（Int，增大可减少曲面屏误触）
   keyboard_padding_top: 3 # 竖屏键盘上边距（Int，第一行上方留白）
   keyboard_padding_bottom: 5 # 竖屏键盘下边距（Int，增大可避免触发全面屏手势）
-  keyboard_padding_left: 40 # 竖屏左利手布局：屏幕左侧与键盘的间距（Int）
-  keyboard_padding_right: 0 # 竖屏右利手布局：屏幕右侧与键盘的间距（Int）
   keyboard_height_land: 150 # 横屏键盘高度锁定值（Int）
   keyboard_padding_land: 40 # 横屏键盘左右边距（Int，避免按键过度拉伸）
   keyboard_padding_land_bottom: 0 # 横屏键盘下边距（Int）
@@ -272,7 +270,6 @@ preset_keys:
 
 # ── 工具栏 ──
 tool_bar:
-  button_spacing: 4 # 按钮间距（Float）
   button_font: *font_combo # 按钮字体（List<String>）
   back_style: "ic@chevron_triple_left" # 返回图标样式（String）
 
@@ -538,7 +535,7 @@ preset_keyboards:
           - { click: "m", label_symbol: ">", swipe_up: ">", popup: ["M"], __include: "key_style/字母行C" }
           - { width: 0.15, click: "BackSpace", label: "ic@backspace_outline", __include: "key_style/退格" }
       - keys:
-          - { width: 0.15, click: "Keyboard_number", label_symbol: "ic@calculator_variant_outline", popup: ["wxcalc", "Refresh", "Deploy"], has_menu: Tab,  __include: "key_style/符号" } # has_menu=有候选菜单时触发
+          - { width: 0.15, click: "Keyboard_number", label_symbol: "ic@calculator_variant_outline", popup: ["wxcalc", "Refresh", "Deploy"], has_menu: Tab, __include: "key_style/符号" } # has_menu=有候选菜单时触发
           - { click: "'", label_symbol: '"', swipe_up: '"', hint: "ic@lightbulb_outline", swipe_down: "{Hint_switch}", __include: "key_style/标点" }
           - { click: ",", label: "，", label_symbol: "[", swipe_up: "[", hint: "ic@web", swipe_down: IME_switch, __include: "key_style/标点" }
           - { width: 0.3, click: "Space", label: "天文馆的猫", long_click: "VOICE_ASSIST", hint: "◕‿◕", swipe_down: "liquid_keyboard_switch", key_text_offset_y: 1 } # long_click=长按动作

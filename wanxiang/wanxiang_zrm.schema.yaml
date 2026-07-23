@@ -89,6 +89,7 @@ engine:
     - lua_translator@*wanxiang.shijian
     - lua_translator@*wanxiang.number_translator
     - lua_translator@*wanxiang.input_statistics
+    - lua_translator@*wanxiang.super_symbols
     - lua_translator@*unicode
     - lua_translator@*uuid
     - table_translator@custom_phrase
@@ -111,7 +112,7 @@ engine:
 speller:
   # auto_select: true # 自动上屏
   # auto_select_pattern: ^@(\w|@)+|^\w{3}\w+ # 自动上屏规则
-  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA1234567890`;/\@|›
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA1234567890`;/\@|.?›
   initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/@|›
   delimiter: " '"
   visual_delimiter: " "
@@ -159,6 +160,15 @@ super_processor:
   kp_number_mode: auto
   limit_repeated: "16,64"
   select_character: "bracketleft, bracketright"
+
+super_symbols:
+  prefix_sym: "/sym"
+  search_sym: "/sym?"
+  prefix_emoji: "/emoji"
+  search_emoji: "/emoji?"
+  max_candidates: 30
+  data_sym: "lua/data/codex_sym.txt"
+  data_emoji: "lua/data/codex_emoji.txt"
 
 super_tips:
   tips_key: "comma"
@@ -317,6 +327,10 @@ wanxiang_lookup:
 recognizer:
   patterns:
     punct: "^/([0-9]|10|[A-Za-z]+)$"
+    super_sym: "^/sym[.?/][A-Za-z.]*$" # /sym.arrow.r.double 精确  /sym?keyword 或 /sym/keyword 模糊
+    super_emoji: "^/emoji[.?/][A-Za-z.]*$" # /emoji.apple.red  /emoji?keyword  /emoji/keyword
+    super_sym_pre: "^/sym[.?/]?$" # 仅 /sym /sym. /sym? /sym/ 模式提示
+    super_emoji_pre: "^/emoji[.?/]?$" # 仅 /emoji /emoji. /emoji? /emoji/ 模式提示
     wanxiang_reverse: "^`[A-Za-z;]*$"
     add_user_dict: "^``[A-Za-z/`']*$"
     unicode: "^U[a-fA-F0-9]+"

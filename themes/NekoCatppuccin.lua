@@ -212,7 +212,7 @@ local theme = theme {
         type = "circle",
         corner_radius = 10,
         highlight = "hilited_candidate_button_color",
-        normal = "hilited_candidate_button_color",
+        normal = "none",
         vertical_inset = 4,
         horizontal_inset = 0
       },

@@ -57,7 +57,7 @@ engine:
     - lua_processor@*wanxiang.super_processor
     - lua_processor@*wanxiang.super_tips
     - lua_processor@*wanxiang.super_sequence*P
-    - digit_catcher # 需要在 recognizer 之前
+    # - digit_catcher # 需要在 recognizer 之前
     - ascii_composer
     - recognizer
     - key_binder
@@ -244,7 +244,7 @@ recognizer:
     yr6: "^N1[02]?3?[01]?"
     nyr1: "^N19?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?"
     nyr2: "^N20?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?[0-9]?"
-    calculator: "^(V.*|[0-9]+[\\+\\-\\*/\\^÷].*|[\\+\\-\\*/\\^÷].*)$"
+    calculator: "^V.*$"
     email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
     url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
 

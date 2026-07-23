@@ -138,6 +138,10 @@ local scheme = {
   clipboard_entry_back_color             = frappe.base,
   clipboard_checkbox_color               = frappe.surface2,
   hilited_clipboard_entry_back_color     = frappe.surface2,
+
+  -- 自定义配色
+  fix_key_text_color                     = frappe.base,
+  fix_key_symbol_color                   = frappe.base
 }
 
 return scheme

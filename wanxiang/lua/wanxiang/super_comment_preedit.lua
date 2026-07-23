@@ -37,6 +37,15 @@ local tone_map       = {
   ['ń'] = 'n',
 }
 
+local upper_map = {
+  ['A'] = 'Ⓐ', ['B'] = 'Ⓑ', ['C'] = 'Ⓒ', ['D'] = 'Ⓓ', ['E'] = 'Ⓔ',
+  ['F'] = 'Ⓕ', ['G'] = 'Ⓖ', ['H'] = 'Ⓗ', ['I'] = 'Ⓘ', ['J'] = 'Ⓙ',
+  ['K'] = 'Ⓚ', ['L'] = 'Ⓛ', ['M'] = 'Ⓜ', ['N'] = 'Ⓝ', ['O'] = 'Ⓞ',
+  ['P'] = 'Ⓟ', ['Q'] = 'Ⓠ', ['R'] = 'Ⓡ', ['S'] = 'Ⓢ', ['T'] = 'Ⓣ',
+  ['U'] = 'Ⓤ', ['V'] = 'Ⓥ', ['W'] = 'Ⓦ', ['X'] = 'Ⓧ', ['Y'] = 'Ⓨ',
+  ['Z'] = 'Ⓩ',
+}
+
 local function remove_pinyin_tone(s)
   local result = {}
   for uchar in s:gmatch("[%z\1-\127\194-\244][\128-\191]*") do
@@ -238,6 +247,10 @@ local function apply_tone_preedit(env, cand)
     return body .. mapped
   end)
 
+  final_pre = final_pre:gsub("[A-Z]", function(u)
+    return upper_map[u] or u
+  end)
+
   cand.preedit = final_pre
 end
 
@@ -347,10 +360,7 @@ function ZH.func(input, env)
               local part_tail = part_offset and part:sub(part_offset) or ""
               part = py_first_char .. part_tail
 
-              if is_wanxiang_pro then
-                input_parts[i] = py
-                pinyin_index = pinyin_index + 1
-              elseif i == #input_parts and #part == 1 then
+              if i == #input_parts and #part == 1 then
                 local prefix = py:sub(1, 2)
                 local first_char = part:sub(1, 1):lower()
                 if first_char == "s" or first_char == "c" or first_char == "z" then
@@ -363,17 +373,15 @@ function ZH.func(input, env)
                   end
                 end
               else
-                input_parts[i] = py
+                local upper_tail = part:match("([A-Z]+)$") or ""
+                input_parts[i] = py .. upper_tail
                 pinyin_index = pinyin_index + 1
               end
             else
               -- 场景 B：常规 26键 字母输入逻辑
               local body, tone = part:match("([%a]+)([^%a]+)")
 
-              if is_wanxiang_pro then
-                input_parts[i] = py
-                pinyin_index = pinyin_index + 1
-              elseif i == #input_parts and #part == 1 then
+              if i == #input_parts and #part == 1 then
                 local prefix = py:sub(1, 2)
                 local first_char = part:sub(1, 1):lower()
                 if first_char == "s" or first_char == "c" or first_char == "z" then
@@ -386,10 +394,12 @@ function ZH.func(input, env)
                   end
                 end
               else
+                local upper_tail = part:match("([A-Z]+)$") or ""
+                local new_part = py .. upper_tail
                 if tone_isolate then
-                  input_parts[i] = py .. (tone or "")
+                  input_parts[i] = new_part .. (tone or "")
                 else
-                  input_parts[i] = py
+                  input_parts[i] = new_part
                 end
                 pinyin_index = pinyin_index + 1
               end

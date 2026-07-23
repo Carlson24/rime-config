@@ -1,3 +1,4 @@
+logs
 **/build
 **/dicts/*
 **/sync/*
@@ -6,8 +7,7 @@
 **/user.yaml
 **/installation.yaml
 **/user_*.txt
-**/lua/clib/*.so
-**/lua/clib/*.dll
+**/lua/clib
 **/*.gram
 **/*.custom.yaml
 **/predict_import.txt

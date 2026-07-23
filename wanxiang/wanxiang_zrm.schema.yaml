@@ -49,10 +49,10 @@ switches:
     reset: 0
   - options: [raw_input, tone_display, full_pinyin]
     states: [原编码, 有声调, 无声调]
-    reset: 0
+    reset: 1
   - options: [comment_off, fuzhu_hint, tone_hint]
     states: [注释关, 辅助开, 读音开]
-    reset: 2
+    reset: 1
   - options: [s2s, s2t, s2hk, s2tw]
     states: [简体, 通繁, 港繁, 臺繁]
     reset: 0
@@ -330,7 +330,7 @@ recognizer:
     yr6: "^N1[02]?3?[01]?"
     nyr1: "^N19?[0-9]?[0-9]?[0-1]?[0-9]?[0-9]?[0-9]?"
     nyr2: "^N20?[0-9]?[0-9]?[0-1]?[0-9]?[0-9]?[0-9]?"
-    calculator: "^(V.*|[0-9]+[\\+\\-\\*/\\^].*|[\\+\\-\\*/\\^](?![a-zA-Z]).*)$" # 放行 /sj 这样的命令
+    calculator: "^V.*$"
     email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
     url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$"
     htj: "^/htj.*$"

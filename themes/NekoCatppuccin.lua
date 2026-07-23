@@ -16,10 +16,6 @@ local mochascheme = safe_require("colors.mocha")
 local frappescheme = safe_require("colors.frappe")
 local macchiatoscheme = safe_require("colors.macchiato")
 
-local presetkey = safe_require("presetkeys")
-
-local Layout26Keys = safe_require("layouts.26keys")
-
 local theme = theme {
   -- ========================================================================
   -- 元数据
@@ -316,10 +312,11 @@ local theme = theme {
   -- 预设按键 (PresetKey)
   -- 按键行为定义，键盘布局中引用键名
   -- ========================================================================
-  preset_keys = presetkey,
+  preset_keys = safe_require("preset_keys"),
 
   preset_keyboards = {
-    default = Layout26Keys
+    default    = safe_require("layouts.45keys"),
+    calculator = safe_require("layouts.calculator")
   }
 }
 

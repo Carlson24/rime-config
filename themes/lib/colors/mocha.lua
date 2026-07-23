@@ -138,6 +138,10 @@ local scheme = {
   clipboard_entry_back_color             = mocha.base,
   clipboard_checkbox_color               = mocha.surface2,
   hilited_clipboard_entry_back_color     = mocha.surface2,
+
+  -- 自定义配色
+  fix_key_text_color                     = mocha.base,
+  fix_key_symbol_color                   = mocha.base
 }
 
 return scheme

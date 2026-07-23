@@ -10,7 +10,6 @@ schema:
   author: amzxyz & Carlson24
   description: 魔然+万象拼音Pro
   dependencies:
-    - wanxiang_mixedcode
     - wanxiang_reverse
     - wanxiang_english
 
@@ -91,7 +90,6 @@ engine:
     - lua_translator@*uuid
     - table_translator@custom_phrase
     - table_translator@wanxiang_english
-    - table_translator@wanxiang_mixedcode
     - reverse_lookup_translator@wanxiang_reverse
     - script_translator@user_dict_set
     - script_translator@add_user_dict
@@ -246,15 +244,6 @@ wanxiang_english:
   spacing_timeout: 5
   max_candidates: 0
   trigger: "\\"
-
-wanxiang_mixedcode:
-  dictionary: wanxiang_mixedcode
-  db_class: stabledb
-  enable_completion: true
-  enable_sentence: false
-  initial_quality: 2
-  comment_format:
-    - xform/.*//
 
 wanxiang_reverse:
   tag: wanxiang_reverse

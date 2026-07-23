@@ -138,6 +138,10 @@ local scheme = {
   clipboard_entry_back_color             = macchiato.base,
   clipboard_checkbox_color               = macchiato.surface2,
   hilited_clipboard_entry_back_color     = macchiato.surface2,
+
+  -- 自定义配色
+  fix_key_text_color                     = macchiato.base,
+  fix_key_symbol_color                   = macchiato.base
 }
 
 return scheme

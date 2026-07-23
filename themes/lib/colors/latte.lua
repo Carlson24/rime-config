@@ -138,6 +138,10 @@ local scheme = {
   clipboard_entry_back_color             = latte.base,
   clipboard_checkbox_color               = latte.surface2,
   hilited_clipboard_entry_back_color     = latte.surface2,
+
+  -- 自定义配色
+  fix_key_text_color                     = latte.text,
+  fix_key_symbol_color                   = latte.text
 }
 
 return scheme

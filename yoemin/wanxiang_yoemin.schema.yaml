@@ -1,0 +1,312 @@
+# @format
+
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: wanxiang_yoemin
+  name: 鸢鸣万象
+  version: "LPS"
+  author:
+    - 佛振 <chen.sst@gmail.com>(Rime开发者)
+    - 阿森納裡 <15678407@qq.com>(本方案所使用的音码——李氏三拼原作者)
+    - AMZ(本方案所使用的词库及基础输入服务原作者)
+    - gbl(本方案所使用的辅助码——墨奇原作者)
+    - 渊默(本方案的~~缝合者~~设计者和维护者)
+  description: |
+    通过缝合、重写自己曾经用过的方案改造而来的普适性较低的自用Rime方案。
+    以万象拼音提供基础服务，音码改造自李氏三拼，采用墨奇为辅助码(通过挂载不同的字库，也可使用其他辅助码方案)。
+    schema_id的后缀为“鸢鸣”的吴语拼音。
+  dependencies:
+    - wanxiang_reverse #部件拆字，反查及辅码
+
+grammar:
+  __include: shared_config.yaml:/grammar
+
+custom_phrase:
+  __include: shared_config.yaml:/custom_phrase
+
+user_predict:
+  __include: shared_config.yaml:/user_predict
+
+super_comment:
+  __include: shared_config.yaml:/super_comment
+
+switches:
+  - name: ascii_mode # 中英输入状态
+    states: [, ]
+    reset: 0
+  - name: ascii_punct # 中英标点
+    states: [, ]
+    reset: 0
+  - name: full_shape #全角、半角字符输出
+    states: [, ]
+    reset: 0
+  - name: emoji
+    states: [, ]
+    reset: 1
+  - name: mars #火星文
+    states: [地, 煋]
+  - options: [simp, s2t, s2hk, s2tw]
+    states: [简体, 繁体, 港繁, 台繁]
+    abbrev: [简, 繁, 港, 台]
+    reset: 0
+  - options: [lssp_quanpin, lssp_ddpy, lssp_zhuyin, lssp_guoluo, lssp_translator]
+    states: [全拼, 拼音, 注音, 国罗, 原码]
+    reset: 1 #对于开关组从0开始数，第几个就reset几可设为默认
+  - name: chaifen_tips #开启后在输入编码后面的提示区显示实时的提示数据，受tips数据库影响，表情、翻译、车牌、符号等对应关系数据，并可实现句号上屏，不开启则默认，影响的是segment.prompt参数，归属：super_tips.lua
+    states: [提示关, 提示开]
+    reset: 1
+  - name: prediction
+    states: [预测关, 预测开] # 这个名称能用于插件也能用于万象的lua实现，用来开启关闭预测功能
+    reset: 1
+  - options: [comment_off, aux_hint, tone_hint] #开启后在候选的注释里面实时显示辅助码或者全拼声调，不开启则采用系统配置，影响的是comment_format，快捷键配套ctrl+a,归属：super_comment.lua
+    states: [注释关, 辅助开, 读音开]
+    reset: 1
+
+# --- 输入引擎 ---
+engine:
+  processors: # 处理器
+    - user_predict_processor
+    - ascii_composer
+    - digit_catcher
+    - lua_processor@*select_character
+    - lua_processor@*lssp_processor
+    - lua_processor@*chaifen_tips
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors: # 分词器
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - affix_segmentor@wanxiang_reverse
+    - punct_segmentor
+    - fallback_segmentor
+  translators: # 翻译器 ##规则/数据配置模块
+    - punct_translator
+    - user_predict_translator
+    - calculator_translator
+    - lua_translator@*shijian
+    - lua_translator@*number
+    - lua_translator@*unicode
+    - lua_translator@*input_statistics
+    - table_translator@custom_phrase
+    - reverse_lookup_translator@wanxiang_reverse
+    - lua_translator@*triple_pinyin_lssp
+    - script_translator
+  filters: # 过滤器
+    - lua_filter@*wanxiang.super_lookup
+    - lua_filter@*wanxiang.super_comment_preedit
+    - lua_filter@*wanxiang.super_replacer
+    - lua_filter@*wanxiang.super_filter
+    - user_predict_filter
+    - simplifier@emoji
+    - simplifier@s2t
+    - simplifier@s2hk
+    - simplifier@s2tw
+    - uniquifier
+
+# --- 拼写规则配置 ---
+speller: # 词典编码->输入码
+  alphabet: "qwertyasdfghzxcvbnQWERTYUIOPASDFGHJKLZXCVBNM/" # 定义允许输入的字符(如全拼中为小写a-z)，如果不想让什么字符直接上屏，可以添加在此处
+  initials: "qwertyasdfghzxcvbn/" # initials 定义仅作为始码的按键
+  delimiter: " ;'" #音节间的分隔符(如全拼中的xi'an)
+  algebra:
+    __patch:
+      - "algebra:/fuzzy/in_ing"
+      - "algebra:/lssp_pro"
+      - "algebra:/aux"
+
+# 子翻译器
+quanpin: # 輸入翻譯器：輸入碼->上屏碼：漢語拼音全拼
+  dictionary: wanxiang.zian
+  prism: yoemin
+  enable_user_dict: false
+  contextual_suggestions: false #模型用来开启词组权重预测，效果一般关闭
+  max_homophones: 8
+  max_homographs: 8
+  spelling_hints: 50 # ～字以內候選標註完整提示碼
+  always_show_comments: false # 始終顯示提示碼
+  preedit_format: # 輸入碼->上屏碼
+    __patch:
+      - yuan_algebra:/preedit/triple2terra
+      - yuan_algebra:/preedit/隔音符号处理
+      - yuan_algebra:/preedit/全拼
+  comment_format:
+
+ddpy: # 輸入翻譯器：輸入碼->上屏碼：帶調拼音
+  dictionary: wanxiang.zian
+  prism: yoemin
+  enable_user_dict: false
+  contextual_suggestions: false #模型用来开启词组权重预测，效果一般关闭
+  max_homophones: 8
+  max_homographs: 8
+  spelling_hints: 50 # ～字以內候選標註完整提示碼
+  always_show_comments: false # 始終顯示提示碼
+  preedit_format: # 輸入碼->上屏碼
+    __patch:
+      - yuan_algebra:/preedit/triple2terra
+      - yuan_algebra:/preedit/隔音符号处理
+      - yuan_algebra:/preedit/汉语拼音
+  comment_format:
+
+zhuyin: # 輸入翻譯器：輸入碼->上屏碼：注音符號
+  dictionary: wanxiang.zian
+  prism: yoemin
+  enable_user_dict: false
+  contextual_suggestions: false #模型用来开启词组权重预测，效果一般关闭
+  max_homophones: 8
+  max_homographs: 8
+  spelling_hints: 50 # ～字以內候選標註完整提示碼
+  always_show_comments: false # 始終顯示提示碼
+  preedit_format: # 輸入碼->上屏碼
+    __patch:
+      - yuan_algebra:/preedit/triple2terra
+      - yuan_algebra:/preedit/隔音符号处理
+      - yuan_algebra:/preedit/注音符号
+  comment_format:
+
+guoluo: # 輸入翻譯器：輸入碼->上屏碼：國語羅馬字
+  dictionary: wanxiang.zian
+  prism: yoemin
+  enable_user_dict: false
+  contextual_suggestions: false #模型用来开启词组权重预测，效果一般关闭
+  max_homophones: 8
+  max_homographs: 8
+  spelling_hints: 50 # ～字以內候選標註完整提示碼
+  always_show_comments: false # 始終顯示提示碼
+  preedit_format: # 輸入碼->上屏碼
+    __patch:
+      - yuan_algebra:/preedit/triple2terra
+      - yuan_algebra:/preedit/隔音符号处理
+      - yuan_algebra:/preedit/国语罗马字
+  comment_format:
+
+# --- 翻译器配置 (查词典) ---
+translator:
+  dictionary: wanxiang.zian # 词典名
+  prism: yoemin # 这是生成的棱镜文件名，建议和 schema_id 保持一致
+  enable_user_dict: false #禁用用户词库（不调频）
+  contextual_suggestions: false #模型用来开启词组权重预测，效果一般关闭
+  max_homophones: 8
+  max_homographs: 8
+  spelling_hints: 50 # ～字以內候選標註完整提示碼
+  always_show_comments: false # 始終顯示提示碼
+  preedit_format: # 输入码->上屏码的显示格式(主要为了美观)
+    # 隔音符号处理
+    - xform/'/"/ # 輸入的隔音符號'變換為"
+    # - xform/ /'/    # 刪除自動生成的隔音符空格，替換為'
+    - xlit|;"| '| # 把;替換為空格，恢復輸入的隔音符號'
+  comment_format:
+
+# 部件拆字反查
+wanxiang_reverse:
+  tag: wanxiang_reverse
+  dictionary: wanxiang_reverse
+  enable_completion: true
+  prefix: "`" # 反查前缀（反查时前缀会消失），与 recognizer/patterns/wanxiang_reverse 匹配
+  tips: "〔反查：拆分|笔画〕"
+
+wanxiang_lookup: #设置归属于super_lookup.lua
+  tags: [abc, add_user_dict] # 检索当前tag的候选
+  key: "`" # 输入中反查引导符，要添加到 speller/alphabet
+  lookup: [wanxiang_reverse] #反查滤镜数据库，万象都合并为一个了
+  enable_tone: true #启用声调反查
+  data_source: ["aux", "db"]
+
+# 处理符合特定规则的输入码，如网址、反查
+recognizer:
+  import_preset: default # 从 default.yaml 继承通用的
+  patterns: # 再追加方案专有的
+    punct: "^/([0-9]|10|[A-Za-z]+)$" # 响应 symbols.yaml 的 symbols
+    wanxiang_reverse: "^`[A-Za-z]*$" # 响应部件拆字与笔画的反查，与 radical_lookup/prefix 匹配
+    number: "^R[0-9]+[.]?[0-9]*" # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
+    yymmdd: "^N1[89]?[0-9]?[0-9]?[0-3]?[0-9]?[0-9]?$|^N2[0]?[0-9]?[0-9]?[0-3]?[0-9]?[0-9]?$"
+    calculator: "^(V.*|[0-9]+[\\+\\-\\*].*|[\\+\\-\\*].*)$" #计算器功能引导
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+    htj: "^/htj.*$"
+    #stroke_lookup: "~[a-z]*'?$"
+
+# --- 标点符号配置 ---
+punctuator:
+  digit_separators: ":,." #数字分隔符
+  __include: yoemin_symbols:/symbol_table # 从 symbols.yaml 导入配置
+
+# --- 按键绑定 (快捷键) ---
+key_binder:
+  import_preset: default # 导入Rime默认快捷键(如 -/= 翻页)
+  select_name_characters: "asciitilde" # 以词定字_名：波浪线号
+  shijian_keys: ["/"] # 涉及：日期、时间、节日、节气等功能
+  tips_key: "comma" # 超级提示上屏键：逗号
+  bindings:
+    - { accept: minus, send: minus, when: has_menu }
+    - { accept: minus, send: Page_Up, when: paging }
+    # - { accept: minus, send: Page_Up, when: has_menu }  # 减号翻页
+    # - { accept: equal, send: Page_Down, when: has_menu }  # 等号翻页
+
+    - { accept: comma, send: comma, when: paging }
+    # - { accept: comma, send: Page_Up, when: paging }  #逗号翻页
+    - { accept: period, send: period, when: has_menu }
+
+    ##### 原版李氏三拼的按键
+    - { accept: "Control+q", when: always, send: "" } # 保留给 Lua 处理器使用
+    - { accept: "Control+l", when: always, send: "" } # 保留给 Lua 处理器使用
+    - { accept: "Control+m", when: always, send: "" } # 保留给 Lua 处理器使用
+
+    ##### 鸢鸣万象新增的按键
+    - { when: always, toggle: s2tg, accept: Control+Shift+F } # 切换简繁
+    - { when: always, toggle: mars, accept: Control+Shift+H } # 切换地煋
+
+# Lua 配置：计算器触发关键字
+calculator:
+  prefix: "V"
+  tag: calculator
+  tips: "计算器"
+
+super_replacer:
+  comment_format: "[%s]"
+  chain: true
+  rules:
+    - option: chinese_english
+      mode: append # <--- 添加注释模式
+      comment_mode: none
+      tags: [abc]
+      prefix: "_en_"
+      files:
+        - lua/data/english_chinese.txt
+        - lua/data/chinese_english.txt
+    - option: mars
+      mode: replace # <--- 替换原候选模式
+      comment_mode: append # <--- 原候选继承注释
+      sentence: true # <--- 句子级别替换
+      tags: [abc]
+      prefix: "_mars_"
+      files: [lua/data/martian.txt]
+
+s2t:
+  option_name: s2t
+  opencc_config: s2t.json
+  tags: [abc]
+  tips: all
+s2hk:
+  option_name: s2hk
+  opencc_config: s2hk.json
+  tags: [abc]
+  tips: all
+s2tw:
+  option_name: s2tw
+  opencc_config: s2tw.json
+  tags: [abc]
+  tips: all
+emoji:
+  option_name: emoji
+  opencc_config: emoji.json
+  tags: [abc]
+  tips: all

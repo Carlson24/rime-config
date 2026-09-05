@@ -1,0 +1,160 @@
+# @format
+
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: wanxiang_flypy_14keys
+  name: 14键·万象小鹤
+  version: "LTS"
+  author: amzxyz & Carlson24
+  description: 小鹤音形+万象拼音Pro
+  dependencies:
+    - wanxiang_english
+    - wanxiang_flypy_14keys_reverse
+
+__include: shared_config.yaml:/opencc
+
+custom_phrase:
+  __include: shared_config.yaml:/custom_phrase
+
+grammar:
+  __include: shared_config.yaml:/grammar
+
+key_binder:
+  __include: shared_config.yaml:/key_binder
+
+moran_pin:
+  __include: shared_config.yaml:/moran_pin
+
+super_comment:
+  __include: shared_config.yaml:/super_comment
+
+super_processor:
+  __include: shared_config.yaml:/super_processor
+
+user_predict:
+  __include: shared_config.yaml:/user_predict
+
+wanxiang_english:
+  __include: shared_config.yaml:/wanxiang_english
+
+switches:
+  __include: shared_config.yaml:/switches
+
+engine:
+  __include: shared_config.yaml:/engine
+
+speller:
+  # auto_select: true # 自动上屏
+  # auto_select_pattern: ^@(\w|@)+|^\w{3}\w+ # 自动上屏规则
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA1234567890`/@
+  initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/@
+  delimiter: " '"
+  visual_delimiter: " "
+  algebra:
+    __patch:
+      - "algebra:/fuzzy/in_ing"
+      - "algebra:/flypy_pro"
+      - "algebra:/14keys"
+      - "algebra:/aux"
+
+super_replacer:
+  comment_format: "[%s]"
+  chain: true
+  keymap: 14
+  rules:
+    - option: kaomoji
+      mode: append
+      comment_mode: none
+      tags: [abc]
+      prefix: "_km_"
+      files:
+        - lua/data/kaomoji.txt
+    - option: chinese_english
+      mode: append
+      comment_mode: none
+      tags: [abc]
+      prefix: "_en_"
+      files:
+        - lua/data/english_chinese.txt
+        - lua/data/chinese_english.txt
+    - option: true
+      exclude_types: [pinyin]
+      mode: abbrev
+      tags: [abc]
+      prefix: "_flypy_"
+      files:
+        - lua/data/flypy/00_user.tsv
+        - lua/data/flypy/00_xh.tsv
+        - lua/data/flypy/11_fl.tsv
+        - lua/data/flypy/21_yj.tsv
+        - lua/data/flypy/22_ej.tsv
+        - lua/data/flypy/31_vt.tsv
+        - lua/data/flypy/41_fh.tsv
+        - lua/data/flypy/51_qmc.tsv
+        - lua/data/flypy/52_upz.tsv
+        - lua/data/flypy/53_qmz.tsv
+        - lua/data/flypy/61_ok.tsv
+    - option: true
+      mode: comment
+      comment_mode: none
+      tags: [abc]
+      prefix: "_comt_"
+      files:
+        - lua/data/english_chinese.txt
+
+translator:
+  dictionary: wanxiang
+  prism: wanxiang_flypy_14keys # 多方案唯一标识
+  enable_completion: true # 开启编码补全
+  enable_user_dict: true # 启用用户词典
+  user_dict: user_flypy # 用户词典的文件名称
+  disable_user_dict_for_patterns:
+    - "^[a-zA-Z0-9]{1,6}$" # 三字以内不调频
+  contextual_suggestions: false # 不好用，还严重影响性能
+  max_sentences: 1 # 越多性能越差
+  max_homophones: 8
+  enable_correction: false # 关闭输入纠错——使用 typo_filter 代替
+  initial_quality: 4
+  spelling_hints: 48
+  always_show_comments: false
+  comment_format:
+
+wanxiang_flypy_14keys_reverse:
+  tag: wanxiang_reverse
+  dictionary: wanxiang_reverse
+  prism: wanxiang_flypy_14keys_reverse
+  enable_completion: true
+  prefix: "`"
+  tips: "〔反查：拆分|笔画〕"
+
+wanxiang_lookup:
+  tags: [abc]
+  key: "`"
+  lookup: [wanxiang_reverse]
+  reverse_schema: wanxiang_flypy_14keys_reverse
+  enable_tone: true
+  data_source: ["aux", "db"]
+
+recognizer:
+  patterns:
+    punct: "^/([0-9]|10|[A-Za-z]+)$"
+    wanxiang_reverse: "^`[A-Za-z]*$"
+    unicode: "^U[a-fA-F0-9]+"
+    number: "^S[0-9\\.]+"
+    yymmdd: "^N[0-9]+"
+    calculator: "^(V.*|[0-9]+[\\+\\-\\*].*|[\\+\\-\\*].*)$"
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$"
+    htj: "^/htj.*$"
+
+calculator:
+  prefix: "V"
+  tag: calculator
+  tips: "计算器"
+
+punctuator:
+  digit_separators: ":,."
+  __include: "user_symbols:/symbol_table"
+  __patch: "user_symbols:/symbols"

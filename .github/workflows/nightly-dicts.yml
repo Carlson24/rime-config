@@ -1,0 +1,72 @@
+# @format
+
+name: Nightly Dicts Build
+
+on:
+  schedule:
+    - cron: "0 16 * * *" # UTC 时间每天 16:00 (北京时间 0:00)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download wanxiang.zip
+        run: |
+          curl -L -o wanxiang.zip https://github.com/amzxyz/rime-wanxiang/archive/refs/heads/wanxiang.zip
+
+      - name: Extract dicts from zip
+        run: |
+          unzip -j wanxiang.zip "rime-wanxiang-wanxiang/dicts/*" -d dicts/
+
+      - name: Download extra dict
+        run: |
+          # Download moegirl.dict.yaml from the latest release of suiginko/moetype
+          curl -L -o dicts/moegirl.dict.yaml https://github.com/suiginko/moetype/releases/latest/download/moe.dict.yaml
+          # Download suzi.dict.yaml and yidu.dict.yaml from the wanxiang_yoemin repository
+          curl -L -o dicts/suzi.dict.yaml    https://raw.githubusercontent.com/yuanz-12/wanxiang_yoemin/refs/heads/main/dicts/suzi.pro.dict.yaml
+          curl -L -o dicts/yidu.dict.yaml    https://raw.githubusercontent.com/yuanz-12/wanxiang_yoemin/refs/heads/main/dicts/yidu.pro.dict.yaml
+
+      - name: Run aux_go.py && zian_go.py
+        run: |
+          # Remove comments from suzi.dict.yaml and yidu.dict.yaml
+          sed -Ei 's/;\S*//g' dicts/suzi.dict.yaml
+          sed -Ei 's/;\S*//g' dicts/yidu.dict.yaml
+          # Run the scripts
+          python tools/aux_go.py
+          python tools/zian_go.py -o dicts-zian-base dicts-base/*.dict.yaml
+          python tools/zian_go.py -o dicts-zian-pro  dicts-pro/*.dict.yaml
+
+      - name: Package dicts
+        run: |
+          # Create tar.bz2 files for each dicts directory
+          tar -cjf "dicts-base.tar.bz2"      -C "dicts-base" .
+          tar -cjf "dicts-zian-base.tar.bz2" -C "dicts-zian-base" .
+          tar -cjf "dicts-pro.tar.bz2"       -C "dicts-pro" .
+          tar -cjf "dicts-zian-pro.tar.bz2"  -C "dicts-zian-pro" .
+          tar -cjf "NekoCatppuccin.tar.bz2"  -C "themes" .
+
+      - name: Create Nightly release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: nightly
+          prerelease: true
+          title: "Nightly Build"
+          files: |
+            dicts-base.tar.bz2
+            dicts-zian-base.tar.bz2
+            dicts-pro.tar.bz2
+            dicts-zian-pro.tar.bz2
+            NekoCatppuccin.tar.bz2

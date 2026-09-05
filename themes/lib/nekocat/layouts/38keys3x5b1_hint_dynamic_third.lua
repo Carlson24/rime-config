@@ -1,0 +1,12 @@
+-- SPDX-License-Identifier: GPL-3.0-or-later
+-- LSSP 动态第三码键盘工厂（3x5b1）
+-- 数据与生成逻辑见 _lssp_data / _lssp_factory
+
+local factory = safe_require("nekocat.layouts._lssp_factory")
+
+return factory.make_third({
+  tag = "b1_",
+  label = "3x5b1",
+  order = { 1, 2, 3, 4, 5 },
+  base = "nekocat.layouts.38keys3x5b1_hint_dynamic_first"
+})

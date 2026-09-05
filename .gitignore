@@ -1,0 +1,17 @@
+logs
+dist/*
+*.zip
+**/build
+**/sync/*
+**/*.userdb
+**/user.yaml
+**/installation.yaml
+**/user_*.txt
+**/*.gram
+**/*.custom.yaml
+**/*.ocd2
+shared/dicts/*.dict.yaml
+shared/dicts_zian/*.dict.yaml
+shared/lua/clib/*.so
+themes/backgrounds/**/*.png
+themes/backgrounds/思无邪

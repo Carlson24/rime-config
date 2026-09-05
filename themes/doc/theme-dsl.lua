@@ -1,0 +1,1775 @@
+--[[
+
+ ██╗   ██╗   ██╗ ██████╗   █████╗     ██╗ ███╗   ███╗ ███████╗
+ ██║   ╚██╗ ██╔╝ ██╔══██╗ ██╔══██╗    ██║ ████╗ ████║ ██╔════╝
+ ██║    ╚████╔╝  ██████╔╝ ███████║    ██║ ██╔████╔██║ █████╗
+ ██║     ╚██╔╝   ██╔══██╗ ██╔══██║    ██║ ██║╚██╔╝██║ ██╔══╝
+ ███████╗ ██║    ██║  ██║ ██║  ██║    ██║ ██║ ╚═╝ ██║ ███████╗
+ ╚══════╝ ╚═╝    ╚═╝  ╚═╝ ╚═╝  ╚═╝    ╚═╝ ╚═╝     ╚═╝ ╚══════╝
+
+ 键盘主题 Lua DSL · 类型补全与文档
+ ===========================================
+
+ 本文件为 LyraIME 键盘主题系统提供完整的 VSCode / Lua Language Server 类型补全。
+ 所有注释使用中文，字段名与 JSON 序列化格式（snake_case）一致。
+
+ 用法：
+   1. 本文件位于 doc/ 目录，由仓库根目录的 .luarc.json 自动加载
+   2. 在 VSCode / Lua 插件中编辑任意 .lua 主题文件即可获得自动补全和悬停提示
+   3. 无需在主题文件中 require 本文件——补全由语言服务器自动提供
+
+ 主题工作流：
+   主题文件 (theme.lua) → Lua 5.5 沙箱执行 → JSON 序列化 → Kotlin Theme 数据类
+
+ 可用全局函数（沙箱注入）：
+   theme(t)            —— 声明根主题表（顶层必须调用）
+   style(t)            —— 声明全局样式
+   keyboard(t)         —— 声明键盘布局
+   row(t)              —— 声明键盘行
+   key(t)              —— 声明按键
+   preedit(t)          —— 声明预编辑区样式
+   window(t)           —— 声明候选窗口样式
+   toolbar(t)          —— 声明工具栏
+   btn(t)              —— 声明工具栏按钮
+   bg(t)               —— 声明按钮背景
+   fg(t)               —— 声明按钮前景
+   liquid(t)           —— 声明液态键盘
+   fallback(t)         —— 声明回退颜色映射
+   scheme(id, t)       —— 声明配色方案
+   pk(id, t)           —— 声明预设按键
+   merge(a, b)         —— 深度合并两个表
+   insert(t, pos, val) —- 在数组指定位置插入值
+
+ 颜色值格式：
+   字符串类型。支持 0xAARRGGBB、0xRRGGBB、#AARRGGBB、#RRGGBB、颜色名（如 "red"），
+   或图片文件路径（如 "background.png"）。
+
+ 目录结构：
+   themes/
+   ├── catppuccin.lua       (内建主题示例)
+   ├── lib/                 (可递归搜索的 Lua 模块)
+   ├── fonts/               (自定义字体)
+   ├── backgrounds/         (背景图片)
+   └── build/               (缓存 JSON 输出)
+   doc/
+   └── theme-dsl.lua        (本文件——类型补全)
+
+ 参考：
+   模型代码：app/src/main/java/com/osfans/trime/data/theme/model/
+   沙箱代码：app/src/main/jni/lua_theme_jni/lua_sandbox.cc
+--]]
+
+-- ============================================================================
+-- 颜色类型与枚举
+-- ============================================================================
+
+--- 颜色值。支持 0xAARRGGBB、0xRRGGBB、#RRGGBB、颜色名、图片路径
+---@alias Color string
+
+--- 已知按键名。基于 Keycode.kt 枚举（Keycode.fromString() 能解析的键名集合）。
+--- 直接字符键（如 "a"、"1"）和 preset_keys 中自定义的键名可任意使用。
+---
+--- 注意：Control+x 格式仅在 PresetKey.send 字段中有效（通过 parseSend 解析），
+--- 不能用于 click 等字段。
+---@alias KeyName
+---| '"a"'
+---| '"b"'
+---| '"c"'
+---| '"d"'
+---| '"e"'
+---| '"f"'
+---| '"g"'
+---| '"h"'
+---| '"i"'
+---| '"j"'
+---| '"k"'
+---| '"l"'
+---| '"m"'
+---| '"n"'
+---| '"o"'
+---| '"p"'
+---| '"q"'
+---| '"r"'
+---| '"s"'
+---| '"t"'
+---| '"u"'
+---| '"v"'
+---| '"w"'
+---| '"x"'
+---| '"y"'
+---| '"z"'
+---| '"A"'
+---| '"B"'
+---| '"C"'
+---| '"D"'
+---| '"E"'
+---| '"F"'
+---| '"G"'
+---| '"H"'
+---| '"I"'
+---| '"J"'
+---| '"K"'
+---| '"L"'
+---| '"M"'
+---| '"N"'
+---| '"O"'
+---| '"P"'
+---| '"Q"'
+---| '"R"'
+---| '"S"'
+---| '"T"'
+---| '"U"'
+---| '"V"'
+---| '"W"'
+---| '"X"'
+---| '"Y"'
+---| '"Z"'
+---| '"0"'
+---| '"1"'
+---| '"2"'
+---| '"3"'
+---| '"4"'
+---| '"5"'
+---| '"6"'
+---| '"7"'
+---| '"8"'
+---| '"9"'
+---| '","'
+---| '"."'
+---| '"?"'
+---| '"!"'
+---| '"@"'
+---| '"#"'
+---| '"$"'
+---| '"%"'
+---| '"&"'
+---| '"*"'
+---| '"_"'
+---| '"="'
+---| '"`"'
+---| '"~"'
+---| '"<"'
+---| '">"'
+---| '"\\"'
+---| '"/"'
+---| '"("'
+---| '")"'
+---| '"["'
+---| '"]"'
+---| '"{"'
+---| '"}"'
+---| '";"'
+---| '":"'
+---| '"\'"'
+---| '"|"'
+---| '"^"'
+---| '"asterisk"'          # *
+---| '"numbersign"'        # #
+---| '"comma"'             # ,
+---| '"period"'            # .
+---| '"grave"'             # `
+---| '"minus"'             # -
+---| '"equal"'             # =
+---| '"bracketleft"'       # [
+---| '"bracketright"'      # ]
+---| '"backslash"'         # \
+---| '"semicolon"'         # ;
+---| '"apostrophe"'        # '
+---| '"slash"'             # /
+---| '"at"'                # @
+---| '"plus"'              # +
+---| '"parenleft"'         # (
+---| '"parenright"'        # )
+---| '"exclam"'            # !
+---| '"quotedbl"'          # "
+---| '"dollar"'            # $
+---| '"percent"'           # %
+---| '"ampersand"'         # &
+---| '"colon"'             # :
+---| '"less"'              # <
+---| '"greater"'           # >
+---| '"question"'          # ?
+---| '"asciicircum"'       # ^
+---| '"underscore"'        # _
+---| '"braceleft"'         # {
+---| '"bar"'               # |
+---| '"braceright"'        # }
+---| '"asciitilde"'        # ~
+---| '"Return"'
+---| '"BackSpace"'
+---| '"space"'
+---| '"Shift_L"'
+---| '"Shift_R"'
+---| '"Alt_L"'
+---| '"Alt_R"'
+---| '"Control_L"'
+---| '"Control_R"'
+---| '"Meta_L"'
+---| '"Meta_R"'
+---| '"Caps_Lock"'
+---| '"Scroll_Lock"'
+---| '"Left"'
+---| '"Right"'
+---| '"Up"'
+---| '"Down"'
+---| '"Home"'
+---| '"End"'
+---| '"Delete"'
+---| '"Escape"'
+---| '"Tab"'
+---| '"Insert"'
+---| '"Page_Up"'
+---| '"Page_Down"'
+---| '"Num_Lock"'
+---| '"Pause"'
+---| '"KP_Begin"'
+---| '"KP_0"'
+---| '"KP_1"'
+---| '"KP_2"'
+---| '"KP_3"'
+---| '"KP_4"'
+---| '"KP_5"'
+---| '"KP_6"'
+---| '"KP_7"'
+---| '"KP_8"'
+---| '"KP_9"'
+---| '"KP_Divide"'
+---| '"KP_Multiply"'
+---| '"KP_Subtract"'
+---| '"KP_Add"'
+---| '"KP_Decimal"'
+---| '"KP_Separator"'
+---| '"KP_Enter"'
+---| '"KP_Equal"'
+---| '"F1"'
+---| '"F2"'
+---| '"F3"'
+---| '"F4"'
+---| '"F5"'
+---| '"F6"'
+---| '"F7"'
+---| '"F8"'
+---| '"F9"'
+---| '"F10"'
+---| '"F11"'
+---| '"F12"'
+---| '"CUT"'
+---| '"COPY"'
+---| '"PASTE"'
+---| '"Eisu_toggle"'
+---| '"SWITCH_CHARSET"'
+---| '"MENU"'
+---| '"BACK"'
+---| '"HOME"'
+---| '"CALL"'
+---| '"ENDCALL"'
+---| '"POWER"'
+---| '"CAMERA"'
+---| '"CLEAR"'
+---| '"SEARCH"'
+---| '"HELP"'
+---| '"Next"'
+---| '"FUNCTION"'
+---| '"VOICE_ASSIST"'
+---| '"SETTINGS"'            # handleSettings
+---| '"PROG_RED"'            # showColorPicker
+---| '"PROG_GREEN"'          # showKeyboardPicker
+---| '"PROG_YELLOW"'         # (同族)
+---| '"PROG_BLUE"'           # (同族)
+---| '"LANGUAGE_SWITCH"'     # handleLanguageSwitch
+---| '"MEDIA_PLAY_PAUSE"'
+---| '"MEDIA_STOP"'
+---| '"MEDIA_NEXT"'
+---| '"MEDIA_PREVIOUS"'
+---| '"MEDIA_REWIND"'
+---| '"MEDIA_FAST_FORWARD"'
+---| '"MEDIA_PLAY"'
+---| '"MEDIA_PAUSE"'
+---| '"MEDIA_CLOSE"'
+---| '"MEDIA_EJECT"'
+---| '"MEDIA_RECORD"'
+---| '"MUTE"'
+---| '"VOLUME_UP"'
+---| '"VOLUME_DOWN"'
+---| '"Control+x"'
+---| '"Control+c"'
+---| '"Control+v"'
+---| '"Control+a"'
+---| '"Control+z"'
+---| '"Control+y"'
+---| '"Control+d"'
+---| string
+
+-- ============================================================================
+-- 枚举定义
+-- ============================================================================
+
+--- 编码注释位置
+---@alias CommentPosition
+---| '"RIGHT"'              # 右侧（默认）
+---| '"TOP"'                # 顶部
+---| '"OVERLAY"'            # 覆盖
+
+--- 按键标签转换模式
+---@alias LabelTransform
+---| '"NONE"'               # 不转换（默认）
+---| '"UPPERCASE"'          # 大写
+
+--- 按键行为枚举（序列化时为小写 snake_case）
+---@alias KeyBehaviorKey
+---| '"composing"'          # 输入中点击
+---| '"has_menu"'           # 有候选菜单时点击
+---| '"paging"'             # 翻页时点击
+---| '"combo"'              # 组合键
+---| '"ascii"'              # 英文模式键
+---| '"click"'              # 普通点击
+---| '"double_click"'       # 双击
+---| '"lazy_double_click"'  # 延迟双击
+---| '"swipe_up"'           # 上滑
+---| '"long_click"'         # 长按
+---| '"swipe_down"'         # 下滑
+---| '"swipe_left"'         # 左滑
+---| '"swipe_right"'        # 右滑
+---| '"extra"'              # 扩展弹窗按键
+
+--- Shift 锁定模式
+---@alias ShiftLock
+---| '"long"'               # 长按锁定
+---| '"click"'              # 单击锁定
+---| '"ascii_long"'         # 英文模式长按锁定
+
+--- 预设按键命令类型。对应 option 字段传递参数。
+---@alias Command
+---| '"liquid_keyboard"'    # 打开液态键盘 (option: 面板标签或类型)
+---| '"menu_keyboard"'      # 打开设置菜单
+---| '"clipboard_window"'   # 打开剪贴板窗口 (option: "0"=全部 "1"=收藏)
+---| '"set_color_scheme"'   # 切换配色方案 (option: 方案ID)
+---| '"set_theme"'          # 切换主题 (option: 主题名) 或刷新 (option: "$reload")
+---| '"set_schema"'         # 切换方案 (option: 方案ID)
+---| '"broadcast"'          # 发送广播 (option: Intent action)
+---| '"clipboard"'          # 剪贴板操作
+---| '"commit"'             # 直接提交文本 (option: 提交内容)
+---| '"date"'               # 提交格式化日期 (option: 日期格式)
+---| '"run"'                # 运行命令 (option: 命令路径)
+---| '"apply"'              # 应用配置 (option: 配置内容)
+---| '"share_text"'         # 分享文本
+---| '"select_candidate"'   # 选择候选 (option: 候选序号)
+---| '"sidebar_clear"'      # 清除侧栏输入
+---| '"dynamic_clear"'      # 清除动态键盘输入
+
+--- 键盘切换目标。以 "." 开头的值由 evalKeyboard 特殊解析。
+--- 其他值为 preset_keyboards 中定义的键盘 ID（如 "symbols"、"number"）。
+---@alias Select
+---| '".default"'           # 智能匹配默认键盘
+---| '".prior"'             # 前一个键盘
+---| '".next"'              # 后一个键盘
+---| '".last"'              # 上次使用的键盘
+---| '".previous"'          # 来源键盘（回退）
+---| '".last_lock"'         # 上次锁定的键盘
+---| '".ascii"'             # 英文模式键盘
+---| string                 # preset_keyboards 中的自定义 ID
+
+--- 液态键盘固定按键栏位置
+---@alias KeyBarPosition
+---| '"TOP"'                # 顶部
+---| '"LEFT"'               # 左侧
+---| '"BOTTOM"'             # 底部（默认）
+---| '"RIGHT"'              # 右侧
+---| '"NAVBAR"'             # 导航栏区域
+
+--- 液态键盘面板类型
+---@alias LiquidKeyboardType
+---| '"SINGLE"'             # 单面板
+---| '"SYMBOL"'             # 符号面板
+---| '"TABS"'               # 标签面板
+---| '"HISTORY"'            # 历史面板
+---| '"VAR_LENGTH"'         # 变长面板
+
+--- 侧栏布局：键位数 + 拼音方案
+--- 全拼按键位将字母分组；双拼按 声母键 + 韵母键 拆为两键
+--- 键位映射见 doc/pinyin
+---@alias SidebarLayout
+---| '"t9"'                # 9 键 T9 布局（2=abc … 9=wxyz），全拼
+---| '"14"'                # 14 键布局，全拼
+---| '"18"'                # 18 键布局，全拼
+---| '"t9_zrm"'            # 9 键 T9 布局，自然码双拼
+---| '"t9_flypy"'          # 9 键 T9 布局，小鹤双拼
+---| '"14_zrm"'            # 14 键布局，自然码双拼
+---| '"14_flypy"'          # 14 键布局，小鹤双拼
+---| '"18_zrm"'            # 18 键布局，自然码双拼
+---| '"18_flypy"'          # 18 键布局，小鹤双拼
+
+-- ============================================================================
+-- 颜色方案 (ColorScheme)
+-- ============================================================================
+
+--- 可被独立配置的键
+---@class KeyColorStyles
+---@field a           TextKey  # A 键
+---@field b           TextKey  # B 键
+---@field c           TextKey  # C 键
+---@field d           TextKey  # D 键
+---@field e           TextKey  # E 键
+---@field f           TextKey  # F 键
+---@field g           TextKey  # G 键
+---@field h           TextKey  # H 键
+---@field i           TextKey  # I 键
+---@field j           TextKey  # J 键
+---@field k           TextKey  # K 键
+---@field l           TextKey  # L 键
+---@field m           TextKey  # M 键
+---@field n           TextKey  # N 键
+---@field o           TextKey  # O 键
+---@field p           TextKey  # P 键
+---@field q           TextKey  # Q 键
+---@field r           TextKey  # R 键
+---@field s           TextKey  # S 键
+---@field t           TextKey  # T 键
+---@field u           TextKey  # U 键
+---@field v           TextKey  # V 键
+---@field w           TextKey  # W 键
+---@field x           TextKey  # X 键
+---@field y           TextKey  # Y 键
+---@field z           TextKey  # Z 键
+---@field num0        TextKey  # 数字 0
+---@field num1        TextKey  # 数字 1
+---@field num2        TextKey  # 数字 2
+---@field num3        TextKey  # 数字 3
+---@field num4        TextKey  # 数字 4
+---@field num5        TextKey  # 数字 5
+---@field num6        TextKey  # 数字 6
+---@field num7        TextKey  # 数字 7
+---@field num8        TextKey  # 数字 8
+---@field num9        TextKey  # 数字 9
+---@field kp0         TextKey  # 小键盘 0
+---@field kp1         TextKey  # 小键盘 1
+---@field kp2         TextKey  # 小键盘 2
+---@field kp3         TextKey  # 小键盘 3
+---@field kp4         TextKey  # 小键盘 4
+---@field kp5         TextKey  # 小键盘 5
+---@field kp6         TextKey  # 小键盘 6
+---@field kp7         TextKey  # 小键盘 7
+---@field kp8         TextKey  # 小键盘 8
+---@field kp9         TextKey  # 小键盘 9
+---@field func        TextKey  # 功能键
+---@field shift       TextKey  # Shift
+---@field backspace   TextKey  # BackSpace
+---@field num         TextKey  # 数字切换
+---@field delete      TextKey  # Delete
+---@field comma       TextKey  # 逗号
+---@field period      TextKey  # 句号
+---@field slash       TextKey  # 斜线
+---@field semicolon   TextKey  # 分号
+---@field ctrl        TextKey  # Ctrl
+---@field alt         TextKey  # Alt
+---@field enter       TextKey  # 回车
+---@field space       TextKey  # 空格
+---@field switch      TextKey  # 切换
+---@field tab         TextKey  # Tab
+---@field capslock    TextKey  # CapsLock
+---@field escape      TextKey  # Escape
+---@field clear       TextKey  # 清除
+---@field up          TextKey  # 上
+---@field down        TextKey  # 下
+---@field left        TextKey  # 左
+---@field right       TextKey  # 右
+---@field lookup      TextKey  # 反查
+---@field num_row     TextKey  # 数字行
+---@field top_row     TextKey  # 上排
+---@field home_row    TextKey  # 主行
+---@field bottom_row  TextKey  # 下排
+---@field mainkey     TextKey  # 主按键
+
+--- 配色方案颜色表
+--- 所有字段均为可选的 Color 类型字符串，未指定的颜色将按回退链解析。
+---@class SchemeColors
+---@field text_color                              Color        # 编码文字颜色（必须定义）
+---@field back_color                              Color        # 候选区背景（必须定义）
+---@field border_color?                           Color        # 边框颜色（回退至 back_color）
+---@field candidate_separator_color?              Color        # 候选分割线（回退至 border_color）
+---@field candidate_separator_color_unrolled?     Color        # 展开候选分割线（回退至 candidate_separator_color）
+---@field candidate_text_color?                   Color        # 候选文字（回退至 text_color）
+---@field comment_text_color?                     Color        # 编码注释（回退至 candidate_text_color）
+---@field label_color?                            Color        # 候选序号/标签（回退至 candidate_text_color）
+---@field hilited_text_color?                     Color        # 标明的编码文字（回退至 text_color）
+---@field hilited_back_color?                     Color        # 标明的编码背景（回退至 back_color）
+---@field hilited_candidate_text_color?           Color        # 标明的候选文字（回退至 hilited_text_color）
+---@field hilited_candidate_back_color?           Color        # 标明的候选背景（回退至 hilited_back_color）
+---@field hilited_candidate_button_color?         Color        # 标明的候选按钮（回退至 hilited_candidate_back_color）
+---@field hilited_label_color?                    Color        # 标明的标签（回退至 hilited_candidate_text_color）
+---@field hilited_comment_text_color?             Color        # 标明的注释（回退至 comment_text_color）
+---@field key_back_color?                         Color        # 按键背景（回退至 back_color）
+---@field key_text_color?                         Color        # 按键文字（回退至 candidate_text_color）
+---@field key_symbol_color?                       Color        # 按键符号（回退至 comment_text_color）
+---@field key_border_color?                       Color        # 按键边框（回退至 border_color）
+---@field key_shadow_color?                       Color        # 按键阴影颜色（回退至 shadow_color）
+---@field hilited_key_back_color?                 Color        # 标明的按键背景（回退至 hilited_candidate_back_color）
+---@field hilited_key_text_color?                 Color        # 标明的按键文字（回退至 hilited_candidate_text_color）
+---@field hilited_key_symbol_color?               Color        # 标明的按键符号（回退至 hilited_comment_text_color）
+---@field off_key_back_color?                     Color        # 关闭状态按键背景（回退至 key_back_color）
+---@field off_key_text_color?                     Color        # 关闭状态按键文字（回退至 key_text_color）
+---@field off_key_symbol_color?                   Color        # 关闭状态按键符号（回退至 key_symbol_color）
+---@field on_key_back_color?                      Color        # 打开状态按键背景（回退至 hilited_key_back_color）
+---@field on_key_text_color?                      Color        # 打开状态按键文字（回退至 hilited_key_text_color）
+---@field on_key_symbol_color?                    Color        # 打开状态按键符号（回退至 hilited_key_symbol_color）
+---@field hilited_off_key_back_color?             Color        # 标明-关闭按键背景（回退至 hilited_key_back_color）
+---@field hilited_off_key_text_color?             Color        # 标明-关闭按键文字（回退至 hilited_key_text_color）
+---@field hilited_off_key_symbol_color?           Color        # 标明-关闭按键符号（回退至 hilited_key_symbol_color）
+---@field hilited_on_key_back_color?              Color        # 标明-打开按键背景（回退至 hilited_key_back_color）
+---@field hilited_on_key_text_color?              Color        # 标明-打开按键文字（回退至 hilited_key_text_color）
+---@field hilited_on_key_symbol_color?            Color        # 标明-打开按键符号（回退至 hilited_key_symbol_color）
+---@field preview_back_color?                     Color        # 按键预览/弹出背景（回退至 key_back_color）
+---@field preview_text_color?                     Color        # 按键预览/弹出文字（回退至 key_text_color）
+---@field hilited_preview_back_color?             Color        # 标明预览背景（回退至 hilited_key_back_color）
+---@field hilited_preview_text_color?             Color        # 标明预览文字（回退至 hilited_key_text_color）
+---@field popup_back_color?                       Color        # 弹窗背景（回退至 key_back_color）
+---@field popup_text_color?                       Color        # 弹窗文字（回退至 key_text_color）
+---@field hilited_popup_back_color?               Color        # 标明弹窗背景（回退至 hilited_key_back_color）
+---@field hilited_popup_text_color?               Color        # 标明弹窗文字（回退至 hilited_key_text_color）
+---@field shadow_color?                           Color        # 阴影颜色（回退至 border_color）
+---@field root_background?                        Color        # 全局/根背景（回退至 back_color）
+---@field candidate_background?                   Color        # 候选区背景（回退至 back_color）
+---@field candidate_border_color?                 Color        # 候选边框（回退至 border_color）
+---@field keyboard_back_color?                    Color        # 键盘背景色（回退至 border_color）
+---@field keyboard_background?                    Color        # 键盘背景（回退至 keyboard_back_color）
+---@field liquid_keyboard_background?             Color        # 液态键盘背景（回退至 keyboard_back_color）
+---@field liquid_keyboard_board?                  Color        # 液态键盘边框（回退至 key_border_color）
+---@field liquid_keyboard_divider_color?          Color        # 液态键盘分割线颜色（回退至 candidate_separator_color）
+---@field text_back_color?                        Color        # 编码区背景（回退至 back_color）
+---@field long_text_color?                        Color        # 长文本/剪贴板文字（回退至 key_text_color）
+---@field long_text_back_color?                   Color        # 长文本/剪贴板背景（回退至 key_back_color）
+---@field clipboard_category_back_color?          Color        # 剪贴板分类标签背景（回退至 key_back_color）
+---@field clipboard_category_selected_back_color? Color        # 剪贴板选中标签背景（回退至 hilited_candidate_back_color）
+---@field clipboard_category_selected_text_color? Color        # 剪贴板选中标签文字（回退至 hilited_candidate_text_color）
+---@field clipboard_entry_back_color?             Color        # 剪贴板条目背景（回退至 key_back_color）
+---@field hilited_clipboard_entry_back_color?     Color        # 剪贴板选中条目背景（回退至 hilited_candidate_back_color）
+---@field clipboard_checkbox_color?               Color        # 剪贴板复选框颜色（回退至 key_text_color）
+---@field sidebar_back_color?                     Color        # 侧栏背景（回退至 key_back_color）
+---@field sidebar_hilited_back_color?             Color        # 侧栏高亮背景（回退至 hilited_key_back_color）
+---@field sidebar_text_color?                     Color        # 侧栏文字（回退至 key_text_color）
+---@field sidebar_border_color?                   Color        # 侧栏边框（回退至 key_border_color）
+---@field sidebar_spacing_color?                  Color        # 侧栏间距颜色（回退至 key_border_color）
+---@field light_scheme?                           string       # 亮色模式切换目标配色 ID
+---@field dark_scheme?                            string       # 暗色模式切换目标配色 ID
+---@field name?                                   string       # 配色显示名称（用于配色选择弹窗，不填则显示 id）
+--- 按键独立配色 (key_id x 7 字段 x 74 键 = 518 条)
+---@field a_key_back_color?                        Color        # A 键背景独立色
+---@field a_key_text_color?                        Color        # A 键文字独立色
+---@field a_key_symbol_color?                      Color        # A 键符号独立色
+---@field a_key_border_color?                      Color        # A 键边框独立色
+---@field a_hilited_key_back_color?                Color        # A 键高亮背景独立色
+---@field a_hilited_key_text_color?                Color        # A 键高亮文字独立色
+---@field a_hilited_key_symbol_color?              Color        # A 键高亮符号独立色
+---@field b_key_back_color?                        Color        # B 键背景独立色
+---@field b_key_text_color?                        Color        # B 键文字独立色
+---@field b_key_symbol_color?                      Color        # B 键符号独立色
+---@field b_key_border_color?                      Color        # B 键边框独立色
+---@field b_hilited_key_back_color?                Color        # B 键高亮背景独立色
+---@field b_hilited_key_text_color?                Color        # B 键高亮文字独立色
+---@field b_hilited_key_symbol_color?              Color        # B 键高亮符号独立色
+---@field c_key_back_color?                        Color        # C 键背景独立色
+---@field c_key_text_color?                        Color        # C 键文字独立色
+---@field c_key_symbol_color?                      Color        # C 键符号独立色
+---@field c_key_border_color?                      Color        # C 键边框独立色
+---@field c_hilited_key_back_color?                Color        # C 键高亮背景独立色
+---@field c_hilited_key_text_color?                Color        # C 键高亮文字独立色
+---@field c_hilited_key_symbol_color?              Color        # C 键高亮符号独立色
+---@field d_key_back_color?                        Color        # D 键背景独立色
+---@field d_key_text_color?                        Color        # D 键文字独立色
+---@field d_key_symbol_color?                      Color        # D 键符号独立色
+---@field d_key_border_color?                      Color        # D 键边框独立色
+---@field d_hilited_key_back_color?                Color        # D 键高亮背景独立色
+---@field d_hilited_key_text_color?                Color        # D 键高亮文字独立色
+---@field d_hilited_key_symbol_color?              Color        # D 键高亮符号独立色
+---@field e_key_back_color?                        Color        # E 键背景独立色
+---@field e_key_text_color?                        Color        # E 键文字独立色
+---@field e_key_symbol_color?                      Color        # E 键符号独立色
+---@field e_key_border_color?                      Color        # E 键边框独立色
+---@field e_hilited_key_back_color?                Color        # E 键高亮背景独立色
+---@field e_hilited_key_text_color?                Color        # E 键高亮文字独立色
+---@field e_hilited_key_symbol_color?              Color        # E 键高亮符号独立色
+---@field f_key_back_color?                        Color        # F 键背景独立色
+---@field f_key_text_color?                        Color        # F 键文字独立色
+---@field f_key_symbol_color?                      Color        # F 键符号独立色
+---@field f_key_border_color?                      Color        # F 键边框独立色
+---@field f_hilited_key_back_color?                Color        # F 键高亮背景独立色
+---@field f_hilited_key_text_color?                Color        # F 键高亮文字独立色
+---@field f_hilited_key_symbol_color?              Color        # F 键高亮符号独立色
+---@field g_key_back_color?                        Color        # G 键背景独立色
+---@field g_key_text_color?                        Color        # G 键文字独立色
+---@field g_key_symbol_color?                      Color        # G 键符号独立色
+---@field g_key_border_color?                      Color        # G 键边框独立色
+---@field g_hilited_key_back_color?                Color        # G 键高亮背景独立色
+---@field g_hilited_key_text_color?                Color        # G 键高亮文字独立色
+---@field g_hilited_key_symbol_color?              Color        # G 键高亮符号独立色
+---@field h_key_back_color?                        Color        # H 键背景独立色
+---@field h_key_text_color?                        Color        # H 键文字独立色
+---@field h_key_symbol_color?                      Color        # H 键符号独立色
+---@field h_key_border_color?                      Color        # H 键边框独立色
+---@field h_hilited_key_back_color?                Color        # H 键高亮背景独立色
+---@field h_hilited_key_text_color?                Color        # H 键高亮文字独立色
+---@field h_hilited_key_symbol_color?              Color        # H 键高亮符号独立色
+---@field i_key_back_color?                        Color        # I 键背景独立色
+---@field i_key_text_color?                        Color        # I 键文字独立色
+---@field i_key_symbol_color?                      Color        # I 键符号独立色
+---@field i_key_border_color?                      Color        # I 键边框独立色
+---@field i_hilited_key_back_color?                Color        # I 键高亮背景独立色
+---@field i_hilited_key_text_color?                Color        # I 键高亮文字独立色
+---@field i_hilited_key_symbol_color?              Color        # I 键高亮符号独立色
+---@field j_key_back_color?                        Color        # J 键背景独立色
+---@field j_key_text_color?                        Color        # J 键文字独立色
+---@field j_key_symbol_color?                      Color        # J 键符号独立色
+---@field j_key_border_color?                      Color        # J 键边框独立色
+---@field j_hilited_key_back_color?                Color        # J 键高亮背景独立色
+---@field j_hilited_key_text_color?                Color        # J 键高亮文字独立色
+---@field j_hilited_key_symbol_color?              Color        # J 键高亮符号独立色
+---@field k_key_back_color?                        Color        # K 键背景独立色
+---@field k_key_text_color?                        Color        # K 键文字独立色
+---@field k_key_symbol_color?                      Color        # K 键符号独立色
+---@field k_key_border_color?                      Color        # K 键边框独立色
+---@field k_hilited_key_back_color?                Color        # K 键高亮背景独立色
+---@field k_hilited_key_text_color?                Color        # K 键高亮文字独立色
+---@field k_hilited_key_symbol_color?              Color        # K 键高亮符号独立色
+---@field l_key_back_color?                        Color        # L 键背景独立色
+---@field l_key_text_color?                        Color        # L 键文字独立色
+---@field l_key_symbol_color?                      Color        # L 键符号独立色
+---@field l_key_border_color?                      Color        # L 键边框独立色
+---@field l_hilited_key_back_color?                Color        # L 键高亮背景独立色
+---@field l_hilited_key_text_color?                Color        # L 键高亮文字独立色
+---@field l_hilited_key_symbol_color?              Color        # L 键高亮符号独立色
+---@field m_key_back_color?                        Color        # M 键背景独立色
+---@field m_key_text_color?                        Color        # M 键文字独立色
+---@field m_key_symbol_color?                      Color        # M 键符号独立色
+---@field m_key_border_color?                      Color        # M 键边框独立色
+---@field m_hilited_key_back_color?                Color        # M 键高亮背景独立色
+---@field m_hilited_key_text_color?                Color        # M 键高亮文字独立色
+---@field m_hilited_key_symbol_color?              Color        # M 键高亮符号独立色
+---@field n_key_back_color?                        Color        # N 键背景独立色
+---@field n_key_text_color?                        Color        # N 键文字独立色
+---@field n_key_symbol_color?                      Color        # N 键符号独立色
+---@field n_key_border_color?                      Color        # N 键边框独立色
+---@field n_hilited_key_back_color?                Color        # N 键高亮背景独立色
+---@field n_hilited_key_text_color?                Color        # N 键高亮文字独立色
+---@field n_hilited_key_symbol_color?              Color        # N 键高亮符号独立色
+---@field o_key_back_color?                        Color        # O 键背景独立色
+---@field o_key_text_color?                        Color        # O 键文字独立色
+---@field o_key_symbol_color?                      Color        # O 键符号独立色
+---@field o_key_border_color?                      Color        # O 键边框独立色
+---@field o_hilited_key_back_color?                Color        # O 键高亮背景独立色
+---@field o_hilited_key_text_color?                Color        # O 键高亮文字独立色
+---@field o_hilited_key_symbol_color?              Color        # O 键高亮符号独立色
+---@field p_key_back_color?                        Color        # P 键背景独立色
+---@field p_key_text_color?                        Color        # P 键文字独立色
+---@field p_key_symbol_color?                      Color        # P 键符号独立色
+---@field p_key_border_color?                      Color        # P 键边框独立色
+---@field p_hilited_key_back_color?                Color        # P 键高亮背景独立色
+---@field p_hilited_key_text_color?                Color        # P 键高亮文字独立色
+---@field p_hilited_key_symbol_color?              Color        # P 键高亮符号独立色
+---@field q_key_back_color?                        Color        # Q 键背景独立色
+---@field q_key_text_color?                        Color        # Q 键文字独立色
+---@field q_key_symbol_color?                      Color        # Q 键符号独立色
+---@field q_key_border_color?                      Color        # Q 键边框独立色
+---@field q_hilited_key_back_color?                Color        # Q 键高亮背景独立色
+---@field q_hilited_key_text_color?                Color        # Q 键高亮文字独立色
+---@field q_hilited_key_symbol_color?              Color        # Q 键高亮符号独立色
+---@field r_key_back_color?                        Color        # R 键背景独立色
+---@field r_key_text_color?                        Color        # R 键文字独立色
+---@field r_key_symbol_color?                      Color        # R 键符号独立色
+---@field r_key_border_color?                      Color        # R 键边框独立色
+---@field r_hilited_key_back_color?                Color        # R 键高亮背景独立色
+---@field r_hilited_key_text_color?                Color        # R 键高亮文字独立色
+---@field r_hilited_key_symbol_color?              Color        # R 键高亮符号独立色
+---@field s_key_back_color?                        Color        # S 键背景独立色
+---@field s_key_text_color?                        Color        # S 键文字独立色
+---@field s_key_symbol_color?                      Color        # S 键符号独立色
+---@field s_key_border_color?                      Color        # S 键边框独立色
+---@field s_hilited_key_back_color?                Color        # S 键高亮背景独立色
+---@field s_hilited_key_text_color?                Color        # S 键高亮文字独立色
+---@field s_hilited_key_symbol_color?              Color        # S 键高亮符号独立色
+---@field t_key_back_color?                        Color        # T 键背景独立色
+---@field t_key_text_color?                        Color        # T 键文字独立色
+---@field t_key_symbol_color?                      Color        # T 键符号独立色
+---@field t_key_border_color?                      Color        # T 键边框独立色
+---@field t_hilited_key_back_color?                Color        # T 键高亮背景独立色
+---@field t_hilited_key_text_color?                Color        # T 键高亮文字独立色
+---@field t_hilited_key_symbol_color?              Color        # T 键高亮符号独立色
+---@field u_key_back_color?                        Color        # U 键背景独立色
+---@field u_key_text_color?                        Color        # U 键文字独立色
+---@field u_key_symbol_color?                      Color        # U 键符号独立色
+---@field u_key_border_color?                      Color        # U 键边框独立色
+---@field u_hilited_key_back_color?                Color        # U 键高亮背景独立色
+---@field u_hilited_key_text_color?                Color        # U 键高亮文字独立色
+---@field u_hilited_key_symbol_color?              Color        # U 键高亮符号独立色
+---@field v_key_back_color?                        Color        # V 键背景独立色
+---@field v_key_text_color?                        Color        # V 键文字独立色
+---@field v_key_symbol_color?                      Color        # V 键符号独立色
+---@field v_key_border_color?                      Color        # V 键边框独立色
+---@field v_hilited_key_back_color?                Color        # V 键高亮背景独立色
+---@field v_hilited_key_text_color?                Color        # V 键高亮文字独立色
+---@field v_hilited_key_symbol_color?              Color        # V 键高亮符号独立色
+---@field w_key_back_color?                        Color        # W 键背景独立色
+---@field w_key_text_color?                        Color        # W 键文字独立色
+---@field w_key_symbol_color?                      Color        # W 键符号独立色
+---@field w_key_border_color?                      Color        # W 键边框独立色
+---@field w_hilited_key_back_color?                Color        # W 键高亮背景独立色
+---@field w_hilited_key_text_color?                Color        # W 键高亮文字独立色
+---@field w_hilited_key_symbol_color?              Color        # W 键高亮符号独立色
+---@field x_key_back_color?                        Color        # X 键背景独立色
+---@field x_key_text_color?                        Color        # X 键文字独立色
+---@field x_key_symbol_color?                      Color        # X 键符号独立色
+---@field x_key_border_color?                      Color        # X 键边框独立色
+---@field x_hilited_key_back_color?                Color        # X 键高亮背景独立色
+---@field x_hilited_key_text_color?                Color        # X 键高亮文字独立色
+---@field x_hilited_key_symbol_color?              Color        # X 键高亮符号独立色
+---@field y_key_back_color?                        Color        # Y 键背景独立色
+---@field y_key_text_color?                        Color        # Y 键文字独立色
+---@field y_key_symbol_color?                      Color        # Y 键符号独立色
+---@field y_key_border_color?                      Color        # Y 键边框独立色
+---@field y_hilited_key_back_color?                Color        # Y 键高亮背景独立色
+---@field y_hilited_key_text_color?                Color        # Y 键高亮文字独立色
+---@field y_hilited_key_symbol_color?              Color        # Y 键高亮符号独立色
+---@field z_key_back_color?                        Color        # Z 键背景独立色
+---@field z_key_text_color?                        Color        # Z 键文字独立色
+---@field z_key_symbol_color?                      Color        # Z 键符号独立色
+---@field z_key_border_color?                      Color        # Z 键边框独立色
+---@field z_hilited_key_back_color?                Color        # Z 键高亮背景独立色
+---@field z_hilited_key_text_color?                Color        # Z 键高亮文字独立色
+---@field z_hilited_key_symbol_color?              Color        # Z 键高亮符号独立色
+---@field num0_key_back_color?                     Color        # 数字 0 键背景独立色
+---@field num0_key_text_color?                     Color        # 数字 0 键文字独立色
+---@field num0_key_symbol_color?                   Color        # 数字 0 键符号独立色
+---@field num0_key_border_color?                   Color        # 数字 0 键边框独立色
+---@field num0_hilited_key_back_color?             Color        # 数字 0 键高亮背景独立色
+---@field num0_hilited_key_text_color?             Color        # 数字 0 键高亮文字独立色
+---@field num0_hilited_key_symbol_color?           Color        # 数字 0 键高亮符号独立色
+---@field num1_key_back_color?                     Color        # 数字 1 键背景独立色
+---@field num1_key_text_color?                     Color        # 数字 1 键文字独立色
+---@field num1_key_symbol_color?                   Color        # 数字 1 键符号独立色
+---@field num1_key_border_color?                   Color        # 数字 1 键边框独立色
+---@field num1_hilited_key_back_color?             Color        # 数字 1 键高亮背景独立色
+---@field num1_hilited_key_text_color?             Color        # 数字 1 键高亮文字独立色
+---@field num1_hilited_key_symbol_color?           Color        # 数字 1 键高亮符号独立色
+---@field num2_key_back_color?                     Color        # 数字 2 键背景独立色
+---@field num2_key_text_color?                     Color        # 数字 2 键文字独立色
+---@field num2_key_symbol_color?                   Color        # 数字 2 键符号独立色
+---@field num2_key_border_color?                   Color        # 数字 2 键边框独立色
+---@field num2_hilited_key_back_color?             Color        # 数字 2 键高亮背景独立色
+---@field num2_hilited_key_text_color?             Color        # 数字 2 键高亮文字独立色
+---@field num2_hilited_key_symbol_color?           Color        # 数字 2 键高亮符号独立色
+---@field num3_key_back_color?                     Color        # 数字 3 键背景独立色
+---@field num3_key_text_color?                     Color        # 数字 3 键文字独立色
+---@field num3_key_symbol_color?                   Color        # 数字 3 键符号独立色
+---@field num3_key_border_color?                   Color        # 数字 3 键边框独立色
+---@field num3_hilited_key_back_color?             Color        # 数字 3 键高亮背景独立色
+---@field num3_hilited_key_text_color?             Color        # 数字 3 键高亮文字独立色
+---@field num3_hilited_key_symbol_color?           Color        # 数字 3 键高亮符号独立色
+---@field num4_key_back_color?                     Color        # 数字 4 键背景独立色
+---@field num4_key_text_color?                     Color        # 数字 4 键文字独立色
+---@field num4_key_symbol_color?                   Color        # 数字 4 键符号独立色
+---@field num4_key_border_color?                   Color        # 数字 4 键边框独立色
+---@field num4_hilited_key_back_color?             Color        # 数字 4 键高亮背景独立色
+---@field num4_hilited_key_text_color?             Color        # 数字 4 键高亮文字独立色
+---@field num4_hilited_key_symbol_color?           Color        # 数字 4 键高亮符号独立色
+---@field num5_key_back_color?                     Color        # 数字 5 键背景独立色
+---@field num5_key_text_color?                     Color        # 数字 5 键文字独立色
+---@field num5_key_symbol_color?                   Color        # 数字 5 键符号独立色
+---@field num5_key_border_color?                   Color        # 数字 5 键边框独立色
+---@field num5_hilited_key_back_color?             Color        # 数字 5 键高亮背景独立色
+---@field num5_hilited_key_text_color?             Color        # 数字 5 键高亮文字独立色
+---@field num5_hilited_key_symbol_color?           Color        # 数字 5 键高亮符号独立色
+---@field num6_key_back_color?                     Color        # 数字 6 键背景独立色
+---@field num6_key_text_color?                     Color        # 数字 6 键文字独立色
+---@field num6_key_symbol_color?                   Color        # 数字 6 键符号独立色
+---@field num6_key_border_color?                   Color        # 数字 6 键边框独立色
+---@field num6_hilited_key_back_color?             Color        # 数字 6 键高亮背景独立色
+---@field num6_hilited_key_text_color?             Color        # 数字 6 键高亮文字独立色
+---@field num6_hilited_key_symbol_color?           Color        # 数字 6 键高亮符号独立色
+---@field num7_key_back_color?                     Color        # 数字 7 键背景独立色
+---@field num7_key_text_color?                     Color        # 数字 7 键文字独立色
+---@field num7_key_symbol_color?                   Color        # 数字 7 键符号独立色
+---@field num7_key_border_color?                   Color        # 数字 7 键边框独立色
+---@field num7_hilited_key_back_color?             Color        # 数字 7 键高亮背景独立色
+---@field num7_hilited_key_text_color?             Color        # 数字 7 键高亮文字独立色
+---@field num7_hilited_key_symbol_color?           Color        # 数字 7 键高亮符号独立色
+---@field num8_key_back_color?                     Color        # 数字 8 键背景独立色
+---@field num8_key_text_color?                     Color        # 数字 8 键文字独立色
+---@field num8_key_symbol_color?                   Color        # 数字 8 键符号独立色
+---@field num8_key_border_color?                   Color        # 数字 8 键边框独立色
+---@field num8_hilited_key_back_color?             Color        # 数字 8 键高亮背景独立色
+---@field num8_hilited_key_text_color?             Color        # 数字 8 键高亮文字独立色
+---@field num8_hilited_key_symbol_color?           Color        # 数字 8 键高亮符号独立色
+---@field num9_key_back_color?                     Color        # 数字 9 键背景独立色
+---@field num9_key_text_color?                     Color        # 数字 9 键文字独立色
+---@field num9_key_symbol_color?                   Color        # 数字 9 键符号独立色
+---@field num9_key_border_color?                   Color        # 数字 9 键边框独立色
+---@field num9_hilited_key_back_color?             Color        # 数字 9 键高亮背景独立色
+---@field num9_hilited_key_text_color?             Color        # 数字 9 键高亮文字独立色
+---@field num9_hilited_key_symbol_color?           Color        # 数字 9 键高亮符号独立色
+---@field kp0_key_back_color?                      Color        # 小键盘 0背景独立色
+---@field kp0_key_text_color?                      Color        # 小键盘 0文字独立色
+---@field kp0_key_symbol_color?                    Color        # 小键盘 0符号独立色
+---@field kp0_key_border_color?                    Color        # 小键盘 0边框独立色
+---@field kp0_hilited_key_back_color?              Color        # 小键盘 0高亮背景独立色
+---@field kp0_hilited_key_text_color?              Color        # 小键盘 0高亮文字独立色
+---@field kp0_hilited_key_symbol_color?            Color        # 小键盘 0高亮符号独立色
+---@field kp1_key_back_color?                      Color        # 小键盘 1背景独立色
+---@field kp1_key_text_color?                      Color        # 小键盘 1文字独立色
+---@field kp1_key_symbol_color?                    Color        # 小键盘 1符号独立色
+---@field kp1_key_border_color?                    Color        # 小键盘 1边框独立色
+---@field kp1_hilited_key_back_color?              Color        # 小键盘 1高亮背景独立色
+---@field kp1_hilited_key_text_color?              Color        # 小键盘 1高亮文字独立色
+---@field kp1_hilited_key_symbol_color?            Color        # 小键盘 1高亮符号独立色
+---@field kp2_key_back_color?                      Color        # 小键盘 2背景独立色
+---@field kp2_key_text_color?                      Color        # 小键盘 2文字独立色
+---@field kp2_key_symbol_color?                    Color        # 小键盘 2符号独立色
+---@field kp2_key_border_color?                    Color        # 小键盘 2边框独立色
+---@field kp2_hilited_key_back_color?              Color        # 小键盘 2高亮背景独立色
+---@field kp2_hilited_key_text_color?              Color        # 小键盘 2高亮文字独立色
+---@field kp2_hilited_key_symbol_color?            Color        # 小键盘 2高亮符号独立色
+---@field kp3_key_back_color?                      Color        # 小键盘 3背景独立色
+---@field kp3_key_text_color?                      Color        # 小键盘 3文字独立色
+---@field kp3_key_symbol_color?                    Color        # 小键盘 3符号独立色
+---@field kp3_key_border_color?                    Color        # 小键盘 3边框独立色
+---@field kp3_hilited_key_back_color?              Color        # 小键盘 3高亮背景独立色
+---@field kp3_hilited_key_text_color?              Color        # 小键盘 3高亮文字独立色
+---@field kp3_hilited_key_symbol_color?            Color        # 小键盘 3高亮符号独立色
+---@field kp4_key_back_color?                      Color        # 小键盘 4背景独立色
+---@field kp4_key_text_color?                      Color        # 小键盘 4文字独立色
+---@field kp4_key_symbol_color?                    Color        # 小键盘 4符号独立色
+---@field kp4_key_border_color?                    Color        # 小键盘 4边框独立色
+---@field kp4_hilited_key_back_color?              Color        # 小键盘 4高亮背景独立色
+---@field kp4_hilited_key_text_color?              Color        # 小键盘 4高亮文字独立色
+---@field kp4_hilited_key_symbol_color?            Color        # 小键盘 4高亮符号独立色
+---@field kp5_key_back_color?                      Color        # 小键盘 5背景独立色
+---@field kp5_key_text_color?                      Color        # 小键盘 5文字独立色
+---@field kp5_key_symbol_color?                    Color        # 小键盘 5符号独立色
+---@field kp5_key_border_color?                    Color        # 小键盘 5边框独立色
+---@field kp5_hilited_key_back_color?              Color        # 小键盘 5高亮背景独立色
+---@field kp5_hilited_key_text_color?              Color        # 小键盘 5高亮文字独立色
+---@field kp5_hilited_key_symbol_color?            Color        # 小键盘 5高亮符号独立色
+---@field kp6_key_back_color?                      Color        # 小键盘 6背景独立色
+---@field kp6_key_text_color?                      Color        # 小键盘 6文字独立色
+---@field kp6_key_symbol_color?                    Color        # 小键盘 6符号独立色
+---@field kp6_key_border_color?                    Color        # 小键盘 6边框独立色
+---@field kp6_hilited_key_back_color?              Color        # 小键盘 6高亮背景独立色
+---@field kp6_hilited_key_text_color?              Color        # 小键盘 6高亮文字独立色
+---@field kp6_hilited_key_symbol_color?            Color        # 小键盘 6高亮符号独立色
+---@field kp7_key_back_color?                      Color        # 小键盘 7背景独立色
+---@field kp7_key_text_color?                      Color        # 小键盘 7文字独立色
+---@field kp7_key_symbol_color?                    Color        # 小键盘 7符号独立色
+---@field kp7_key_border_color?                    Color        # 小键盘 7边框独立色
+---@field kp7_hilited_key_back_color?              Color        # 小键盘 7高亮背景独立色
+---@field kp7_hilited_key_text_color?              Color        # 小键盘 7高亮文字独立色
+---@field kp7_hilited_key_symbol_color?            Color        # 小键盘 7高亮符号独立色
+---@field kp8_key_back_color?                      Color        # 小键盘 8背景独立色
+---@field kp8_key_text_color?                      Color        # 小键盘 8文字独立色
+---@field kp8_key_symbol_color?                    Color        # 小键盘 8符号独立色
+---@field kp8_key_border_color?                    Color        # 小键盘 8边框独立色
+---@field kp8_hilited_key_back_color?              Color        # 小键盘 8高亮背景独立色
+---@field kp8_hilited_key_text_color?              Color        # 小键盘 8高亮文字独立色
+---@field kp8_hilited_key_symbol_color?            Color        # 小键盘 8高亮符号独立色
+---@field kp9_key_back_color?                      Color        # 小键盘 9背景独立色
+---@field kp9_key_text_color?                      Color        # 小键盘 9文字独立色
+---@field kp9_key_symbol_color?                    Color        # 小键盘 9符号独立色
+---@field kp9_key_border_color?                    Color        # 小键盘 9边框独立色
+---@field kp9_hilited_key_back_color?              Color        # 小键盘 9高亮背景独立色
+---@field kp9_hilited_key_text_color?              Color        # 小键盘 9高亮文字独立色
+---@field kp9_hilited_key_symbol_color?            Color        # 小键盘 9高亮符号独立色
+---@field func_key_back_color?                     Color        # 功能键背景独立色
+---@field func_key_text_color?                     Color        # 功能键文字独立色
+---@field func_key_symbol_color?                   Color        # 功能键符号独立色
+---@field func_key_border_color?                   Color        # 功能键边框独立色
+---@field func_hilited_key_back_color?             Color        # 功能键高亮背景独立色
+---@field func_hilited_key_text_color?             Color        # 功能键高亮文字独立色
+---@field func_hilited_key_symbol_color?           Color        # 功能键高亮符号独立色
+---@field shift_key_back_color?                    Color        # Shift 键背景独立色
+---@field shift_key_text_color?                    Color        # Shift 键文字独立色
+---@field shift_key_symbol_color?                  Color        # Shift 键符号独立色
+---@field shift_key_border_color?                  Color        # Shift 键边框独立色
+---@field shift_hilited_key_back_color?            Color        # Shift 键高亮背景独立色
+---@field shift_hilited_key_text_color?            Color        # Shift 键高亮文字独立色
+---@field shift_hilited_key_symbol_color?          Color        # Shift 键高亮符号独立色
+---@field backspace_key_back_color?                Color        # BackSpace 键背景独立色
+---@field backspace_key_text_color?                Color        # BackSpace 键文字独立色
+---@field backspace_key_symbol_color?              Color        # BackSpace 键符号独立色
+---@field backspace_key_border_color?              Color        # BackSpace 键边框独立色
+---@field backspace_hilited_key_back_color?        Color        # BackSpace 键高亮背景独立色
+---@field backspace_hilited_key_text_color?        Color        # BackSpace 键高亮文字独立色
+---@field backspace_hilited_key_symbol_color?      Color        # BackSpace 键高亮符号独立色
+---@field num_key_back_color?                      Color        # 数字切换键背景独立色
+---@field num_key_text_color?                      Color        # 数字切换键文字独立色
+---@field num_key_symbol_color?                    Color        # 数字切换键符号独立色
+---@field num_key_border_color?                    Color        # 数字切换键边框独立色
+---@field num_hilited_key_back_color?              Color        # 数字切换键高亮背景独立色
+---@field num_hilited_key_text_color?              Color        # 数字切换键高亮文字独立色
+---@field num_hilited_key_symbol_color?            Color        # 数字切换键高亮符号独立色
+---@field delete_key_back_color?                   Color        # Delete 键背景独立色
+---@field delete_key_text_color?                   Color        # Delete 键文字独立色
+---@field delete_key_symbol_color?                 Color        # Delete 键符号独立色
+---@field delete_key_border_color?                 Color        # Delete 键边框独立色
+---@field delete_hilited_key_back_color?           Color        # Delete 键高亮背景独立色
+---@field delete_hilited_key_text_color?           Color        # Delete 键高亮文字独立色
+---@field delete_hilited_key_symbol_color?         Color        # Delete 键高亮符号独立色
+---@field comma_key_back_color?                    Color        # 逗号键背景独立色
+---@field comma_key_text_color?                    Color        # 逗号键文字独立色
+---@field comma_key_symbol_color?                  Color        # 逗号键符号独立色
+---@field comma_key_border_color?                  Color        # 逗号键边框独立色
+---@field comma_hilited_key_back_color?            Color        # 逗号键高亮背景独立色
+---@field comma_hilited_key_text_color?            Color        # 逗号键高亮文字独立色
+---@field comma_hilited_key_symbol_color?          Color        # 逗号键高亮符号独立色
+---@field period_key_back_color?                   Color        # 句号键背景独立色
+---@field period_key_text_color?                   Color        # 句号键文字独立色
+---@field period_key_symbol_color?                 Color        # 句号键符号独立色
+---@field period_key_border_color?                 Color        # 句号键边框独立色
+---@field period_hilited_key_back_color?           Color        # 句号键高亮背景独立色
+---@field period_hilited_key_text_color?           Color        # 句号键高亮文字独立色
+---@field period_hilited_key_symbol_color?         Color        # 句号键高亮符号独立色
+---@field slash_key_back_color?                    Color        # 斜线键背景独立色
+---@field slash_key_text_color?                    Color        # 斜线键文字独立色
+---@field slash_key_symbol_color?                  Color        # 斜线键符号独立色
+---@field slash_key_border_color?                  Color        # 斜线键边框独立色
+---@field slash_hilited_key_back_color?            Color        # 斜线键高亮背景独立色
+---@field slash_hilited_key_text_color?            Color        # 斜线键高亮文字独立色
+---@field slash_hilited_key_symbol_color?          Color        # 斜线键高亮符号独立色
+---@field semicolon_key_back_color?                Color        # 分号键背景独立色
+---@field semicolon_key_text_color?                Color        # 分号键文字独立色
+---@field semicolon_key_symbol_color?              Color        # 分号键符号独立色
+---@field semicolon_key_border_color?              Color        # 分号键边框独立色
+---@field semicolon_hilited_key_back_color?        Color        # 分号键高亮背景独立色
+---@field semicolon_hilited_key_text_color?        Color        # 分号键高亮文字独立色
+---@field semicolon_hilited_key_symbol_color?      Color        # 分号键高亮符号独立色
+---@field ctrl_key_back_color?                     Color        # Ctrl 键背景独立色
+---@field ctrl_key_text_color?                     Color        # Ctrl 键文字独立色
+---@field ctrl_key_symbol_color?                   Color        # Ctrl 键符号独立色
+---@field ctrl_key_border_color?                   Color        # Ctrl 键边框独立色
+---@field ctrl_hilited_key_back_color?             Color        # Ctrl 键高亮背景独立色
+---@field ctrl_hilited_key_text_color?             Color        # Ctrl 键高亮文字独立色
+---@field ctrl_hilited_key_symbol_color?           Color        # Ctrl 键高亮符号独立色
+---@field alt_key_back_color?                      Color        # Alt 键背景独立色
+---@field alt_key_text_color?                      Color        # Alt 键文字独立色
+---@field alt_key_symbol_color?                    Color        # Alt 键符号独立色
+---@field alt_key_border_color?                    Color        # Alt 键边框独立色
+---@field alt_hilited_key_back_color?              Color        # Alt 键高亮背景独立色
+---@field alt_hilited_key_text_color?              Color        # Alt 键高亮文字独立色
+---@field alt_hilited_key_symbol_color?            Color        # Alt 键高亮符号独立色
+---@field enter_key_back_color?                    Color        # 回车键背景独立色
+---@field enter_key_text_color?                    Color        # 回车键文字独立色
+---@field enter_key_symbol_color?                  Color        # 回车键符号独立色
+---@field enter_key_border_color?                  Color        # 回车键边框独立色
+---@field enter_hilited_key_back_color?            Color        # 回车键高亮背景独立色
+---@field enter_hilited_key_text_color?            Color        # 回车键高亮文字独立色
+---@field enter_hilited_key_symbol_color?          Color        # 回车键高亮符号独立色
+---@field space_key_back_color?                    Color        # 空格键背景独立色
+---@field space_key_text_color?                    Color        # 空格键文字独立色
+---@field space_key_symbol_color?                  Color        # 空格键符号独立色
+---@field space_key_border_color?                  Color        # 空格键边框独立色
+---@field space_hilited_key_back_color?            Color        # 空格键高亮背景独立色
+---@field space_hilited_key_text_color?            Color        # 空格键高亮文字独立色
+---@field space_hilited_key_symbol_color?          Color        # 空格键高亮符号独立色
+---@field switch_key_back_color?                   Color        # 切换键背景独立色
+---@field switch_key_text_color?                   Color        # 切换键文字独立色
+---@field switch_key_symbol_color?                 Color        # 切换键符号独立色
+---@field switch_key_border_color?                 Color        # 切换键边框独立色
+---@field switch_hilited_key_back_color?           Color        # 切换键高亮背景独立色
+---@field switch_hilited_key_text_color?           Color        # 切换键高亮文字独立色
+---@field switch_hilited_key_symbol_color?         Color        # 切换键高亮符号独立色
+---@field tab_key_back_color?                      Color        # Tab 键背景独立色
+---@field tab_key_text_color?                      Color        # Tab 键文字独立色
+---@field tab_key_symbol_color?                    Color        # Tab 键符号独立色
+---@field tab_key_border_color?                    Color        # Tab 键边框独立色
+---@field tab_hilited_key_back_color?              Color        # Tab 键高亮背景独立色
+---@field tab_hilited_key_text_color?              Color        # Tab 键高亮文字独立色
+---@field tab_hilited_key_symbol_color?            Color        # Tab 键高亮符号独立色
+---@field capslock_key_back_color?                 Color        # CapsLock 键背景独立色
+---@field capslock_key_text_color?                 Color        # CapsLock 键文字独立色
+---@field capslock_key_symbol_color?               Color        # CapsLock 键符号独立色
+---@field capslock_key_border_color?               Color        # CapsLock 键边框独立色
+---@field capslock_hilited_key_back_color?         Color        # CapsLock 键高亮背景独立色
+---@field capslock_hilited_key_text_color?         Color        # CapsLock 键高亮文字独立色
+---@field capslock_hilited_key_symbol_color?       Color        # CapsLock 键高亮符号独立色
+---@field escape_key_back_color?                   Color        # Escape 键背景独立色
+---@field escape_key_text_color?                   Color        # Escape 键文字独立色
+---@field escape_key_symbol_color?                 Color        # Escape 键符号独立色
+---@field escape_key_border_color?                 Color        # Escape 键边框独立色
+---@field escape_hilited_key_back_color?           Color        # Escape 键高亮背景独立色
+---@field escape_hilited_key_text_color?           Color        # Escape 键高亮文字独立色
+---@field escape_hilited_key_symbol_color?         Color        # Escape 键高亮符号独立色
+---@field clear_key_back_color?                    Color        # 清除键背景独立色
+---@field clear_key_text_color?                    Color        # 清除键文字独立色
+---@field clear_key_symbol_color?                  Color        # 清除键符号独立色
+---@field clear_key_border_color?                  Color        # 清除键边框独立色
+---@field clear_hilited_key_back_color?            Color        # 清除键高亮背景独立色
+---@field clear_hilited_key_text_color?            Color        # 清除键高亮文字独立色
+---@field clear_hilited_key_symbol_color?          Color        # 清除键高亮符号独立色
+---@field up_key_back_color?                       Color        # 上箭头键背景独立色
+---@field up_key_text_color?                       Color        # 上箭头键文字独立色
+---@field up_key_symbol_color?                     Color        # 上箭头键符号独立色
+---@field up_key_border_color?                     Color        # 上箭头键边框独立色
+---@field up_hilited_key_back_color?               Color        # 上箭头键高亮背景独立色
+---@field up_hilited_key_text_color?               Color        # 上箭头键高亮文字独立色
+---@field up_hilited_key_symbol_color?             Color        # 上箭头键高亮符号独立色
+---@field down_key_back_color?                     Color        # 下箭头键背景独立色
+---@field down_key_text_color?                     Color        # 下箭头键文字独立色
+---@field down_key_symbol_color?                   Color        # 下箭头键符号独立色
+---@field down_key_border_color?                   Color        # 下箭头键边框独立色
+---@field down_hilited_key_back_color?             Color        # 下箭头键高亮背景独立色
+---@field down_hilited_key_text_color?             Color        # 下箭头键高亮文字独立色
+---@field down_hilited_key_symbol_color?           Color        # 下箭头键高亮符号独立色
+---@field left_key_back_color?                     Color        # 左箭头键背景独立色
+---@field left_key_text_color?                     Color        # 左箭头键文字独立色
+---@field left_key_symbol_color?                   Color        # 左箭头键符号独立色
+---@field left_key_border_color?                   Color        # 左箭头键边框独立色
+---@field left_hilited_key_back_color?             Color        # 左箭头键高亮背景独立色
+---@field left_hilited_key_text_color?             Color        # 左箭头键高亮文字独立色
+---@field left_hilited_key_symbol_color?           Color        # 左箭头键高亮符号独立色
+---@field right_key_back_color?                    Color        # 右箭头键背景独立色
+---@field right_key_text_color?                    Color        # 右箭头键文字独立色
+---@field right_key_symbol_color?                  Color        # 右箭头键符号独立色
+---@field right_key_border_color?                  Color        # 右箭头键边框独立色
+---@field right_hilited_key_back_color?            Color        # 右箭头键高亮背景独立色
+---@field right_hilited_key_text_color?            Color        # 右箭头键高亮文字独立色
+---@field right_hilited_key_symbol_color?          Color        # 右箭头键高亮符号独立色
+---@field lookup_key_back_color?                   Color        # 反查键背景独立色
+---@field lookup_key_text_color?                   Color        # 反查键文字独立色
+---@field lookup_key_symbol_color?                 Color        # 反查键符号独立色
+---@field lookup_key_border_color?                 Color        # 反查键边框独立色
+---@field lookup_hilited_key_back_color?           Color        # 反查键高亮背景独立色
+---@field lookup_hilited_key_text_color?           Color        # 反查键高亮文字独立色
+---@field lookup_hilited_key_symbol_color?         Color        # 反查键高亮符号独立色
+---@field num_row_key_back_color?                  Color        # 数字行背景独立色
+---@field num_row_key_text_color?                  Color        # 数字行文字独立色
+---@field num_row_key_symbol_color?                Color        # 数字行符号独立色
+---@field num_row_key_border_color?                Color        # 数字行边框独立色
+---@field num_row_hilited_key_back_color?          Color        # 数字行高亮背景独立色
+---@field num_row_hilited_key_text_color?          Color        # 数字行高亮文字独立色
+---@field num_row_hilited_key_symbol_color?        Color        # 数字行高亮符号独立色
+---@field top_row_key_back_color?                  Color        # 上排行背景独立色
+---@field top_row_key_text_color?                  Color        # 上排行文字独立色
+---@field top_row_key_symbol_color?                Color        # 上排行符号独立色
+---@field top_row_key_border_color?                Color        # 上排行边框独立色
+---@field top_row_hilited_key_back_color?          Color        # 上排行高亮背景独立色
+---@field top_row_hilited_key_text_color?          Color        # 上排行高亮文字独立色
+---@field top_row_hilited_key_symbol_color?        Color        # 上排行高亮符号独立色
+---@field home_row_key_back_color?                 Color        # 主行背景独立色
+---@field home_row_key_text_color?                 Color        # 主行文字独立色
+---@field home_row_key_symbol_color?               Color        # 主行符号独立色
+---@field home_row_key_border_color?               Color        # 主行边框独立色
+---@field home_row_hilited_key_back_color?         Color        # 主行高亮背景独立色
+---@field home_row_hilited_key_text_color?         Color        # 主行高亮文字独立色
+---@field home_row_hilited_key_symbol_color?       Color        # 主行高亮符号独立色
+---@field bottom_row_key_back_color?               Color        # 下排行背景独立色
+---@field bottom_row_key_text_color?               Color        # 下排行文字独立色
+---@field bottom_row_key_symbol_color?             Color        # 下排行符号独立色
+---@field bottom_row_key_border_color?             Color        # 下排行边框独立色
+---@field bottom_row_hilited_key_back_color?       Color        # 下排行高亮背景独立色
+---@field bottom_row_hilited_key_text_color?       Color        # 下排行高亮文字独立色
+---@field bottom_row_hilited_key_symbol_color?     Color        # 下排行高亮符号独立色
+---@field mainkey_key_back_color?                  Color        # 主按键背景独立色
+---@field mainkey_key_text_color?                  Color        # 主按键文字独立色
+---@field mainkey_key_symbol_color?                Color        # 主按键符号独立色
+---@field mainkey_key_border_color?                Color        # 主按键边框独立色
+---@field mainkey_hilited_key_back_color?          Color        # 主按键高亮背景独立色
+---@field mainkey_hilited_key_text_color?          Color        # 主按键高亮文字独立色
+---@field mainkey_hilited_key_symbol_color?        Color        # 主按键高亮符号独立色
+
+--- 配色方案
+---@class ColorScheme
+---@field id                                      string       # 配色方案唯一标识符
+---@field colors                                  SchemeColors # 颜色键值对表
+
+-- ============================================================================
+-- 预设按键 (PresetKey)
+-- ============================================================================
+
+--- 预设按键行为定义
+--- 在 preset_keys 表中以键名为标识符（如 preset_keys = { Space = {...} }）
+---@class PresetKey
+---@field command?        Command   # 命令类型（如 "FUNCTION" 用于调用内置功能）
+---@field option?         string    # 命令选项值
+---@field select?         Select    # 键盘切换目标（如 "symbols"、"number"、".default"）
+---@field toggle?         string    # Rime 运行时开关名称（如 "ascii_mode"、"full_shape"）
+---@field label?          string    # 按键显示标签
+---@field ascii_label?    string    # 英文模式下替换标签（为 nil 则沿用 label）
+---@field popup_label?    string    # 弹窗键盘显示标签（优先于 label，不截断）
+---@field preview?        string?   # 预览文字（nil 时使用 label）
+---@field shift_lock?     ShiftLock # Shift 锁定模式： "long" | "click" | "ascii_long"
+---@field commit?         string    # 直接提交的文本
+---@field text?           string    # 多步动作序列（支持 {PresetKey} / {KeyCode} 序列）
+---@field actions?        string[]  # 多步动作序列（PresetKey 名 或 KeyCode）
+---@field sticky?         boolean   # 是否粘滞键（按下后保持激活）
+---@field repeatable?     boolean   # 是否可长按重复
+---@field slide_cursor?   boolean   # 是否启用滑动光标
+---@field slide_delete?   boolean   # 是否启用滑动删除
+---@field functional?     boolean   # 是否为功能键（不计入文本输入）
+---@field states?         string[]  # 开关按键的双态标签 [off_label, on_label]
+---@field send?           KeyName   # 发送的按键事件或键码（如 "space"、"BackSpace"、"Return"）
+
+-- ============================================================================
+-- 全局样式 (GeneralStyle) 及子类型
+-- ============================================================================
+
+--- 字体样式
+---@class FontStyle
+---@field key?                     string[]              # 按键标签字体文件列表
+---@field label?                   string[]              # 按键副标签字体文件列表
+---@field latin?                   string[]              # 拉丁字符字体文件列表
+---@field hanb?                    string[]              # 汉字字体文件列表
+---@field symbol?                  string[]              # 符号字体文件列表
+---@field text?                    string[]              # 文字字体文件列表
+---@field hint?                    string[]              # 提示字体文件列表
+---@field candidate?               string[]              # 候选字体文件列表
+---@field comment?                 string[]              # 注释字体文件列表
+---@field popup?                   string[]              # 弹窗字体文件列表
+---@field clipboard?               string[]              # 剪贴板字体文件列表
+---@field sidebar?                 string[]              # 侧栏字体文件列表
+---@field clipboard_category?      string[]              # 剪贴板分类标签字体文件列表
+---@field key_size?                number                # 按键标签字号（默认 15）
+---@field key_long_size?           number                # 长按键字号（默认 15）
+---@field label_size?              number                # 副标签字号（默认 0）
+---@field symbol_size?             number                # 符号字号（默认 0）
+---@field hint_size?               number                # 提示字号（默认 0）
+---@field candidate_size?          number                # 候选字号（默认 15）
+---@field comment_size?            number                # 注释字号（默认 10）
+---@field popup_size?              number                # 弹窗字号（默认 0）
+---@field clipboard_category_size? number                # 剪贴板标签字号（默认 13）
+---@field clipboard_size?          number                # 剪贴板字号（默认 14）
+---@field sidebar_size?            number                # 侧栏字号（默认 -1）
+---@field liquid_tabs_size?        number                # 液态键盘导航栏字号（默认 -1，跟随 candidate_size）
+---@field variations?              { [string]: boolean } # 字体变体特性（如 { cpct = true }）
+---@field display?                 { [string]: string }  # Unicode 异体字显示映射
+
+--- 回车键标签文本
+---@class EnterLabel
+---@field go?       string # 前往（默认 "go"）
+---@field done?     string # 完成（默认 "done"）
+---@field next?     string # 下个（默认 "next"）
+---@field pre?      string # 上个（默认 "pre"）
+---@field search?   string # 搜索（默认 "search"）
+---@field send?     string # 发送（默认 "send"）
+---@field default?  string # 默认回车文本（默认 "default"）
+
+--- 全局样式
+---@class GeneralStyle
+---@field fonts?                              FontStyle       # 字体样式子表
+---@field keyboard_height?                    integer         # 竖屏键盘高度 (px)
+---@field keyboard_height_land?               integer         # 横屏键盘高度 (px)
+---@field horizontal_gap?                     integer         # 键水平间距 (px)
+---@field vertical_gap?                       integer         # 键盘行距 (px)
+---@field round_corner?                       number          # 按键圆角半径
+---@field content_padding?                    integer         # 面板内容上下内缩（适配图片背景的透明边框区，默认 0）
+---@field key_shadow_radius?                  number          # 按键阴影模糊半径（0=无阴影）
+---@field key_shadow_direction?               string[]        # 按键阴影方向（"left"/"up"/"right"/"down" 组合，如 {"down","right"}）
+---@field key_border?                         integer         # 按键边框宽度
+---@field keyboard_padding?                   integer         # 键盘左右边距 (px)
+---@field keyboard_padding_bottom?            integer         # 键盘底部边距（避免触发全面屏手势）
+---@field keyboard_padding_top?               integer         # 键盘顶部边距
+---@field keyboard_padding_land?              integer         # 横屏键盘左右边距
+---@field keyboard_padding_land_bottom?       integer         # 横屏键盘底部边距
+---@field key_text_offset_x?                  number          # 按键文字 X 偏移
+---@field key_text_offset_y?                  number          # 按键文字 Y 偏移
+---@field key_symbol_offset_x?                number          # 符号 X 偏移
+---@field key_symbol_offset_y?                number          # 符号 Y 偏移
+---@field key_hint_offset_x?                  number          # 提示 X 偏移
+---@field key_hint_offset_y?                  number          # 提示 Y 偏移
+---@field key_press_offset_x?                 number          # 按下时 X 偏移
+---@field key_press_offset_y?                 number          # 按下时 Y 偏移
+---@field candidate_view_height?              integer         # 候选区高度 (px)
+---@field candidate_padding?                  integer         # 候选项内边距 (px)
+---@field candidate_spacing?                  number          # 候选间距 (px)
+---@field candidate_text_vertical_bias?       number          # 候选文字垂直偏移 (0.0~1.0，默认 1.0)
+---@field candidate_border?                   integer         # 候选边框宽度
+---@field candidate_border_round?             number          # 候选边框圆角
+---@field candidate_corner_radius?            number          # 候选项圆角半径
+---@field candidate_label?                    boolean         # 候选序号显示（默认 false）
+---@field candidate_label_size?               number          # 候选序号字号（默认 14）
+---@field comment_height?                     integer         # 编码注释区高度
+---@field comment_vertical_bias?              number          # 注释垂直偏移(overlay 模式)
+---@field comment_position?                   CommentPosition # 注释位置（RIGHT / TOP / OVERLAY）
+---@field popup_bottom_margin?                integer         # 悬浮提示底部边距
+---@field popup_width?                        integer         # 悬浮提示宽度
+---@field popup_height?                       integer         # 悬浮提示高度
+---@field popup_key_height?                   integer         # 悬浮提示按键高度
+---@field enter_label_mode?                   integer         # 回车键文本模式：0=不使用 1=仅action 2=优先 3=回退
+---@field enter_labels?                       EnterLabel      # 回车键标签文本
+---@field sidebar_round_corner?               number          # 侧栏圆角（-1=跟随 round_corner）
+---@field auto_caps?                          boolean         # 自动句首大写
+---@field background_folder?                  string          # 背景图存放子目录（默认 "backgrounds"）
+---@field reset_ascii_mode_on_focus_change?   boolean         # 焦点变更时重置英文模式
+
+-- ============================================================================
+-- 预编辑区 (Preedit)
+-- ============================================================================
+
+---@class PreeditForeground
+---@field font_size? number # 预编辑区字号（默认 16）
+
+--- 预编辑区样式（编码栏）
+---@class Preedit
+---@field horizontal_padding? integer           # 横向内边距（默认 8）
+---@field top_end_radius?     number            # 上端圆角半径
+---@field alpha?              number            # 透明度 0.0~1.0（默认 0.8）
+---@field foreground?         PreeditForeground # 前景样式
+
+-- ============================================================================
+-- 候选窗口/悬浮窗 (Window)
+-- ============================================================================
+
+---@class WindowPadding
+---@field vertical?          integer           # 垂直内边距
+---@field horizontal?        integer           # 水平内边距
+
+---@class WindowForeground
+---@field label_font_size?   number            # 序号字号（默认 20）
+---@field text_font_size?    number            # 候选文字字号（默认 20）
+---@field comment_font_size? number            # 注释字号（默认 20）
+
+--- 候选窗口 / 悬浮窗样式
+---@class Window
+---@field insets?            WindowPadding     # 窗口内边距（默认 vertical=4, horizontal=4）
+---@field item_padding?      WindowPadding     # 候选项内边距（默认 vertical=2, horizontal=4）
+---@field min_width?         integer           # 最小宽度
+---@field corner_radius?     number            # 窗口圆角
+---@field border?            integer           # 边框宽度
+---@field shadow?            number            # 阴影半径
+---@field alpha?             number            # 透明度 0.0~1.0（默认 1.0）
+---@field foreground?        WindowForeground  # 前景样式
+
+-- ============================================================================
+-- 工具栏 (ToolBar)
+-- ============================================================================
+
+---@class ToolBarButtonBackground
+---@field type?              string   # 背景类型（默认 "rectangle"）
+---@field corner_radius?     number   # 圆角半径（默认 10）
+---@field normal?            Color    # 普通状态颜色/图片
+---@field highlight?         Color    # 高亮状态颜色/图片
+---@field vertical_inset?    integer  # 垂直内缩（默认 4）
+---@field horizontal_inset?  integer  # 水平内缩（默认 4）
+
+---@class ToolBarButtonForeground
+---@field style?             string   # 前景样式
+---@field option_styles?     string[] # 选项样式列表
+---@field normal?            string   # 普通状态颜色/图标
+---@field highlight?         string   # 高亮状态颜色/图标
+---@field font_size?         number   # 字号（默认 18）
+---@field padding?           integer  # 内边距（默认 4）
+
+--- 工具栏按钮
+---@class ToolBarButton
+---@field background?        ToolBarButtonBackground # 按钮背景样式
+---@field foreground?        ToolBarButtonForeground # 按钮前景样式
+---@field action?            KeyName                 # 点击动作
+---@field long_press_action? KeyName                 # 长按动作
+---@field size?              integer[]               # 按钮尺寸 [width, height]
+
+--- 工具栏样式
+---@class ToolBar
+---@field primary_button? ToolBarButton?   # 主按钮（可选，不配置则使用默认）
+---@field buttons?        ToolBarButton[]  # 附加按钮列表
+---@field button_font?    string[]         # 按钮字体文件列表
+---@field back_style?     string           # 返回按钮样式（默认 "ic@arrow-left"）
+
+-- ============================================================================
+-- 候选工具栏 (CandidatesTool)
+-- ============================================================================
+
+---@class PopupAction
+---@field action KeyName # 弹窗动作
+---@field label  string  # 弹窗标签
+
+--- 按候选类型的弹窗菜单配置。
+--- 每个类型可覆写弹窗宽度，不设置则沿用顶层 `popup_width`。
+---@class TypePopupConfig
+---@field popup_width? integer          # 弹窗宽度（0 = 使用顶层 popup_width）
+---@field popup?       PopupAction[]    # 弹窗动作列表
+
+--- 候选工具栏。
+--- 此表为可选——不配置时工具栏隐藏。
+---
+--- 长按候选词弹窗菜单：
+---   - 未配置 `popup` 时，默认显示"忘记该词"（DeleteCandidate）
+---   - 可通过 `popup_by_type` 按候选类型（cand.type）设置不同菜单
+---   - `popup_by_type[type]` 优先匹配，未匹配时回退到 `popup`
+---   - 每个类型可单独设置 `popup_width`，不设则沿用顶层 `popup_width`
+---
+--- 常见 cand.type 值：
+---   "phrase"       — 系统词库词 (script_translator)
+---   "user_phrase"  — 用户词库词 (script_translator)
+---   "table"        — 码表系统词 (table_translator)
+---   "user_table"   — 码表用户词 (table_translator)
+---   "completion"   — 补全/联想候选
+---   "sentence"     — 整句候选
+---   "punct"        — 标点符号
+---   "raw"          — 原始输入
+---
+---@class CandidatesTool
+---@field nav_width?               integer                                    # 导航区域宽度（默认 44）
+---@field popup_width?             integer                                    # 弹窗宽度
+---@field popup_text_size?         number                                     # 弹窗文字字号
+---@field popup_text_color?        Color                                      # 弹窗文字颜色
+---@field popup_background_color?  Color                                      # 弹窗背景颜色
+---@field popup_font?              string[]                                   # 弹窗字体文件列表
+---@field background?              Color                                      # 工具栏背景
+---@field separator_color?         Color                                      # 分隔线颜色
+---@field button_font?             string[]                                   # 按钮字体文件列表
+---@field buttons?                 ToolBarButton[]                            # 工具栏按钮列表
+---@field popup?                   PopupAction[]                              # 弹窗动作列表（默认菜单）
+---@field popup_by_type?           { [string]: TypePopupConfig }              # 按候选类型的弹窗菜单
+
+-- ============================================================================
+-- 液态键盘 (LiquidKeyboard)
+-- ============================================================================
+
+--- 液态键盘按键项
+---@class KeyItem
+---@field text?             string                # 主文本
+---@field alt_text?         string                # 替代文本（默认同 text）
+
+--- 液态键盘面板
+---@class LiquidKeyboardPanel
+---@field id?               string                # 面板唯一标识符
+---@field type?             LiquidKeyboardType    # 面板类型
+---@field name?             string                # 面板名称（标签显示用）
+---@field keys?             string[]             # 按键列表
+
+--- 液态键盘。
+--- 可选——不配置时使用默认值。
+---@class LiquidKeyboard
+---@field columns?          integer               # 每行符号数（默认 6）
+---@field rows?             integer               # 可见行数（默认 5）
+---@field bottom_padding?   integer               # 底部抬高
+---@field keyboards?        LiquidKeyboardPanel[] # 面板列表
+
+-- ============================================================================
+-- 键盘布局 (TextKeyboard) 及相关类型
+-- ============================================================================
+
+--- 水平对齐方向
+---@alias Align
+---| '"left"'    # 左对齐
+---| '"center"'  # 居中（默认）
+---| '"right"'   # 右对齐
+---| '"justify"' # 分散居中
+
+--- 垂直对齐方向（单行内分段级别，等价于水平 justify 的语义）
+---@alias VerticalAlign
+---| '"top"'     # 顶部对齐
+---| '"center"'  # 居中（默认）
+---| '"bottom"'  # 底部对齐
+---| '"justify"' # 段内分散对齐——同组垂直均匀分布
+
+--- 按键标签分段。每个分段可独立设置粗体、颜色、缩放和对齐。
+--- 文本前缀 "ic@" 表示图标，如 "ic@arrow-left"。
+--- 文本 "\n" 表示换行。
+---
+--- 示例：
+---   label = {
+---     { text = "A", bold = true },
+---     { text = "1", scale = 0.6, color = "red", align = "right" },
+---     { text = "7", scale = 0.6, valign = "bottom" },
+---   },
+---   label_symbol = {
+---     { text = "ic@arrow-left", scale = 0.7 },
+---     { text = "@", align = "right" },
+---     { text = "#", valign = "top" },
+---   },
+---@class LabelSegment
+---@field text?   string | string[]       # 文本内容（"ic@" 前缀表示图标；"\n" 表示换行）
+---@field bold?   boolean | boolean[]     # 粗体
+---@field color?  string | string[]       # 颜色键名或 hex
+---@field scale?  number | number[]       # 字号缩放因子（如 0.6 表示 60%）
+---@field align?  Align | Align[]         # 水平对齐
+---@field valign? VerticalAlign | VerticalAlign[]  # 垂直对齐
+
+--- 按键标签。支持三种格式：
+---  1. 分段数组：`{ { text = "A", bold = true }, { text = "1", color = "red" } }`
+---     每个段内 text/style 也可为数组，按索引展开为多个 LabelSegment
+---  2. 字符串 text + 单值样式：`{ text = "ab", color = "red", bold = true }`
+---  3. 数组 text + 并行样式：`{ text = {"a", "bc"}, color = {"red", "green"}, align = {"left", "right"} }`
+---@alias LabelSpec
+---| LabelSegment[]                # 分段数组
+---| LabelSegment                  # 字符串/数组 text + 样式
+
+--- 按键定义。
+---@class TextKey
+---@field width?                      number          # 按键宽度（相对于行的比例，默认 0.0）
+---@field spacer?                     boolean         # 是否为空白占位键
+---@field round_corner?               number          # 圆角半径（-1 = 使用全局值）
+---@field round_corner_top_left?      number?         # 左上角圆角半径（nil = 跟随 round_corner）
+---@field round_corner_top_right?     number?         # 右上角圆角半径
+---@field round_corner_bottom_left?   number?         # 左下角圆角半径
+---@field round_corner_bottom_right?  number?         # 右下角圆角半径
+---@field key_border?                 integer         # 按键边框（-1 = 使用全局值）
+---@field key_border_color?           Color           # 按键边框颜色
+---@field key_shadow_radius?          number          # 按键阴影模糊半径（-1=使用键盘/全局值）
+---@field key_shadow_direction?       string[]        # 按键阴影方向（nil=使用键盘/全局值）
+---@field label?                      LabelSpec       # 按键标签
+---@field ascii_label?                LabelSpec       # 英文模式下替换标签（nil 则沿用 label）
+---@field label_symbol?               LabelSpec       # 按键副标签（右上角）
+---@field hint?                       LabelSpec       # 提示文字（底部）
+---@field click?                      KeyName         # 点击动作（预设按键名或键码）
+---@field send_bindings?              boolean         # 是否发送按键绑定（默认 true）
+---@field key_text_size?              number          # 按键文字字号（0 = 使用全局值）
+---@field symbol_text_size?           number          # 符号文字字号（0 = 使用全局值）
+---@field hint_text_size?             number          # 提示文字字号（0 = 使用全局值）
+---@field key_text_offset_x?          number          # 按键文字 X 偏移
+---@field key_text_offset_y?          number          # 按键文字 Y 偏移
+---@field key_symbol_offset_x?        number          # 符号 X 偏移
+---@field key_symbol_offset_y?        number          # 符号 Y 偏移
+---@field key_hint_offset_x?          number          # 提示 X 偏移
+---@field key_hint_offset_y?          number          # 提示 Y 偏移
+---@field key_press_offset_x?         number          # 按下时 X 偏移
+---@field key_press_offset_y?         number          # 按下时 Y 偏移
+---@field key_text_color?             Color           # 按键文字颜色
+---@field key_back_color?             Color           # 按键背景颜色
+---@field key_symbol_color?           Color           # 按键符号颜色
+---@field hilited_key_text_color?     Color           # 标明按键文字颜色
+---@field hilited_key_back_color?     Color           # 标明按键背景颜色
+---@field hilited_key_symbol_color?   Color           # 标明按键符号颜色
+---@field popup?                      KeyName[]       # 弹窗按键列表
+---@field dynamic?                    string          # 动态键盘关联的按键名
+---@field composing?                  KeyName         # 输入中点击
+---@field has_menu?                   KeyName         # 有候选菜单时点击
+---@field paging?                     KeyName         # 翻页时点击
+---@field combo?                      KeyName         # 组合键
+---@field ascii?                      KeyName         # 英文模式键
+---@field double_click?               KeyName         # 双击
+---@field lazy_double_click?          KeyName         # 延迟双击
+---@field swipe_up?                   KeyName         # 上滑
+---@field long_click?                 KeyName         # 长按
+---@field swipe_down?                 KeyName         # 下滑
+---@field swipe_left?                 KeyName         # 左滑
+---@field swipe_right?                KeyName         # 右滑
+---@field extra?                      KeyName         # 扩展弹窗按键
+
+--- 键盘行定义
+---@class KeyboardRow
+---@field height? number    # 行高（0 = 自动）
+---@field split?  boolean   # 是否为分割行（landscape_split_percent 处分割）
+---@field keys?   TextKey[] # 按键列表
+
+--- 键盘布局定义
+---@class TextKeyboard
+---@field name?                     string         # 键盘名称
+---@field author?                   string         # 作者
+---@field keyboard_height?          integer        # 键盘高度（0 = 使用全局值）
+---@field keyboard_height_land?     integer        # 横屏键盘高度（0 = 使用全局值）
+---@field auto_height_index?        integer        # 自动高度基准行索引（-1 = 禁用）
+---@field horizontal_gap?           integer        # 键水平间距（0 = 使用全局值）
+---@field vertical_gap?             integer        # 键垂直间距（0 = 使用全局值）
+---@field round_corner?             number         # 圆角半径（-1 = 使用全局值）
+---@field key_border?               integer        # 按键边框（-1 = 使用全局值）
+---@field key_shadow_radius?        number          # 按键阴影模糊半径（-1=使用键盘/全局值）
+---@field key_shadow_direction?     string[]        # 按键阴影方向（nil=使用键盘/全局值）
+---@field ascii_mode?               boolean        # 是否为英文输入模式（默认 true）
+---@field reset_ascii_mode?         boolean        # 是否在激活时重置英文模式
+---@field label_transform?          LabelTransform # 标签转换（NONE / UPPERCASE）
+---@field lock?                     boolean        # 是否锁定该键盘（不随模式切换）
+---@field ascii_keyboard?           string         # 英文模式下关联的键盘 ID
+---@field landscape_keyboard?       string         # 横屏时切换的键盘 ID
+---@field landscape_split_percent?  integer        # 横屏分割百分比
+---@field key_text_offset_x?        number         # 按键文字 X 偏移
+---@field key_text_offset_y?        number         # 按键文字 Y 偏移
+---@field key_symbol_offset_x?      number         # 符号 X 偏移
+---@field key_symbol_offset_y?      number         # 符号 Y 偏移
+---@field key_hint_offset_x?        number         # 提示 X 偏移
+---@field key_hint_offset_y?        number         # 提示 Y 偏移
+---@field key_press_offset_x?       number         # 按下时 X 偏移
+---@field key_press_offset_y?       number         # 按下时 Y 偏移
+---@field import_preset?            string         # 导入预设键盘 ID
+---@field navbar?                   boolean        # 是否显示导航栏
+---@field sidebar_mode?             boolean        # 是否启用侧栏模式（需配合 sidebar_layout）
+---@field sidebar_layout?           SidebarLayout  # 侧栏布局（默认 "t9"）
+---@field keyboard_padding_top?     integer        # 键盘顶部边距
+---@field sidebar_width?            number         # 侧栏宽度比例（默认 0.15）
+---@field sidebar_position?         string         # 侧栏位置（默认 "left"）
+---@field sidebar_span_rows?        integer        # 侧栏跨越行数（默认 3）
+---@field sidebar_show_items?       integer        # 侧栏显示条目数（默认 4）
+---@field sidebar_symbols?          string[]       # 侧栏符号列表
+---@field dynamic_mode?             boolean        # 是否启用动态键盘
+---@field dynamic_original?         string         # 动态键盘原始布局引用
+---@field rows?                     KeyboardRow[]  # 键盘行列表
+
+-- ============================================================================
+-- 根主题 (Theme)
+-- ============================================================================
+
+--- LyraIME 键盘主题根表。
+--- 这是主题文件的顶层返回值。所有属性均为可选（除 name 外），
+--- 未指定的属性会使用默认值。
+---
+--- 用法：
+---   return theme {
+---     name = "我的主题",
+---     version = "1.0",
+---     style = style { ... },
+---     preset_color_schemes = { scheme("light", { ... }), scheme("dark", { ... }) },
+---     preset_keys = { Space = { ... }, BackSpace = { ... } },
+---     preset_keyboards = { default = keyboard { ... } },
+---   }
+---@class Theme
+---@field name                  string                     # 主题名称（***必填***）
+---@field version               string                     # 版本号（默认 ""）
+---@field author?               string                     # 作者（默认 ""）
+---@field style                 GeneralStyle               # 全局样式
+---@field preedit?              Preedit                    # 预编辑区样式（默认值见 Preedit）
+---@field window?               Window                     # 候选窗口样式（默认值见 Window）
+---@field tool_bar?             ToolBar                    # 工具栏样式（默认值见 ToolBar）
+---@field candidates_tool?      CandidatesTool             # 候选工具栏（nil = 隐藏）
+---@field liquid_keyboard?      LiquidKeyboard             # 液态键盘（默认值见 LiquidKeyboard）
+---@field fallback_colors?      { [string]: Color }        # 回退颜色映射（如 { candidate_text_color = "text_color" }）
+---@field preset_color_schemes  ColorScheme[]              # 配色方案列表
+---@field preset_keys?          { [string]: PresetKey }    # 预设按键（键名 → 定义）
+---@field preset_keyboards      { [string]: TextKeyboard } # 预设键盘布局（ID → 定义）
+
+-- ============================================================================
+-- 全局 DSL 函数
+-- ============================================================================
+
+--- 沙箱模块加载函数。等价于 Lua 原生 require（沙箱中 require 已被 nil）。
+--- 模块搜索路径：themes/lib/ 及其所有子目录下的 ?.lua、?/init.lua。
+---
+--- 用法：
+---   local mocha = safe_require("colors.mocha")
+---   local layout = safe_require("layouts.qwerty")
+---@param modname string # 模块名
+---@return any
+function safe_require(modname)
+  return (require(modname))
+end
+
+--- 声明根主题表（主题文件顶层必须调用）。
+--- 对传入的表进行类型检查后原样返回。与 `return { ... }` 等价的类型安全封装。
+---@param t Theme
+---@return Theme
+function theme(t)
+  return t
+end
+
+--- 声明全局样式子表。
+---@param t GeneralStyle
+---@return GeneralStyle
+function style(t)
+  return t
+end
+
+--- 声明键盘布局。
+--- 可用作 preset_keyboards 映射中的值，也可用 merge 和 insert 进行组合。
+---@param t TextKeyboard
+---@return TextKeyboard
+function keyboard(t)
+  return t
+end
+
+--- 声明键盘行。一般用作 keyboard.rows 中的元素。
+---@param t KeyboardRow
+---@return KeyboardRow
+function row(t)
+  return t
+end
+
+--- 声明键盘按键。一般用作 row.keys 中的元素。
+---@param t TextKey
+---@return TextKey
+function key(t)
+  return t
+end
+
+--- 声明预编辑区样式。
+---@param t Preedit
+---@return Preedit
+function preedit(t)
+  return t
+end
+
+--- 声明候选窗口样式。
+---@param t Window
+---@return Window
+function window(t)
+  return t
+end
+
+--- 声明工具栏样式。
+---@param t ToolBar
+---@return ToolBar
+function toolbar(t)
+  return t
+end
+
+--- 声明工具栏按钮。可用于 ToolBar.primary_button 或 ToolBar.buttons。
+---@param t ToolBarButton
+---@return ToolBarButton
+function btn(t)
+  return t
+end
+
+--- 声明工具栏按钮背景。
+---@param t ToolBarButtonBackground
+---@return ToolBarButtonBackground
+function bg(t)
+  return t
+end
+
+--- 声明工具栏按钮前景。
+---@param t ToolBarButtonForeground
+---@return ToolBarButtonForeground
+function fg(t)
+  return t
+end
+
+--- 声明液态键盘。
+---@param t LiquidKeyboard
+---@return LiquidKeyboard
+function liquid(t)
+  return t
+end
+
+--- 声明回退颜色映射。未配置的颜色按此表键名重定向。
+---@param t { [string]: string } # 回退映射表
+---@return { [string]: string }
+function fallback(t)
+  return t
+end
+
+--- 声明配色方案。返回包含 id 和 colors 字段的表。
+---
+--- 用法：
+---   scheme("light", {
+---     text_color = "0x000000",
+---     back_color = "0xFFFFFF",
+---     light_scheme = "light",  -- 自身标记
+---     dark_scheme = "dark",    -- 暗色模式跳转目标
+---   })
+---@param id string                          # 配色方案唯一标识符
+---@param colors SchemeColors  # 颜色键值对表
+---@return ColorScheme
+function scheme(id, colors)
+  return { id = id, colors = colors }
+end
+
+--- 声明预设按键。返回第二个参数（预设按键定义）。
+--- 注意：当前实现中，第一个参数（id）不嵌入返回值，
+---       预设按键通过 preset_keys 表中的键名查找。
+--- 用法：
+---   preset_keys = {
+---     Space = pk("space", { label = " ", send = "space" }),
+---   }
+---@param id string     # 按键标识符（当前未嵌入返回值，保留供将来使用）
+---@param t PresetKey   # 预设按键定义
+---@return PresetKey
+function pk(id, t)
+  return t
+end
+
+--- lua_sandbox.cc:135-169 l_merge 实现：
+---   先将 a 的全部键值复制到新表 result，再遍历 b：
+---   - 若 result[k] 与 b[k] 同为 table → 递归 merge
+---   - 否则以 b[k] 直接覆盖 result[k]
+---   返回新表，a / b 均不被修改。
+---   替代旧 YAML 的 __include 和 __patch（字段覆盖）。
+---
+---   注：C++ 递归时以 b[k]（value）为键去 result 中查找（lua_gettable），
+---   此处对 Lua trace 来说可能返回 nil。本节中的代码做了修正，以 result[k]（key）作为
+---   第一个参数进行递归调用。
+
+--- 深度合并两个表。第二个表的字段会覆盖第一个表的同名字段。
+--- 当两个表在同一键下均为表类型时，递归合并（而非直接替换）。
+---
+--- 用法：
+---   -- 基于已有布局创建新变体
+---   local letter_kb = keyboard(merge(base_kb, { ascii_mode = true }))
+---   -- 嵌套覆盖（修改特定按键的行为）
+---   local modified = keyboard(merge(base_kb, {
+---     rows = { [3] = { keys = { [2] = { long_click = "x" } } } }
+---   }))
+---@param a table # 基础表
+---@param b table # 覆盖表（优先级更高）
+---@return table  # 合并后的新表
+function merge(a, b)
+  local result = {}
+  for k, v in pairs(a) do
+    result[k] = v
+  end
+  for k, v in pairs(b) do
+    if type(result[k]) == "table" and type(v) == "table" then
+      result[k] = merge(result[k], v)
+    else
+      result[k] = v
+    end
+  end
+  return result
+end
+
+--- lua_sandbox.cc:172-196 l_insert 实现：
+---   先用 pairs 计数得到数组长度 n，再将位置 1..pos-1 复制到新表，
+---   在 pos 处插入 val，最后将原位置 pos..n 的元素集体后移一位。
+---   返回新表，原表 t 不被修改。
+---   替代旧 YAML 的 __patch（数组插入）。
+
+--- 在数组表指定位置插入值（1-索引），返回新数组表。
+--- 原表不会被修改。
+---
+--- 用法：
+---   -- 在键盘第 5 行后插入新行
+---   local new_rows = insert(base_kb.rows, 5, row { ... })
+---   -- 在第 2 行第 3 个键后插入新键
+---   local new_keys = insert(base_kb.rows[2].keys, 3, key { ... })
+---@param t   table   # 原数组表（1-索引的连续整数键）
+---@param pos integer # 插入位置（1-索引）
+---@param val any     # 要插入的值
+---@return table      # 插入后的新数组表
+function insert(t, pos, val)
+  local n = 0
+  for _ in pairs(t) do
+    n = n + 1
+  end
+  local result = {}
+  for i = 1, pos - 1 do
+    result[i] = t[i]
+  end
+  result[pos] = val
+  for i = pos, n do
+    result[i + 1] = t[i]
+  end
+  return result
+end
+
+-- ============================================================================
+-- 键盘布局组合模式示例
+-- ============================================================================
+--[[
+
+  -- 1. 定义基础布局
+  local base_keyboard = {
+    name = "26键基础布局",
+    ascii_mode = false,
+    rows = {
+      row { keys = { key { click = "q" }, key { click = "w" }, ... } },
+      row { keys = { key { click = "a" }, key { click = "s" }, ... } },
+      ...
+    }
+  }
+
+  -- 2. 直接引用
+  preset_keyboards = {
+    default = keyboard(base_keyboard),
+  }
+
+  -- 3. merge 创建变体
+  preset_keyboards = {
+    default = keyboard(base_keyboard),
+    letter = keyboard(merge(base_keyboard, {
+      name = "英文键盘",
+      ascii_mode = true,
+      reset_ascii_mode = true,
+    })),
+  }
+
+  -- 4. insert 插入行列
+  local with_extra_row = merge(base_keyboard, {
+    rows = insert(base_keyboard.rows, 2, row {
+      keys = { key { click = "1" }, key { click = "2" }, ... }
+    })
+  })
+
+--]]

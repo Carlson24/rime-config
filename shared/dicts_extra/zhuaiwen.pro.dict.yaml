@@ -1,0 +1,62 @@
+# @format
+
+# Rime dictionary
+# encoding: utf-8
+# ------ 转文词库 ------
+---
+name: zhuaiwen
+version: "LTS"
+sort: by_weight
+...
+，	of;dh	20
+。	of;jh	19
+？	of;wh	18
+！	of;th	17
+：	of;mh	16
+；	of;fh	15
+“	of;yz	14
+”	of;yy	13
+‘	of;yz	12
+’	of;yy	11
+（	of;kz	10
+）	of;ky	9
+【	of;vz	8
+】	of;vy	7
+「	of;dz	6
+」	of;dy	5
+《	of;uz	4
+》	of;uy	3
+……	of;ul	2
+——	of;pv	1
+榛树	zhen1;mh shu4;mc	10
+行山踏海	xing2;ii shan1;lk ta4;zo hai3;dm	10
+神官赐福	shen2;pu guan1;bk ci4;kw fu2;pt	10
+长谈不倦	chang2;pn tan2;yh bu2;ad jvan4;rv	10
+鹿覆蕉叶	lu4;gb fu4;xw jiao1;ch ye4;ku	10
+鹤衔春雪	he4;dn xian2;ii chun1;fo xve3;ye	10
+长谈不厌	chang2;pn tan2;yh bu2;ad yan4;iq	10
+如椒似漆	ru2;nk jiao1;my si4;rr qi1;du	10
+远渡岁月	yvan3;ze du4;dy sui4;ex yve4;ka	10
+华饰	hua2;ru shi4;uj	10
+拊膺	fu3;fc ying1;go	10
+苏澜城	su1;cb lan2;dj cheng2;ti	10
+苏澜桥	su1;cb lan2;dj qiao2;ml	10
+山河不改	shan1;lk he2;dk bu4;ad gai3;jw	10
+韶华绵延	shao2;lk hua2;ru mian2;sj yan2;zv	10
+浮生缥缈	fu2;dz sheng1;pf piao1;sx miao3;su	10
+长乐亦未央	chang2;pn le4;pd yi4;wd wei4;an yang1;lg	10
+边衬区	bian1;zl chen4;pc qv1;kx	10
+千家笑语	qian1;pu jia1;bu xiao4;vy yv3;yk	10
+岁长日远	sui4;ex chang2;pn ri4;ka yvan3;ze	10
+杏花时	xing4;mk hua1;cb shi2;oc	10
+杨柳天	yang2;mp liu3;me tian1;ad	10
+赭红石榴	zhe3;to hong2;sg shi2;ak liu5;mt	10
+青绿山川	qing1;fo lv4;su shan1;lk chuan1;pl	10
+七彩绘八仙	qi1;av cai3;pp hui4;ss ba1;pn xian1;re	10
+三羊开泰	san1;ae yang2;bl kai1;ac tai4;fu	10
+五子夺莲	wu3;aa zi3;va duo2;dc lian2;cz	10
+太平诗卷	tai4;dd ping2;au shi1;yc jvan4;jv	10
+好花可看	hao3;nz hua1;cb ke3;dk kan4;uo	10
+清梦可谈	qing1;do meng4;mx ke3;dk tan2;yh	10
+朝暮无事	zhao1;uo mu4;co wu2;ay shi4;al	10
+岁岁长安	sui4;ex sui4;ex chang2;pn an1;bn	10

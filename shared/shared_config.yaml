@@ -1,0 +1,208 @@
+# @format
+
+engine:
+  processors:
+    - user_predict_processor # 必须放在第一个
+    - lua_processor@*wanxiang.super_processor
+    - lua_processor@*chaifen_tips
+    - ascii_composer
+    - digit_catcher # 需要在 ascii_composer 之后 recognizer 之前
+    - recognizer
+    - key_binder
+    - lua_processor@*moran_pin*pin_processor
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - affix_segmentor@wanxiang_reverse
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - user_predict_translator
+    - calculator_translator
+    - lua_translator@*shijian
+    - lua_translator@*number
+    - lua_translator@*unicode
+    - lua_translator@*input_statistics
+    - table_translator@custom_phrase
+    - lua_translator@*wanxiang.super_english*T
+    - reverse_lookup_translator@wanxiang_flypy_reverse
+    - lua_translator@*moran_pin*panacea_translator
+  filters:
+    - lua_filter@*moran_pin*pin_filter
+    - lua_filter@*wanxiang.super_english*F
+    - lua_filter@*wanxiang.super_lookup
+    - lua_filter@*wanxiang.super_comment_preedit
+    - lua_filter@*wanxiang.super_replacer
+    - lua_filter@*wanxiang.super_filter
+    - user_predict_filter # 去重、简繁转换之前
+    - simplifier@emoji
+    - simplifier@s2t
+    - simplifier@s2hk
+    - simplifier@s2tw
+    - uniquifier # 候选去重
+
+custom_phrase:
+  dictionary: ""
+  user_dict: user_phrase
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: 99
+
+grammar:
+  language: wanxiang-lts-zh-hans
+  collocation_max_length: 6
+  collocation_min_length: 2
+  collocation_penalty: -14
+  non_collocation_penalty: -6
+  weak_collocation_penalty: -100
+  rear_penalty: -18
+
+moran_pin:
+  enable: true
+  # indicator: "📌" # 交给 super_comment 来处理
+  panacea:
+    infix: "//"
+    prompt: "〔加词〕"
+    tip_prefix: ""
+    freestyle: false
+
+user_predict:
+  db_name: "user_predict" # 用户预测数据库
+  predict_style: "all" # 预测样式
+  use_space_to_commit: false # 是否使用空格提交预测
+  max_candidates: 9 # 最大预测候选数
+  max_predictions: 15 # 最大预测条数（S-Gram 不受限制）
+  max_history_entries: 5 # 上文最大历史记录
+  expiry_days: 90 # 预测过期天数（S-Gram 永不过期）
+  decay_rate: 0.85 # 预测衰减率
+  context_timeout: 10000 # 上下文超时（毫秒）
+
+super_comment:
+  candidate_length: 16 # 注释候选长度
+  cand_type:
+    user_phrase: "" # 用户自造词
+    sentence: "" # 整句
+    table: "✬" # 系统码表词
+    typo: "" # 纠错
+    user_table: "" # 用户码表词
+    completion: "⋙" # 编码补全
+    abbrev: "" # 简码
+    predict: "∞" # 预测候选
+    pinned: "" # pin 候选
+
+super_processor:
+  enable_backspace_limit: true
+  enable_seg_loop: true
+  enable_tone_fallback: true
+  enable_predict_space: false
+  kp_number_mode: auto
+  limit_repeated: "16,64"
+  select_character: "bracketleft, bracketright"
+
+wanxiang_english:
+  dictionary: wanxiang_english
+  user_dict: user_en
+  enable_completion: true
+  initial_quality: 2.1
+  comment_format:
+    - xform/^~.+$//
+  min_word_length: 3 # 最少三个字母才会查字典，防止巨量候选
+
+switches:
+  - name: ascii_mode
+    states: [, ]
+    reset: 0
+  - name: ascii_punct
+    states: [, ]
+    reset: 0
+  - name: full_shape
+    states: [, ]
+    reset: 0
+  - name: emoji
+    states: [, ]
+    reset: 1
+  - name: kaomoji
+    states: [颜文关, 颜文开]
+    reset: 0
+  - name: chaifen_tips
+    states: [提示关, 提示开]
+    reset: 1
+  - name: prediction
+    states: [预测关, 预测开]
+    reset: 1
+  - name: chinese_english
+    states: [翻译关, 翻译开]
+    reset: 0
+  - options: [raw_input, tone_display, full_pinyin]
+    states: [原编码, 有声调, 无声调]
+    reset: 0
+  - options: [comment_off, aux_hint, tone_hint]
+    states: [注释关, 辅助开, 读音开]
+    reset: 1
+  - options: [simp, s2t, s2hk, s2tw]
+    states: [简体, 繁体, 港繁, 台繁]
+    abbrev: [简, 繁, 港, 台]
+    reset: 0
+
+key_binder:
+  import_preset: default
+  datetime_keys: "/"
+  bindings:
+    - { when: has_menu, accept: "minus", send: "Page_Up" }
+    - { when: has_menu, accept: "equal", send: "Page_Down" }
+    - { when: composing, accept: "Alt+Left", send: "Shift+Left" }
+    - { when: composing, accept: "Alt+Right", send: "Shift+Right" }
+    - { when: has_menu, accept: "Control+e", toggle: "chinese_english" }
+    - { when: has_menu, accept: "Tab", send: "Control+Right" }
+    - { when: composing, accept: "Tab", send: "Control+Right" }
+    - { when: composing, accept: "Control+Tab", send_sequence: "{Home}{Shift+Right}{1}{Shift+Right}" }
+    - { when: has_menu, accept: "semicolon", send: 2 }
+
+opencc:
+  s2t:
+    option_name: s2t
+    opencc_config: s2t.json
+    tags: [abc]
+    tips: all
+  s2hk:
+    option_name: s2hk
+    opencc_config: s2hk.json
+    tags: [abc]
+    tips: all
+  s2tw:
+    option_name: s2tw
+    opencc_config: s2tw.json
+    tags: [abc]
+    tips: all
+  emoji:
+    option_name: emoji
+    opencc_config: emoji.json
+    tags: [abc]
+    tips: all
+  editor:
+    bindings:
+      space: confirm
+      Return: commit_raw_input
+      Control+Return: commit_script_text
+      Control+Shift+Return: commit_comment
+      BackSpace: revert
+      Delete: delete
+      Control+BackSpace: back_syllable
+      Control+Delete: delete_candidate
+      Escape: cancel
+
+  navigator:
+    bindings:
+      Left: left_by_char_no_loop
+      Right: right_by_char_no_loop
+      Shift+Left: left_by_syllable
+      Shift+Right: right_by_syllable

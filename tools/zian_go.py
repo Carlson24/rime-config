@@ -10,20 +10,10 @@ import re
 from typing import List
 
 # ================= 用户配置区 =================
-# 映射文件路径（三列：汉字、目标拼音、原始拼音，Tab分隔）
 MAP_FILE = "tools/zian_map.csv"
-
-# 默认输出目录（可用 -o/--output-dir 覆盖）
 DEFAULT_OUTPUT_DIR = "dicts-zian"
-
-# 默认包含模式（glob风格，如 "*.yaml" 或 "*.dict.yaml"，可用位置参数覆盖）
-# 如果为空列表 []，则处理当前目录下所有文件（不推荐）
 DEFAULT_INCLUDE_PATTERNS = ["dicts/*.dict.yaml"]
-
-# 要排除的文件名模式（glob风格，如 "*.bak"）
 EXCLUDE_PATTERNS = ["en.dict.yaml", "mixed.dict.yaml"]
-
-# 是否递归子目录（True/False）
 RECURSIVE = False
 # =============================================
 

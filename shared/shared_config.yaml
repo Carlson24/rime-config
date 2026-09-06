@@ -96,7 +96,7 @@ super_comment:
     user_table: "" # 用户码表词
     completion: "⋙" # 编码补全
     abbrev: "" # 简码
-    predict: "∞" # 预测候选
+    predict: "" # 预测候选
     pinned: "" # pin 候选
 
 super_processor:

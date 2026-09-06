@@ -6,6 +6,13 @@ import unicodedata
 import argparse
 from typing import List
 
+# ================= 用户配置区 =================
+INPUT_DIR_DEFAULT = "dicts"
+OUTPUT_ROOT_DEFAULT = "."
+CSV_PATH = "tools/aux_code.csv"
+BLACKLIST_FILES = {"mixed.dict.yaml", "en.dict.yaml"}
+# =============================================
+
 CJK_PATTERN = re.compile(
     r"[〇々の𖿲𖿳\u2e80-\u2fdf\u3400-\u4DBF\u4E00-\u9FFF\U00020000-\U0003347F]"
 )
@@ -231,19 +238,16 @@ def main():
     parser.add_argument(
         "-i",
         "--input-dir",
-        default="dicts",
-        help="输入原始词库目录（默认：dicts）",
+        default=INPUT_DIR_DEFAULT,
+        help=f"输入原始词库目录（默认：{INPUT_DIR_DEFAULT}）",
     )
     parser.add_argument(
         "-o",
         "--output-root",
-        default=".",
-        help="输出根目录，将生成其下的 dicts-pro 与 dicts-base（默认：.）",
+        default=OUTPUT_ROOT_DEFAULT,
+        help=f"输出根目录，将生成其下的 dicts-pro 与 dicts-base（默认：{OUTPUT_ROOT_DEFAULT}）",
     )
     args = parser.parse_args()
-
-    CSV_PATH = "tools/aux_code.csv"
-    BLACKLIST_FILES = {"mixed.dict.yaml", "en.dict.yaml"}
 
     flypy_aux = load_flypy_aux(CSV_PATH)
     print(f"已加载 flypy 辅助码，共 {len(flypy_aux)} 条")

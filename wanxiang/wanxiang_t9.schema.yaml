@@ -120,7 +120,7 @@ super_replacer:
         - user_abbrev.txt
 
 translator:
-  dictionary: wanxiang
+  dictionary: wanxiang.zian
   prism: wanxiang_t9
   enable_completion: true
   user_dict: user_t9

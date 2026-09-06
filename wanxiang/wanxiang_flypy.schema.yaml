@@ -104,7 +104,7 @@ super_replacer:
         - lua/data/english_chinese.txt
 
 translator:
-  dictionary: wanxiang
+  dictionary: wanxiang.zian
   prism: wanxiang_flypy # 多方案唯一标识
   enable_completion: true # 开启编码补全
   enable_user_dict: true # 启用用户词典

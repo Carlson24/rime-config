@@ -25,14 +25,14 @@ return function(opts)
         key_text_size = func_key_text_size
       })),
       key(merge(S.switch, key {
-        click = opts.mode_switch and "ModeSwitch" or "Keyboard45Eng",
-        label_symbol = { { text = "ic@keyboard-settings-outline" } },
-        long_click = "KeyboardList",
-        hint = { { text = "ic@web" } },
-        swipe_down = "IMESwitch",
-        has_menu = "Escape",
-        width = 0.11,
-        key_text_offset_y = 1
+        click = "/",
+        label_symbol = { { text = "'", scale = 1.5 } },
+        long_click = "/",
+        swipe_up = "'",
+        hint = { { text = "ic@lightbulb-outline" } },
+        swipe_down = "HintSwitch",
+        has_menu = "Semicolon",
+        width = 0.11
       })),
       key(merge(S.comma, key {
         label = { { text = "，" } },
@@ -66,14 +66,14 @@ return function(opts)
         key_text_offset_y = -1
       })),
       key(merge(S.switch, key {
-        click = "/",
-        label_symbol = { { text = "'", scale = 1.5 } },
-        long_click = "/",
-        swipe_up = "'",
-        hint = { { text = "ic@lightbulb-outline" } },
-        swipe_down = "HintSwitch",
-        has_menu = "Semicolon",
-        width = 0.11
+        click = opts.mode_switch and "ModeSwitch" or "Keyboard45Eng",
+        label_symbol = { { text = "ic@keyboard-settings-outline" } },
+        long_click = "KeyboardList",
+        hint = { { text = "ic@web" } },
+        swipe_down = "IMESwitch",
+        has_menu = "Escape",
+        width = 0.11,
+        key_text_offset_y = 1
       })),
       key(merge(S.enter, key {
         label = { { text = "enter_labels" } },

@@ -126,7 +126,7 @@ local keyboard = keyboard(merge(safe_require("nekocat.layouts.47keys"), keyboard
           { text = "ao", color = "blue" }
         } })),
         [5] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
-          { text = "𪛙\n", color = "lavender" },
+          { text = "乛\n", color = "lavender" },
           { text = { "⺮", "豸\n" }, color = "overlay2", align = "justify" },
           { text = { "\u{F82A}", "ui", "ü" }, color = { "red", "blue", "blue" }, bold = { true, false, false }, align = "justify" }
         } })),

@@ -95,7 +95,6 @@ super_replacer:
         - lua/data/flypy/51_qmc.tsv
         - lua/data/flypy/52_upz.tsv
         - lua/data/flypy/53_qmz.tsv
-        - lua/data/flypy/61_ok.tsv
     - option: true
       mode: comment
       comment_mode: none

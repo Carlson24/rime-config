@@ -7,7 +7,7 @@ local t_concat                = table.concat
 
 -- x-release-please-start-version
 
-wanxiang.version              = "v18.0.0"
+wanxiang.version              = "v114.51.4"
 
 -- x-release-please-end
 
@@ -338,7 +338,7 @@ wanxiang.tone_mark_map = {
   i = { 'ī', 'í', 'ǐ', 'ì' },
   u = { 'ū', 'ú', 'ǔ', 'ù' },
   ['ü'] = { 'ǖ', 'ǘ', 'ǚ', 'ǜ' },
-  n = { 'n̄', 'ń', 'ň', 'ǹ' },  -- n̄=n+U+0304
+  n = { 'n̄', 'ń', 'ň', 'ǹ' }, -- n̄=n+U+0304
   m = { 'm̄', 'ḿ', 'm̌', 'm̀' },
 }
 

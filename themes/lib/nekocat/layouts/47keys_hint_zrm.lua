@@ -21,7 +21,7 @@ local keyboard = keyboard(merge(safe_require("nekocat.layouts.47keys"), keyboard
         [3] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "阝", "卩", "二\n" }, color = { "rosewater", "rosewater", "overlay2" }, align = "justify" },
           { text = { "而", "儿", "耳\n" }, color = "overlay2", align = "justify" },
-          { text = { "cy", "e" }, color = { "red", "blue" }, bold = { true, false }, align = "justify" }
+          { text = { "\u{F82E}", "e" }, color = { "red", "blue" }, bold = { true, false }, align = "justify" }
         } })),
         [4] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "亻", "人", "入\n" }, color = "rosewater", align = "justify" },
@@ -41,17 +41,17 @@ local keyboard = keyboard(merge(safe_require("nekocat.layouts.47keys"), keyboard
         [7] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "礻", "饣", "石\n" }, color = "rosewater", align = "justify" },
           { text = { "尸", "十", "士\n" }, color = "overlay2", align = "justify" },
-          { text = { "ŝ", "u" }, color = { "red", "blue" }, bold = { true, false }, align = "justify" }
+          { text = { "\u{F82C}", "u" }, color = { "red", "blue" }, bold = { true, false }, align = "justify" }
         } })),
         [8] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "㐅", "厂", "虫\n" }, color = "rosewater", align = "justify" },
           { text = { "川", "巛", "叉\n" }, color = "overlay2", align = "justify" },
-          { text = { "ĉ", "i" }, color = { "red", "blue" }, bold = { true, false }, align = "justify" }
+          { text = { "\u{F82B}", "i" }, color = { "red", "blue" }, bold = { true, false }, align = "justify" }
         } })),
         [9] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "日", "月\n" }, color = "rosewater", align = "justify" },
           { text = { "目", "曰\n" }, color = "rosewater", align = "justify" },
-          { text = { "zy", "u?o" }, color = { "red", "blue", "blue" }, bold = { true, false, false }, align = "justify" }
+          { text = { "\u{F82D}", "u?o" }, color = { "red", "blue", "blue" }, bold = { true, false, false }, align = "justify" }
         } })),
         [10] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "丿", "彡", "𤴔\n" }, color = { "lavender", "rosewater", "rosewater" }, align = "justify" },
@@ -65,7 +65,7 @@ local keyboard = keyboard(merge(safe_require("nekocat.layouts.47keys"), keyboard
         [2] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "丨", "一", "乛\n" }, color = "lavender", align = "justify" },
           { text = { "亅", "𠃋", "〇\n" }, color = "rosewater", align = "justify" },
-          { text = { "sy", "a", "er" }, color = { "red", "blue", "blue" }, bold = { true, false, false }, align = "justify" }
+          { text = { "\u{F82F}", "a", "er" }, color = { "red", "blue", "blue" }, bold = { true, false, false }, align = "justify" }
         } })),
         [3] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "纟", "罒", "龴\n" }, color = "rosewater", align = "justify" },
@@ -129,7 +129,7 @@ local keyboard = keyboard(merge(safe_require("nekocat.layouts.47keys"), keyboard
         [5] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "⺮", "𠂤", "爫\n" }, color = "rosewater", align = "justify" },
           { text = { "隹", "爪", "豸\n" }, color = "overlay2", align = "justify" },
-          { text = { "ẑ", "ui", "ü" }, color = { "red", "blue", "blue" }, bold = { true, false, false }, align = "justify" }
+          { text = { "\u{F82A}", "ui", "ü" }, color = { "red", "blue", "blue" }, bold = { true, false, false }, align = "justify" }
         } })),
         [6] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "冖", "宀", "丷\n" }, color = "rosewater", align = "justify" },

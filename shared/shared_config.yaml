@@ -144,7 +144,7 @@ switches:
     reset: 0
   - options: [raw_input, tone_display, full_pinyin]
     states: [原编码, 有声调, 无声调]
-    reset: 0
+    reset: 1
   - options: [comment_off, aux_hint, tone_hint]
     states: [注释关, 辅助开, 读音开]
     reset: 1

@@ -35,8 +35,8 @@ zrm_pro:
     - xform/[uv]an(\d);/R$1;/
     - xform/[uv]e(\d);/T$1;/
     - xform/ing(\d);/Y$1;/
-    - xform/uai(\d);/Y$1;/
-    - xform/uo(\d);/O$1;/
+    - xform/[uv]ai(\d);/Y$1;/
+    - xform/[uv]o(\d);/O$1;/
     - xform/[uv]n(\d);/P$1;/
     - xform/i?ong(\d);/S$1;/
     - xform/[iu]ang(\d);/D$1;/
@@ -45,7 +45,7 @@ zrm_pro:
     - xform/ian(\d);/M$1;/
     - xform/iao(\d);/C$1;/
     - xform/ie(\d);/X$1;/
-    - xform/ui(\d);/V$1;/
+    - xform/[uv]i(\d);/V$1;/
     - xform/in(\d);/N$1;/
     - xform/[iu]a(\d);/W$1;/
     - xform/([a-z]+)ao(\d);/$1K$2;/
@@ -93,8 +93,8 @@ zrm_zian_pro:
     - xform/[uv]an(\d);/R$1;/
     - xform/[uv]e(\d);/T$1;/
     - xform/ing(\d);/Y$1;/
-    - xform/uai(\d);/Y$1;/
-    - xform/uo(\d);/O$1;/
+    - xform/[uv]ai(\d);/Y$1;/
+    - xform/[uv]o(\d);/O$1;/
     - xform/[uv]n(\d);/P$1;/
     - xform/i?ong(\d);/S$1;/
     - xform/[iu]ang(\d);/D$1;/
@@ -103,7 +103,7 @@ zrm_zian_pro:
     - xform/ian(\d);/M$1;/
     - xform/iao(\d);/C$1;/
     - xform/ie(\d);/X$1;/
-    - xform/ui(\d);/V$1;/
+    - xform/[uv]i(\d);/V$1;/
     - xform/in(\d);/N$1;/
     - xform/[iu]a(\d);/W$1;/
     - xform/([a-z]+)ao(\d);/$1K$2;/
@@ -189,18 +189,18 @@ flypy_pro:
     - xform/[uv]an(\d);/R$1;/
     - xform/[uv]e(\d);/T$1;/
     - xform/[uv]n(\d);/Y$1;/
-    - xform/uo(\d);/O$1;/
+    - xform/[uv]o(\d);/O$1;/
     - xform/ie(\d);/P$1;/
     - xform/i?ong(\d);/S$1;/
     - xform/ing(\d);/K$1;/
-    - xform/uai(\d);/K$1;/
+    - xform/[uv]ai(\d);/K$1;/
     - xform/eng(\d);/G$1;/
     - xform/[iu]ang(\d);/L$1;/
     - xform/ang(\d);/H$1;/
     - xform/ian(\d);/M$1;/
     - xform/iao(\d);/N$1;/
     - xform/[iu]a(\d);/X$1;/
-    - xform/ui(\d);/V$1;/
+    - xform/[uv]i(\d);/V$1;/
     - xform/in(\d);/B$1;/
     - xform/([a-z]+)ai(\d);/$1D$2;/
     - xform/([a-z]+)an(\d);/$1J$2;/
@@ -247,18 +247,18 @@ flypy_zian_pro:
     - xform/[uv]an(\d);/R$1;/
     - xform/[uv]e(\d);/T$1;/
     - xform/[uv]n(\d);/Y$1;/
-    - xform/uo(\d);/O$1;/
+    - xform/[uv]o(\d);/O$1;/
     - xform/ie(\d);/P$1;/
     - xform/i?ong(\d);/S$1;/
     - xform/ing(\d);/K$1;/
-    - xform/uai(\d);/K$1;/
+    - xform/[uv]ai(\d);/K$1;/
     - xform/eng(\d);/G$1;/
     - xform/[iu]ang(\d);/L$1;/
     - xform/ang(\d);/H$1;/
     - xform/ian(\d);/M$1;/
     - xform/iao(\d);/N$1;/
     - xform/[iu]a(\d);/X$1;/
-    - xform/ui(\d);/V$1;/
+    - xform/[uv]i(\d);/V$1;/
     - xform/in(\d);/B$1;/
     - xform/([a-z]+)ai(\d);/$1D$2;/
     - xform/([a-z]+)an(\d);/$1J$2;/

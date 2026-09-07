@@ -25,7 +25,7 @@ local keyboard = keyboard {
     },
     row {
       keys = {
-        key(merge(S.slash, key { click = "/", key_text_size = func_key_text_size, width = 0.11 })),
+        key(merge(S.slash, key { click = "@", key_text_size = func_key_text_size, width = 0.11 })),
         key(merge(S.d, key { label = { { text = "d" } }, click = "a", label_symbol = { { text = { "D", "一", "<" }, align = "justify", color = { "text", "mauve", "text" } } }, swipe_up = "<", popup = { "D", "d" }, swipe_down = "H", key_text_size = main_key_text_size })),
         key(merge(S.f, key { label = { { text = "t" } }, click = "s", label_symbol = { { text = { "T", "丨", "=" }, align = "justify", color = { "text", "mauve", "text" } } }, swipe_up = "=", popup = { "T", "t" }, swipe_down = "S", key_text_size = main_key_text_size })),
         key(merge(S.j, key { label = { { text = "\u{F82B} c" } }, click = "g", label_symbol = { { text = { "I/C", "𠃋", ";" }, align = "justify", color = { "text", "mauve", "text" } } }, swipe_up = ";", popup = { "I", "C", "i", "c", "·", "§" }, swipe_down = "Z", key_text_size = main_key_text_size })),

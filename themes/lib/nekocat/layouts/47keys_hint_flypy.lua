@@ -33,13 +33,13 @@ local keyboard = keyboard(merge(safe_require("nekocat.layouts.47keys"), keyboard
           { text = "[uü]e", color = "blue" }
         } })),
         [6] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
-          { text = { "\u{F809}", "讠\n" }, color = "overlay2", align = "justify" },
+          { text = { "𧘇", "讠\n" }, color = "overlay2", align = "justify" },
           { text = { "⺷", "⺶", "羊\n" }, color = "overlay2", align = "justify" },
           { text = "[uü]n", color = "blue" }
         } })),
         [7] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {
           { text = { "饣", "龵\n" }, color = "overlay2", align = "justify" },
-          { text = { "\u{F80A}", "氺", "石\n" }, color = "overlay2", align = "justify" },
+          { text = { "𠂇", "氺", "石\n" }, color = "overlay2", align = "justify" },
           { text = { "\u{F82C}", "u" }, color = { "red", "blue" }, bold = { true, false }, align = "justify" }
         } })),
         [8] = key(merge(hint_offset, key { label = { { align = "left", valign = "top" } }, hint = {

@@ -22,7 +22,7 @@ local keyboard = keyboard {
         key(merge(S.kp1, { label = { { text = "分词" } }, click = "1", label_symbol = { { text = "`" } }, swipe_up = "`", hint = { { text = "1" } } })),
         key(merge(S.kp2, { label = { { text = "ABC" } }, click = "2", label_symbol = { { text = "#" } }, swipe_up = "#", popup = { "a", "b", "c", "A", "B", "C" }, hint = { { text = "2" } } })),
         key(merge(S.kp3, { label = { { text = "DEF" } }, click = "3", label_symbol = { { text = "@" } }, swipe_up = "@", popup = { "d", "e", "f", "D", "E", "F" }, hint = { { text = "3" } } })),
-        key(merge(S.backspace, key { click = "BackSpace", key_text_size = func_key_text_size, width = 0.15 }))
+        key(merge(S.func, key { click = "@", key_text_size = func_key_text_size, width = 0.15 }))
       }
     },
     row {
@@ -40,7 +40,7 @@ local keyboard = keyboard {
         key(merge(S.kp7, { label = { { text = "PQRS" } }, click = "7", label_symbol = { { text = "+" } }, swipe_up = "+", popup = { "p", "q", "r", "s", "P", "Q", "R", "S" }, hint = { { text = "7" } } })),
         key(merge(S.kp8, { label = { { text = "TUV" } }, click = "8", label_symbol = { { text = "-" } }, swipe_up = "-", popup = { "t", "u", "v", "T", "U", "V" }, hint = { { text = "8" } } })),
         key(merge(S.kp9, { label = { { text = "WXYZ" } }, click = "9", label_symbol = { { text = "=" } }, swipe_up = "=", popup = { "w", "x", "y", "z", "W", "X", "Y", "Z" }, hint = { { text = "9" } } })),
-        key(merge(S.func, key { click = "ZiTools", key_text_size = func_key_text_size, width = 0.15 }))
+        key(merge(S.backspace, key { click = "BackSpace", key_text_size = func_key_text_size, width = 0.15 }))
       }
     },
     row {

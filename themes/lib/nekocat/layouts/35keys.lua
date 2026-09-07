@@ -23,7 +23,7 @@ local keyboard = keyboard {
     },
     row {
       keys = {
-        key(merge(S.slash, key { click = "/", width = 0.11 })),
+        key(merge(S.slash, key { click = "@", width = 0.11 })),
         key(merge(S.a, key { label = { { text = "A S" } }, click = "a", label_symbol = { { text = "<" } }, swipe_up = "<", popup = { "A", "S", "a", "s" } })),
         key(merge(S.f, key { label = { { text = "D F" } }, click = "d", label_symbol = { { text = "=" } }, swipe_up = "=", popup = { "D", "F", "d", "f" } })),
         key(merge(S.g, key { label = { { text = "G H" } }, click = "g", label_symbol = { { text = ">" } }, swipe_up = ">", popup = { "G", "H", "g", "h" }, swipe_down = "KeyboardEditor" })),

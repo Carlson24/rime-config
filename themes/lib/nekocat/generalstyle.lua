@@ -1,7 +1,7 @@
 local font_combo = {
   "LXGW975YuanSC-400W.ttf", "WenYuanRoundedSC-Regular.ttf",
   "OpenMoji.ttf", "CarlsonFont.ttf",
-  "WenJinMinchoP0-Regular.otf", "WenJinMinchoP2-Regular.otf", "WenJinMinchoP3-Regular.otf"
+  "PlangothicP1-Regular.ttf", "PlangothicP2-Regular.ttf"
 }
 
 -- ========================================================================

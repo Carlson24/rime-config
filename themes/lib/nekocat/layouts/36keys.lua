@@ -24,7 +24,7 @@ local keyboard = keyboard {
     },
     row {
       keys = {
-        key(merge(S.slash, key { click = "/", width = 0.11 })),
+        key(merge(S.slash, key { click = "@", width = 0.11 })),
         key(merge(S.d, key { label = { { text = " L " } }, click = "l", label_symbol = { { text = "×" } }, swipe_up = "×", popup = { "L", "l" } })),
         key(merge(S.f, key { label = { { text = " D " } }, click = "d", label_symbol = { { text = "÷" } }, swipe_up = "÷", popup = { "D", "d", "U", "u" } })),
         key(merge(S.g, key { label = { { text = " Y " } }, click = "y", label_symbol = { { text = "<" } }, swipe_up = "<", popup = { "Y", "y" }, swipe_down = "KeyboardEditor" })),

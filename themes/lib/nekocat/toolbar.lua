@@ -17,7 +17,6 @@ local function make_button(action, style)
 end
 
 local tb = toolbar {
-  button_font = { "LXGW975YuanSC-400W.ttf" },
   back_style = "ic@chevron-triple-left",
   primary_button = {
     action = "KeyboardSettings",

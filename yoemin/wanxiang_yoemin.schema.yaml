@@ -103,7 +103,7 @@ engine:
     - lua_filter@*wanxiang.super_lookup
     - lua_filter@*wanxiang.super_comment_preedit
     - lua_filter@*wanxiang.super_replacer
-    - lua_filter@*wanxiang.super_filter
+    - lua_filter@*replace_placeholder
     - user_predict_filter
     - simplifier@emoji
     - simplifier@s2t

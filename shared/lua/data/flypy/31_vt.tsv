@@ -1,9 +1,13 @@
 orq	%Y年%m月%d日
-orq	%Y-%m-%d
+orq	%F
 orq	%Y/%m/%d
-ouj	%H:%M:%S
+ouj	%R
+ouj	%H时%M分
+ouj	%T
 ouj	%H时%M分%S秒
-ouj	%A%H:%M
+oiso	%r
+oiso	%Y-%m-%dT%H:%M:%S+08:00
+oiso	%c
 over	魔改版v114.51.4
 xhrm	https://flypy.cc/help
 xhgw	https://flypy.cc

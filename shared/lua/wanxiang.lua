@@ -19,79 +19,6 @@ wanxiang.RIME_PROCESS_RESULTS = {
   kNoop = 2      -- 表示处理器没有处理这个按键，继续传递给下一个处理器
 }
 
--- 整个生命周期内不变，缓存判断结果
-local is_mobile_device        = nil
--- 判断是否为手机设备
----@author amzxyz
----@return boolean
-function wanxiang.is_mobile_device()
-  local function _is_mobile_device()
-    local dist = rime_api.get_distribution_code_name() or ""
-    local user_data_dir = rime_api.get_user_data_dir() or ""
-    local sys_dir = rime_api.get_shared_data_dir() or ""
-    -- 转换为小写以便比较
-    local lower_dist = dist:lower()
-    local lower_path = user_data_dir:lower()
-    local sys_lower_path = sys_dir:lower()
-    -- 主判断：常见移动端输入法
-    if lower_dist == "trime" or
-        lower_dist == "hamster" or
-        lower_dist == "hamster3" or
-        lower_dist == "default" or   -- 超越
-        lower_dist == "xime" or      -- 曦码
-        lower_dist == "lyraime" then -- 灵韵
-      return true
-    end
-
-    -- 补充判断：路径中包含移动设备特征
-    if lower_path:find("/android/") or
-        lower_path:find("/mobile/") or
-        lower_path:find("/sdcard/") or
-        lower_path:find("/data/storage/") or
-        lower_path:find("/storage/emulated/") then
-      return true
-    end
-
-    -- 特定平台判断（Android/Linux）
-    if jit and jit.os then
-      local os_name = jit.os:lower()
-      if os_name:find("android") then
-        return true
-      end
-    end
-
-    -- 所有检查未通过则默认为桌面设备
-    return false
-  end
-
-  if is_mobile_device == nil then
-    is_mobile_device = _is_mobile_device()
-  end
-  return is_mobile_device
-end
-
-local is_special_desktop = nil
-
---- 判断是否为需要特殊处理的桌面环境（squirrel、Cobra 或 fcitx-rime+library）
----@return boolean
-function wanxiang.is_special_desktop()
-  if is_special_desktop == nil then
-    local dist = rime_api.get_distribution_code_name() or ""
-    local sys_dir = rime_api.get_shared_data_dir() or ""
-    local lower_dist = dist:lower()
-    local lower_sys = sys_dir:lower()
-
-    local exclude = false
-    if lower_dist == "squirrel" or lower_dist == "cobra" then
-      exclude = true
-    elseif lower_dist == "fcitx-rime" and lower_sys:find("library") then
-      exclude = true
-    end
-    is_special_desktop = exclude
-  end
-  return is_special_desktop
-end
-
 --- 检测是否为万象专业版
 ---@param env Env
 ---@return boolean
@@ -166,11 +93,6 @@ function wanxiang.is_chinese_codepoint(codepoint)
       or (codepoint >= 0x2F00 and codepoint <= 0x2FDF)   -- Kangxi Radicals
 end
 
--- 判断字符是否为汉字
-function wanxiang.IsChineseCharacter(text)
-  return wanxiang.is_chinese_codepoint(utf8.codepoint(text))
-end
-
 ---按照优先顺序获取文件：用户目录 > 系统目录
 ---@param filename string 相对路径
 ---@retur string | nil
@@ -232,33 +154,6 @@ function wanxiang.load_file_with_fallback(filename, mode)
   end
 
   return file, close, err
-end
-
-local USER_ID_DEFAULT = "unknown"
----作为「小狼毫」和「仓」 `rime_api.get_user_id()` 的一个 workaround
----详见：
----1. https://github.com/rime/weasel/pull/1649
----2. https://github.com/rime/librime/issues/1038
----@return string
-function wanxiang.get_user_id()
-  local user_id = rime_api.get_user_id()
-  if user_id ~= USER_ID_DEFAULT then return user_id end
-
-  local user_data_dir = rime_api.get_user_data_dir()
-  local installation_path = user_data_dir .. "/installation.yaml"
-  local installation_file, _ = io.open(installation_path, "r")
-  if not installation_file then return user_id end
-
-  for line in installation_file:lines() do
-    local key, value = line:match('^([^#:]+):%s+"?([^"]%S+[^"])"?')
-    if key == "installation_id" then
-      user_id = value
-      break
-    end
-  end
-
-  installation_file:close()
-  return user_id
 end
 
 wanxiang.INPUT_METHOD_MARKERS = {
@@ -665,29 +560,6 @@ function wanxiang.blob_fetch(data, pos, key)
     end
   end
   return nil
-end
-
---- 前缀扫描：等价于原 LevelDb 的有序 query(prefix)。
---- handler(key, value) 按 key 字节序被依次调用，仅匹配 key 以 prefix 开头的记录。
-function wanxiang.blob_query_prefix(data, pos, prefix, handler)
-  local n = #pos - 1
-  local lo, hi = 1, n
-  while lo <= hi do
-    local mid = m_floor((lo + hi) / 2)
-    if blob_key_at(data, pos, mid) < prefix then
-      lo = mid + 1
-    else
-      hi = mid - 1
-    end
-  end
-
-  while lo <= n do
-    local s = pos[lo]
-    if s_find(data, prefix, s, true) ~= s then break end
-    local tab = s_find(data, "\t", s, true)
-    handler(s_sub(data, s, tab - 1), s_sub(data, tab + 1, pos[lo + 1] - 2))
-    lo = lo + 1
-  end
 end
 
 --- 缓存文件路径：<user_data>/build/<kind>_<schema_id>.lub

@@ -41,7 +41,7 @@ engine:
     - lua_filter@*wanxiang.super_lookup
     - lua_filter@*wanxiang.super_comment_preedit
     - lua_filter@*wanxiang.super_replacer
-    - lua_filter@*wanxiang.super_filter
+    - lua_filter@*replace_placeholder
     - user_predict_filter # 去重、简繁转换之前
     - simplifier@emoji
     - simplifier@s2t
@@ -100,12 +100,8 @@ super_comment:
     pinned: "" # pin 候选
 
 super_processor:
-  enable_backspace_limit: true
-  enable_seg_loop: true
   enable_tone_fallback: true
-  enable_predict_space: false
   kp_number_mode: auto
-  limit_repeated: "16,64"
   select_character: "bracketleft, bracketright"
 
 wanxiang_english:
@@ -199,7 +195,6 @@ opencc:
       Control+BackSpace: back_syllable
       Control+Delete: delete_candidate
       Escape: cancel
-
   navigator:
     bindings:
       Left: left_by_char_no_loop

@@ -1,0 +1,1992 @@
+# @format
+
+# Rime dictionary
+# encoding: utf-8
+#
+# Luna Pinyin Extended Dictionary(Chinese&English) - 明月拼音扩充词库（含西文的词汇）
+#
+#   瑾昀 <cokunhui@gmail.com>
+#
+# 部署位置：
+# ~/.config/ibus/rime  (Linux)
+# ~/Library/Rime  (Mac OS)
+# %APPDATA%\Rime  (Windows)
+#
+# 于重新部署后生效
+#
+
+# 注（魔然）：原始词库为简化字，使用 OpenCC 繁体化。
+
+---
+name: computer
+version: "LTS"
+sort: by_weight
+...
+磁心	ci2 sin1	10
+错接	cuo4 zie1	10
+盖写	gai4 sie3	10
+后像	hou4 siang4	10
+浸焊	zin4 han4	10
+禁集	jin4 zii2	10
+进栈	zin4 zhan4	10
+净荷	zing4 he2	10
+盲签	mang2 cian1	10
+魔集	mo2 zii2	10
+前像	cian2 siang4	10
+绕接	rao4 zie1	10
+色集	se4 zii2	10
+团集	tuan2 zii2	10
+伪像	wei3 siang4	10
+系序	xi4 sv4	10
+线表	sian4 biao3	10
+线或	sian4 huo4	10
+消密	siao1 mi4	10
+写锁	sie3 suo3	10
+芯件	sin1 jian4	10
+行选	xing2 svan3	10
+锈污	siu4 wu1	10
+序偶	sv4 ou3	10
+隐线	yin3 sian4	10
+槽排序	cao2 pai2 sv4	10
+层析术	ceng2 sii1 shu4	10
+程序池	cheng2 sv4 chi2	10
+程序纸	cheng2 sv4 zhi3	10
+冲突集	chong1 tu1 zii2	10
+词切分	ci2 cie1 fen1	10
+存取臂	cun2 cv3 bi4	10
+带扭斜	dai4 niu3 sie2	10
+读出线	du2 chu1 sian4	10
+读写孔	du2 sie3 kong3	10
+端接器	duan1 zie1 qi4	10
+对换集	dui4 huan4 zii2	10
+对象式	dui4 siang4 shi4	10
+多总线	duo1 zong3 sian4	10
+法线流	fa3 sian4 liu2	10
+赋逻辑	fu4 luo2 zii2	10
+光顺性	guang1 shun4 sing4	10
+黑信号	hei1 sin4 hao4	10
+红信号	hong2 sin4 hao4	10
+活变迁	huo2 bian4 cian1	10
+迹语言	zii4 yv3 yan2	10
+键元集	jian4 yvan2 zii2	10
+接收门	zie1 shou1 men2	10
+精定位	zing1 ding4 wei4	10
+静启动	zing4 qi3 dong4	10
+块净荷	kuai4 zing4 he2	10
+连线表	lian2 sian4 biao3	10
+逻辑环	luo2 zii2 huan2	10
+码元集	ma3 yvan2 zii2	10
+挠进程	nao2 zin4 cheng2	10
+逆变迁	ni4 bian4 cian1	10
+前驱站	cian2 qv1 zhan4	10
+前台区	cian2 tai2 qv1	10
+清洁盘	cing1 jie2 pan2	10
+情态集	cing2 tai4 zii2	10
+去焊枪	qv4 han4 ciang1	10
+全干扰	cvan2 gan1 rao3	10
+全混洗	cvan2 hun4 sii3	10
+全减器	cvan2 jian3 qi4	10
+死变迁	si3 bian4 cian1	10
+通信性	tong1 sin4 sing4	10
+凸凹性	tu1 ao1 sing4	10
+图像元	tu2 siang4 yvan2	10
+外裁剪	wai4 cai2 zian3	10
+外像素	wai4 siang4 su4	10
+微逻辑	wei1 luo2 zii2	10
+微前端	wei1 cian2 duan1	10
+无端接	wu2 duan1 zie1	10
+无穷集	wu2 qiong2 zii2	10
+稀疏集	xi1 shu1 zii2	10
+细索引	sii4 suo3 yin3	10
+线畸变	sian4 ji1 bian4	10
+线检索	sian4 jian3 suo3	10
+线衰减	sian4 shuai1 jian3	10
+相变碟	siang1 bian4 die2	10
+消耗件	siao1 hao4 jian4	10
+小背板	siao3 bei4 ban3	10
+写广播	sie3 guang3 bo1	10
+卸载区	sie4 zai4 qv1	10
+信元头	sin4 yvan2 tou2	10
+星环网	sing1 huan2 wang3	10
+星特性	sing1 te4 sing4	10
+星状网	sing1 zhuang4 wang3	10
+循环网	svn2 huan2 wang3	10
+询问站	svn2 wen4 zhan4	10
+元信令	yvan2 sin4 ling4	10
+栈寻址	zhan4 svn2 zhi3	10
+正则序	zheng4 ze2 sv4	10
+终接器	zhong1 zie1 qi4	10
+转接网	zhuan3 zie1 wang3	10
+自修理	zi4 siu1 li3	10
+总线网	zong3 sian4 wang3	10
+组进位	zu3 zin4 wei4	10
+安全标号	an1 cvan2 biao1 hao4	10
+安全停机	an1 cvan2 ting2 ji1	10
+按序检测	an4 sv4 jian3 ce4	10
+按序提交	an4 sv4 ti2 jiao1	10
+白箱测试	bai2 siang1 ce4 shi4	10
+半线性集	ban4 sian4 sing4 zii2	10
+比特彗星	bi3 te4 hui4 sing1	10
+比特精灵	bi3 te4 zing1 ling2	10
+比特信令	bi3 te4 sin4 ling4	10
+编辑距离	bian1 zii2 jv4 li2	10
+编译选项	bian1 yi4 svan3 xiang4	10
+边缘图像	bian1 yvan2 tu2 siang4	10
+边缘像素	bian1 yvan2 siang4 su4	10
+变迁规则	bian4 cian1 gui1 ze2	10
+变迁系统	bian4 cian1 xi4 tong3	10
+变迁序列	bian4 cian1 sv4 lie4	10
+变迁子网	bian4 cian1 zi5 wang3	10
+标志序列	biao1 zhi4 sv4 lie4	10
+标准对象	biao1 zhun3 dui4 siang4	10
+别名分析	bie2 ming2 fen1 sii1	10
+并发变迁	bing4 fa1 bian4 cian1	10
+布线程序	bu4 sian4 cheng2 sv4	10
+步可达性	bu4 ke3 da2 sing4	10
+裁剪曲面	cai2 zian3 qv1 mian4	10
+插补程序	cha1 bu3 cheng2 sv4	10
+查询优化	cha2 svn2 you1 hua4	10
+查询语言	cha2 svn2 yv3 yan2	10
+超级巡警	chao1 ji2 svn2 jing3	10
+超前补偿	chao1 cian2 bu3 chang2	10
+撤销还原	che4 siao1 huan2 yvan2	10
+程序保护	cheng2 sv4 bao3 hu4	10
+程序变异	cheng2 sv4 bian4 yi4	10
+程序代数	cheng2 sv4 dai4 shu4	10
+程序段表	cheng2 sv4 duan4 biao3	10
+程序对换	cheng2 sv4 dui4 huan4	10
+程序高手	cheng2 sv4 gao1 shou3	10
+程序隔离	cheng2 sv4 ge2 li2	10
+程序格式	cheng2 sv4 ge2 shi4	10
+程序规约	cheng2 sv4 gui1 yve1	10
+程序划分	cheng2 sv4 hua4 fen1	10
+程序集合	cheng2 sv4 zii2 he2	10
+程序扩展	cheng2 sv4 kuo4 zhan3	10
+程序理解	cheng2 sv4 li3 jie3	10
+程序确认	cheng2 sv4 qve4 ren4	10
+程序生成	cheng2 sv4 sheng1 cheng2	10
+程序探测	cheng2 sv4 tan4 ce4	10
+程序修改	cheng2 sv4 siu1 gai3	10
+程序暂停	cheng2 sv4 zan4 ting2	10
+程序质量	cheng2 sv4 zhi4 liang4	10
+程序重试	cheng2 sv4 zhong4 shi4	10
+程序转换	cheng2 sv4 zhuan3 huan4	10
+程序状态	cheng2 sv4 zhuang4 tai4	10
+程序综合	cheng2 sv4 zong1 he2	10
+乘积曲面	cheng2 zii1 qv1 mian4	10
+重新运行	chong2 sin1 yvn4 xing2	10
+虫孔寻径	chong2 kong3 svn2 jing4	10
+虫蚀寻径	chong2 shi2 svn2 jing4	10
+抽象层次	chou1 siang4 ceng2 ci4	10
+初启程序	chu1 qi3 cheng2 sv4	10
+初启序列	chu1 qi3 sv4 lie4	10
+出现序列	chu1 xian4 sv4 lie4	10
+穿越序列	chuan1 yve4 sv4 lie4	10
+串行排序	chuan4 xing2 pai2 sv4	10
+窗口大小	chuang1 kou3 da4 siao3	10
+磁盘镜像	ci2 pan2 jing4 siang4	10
+词汇分析	ci2 hui4 fen1 sii1	10
+词性标注	ci2 sing4 biao1 zhu4	10
+词语切分	ci2 yv3 cie1 fen1	10
+词语信息	ci2 yv3 sin4 sii1	10
+次递归性	ci4 di4 gui1 sing4	10
+存取冲突	cun2 cv3 chong1 tu1	10
+存取队列	cun2 cv3 dui4 lie4	10
+存取范畴	cun2 cv3 fan4 chou2	10
+存取方法	cun2 cv3 fang1 fa3	10
+存取机构	cun2 cv3 ji1 gou4	10
+存取级别	cun2 cv3 ji2 bie2	10
+存取矩阵	cun2 cv3 jv3 zhen4	10
+存取拒绝	cun2 cv3 jv4 zve2	10
+存取控制	cun2 cv3 kong4 zhi4	10
+存取类型	cun2 cv3 lei4 xing2	10
+存取时间	cun2 cv3 shi2 jian1	10
+存取特权	cun2 cv3 te4 qvan2	10
+存取违例	cun2 cv3 wei2 li4	10
+存取许可	cun2 cv3 xv3 ke3	10
+错误分析	cuo4 wu4 fen1 sii1	10
+打包安全	da3 bao1 an1 cvan2	10
+代数逻辑	dai4 shu4 luo2 zii2	10
+单端端接	dan1 duan1 duan1 zie1	10
+单选按钮	dan1 svan3 an4 niu3	10
+当前日期	dang1 cian2 ri4 qi1	10
+递归查询	di4 gui1 cha2 svn2	10
+点可见性	dian3 ke3 jian4 sing4	10
+点阵精度	dian3 zhen4 zing1 du4	10
+电源总线	dian4 yvan2 zong3 sian4	10
+电子情报	dian4 zi5 cing2 bao4	10
+调度程序	diao4 du4 cheng2 sv4	10
+迭代改进	die2 dai4 gai3 zin4	10
+定时分析	ding4 shi2 fen1 sii1	10
+定位信道	ding4 wei4 sin4 dao4	10
+定性描述	ding4 sing4 miao2 shu4	10
+定性推理	ding4 sing4 tui1 li3	10
+定性物理	ding4 sing4 wu4 li3	10
+动态扭斜	dong4 tai4 niu3 sie2	10
+动态刷新	dong4 tai4 shua1 sin1	10
+独立程序	du2 li4 cheng2 sv4	10
+读写周期	du2 sie3 zhou1 qi1	10
+读选择线	du2 svan3 ze2 sian4	10
+端接电压	duan1 zie1 dian4 ya1	10
+对换程序	dui4 huan4 cheng2 sv4	10
+对象模型	dui4 siang4 mo2 xing2	10
+对象引用	dui4 siang4 yin3 yong4	10
+对象字典	dui4 siang4 zi4 dian3	10
+多遍排序	duo1 bian4 pai2 sv4	10
+多点通信	duo1 dian3 tong1 sin4	10
+多级安全	duo1 ji2 an1 cvan2	10
+多类逻辑	duo1 lei4 luo2 zii2	10
+多维存取	duo1 wei2 cun2 cv3	10
+恶意逻辑	e4 yi4 luo2 zii2	10
+翻译程序	fan1 yi4 cheng2 sv4	10
+反向信道	fan3 xiang4 sin4 dao4	10
+范畴分析	fan4 chou2 fen1 sii1	10
+范例修正	fan4 li4 siu1 zheng4	10
+防疫程序	fang2 yi4 cheng2 sv4	10
+放弃序列	fang4 qi4 sv4 lie4	10
+非自反性	fei1 zi4 fan3 sing4	10
+分隔安全	fen1 ge2 an1 cvan2	10
+分派程序	fen1 pai4 cheng2 sv4	10
+分析攻击	fen1 sii1 gong1 ji1	10
+分析阶段	fen1 sii1 jie1 duan4	10
+分析属性	fen1 sii1 shu3 sing4	10
+分析学习	fen1 sii1 xve2 sii2	10
+分页程序	fen1 ye4 cheng2 sv4	10
+风险接受	feng1 xian3 zie1 shou4	10
+符号分析	fu2 hao4 fen1 sii1	10
+符号逻辑	fu2 hao4 luo2 zii2	10
+腐蚀切割	fu3 shi2 cie1 ge1	10
+负载线图	fu4 zai4 sian4 tu2	10
+附加维修	fu4 jia1 wei2 siu1	10
+复合序列	fu4 he2 sv4 lie4	10
+复位序列	fu4 wei4 sv4 lie4	10
+复原请求	fu4 yvan2 cing3 qiu2	10
+改进调频	gai3 zin4 tiao2 pin2	10
+概念分析	gai4 nian4 fen1 sii1	10
+概念获取	gai4 nian4 huo4 cv3	10
+概念相关	gai4 nian4 siang1 guan1	10
+概念学习	gai4 nian4 xve2 sii2	10
+个性标记	ge4 sing4 biao1 ji4	10
+更新报酬	geng1 sin1 bao4 chou2	10
+更新传播	geng1 sin1 chuan2 bo1	10
+公共总线	gong1 gong4 zong3 sian4	10
+攻击程序	gong1 ji1 cheng2 sv4	10
+构造程序	gou4 zao4 cheng2 sv4	10
+观察学习	guan1 cha2 xve2 sii2	10
+光线跟踪	guang1 sian4 gen1 zong1	10
+光线投射	guang1 sian4 tou2 she4	10
+光学图像	guang1 xve2 tu2 siang4	10
+归纳学习	gui1 na4 xve2 sii2	10
+轨迹曲线	gui3 zii4 qv1 sian4	10
+过程分析	guo4 cheng2 fen1 sii1	10
+过程逻辑	guo4 cheng2 luo2 zii2	10
+汉语分析	han4 yv3 fen1 sii1	10
+汉字属性	han4 zi4 shu3 sing4	10
+核基安全	he2 ji1 an1 cvan2	10
+合取查询	he2 cv3 cha2 svn2	10
+黑箱测试	hei1 siang1 ce4 shi4	10
+后加安全	hou4 jia1 an1 cvan2	10
+互斥变迁	hu4 chi4 bian4 cian1	10
+互相怀疑	hu4 siang1 huai2 yi2	10
+话题小组	hua4 ti2 siao3 zu3	10
+唤醒等待	huan4 sing3 deng3 dai4	10
+唤醒原语	huan4 sing3 yvan2 yv3	10
+唤醒字符	huan4 sing3 zi4 fu2	10
+回收程序	hui2 shou1 cheng2 sv4	10
+会议连接	hui4 yi4 lian2 zie1	10
+混洗交换	hun4 sii3 jiao1 huan4	10
+活动进程	huo2 dong4 zin4 cheng2	10
+获取过程	huo4 cv3 guo4 cheng2	10
+霍尔逻辑	huo4 er3 luo2 zii2	10
+即时压缩	zii2 shi2 ya1 suo1	10
+集成电源	zii2 cheng2 dian4 yvan2	10
+集合语言	zii2 he2 yv3 yan2	10
+集散控制	zii2 san4 kong4 zhi4	10
+集团口令	zii2 tuan2 kou3 ling4	10
+集中电容	zii2 zhong1 dian4 rong2	10
+集中负载	zii2 zhong1 fu4 zai4	10
+集中式网	zii2 zhong1 shi4 wang3	10
+计算程序	ji4 suan4 cheng2 sv4	10
+计算逻辑	ji4 suan4 luo2 zii2	10
+计算性能	ji4 suan4 sing4 neng2	10
+监视信元	jian1 shi4 sin4 yvan2	10
+剪裁过程	zian3 cai2 guo4 cheng2	10
+剪切变换	zian3 cie1 bian4 huan4	10
+拣取设备	jian3 cv3 she4 bei4	10
+检查程序	jian3 cha2 cheng2 sv4	10
+检验序列	jian3 yan4 sv4 lie4	10
+检验总线	jian3 yan4 zong3 sian4	10
+溅射膜盘	zian4 she4 mo2 pan2	10
+鉴别逻辑	jian4 bie2 luo2 zii2	10
+鉴别信息	jian4 bie2 sin4 sii1	10
+鉴定需求	jian4 ding4 sv1 qiu2	10
+讲授学习	jiang3 shou4 xve2 sii2	10
+交叉存取	jiao1 cha1 cun2 cv3	10
+交换排序	jiao1 huan4 pai2 sv4	10
+交换线路	jiao1 huan4 sian4 lu4	10
+接触起停	zie1 chu4 qi3 ting2	10
+接地平面	zie1 di4 ping2 mian4	10
+接口分析	zie1 kou3 fen1 sii1	10
+接口规约	zie1 kou3 gui1 yve1	10
+接口净荷	zie1 kou3 zing4 he2	10
+接口开销	zie1 kou3 kai1 siao1	10
+接口速率	zie1 kou3 su4 lv4	10
+接口需求	zie1 kou3 sv1 qiu2	10
+接口主体	zie1 kou3 zhu3 ti3	10
+接收证实	zie1 shou1 zheng4 shi2	10
+节点插值	zie2 dian3 cha1 zhi2	10
+节点删除	zie2 dian3 shan1 chu2	10
+解答抽取	jie3 da2 chou1 cv3	10
+借线进入	zie4 sian4 zin4 ru4	10
+尽力投递	zin4 li4 tou2 di4	10
+禁止信号	jin4 zhi3 sin4 hao4	10
+进程变迁	zin4 cheng2 bian4 cian1	10
+进程调度	zin4 cheng2 diao4 du4	10
+进程迁移	zin4 cheng2 cian1 yi2	10
+进程同步	zin4 cheng2 tong2 bu4	10
+进程状态	zin4 cheng2 zhuang4 tai4	10
+进化策略	zin4 hua4 ce4 lve4	10
+进化程序	zin4 hua4 cheng2 sv4	10
+进化发展	zin4 hua4 fa1 zhan3	10
+进化机制	zin4 hua4 ji1 zhi4	10
+进化计算	zin4 hua4 ji4 suan4	10
+进化检查	zin4 hua4 jian3 cha2	10
+进化优化	zin4 hua4 you1 hua4	10
+精化策略	zing1 hua4 ce4 lve4	10
+精化准则	zing1 hua4 zhun3 ze2	10
+精简指令	zing1 jian3 zhi3 ling4	10
+经典逻辑	jing1 dian3 luo2 zii2	10
+静态绑定	zing4 tai4 bang3 ding4	10
+静态测试	zing4 tai4 ce4 shi4	10
+静态调度	zing4 tai4 diao4 du4	10
+静态缓冲	zing4 tai4 huan3 chong1	10
+静态检验	zing4 tai4 jian3 yan4	10
+静态冒险	zing4 tai4 mao4 xian3	10
+静态扭斜	zing4 tai4 niu3 sie2	10
+静态冗余	zing4 tai4 rong3 yv2	10
+静态刷新	zing4 tai4 shua1 sin1	10
+静态网络	zing4 tai4 wang3 luo4	10
+静态知识	zing4 tai4 zhi1 shi2	10
+竞争变迁	jing4 zheng1 bian4 cian1	10
+就绪状态	ziu4 sv4 zhuang4 tai4	10
+局部总线	jv2 bu4 zong3 sian4	10
+句法分析	jv4 fa3 fen1 sii1	10
+聚焦伺服	zv4 ziao1 ci4 fu2	10
+聚酯色带	zv4 zhi3 se4 dai4	10
+拒绝服务	jv4 zve2 fu2 wu4	10
+开发进展	kai1 fa1 zin4 zhan3	10
+可串行性	ke3 chuan4 xing2 sing4	10
+可归约性	ke3 gui1 yve1 sing4	10
+可扩缩性	ke3 kuo4 suo1 sing4	10
+可视现象	ke3 shi4 xian4 siang4	10
+可信代理	ke3 sin4 dai4 li3	10
+可信计算	ke3 sin4 ji4 suan4	10
+可信进程	ke3 sin4 zin4 cheng2	10
+可诊断性	ke3 zhen3 duan4 sing4	10
+课题小组	ke4 ti2 siao3 zu3	10
+空间需要	kong1 jian1 sv1 yao4	10
+控制精度	kong4 zhi4 zing1 du4	10
+控制总线	kong4 zhi4 zong3 sian4	10
+快速消息	kuai4 su4 siao1 sii1	10
+快速选择	kuai4 su4 svan3 ze2	10
+类比学习	lei4 bi3 xve2 sii2	10
+离散卷积	li2 san4 jvan3 zii1	10
+立即地址	li4 zii2 di4 zhi3	10
+联赛排序	lian2 sai4 pai2 sv4	10
+联想输入	lian2 siang3 shu1 ru4	10
+联想网络	lian2 siang3 wang3 luo4	10
+连接端点	lian2 zie1 duan1 dian3	10
+连续控制	lian2 sv4 kong4 zhi4	10
+连续文本	lian2 sv4 wen2 ben3	10
+良构程序	liang2 gou4 cheng2 sv4	10
+两倍线程	liang3 bei4 sian4 cheng2	10
+路径分析	lu4 jing4 fen1 sii1	10
+路由选择	lu4 you2 svan3 ze2	10
+乱序提交	luan4 sv4 ti2 jiao1	10
+乱序执行	luan4 sv4 zhi2 xing2	10
+螺旋磁道	luo2 svan2 ci2 dao4	10
+螺旋扫描	luo2 svan2 sao3 miao2	10
+逻辑部件	luo2 zii2 bu4 jian4	10
+逻辑布局	luo2 zii2 bu4 jv2	10
+逻辑布线	luo2 zii2 bu4 sian4	10
+逻辑测试	luo2 zii2 ce4 shi4	10
+逻辑地址	luo2 zii2 di4 zhi3	10
+逻辑分页	luo2 zii2 fen1 ye4	10
+逻辑跟踪	luo2 zii2 gen1 zong1	10
+逻辑划分	luo2 zii2 hua4 fen1	10
+逻辑记录	luo2 zii2 ji4 lu4	10
+逻辑控制	luo2 zii2 kong4 zhi4	10
+逻辑冒险	luo2 zii2 mao4 xian3	10
+逻辑模拟	luo2 zii2 mo2 ni3	10
+逻辑设备	luo2 zii2 she4 bei4	10
+逻辑探头	luo2 zii2 tan4 tou2	10
+逻辑文件	luo2 zii2 wen2 jian4	10
+逻辑系统	luo2 zii2 xi4 tong3	10
+逻辑语法	luo2 zii2 yv3 fa3	10
+逻辑炸弹	luo2 zii2 zha4 dan4	10
+逻辑综合	luo2 zii2 zong1 he2	10
+逻辑座标	luo2 zii2 zuo4 biao1	10
+脉冲步进	mai4 chong1 bu4 zin4	10
+迷失消息	mi2 shi1 siao1 sii1	10
+密级信息	mi4 ji2 sin4 sii1	10
+密码分析	mi4 ma3 fen1 sii1	10
+免费短信	mian3 fei4 duan3 sin4	10
+名字抽取	ming2 zi4 chou1 cv3	10
+命令接口	ming4 ling4 zie1 kou3	10
+模糊逻辑	mo2 hu2 luo2 zii2	10
+模拟程序	mo2 ni3 cheng2 sv4	10
+目录排序	mu4 lu4 pai2 sv4	10
+内部对象	nei4 bu4 dui4 siang4	10
+内核程序	nei4 he2 cheng2 sv4	10
+内核进程	nei4 he2 zin4 cheng2	10
+排队进程	pai2 dui4 zin4 cheng2	10
+排序策略	pai2 sv4 ce4 lve4	10
+排序网络	pai2 sv4 wang3 luo4	10
+判定逻辑	pan4 ding4 luo2 zii2	10
+喷泉模型	pen1 cvan2 mo2 xing2	10
+篇章分析	pian1 zhang1 fen1 sii1	10
+品质属性	pin3 zhi4 shu3 sing4	10
+签名模式	cian1 ming2 mo2 shi4	10
+签名算法	cian1 ming2 suan4 fa3	10
+签名文件	cian1 ming2 wen2 jian4	10
+签名验证	cian1 ming2 yan4 zheng4	10
+迁移开销	cian1 yi2 kai1 siao1	10
+前台分区	cian2 tai2 fen1 qv1	10
+前台分页	cian2 tai2 fen1 ye4	10
+前台任务	cian2 tai2 ren4 wu4	10
+前台作业	cian2 tai2 zuo4 ye4	10
+前向串扰	cian2 xiang4 chuan4 rao3	10
+前缀性质	cian2 zhui4 sing4 zhi4	10
+强度削弱	qiang2 du4 sve1 ruo4	10
+抢先调度	ciang3 sian1 diao4 du4	10
+桥接故障	qiao2 zie1 gu4 zhang4	10
+桥接结点	qiao2 zie1 jie2 dian3	10
+窃取程序	cie4 cv3 cheng2 sv4	10
+清除请求	cing1 chu2 cing3 qiu2	10
+清洁软盘	cing1 jie2 ruan3 pan2	10
+情感符号	cing2 gan3 fu2 hao4	10
+情感建模	cing2 gan3 jian4 mo2	10
+情景演算	cing2 jing3 yan3 suan4	10
+情景主体	cing2 jing3 zhu3 ti3	10
+情况语句	cing2 kuang4 yv3 jv4	10
+情态公理	cing2 tai4 gong1 li3	10
+请求分页	cing3 qiu2 fen1 ye4	10
+请求评论	cing3 qiu2 ping2 lun4	10
+区分序列	qv1 fen1 sv4 lie4	10
+区间查询	qv1 jian1 cha2 svn2	10
+区域聚类	qv1 yv4 zv4 lei4	10
+曲面拼接	qv1 mian4 pin1 zie1	10
+曲线光顺	qv1 sian4 guang1 shun4	10
+驱动安全	qv1 dong4 an1 cvan2	10
+取景变换	cv3 jing3 bian4 huan4	10
+全称域名	cvan2 cheng1 yv4 ming2	10
+全局查询	cvan2 jv2 cha2 svn2	10
+全局搜索	cvan2 jv2 sou1 suo3	10
+全局应用	cvan2 jv2 ying4 yong4	10
+全局优化	cvan2 jv2 you1 hua4	10
+全局知识	cvan2 jv2 zhi1 shi2	10
+全连接网	cvan2 lian2 zie1 wang3	10
+全球地址	cvan2 qiu2 di4 zhi3	10
+全文索引	cvan2 wen2 suo3 yin3	10
+确定变迁	qve4 ding4 bian4 cian1	10
+群集分析	qvn2 zii2 fen1 sii1	10
+人工进化	ren2 gong1 zin4 hua4	10
+人机接口	ren2 ji1 zie1 kou3	10
+人际消息	ren2 zii4 siao1 sii1	10
+任务集库	ren4 wu4 zii2 ku4	10
+任务迁移	ren4 wu4 cian1 yi2	10
+熔丝连接	rong2 si1 lian2 zie1	10
+软件安全	ruan3 jian4 an1 cvan2	10
+软件盗窃	ruan3 jian4 dao4 cie4	10
+软件获取	ruan3 jian4 huo4 cv3	10
+软件陷阱	ruan3 jian4 xian4 zing3	10
+软件性能	ruan3 jian4 sing4 neng2	10
+软件总线	ruan3 jian4 zong3 sian4	10
+弱一致性	ruo4 yi2 zhi4 sing4	10
+散焦测距	san4 ziao1 ce4 jv4	10
+色适应性	se4 shi4 ying4 sing4	10
+筛选主体	shai1 svan3 zhu3 ti3	10
+上推排序	shang4 tui1 pai2 sv4	10
+设计分析	she4 ji4 fen1 sii1	10
+设计需求	she4 ji4 sv1 qiu2	10
+设施请求	she4 shi1 cing3 qiu2	10
+审计尾迹	shen3 ji4 wei3 zii4	10
+实际页数	shi2 zii4 ye4 shu4	10
+实施变迁	shi2 shi1 bian4 cian1	10
+实现需求	shi2 xian4 sv1 qiu2	10
+拾取设备	shi2 cv3 she4 bei4	10
+时间变迁	shi2 jian1 bian4 cian1	10
+时序综合	shi2 sv4 zong1 he2	10
+时钟步进	shi2 zhong1 bu4 zin4	10
+事故变迁	shi4 gu4 bian4 cian1	10
+示教学习	shi4 jiao4 xve2 sii2	10
+视频消息	shi4 pin2 siao1 sii1	10
+适应学习	shi4 ying4 xve2 sii2	10
+守护程序	shou3 hu4 cheng2 sv4	10
+手机小二	shou3 ji1 siao3 er4	10
+手势消息	shou3 shi4 siao1 sii1	10
+受控安全	shou4 kong4 an1 cvan2	10
+受控存取	shou4 kong4 cun2 cv3	10
+受控对象	shou4 kong4 dui4 siang4	10
+输出进程	shu1 chu1 zin4 cheng2	10
+输入进程	shu1 ru4 zin4 cheng2	10
+书写方向	shu1 sie3 fang1 xiang4	10
+属性闭包	shu3 sing4 bi4 bao1	10
+属性语法	shu3 sing4 yv3 fa3	10
+术语抽取	shu4 yv3 chou1 cv3	10
+数据抽象	shu4 jv4 chou1 siang4	10
+数据偏斜	shu4 jv4 pian1 sie2	10
+数据属性	shu4 jv4 shu3 sing4	10
+数据信号	shu4 jv4 sin4 hao4	10
+数值精度	shu4 zhi2 zing1 du4	10
+数字对象	shu4 zi4 dui4 siang4	10
+刷新测试	shua1 sin1 ce4 shi4	10
+刷新电路	shua1 sin1 dian4 lu4	10
+刷新周期	shua1 sin1 zhou1 qi1	10
+双向通信	shuang1 xiang4 tong1 sin4	10
+顺序操作	shun4 sv4 cao1 zuo4	10
+顺序处理	shun4 sv4 chu3 li3	10
+顺序存取	shun4 sv4 cun2 cv3	10
+顺序调度	shun4 sv4 diao4 du4	10
+顺序调用	shun4 sv4 diao4 yong4	10
+顺序发生	shun4 sv4 fa1 sheng1	10
+顺序加电	shun4 sv4 jia1 dian4	10
+顺序进程	shun4 sv4 zin4 cheng2	10
+顺序搜索	shun4 sv4 sou1 suo3	10
+顺序索引	shun4 sv4 suo3 yin3	10
+顺序文件	shun4 sv4 wen2 jian4	10
+瞬时变迁	shun4 shi2 bian4 cian1	10
+瞬态分析	shun4 tai4 fen1 sii1	10
+算法分析	suan4 fa3 fen1 sii1	10
+随机存取	sui2 ji1 cun2 cv3	10
+缩写抽取	suo1 sie3 chou1 cv3	10
+索引图像	suo3 yin3 tu2 siang4	10
+贪心周期	tan1 sin1 zhou1 qi1	10
+特征集成	te4 zheng1 zii2 cheng2	10
+提取策略	ti2 cv3 ce4 lve4	10
+替代选择	ti4 dai4 svan3 ze2	10
+条件逻辑	tiao2 jian4 luo2 zii2	10
+调试程序	tiao2 shi4 cheng2 sv4	10
+停止信号	ting2 zhi3 sin4 hao4	10
+通道接口	tong1 dao4 zie1 kou3	10
+通信安全	tong1 sin4 an1 cvan2	10
+通信接口	tong1 sin4 zie1 kou3	10
+通信模型	tong1 sin4 mo2 xing2	10
+通信情报	tong1 sin4 cing2 bao4	10
+通信子网	tong1 sin4 zi5 wang3	10
+同步刷新	tong2 bu4 shua1 sin1	10
+同步通信	tong2 bu4 tong1 sin4	10
+同步序列	tong2 bu4 sv4 lie4	10
+投影中心	tou2 ying3 zhong1 sin1	10
+透明桥接	tou4 ming2 qiao2 zie1	10
+透明刷新	tou4 ming2 shua1 sin1	10
+图例查询	tu2 li4 cha2 svn2	10
+图像逼真	tu2 siang4 bi1 zhen1	10
+图像重建	tu2 siang4 chong2 jian4	10
+图像函数	tu2 siang4 han2 shu4	10
+图像检索	tu2 siang4 jian3 suo3	10
+图像空间	tu2 siang4 kong1 jian1	10
+图像匹配	tu2 siang4 pi3 pei4	10
+图像拼接	tu2 siang4 pin1 zie1	10
+图像平滑	tu2 siang4 ping2 hua2	10
+图像平面	tu2 siang4 ping2 mian4	10
+图像去噪	tu2 siang4 qv4 zao4	10
+图像序列	tu2 siang4 sv4 lie4	10
+推理程序	tui1 li3 cheng2 sv4	10
+外壳进程	wai4 ke2 zin4 cheng2	10
+完全保密	wan2 cvan2 bao3 mi4	10
+完全问题	wan2 cvan2 wen4 ti2	10
+往复寻道	wang3 fu4 svn2 dao4	10
+网上新手	wang3 shang4 sin1 shou3	10
+威胁分析	wei1 xie2 fen1 sii1	10
+维护程序	wei2 hu4 cheng2 sv4	10
+维护陷阱	wei2 hu4 xian4 zing3	10
+卫星直播	wei4 sing1 zhi2 bo1	10
+纹理图像	wen2 li3 tu2 siang4	10
+文件安全	wen2 jian4 an1 cvan2	10
+文件存取	wen2 jian4 cun2 cv3	10
+文献分析	wen2 xian4 fen1 sii1	10
+稳态信号	wen3 tai4 sin4 hao4	10
+无饥饿性	wu2 ji1 e4 sing4	10
+无死锁性	wu2 si3 suo3 sing4	10
+无效信元	wu2 xiao4 sin4 yvan2	10
+无用信息	wu2 yong4 sin4 sii1	10
+物理安全	wu4 li3 an1 cvan2	10
+物理布线	wu4 li3 bu4 sian4	10
+物理信号	wu4 li3 sin4 hao4	10
+物理需求	wu4 li3 sv1 qiu2	10
+系统核心	xi4 tong3 he2 sin1	10
+系统进程	xi4 tong3 zin4 cheng2	10
+系统开销	xi4 tong3 kai1 siao1	10
+系统需求	xi4 tong3 sv1 qiu2	10
+细节层次	sii4 zie2 ceng2 ci4	10
+先行分页	sian1 xing2 fen1 ye4	10
+先行算法	sian1 xing2 suan4 fa3	10
+线程结构	sian4 cheng2 jie2 gou4	10
+线间进入	sian4 jian1 zin4 ru4	10
+线路噪声	sian4 lu4 zao4 sheng1	10
+线条检测	sian4 tiao2 jian3 ce4	10
+线性归结	sian4 sing4 gui1 jie2	10
+线性检测	sian4 sing4 jian3 ce4	10
+线性文法	sian4 sing4 wen2 fa3	10
+线性演绎	sian4 sing4 yan3 yi4	10
+线性语言	sian4 sing4 yv3 yan2	10
+线性组织	sian4 sing4 zu3 zhi1	10
+现场总线	xian4 chang3 zong3 sian4	10
+相关匹配	siang1 guan1 pi3 pei4	10
+相关驱动	siang1 guan1 qv1 dong4	10
+相关探测	siang1 guan1 tan4 ce4	10
+相容收敛	siang1 rong2 shou1 lian3	10
+相似性弧	siang1 si4 sing4 hu2	10
+相信逻辑	siang1 sin4 luo2 zii2	10
+向心模型	xiang4 sin1 mo2 xing2	10
+消解规则	siao1 jie3 gui1 ze2	10
+消息处理	siao1 sii1 chu3 li3	10
+消息传递	siao1 sii1 chuan2 di4	10
+消息存储	siao1 sii1 cun2 chu3	10
+消息方式	siao1 sii1 fang1 shi4	10
+消息排队	siao1 sii1 pai2 dui4	10
+小波包基	siao3 bo1 bao1 ji1	10
+协调程序	xie2 tiao2 cheng2 sv4	10
+谐波信号	xie2 bo1 sin4 hao4	10
+写读串扰	sie3 du2 chuan4 rao3	10
+写前补偿	sie3 cian2 bu3 chang2	10
+写数据线	sie3 shu4 jv4 sian4	10
+写选择线	sie3 svan3 ze2 sian4	10
+泄密发射	sie4 mi4 fa1 she4	10
+心智机理	sin1 zhi4 ji1 li3	10
+心智能力	sin1 zhi4 neng2 li4	10
+心智图像	sin1 zhi4 tu2 siang4	10
+心智状态	sin1 zhi4 zhuang4 tai4	10
+新认知机	sin1 ren4 zhi1 ji1	10
+信号交换	sin4 hao4 jiao1 huan4	10
+信号情报	sin4 hao4 cing2 bao4	10
+信号退化	sin4 hao4 tui4 hua4	10
+信号重构	sin4 hao4 zhong4 gou4	10
+信令终端	sin4 ling4 zhong1 duan1	10
+信念修正	sin4 nian4 siu1 zheng4	10
+信任逻辑	sin4 ren4 luo2 zii2	10
+信息编码	sin4 sii1 bian1 ma3	10
+信息分类	sin4 sii1 fen1 lei4	10
+信息格式	sin4 sii1 ge2 shi4	10
+信息估计	sin4 sii1 gu1 ji4	10
+信息结构	sin4 sii1 jie2 gou4	10
+信息客体	sin4 sii1 ke4 ti3	10
+信息空间	sin4 sii1 kong1 jian1	10
+信息模型	sin4 sii1 mo2 xing2	10
+信息协议	sin4 sii1 xie2 yi4	10
+信息隐蔽	sin4 sii1 yin3 bi4	10
+信息增益	sin4 sii1 zeng1 yi4	10
+信息主管	sin4 sii1 zhu3 guan3	10
+信息字段	sin4 sii1 zi4 duan4	10
+信元划界	sin4 yvan2 hua4 jie4	10
+行位偏斜	xing2 wei4 pian1 sie2	10
+行政安全	xing2 zheng4 an1 cvan2	10
+形状曲线	xing2 zhuang4 qv1 sian4	10
+性能保证	sing4 neng2 bao3 zheng4	10
+性能测量	sing4 neng2 ce4 liang2	10
+性能管理	sing4 neng2 guan3 li3	10
+性能规约	sing4 neng2 gui1 yve1	10
+性能监视	sing4 neng2 jian1 shi4	10
+性能评价	sing4 neng2 ping2 jia4	10
+性能需求	sing4 neng2 sv1 qiu2	10
+修改检测	siu1 gai3 jian3 ce4	10
+修理时间	siu1 li3 shi2 jian1	10
+需求工程	sv1 qiu2 gong1 cheng2	10
+需求规约	sv1 qiu2 gui1 yve1	10
+需求函数	sv1 qiu2 han2 shu4	10
+需求阶段	sv1 qiu2 jie1 duan4	10
+需求审查	sv1 qiu2 shen3 cha2	10
+需求验证	sv1 qiu2 yan4 zheng4	10
+序列密码	sv4 lie4 mi4 ma3	10
+旋转变换	svan2 zhuan3 bian4 huan4	10
+选择通道	svan3 ze2 tong1 dao4	10
+选择注意	svan3 ze2 zhu4 yi4	10
+学习程序	xve2 sii2 cheng2 sv4	10
+学习风范	xve2 sii2 feng1 fan4	10
+学习功能	xve2 sii2 gong1 neng2	10
+寻径函数	svn2 jing4 han2 shu4	10
+循环测试	svn2 huan2 ce4 shi4	10
+循环调度	svn2 huan2 diao4 du4	10
+循环缓冲	svn2 huan2 huan3 chong1	10
+循环借位	svn2 huan2 zie4 wei4	10
+循环链表	svn2 huan2 lian4 biao3	10
+循环展开	svn2 huan2 zhan3 kai1	10
+演示程序	yan3 shi4 cheng2 sv4	10
+样条曲线	yang4 tiao2 qv1 sian4	10
+遗传学习	yi2 chuan2 xve2 sii2	10
+易调度性	yi4 diao4 du4 sing4	10
+易扩充性	yi4 kuo4 chong1 sing4	10
+易扩缩性	yi4 kuo4 suo1 sing4	10
+译词选择	yi4 ci2 svan3 ze2	10
+因果逻辑	yin1 guo3 luo2 zii2	10
+银兆信安	yin2 zhao4 sin4 an1	10
+隐蔽信道	yin3 bi4 sin4 dao4	10
+隐含属性	yin3 han2 shu3 sing4	10
+引导程序	yin3 dao3 cheng2 sv4	10
+应用进程	ying4 yong4 zin4 cheng2	10
+应用逻辑	ying4 yong4 luo2 zii2	10
+映射程序	ying4 she4 cheng2 sv4	10
+硬件安全	ying4 jian4 an1 cvan2	10
+硬盘接口	ying4 pan2 zie1 kou3	10
+用户程序	yong4 hu4 cheng2 sv4	10
+用户线路	yong4 hu4 sian4 lu4	10
+用户兴趣	yong4 hu4 xing4 cv4	10
+用户选项	yong4 hu4 svan3 xiang4	10
+用户注销	yong4 hu4 zhu4 siao1	10
+优先约束	you1 sian1 yve1 shu4	10
+有限点集	you3 xian4 dian3 zii2	10
+有效请求	you3 xiao4 cing3 qiu2	10
+有效信元	you3 xiao4 sin4 yvan2	10
+有序搜索	you3 sv4 sou1 suo3	10
+语法属性	yv3 fa3 shu3 sing4	10
+语言获取	yv3 yan2 huo4 cv3	10
+语言信息	yv3 yan2 sin4 sii1	10
+语义属性	yv3 yi4 shu3 sing4	10
+浴盆曲线	yv4 pen2 qv1 sian4	10
+阈下信道	yv4 xia4 sin4 dao4	10
+预定维修	yv4 ding4 wei2 siu1	10
+远程查询	yvan3 cheng2 cha2 svn2	10
+远程咨询	yvan3 cheng2 zi1 svn2	10
+运动分析	yvn4 dong4 fen1 sii1	10
+运动图像	yvn4 dong4 tu2 siang4	10
+噪声清除	zao4 sheng1 cing1 chu2	10
+增量精化	zeng1 liang4 zing1 hua4	10
+增量学习	zeng1 liang4 xve2 sii2	10
+战略情报	zhan4 lve4 cing2 bao4	10
+战术情报	zhan4 shu4 cing2 bao4	10
+正文编辑	zheng4 wen2 bian1 zii2	10
+正向信道	zheng4 xiang4 sin4 dao4	10
+知识精化	zhi1 shi2 zing1 hua4	10
+支持程序	zhi1 chi2 cheng2 sv4	10
+执行开销	zhi2 xing2 kai1 siao1	10
+直接存取	zhi2 zie1 cun2 cv3	10
+直接液冷	zhi2 zie1 ye4 leng3	10
+直接映射	zhi2 zie1 ying4 she4	10
+直接组织	zhi2 zie1 zu3 zhi1	10
+指令步进	zhi3 ling4 bu4 zin4	10
+指数变迁	zhi3 shu4 bian4 cian1	10
+指纹分析	zhi3 wen2 fen1 sii1	10
+置信测度	zhi4 sin4 ce4 duo2	10
+中心动词	zhong1 sin1 dong4 ci2	10
+中心机构	zhong1 sin1 ji1 gou4	10
+中心名词	zhong1 sin1 ming2 ci2	10
+重心座标	zhong4 sin1 zuo4 biao1	10
+重邮程序	zhong4 you2 cheng2 sv4	10
+重载分析	zhong4 zai4 fen1 sii1	10
+周期窃取	zhou1 qi1 cie4 cv3	10
+主动查询	zhu3 dong4 cha2 svn2	10
+主干总线	zhu3 gan4 zong3 sian4	10
+专用线路	zhuan1 yong4 sian4 lu4	10
+转储清除	zhuan3 chu3 cing1 chu2	10
+转接延迟	zhuan3 zie1 yan2 chi2	10
+装入程序	zhuang1 ru4 cheng2 sv4	10
+追踪程序	zhui1 zong1 cheng2 sv4	10
+字符相关	zi4 fu2 siang1 guan1	10
+自然非序	zi4 ran2 fei1 sv4	10
+自由曲线	zi4 you2 qv1 sian4	10
+自主安全	zi4 zhu3 an1 cvan2	10
+总线结构	zong3 sian4 jie2 gou4	10
+总线鼠标	zong3 sian4 shu3 biao1	10
+总线仲裁	zong3 sian4 zhong4 cai2	10
+租用线路	zu1 yong4 sian4 lu4	10
+组合曲线	zu3 he2 qv1 sian4	10
+最大线长	zui4 da4 sian4 zhang3	10
+最小范围	zui4 siao3 fan4 wei2	10
+最小回路	zui4 siao3 hui2 lu4	10
+最小特权	zui4 siao3 te4 qvan2	10
+安全病毒库	an1 cvan2 bing4 du2 ku4	10
+安全过滤器	an1 cvan2 guo4 lv4 qi4	10
+安全浏览器	an1 cvan2 liu2 lan3 qi4	10
+安全路由器	an1 cvan2 lu4 you2 qi4	10
+八进制数字	ba1 zin4 zhi4 shu4 zi4	10
+白消耗周期	bai2 siao1 hao4 zhou1 qi1	10
+半色调图像	ban4 se4 diao4 tu2 siang4	10
+包交换总线	bao1 jiao1 huan4 zong3 sian4	10
+薄膜晶体管	bao2 mo2 zing1 ti3 guan3	10
+保留页选项	bao3 liu2 ye4 svan3 xiang4	10
+报复性雇员	bao4 fu4 sing4 gu4 yvan2	10
+贝济埃曲面	bei4 zii4 ai1 qv1 mian4	10
+贝叶斯逻辑	bei4 ye4 si1 luo2 zii2	10
+编码字符集	bian1 ma3 zi4 fu2 zii2	10
+边缘连接器	bian1 yvan2 lian2 zie1 qi4	10
+标号化安全	biao1 hao4 hua4 an1 cvan2	10
+标量流水线	biao1 liang4 liu2 shui3 sian4	10
+标准程序法	biao1 zhun3 cheng2 sv4 fa3	10
+标准程序库	biao1 zhun3 cheng2 sv4 ku4	10
+标准扭斜带	biao1 zhun3 niu3 sie2 dai4	10
+并行外排序	bing4 xing2 wai4 pai2 sv4	10
+波形流水线	bo1 xing2 liu2 shui3 sian4	10
+不精确推理	bu4 zing1 qve4 tui1 li3	10
+不精确中断	bu4 zing1 qve4 zhong1 duan4	10
+不可靠进程	bu4 ke3 kao4 zin4 cheng2	10
+不完全排错	bu4 wan2 cvan2 pai2 cuo4	10
+不完全数据	bu4 wan2 cvan2 shu4 jv4	10
+不完全信息	bu4 wan2 cvan2 sin4 sii1	10
+部分正确性	bu4 fen4 zheng4 qve4 sing4	10
+参照完整性	can1 zhao4 wan2 zheng3 sing4	10
+测试有效性	ce4 shi4 you3 xiao4 sing4	10
+差错潜伏期	cha1 cuo4 cian2 fu2 qi1	10
+差分双绞线	cha1 fen1 shuang1 jiao3 sian4	10
+长期相关性	chang2 qi1 siang1 guan1 sing4	10
+陈述性知识	chen2 shu4 sing4 zhi1 shi2	10
+程序寄存器	cheng2 sv4 ji4 cun2 qi4	10
+程序计数器	cheng2 sv4 ji4 shu4 qi4	10
+程序局部性	cheng2 sv4 jv2 bu4 sing4	10
+程序生成器	cheng2 sv4 sheng1 cheng2 qi4	10
+程序验证器	cheng2 sv4 yan4 zheng4 qi4	10
+程序优先级	cheng2 sv4 you1 sian1 ji2	10
+程序员作业	cheng2 sv4 yvan2 zuo4 ye4	10
+程序正确性	cheng2 sv4 zheng4 qve4 sing4	10
+程序支持库	cheng2 sv4 zhi1 chi2 ku4	10
+抽象语言族	chou1 siang4 yv3 yan2 zu2	10
+穿线二叉树	chuan1 sian4 er4 cha1 shu4	10
+传递相关性	chuan2 di4 siang1 guan1 sing4	10
+串联端接线	chuan4 lian2 duan1 zie1 sian4	10
+磁道中心距	ci2 dao4 zhong1 sin1 jv4	10
+磁头读写槽	ci2 tou2 du2 sie3 cao2	10
+磁头卸载区	ci2 tou2 sie4 zai4 qv1	10
+存储器总线	cun2 chu3 qi4 zong3 sian4	10
+存取透明性	cun2 cv3 tou4 ming2 sing4	10
+打印机机芯	da3 yin4 ji1 ji1 sin1	10
+带标号信道	dai4 biao1 hao4 sin4 dao4	10
+单回路调节	dan1 hui2 lu4 tiao2 zie2	10
+单字节校正	dan1 zi4 zie2 jiao4 zheng4	10
+弹出式选单	dan4 chu1 shi4 svan3 dan1	10
+当前活动栈	dang1 cian2 huo2 dong4 zhan4	10
+当前行指针	dang1 cian2 xing2 zhi3 zhen1	10
+点对点通信	dian3 dui4 dian3 tong1 sin4	10
+电流型逻辑	dian4 liu2 xing2 luo2 zii2	10
+调度信息池	diao4 du4 sin4 sii1 chi2	10
+定义性出现	ding4 yi4 sing4 chu1 xian4	10
+动态分析器	dong4 tai4 fen1 sii1 qi4	10
+动态流水线	dong4 tai4 liu2 shui3 sian4	10
+动态优先级	dong4 tai4 you1 sian1 ji2	10
+端接二极管	duan1 zie1 er4 ji2 guan3	10
+对称传输线	dui4 chen4 chuan2 shu1 sian4	10
+对换优先级	dui4 huan4 you1 sian1 ji2	10
+对角线测试	dui4 jiao3 sian4 ce4 shi4	10
+对象标识符	dui4 siang4 biao1 shi2 fu2	10
+对象式方法	dui4 siang4 shi4 fang1 fa3	10
+对象式分析	dui4 siang4 shi4 fen1 sii1	10
+对象式设计	dui4 siang4 shi4 she4 ji4	10
+对象式语言	dui4 siang4 shi4 yv3 yan2	10
+多边形裁剪	duo1 bian1 xing2 cai2 zian3	10
+多边形取向	duo1 bian1 xing2 cv3 xiang4	10
+多尺度分析	duo1 chi3 du4 fen1 sii1	10
+多光谱图像	duo1 guang1 pu3 tu2 siang4	10
+多回路调节	duo1 hui2 lu4 tiao2 zie2	10
+多媒体通信	duo1 mei2 ti3 tong1 sin4	10
+多面体裁剪	duo1 mian4 ti3 cai2 zian3	10
+多模式接口	duo1 mo2 shi4 zie1 kou3	10
+多线程处理	duo1 sian4 cheng2 chu3 li3	10
+多芯片模块	duo1 sin1 pian4 mo2 kuai4	10
+多一可归性	duo1 yi1 ke3 gui1 sing4	10
+二进制单元	er4 zin4 zhi4 dan1 yvan2	10
+二进制数字	er4 zin4 zhi4 shu4 zi4	10
+二进制运算	er4 zin4 zhi4 yvn4 suan4	10
+二进制字符	er4 zin4 zhi4 zi4 fu2	10
+发射极点接	fa1 she4 ji2 dian3 zie1	10
+反编译程序	fan3 bian1 yi4 cheng2 sv4	10
+反汇编程序	fan3 hui4 bian1 cheng2 sv4	10
+反馈边集合	fan3 kui4 bian1 zii2 he2	10
+反窃听装置	fan3 cie4 ting1 zhuang1 zhi4	10
+防病毒程序	fang2 bing4 du2 cheng2 sv4	10
+防信息泄漏	fang2 sin4 sii1 sie4 lou4	10
+访问局部性	fang3 wen4 jv2 bu4 sing4	10
+访问局守性	fang3 wen4 jv2 shou3 sing4	10
+非交换连接	fei1 jiao1 huan4 lian2 zie1	10
+非抢先调度	fei1 ciang3 sian1 diao4 du4	10
+非请求分页	fei1 cing3 qiu2 fen1 ye4	10
+非线性编辑	fei1 sian4 sing4 bian1 zii2	10
+非线性导航	fei1 sian4 sing4 dao3 hang2	10
+非线性量化	fei1 sian4 sing4 liang4 hua4	10
+非预定维修	fei1 yv4 ding4 wei2 siu1	10
+分布透明性	fen1 bu4 tou4 ming2 sing4	10
+分派优先级	fen1 pai4 you1 sian1 ji2	10
+分区存取法	fen1 qv1 cun2 cv3 fa3	10
+分时优先级	fen1 shi2 you1 sian1 ji2	10
+封装可靠性	feng1 zhuang1 ke3 kao4 sing4	10
+服务接入点	fu2 wu4 zie1 ru4 dian3	10
+服务请求块	fu2 wu4 cing3 qiu2 kuai4	10
+负逻辑转换	fu4 luo2 zii2 zhuan3 huan4	10
+复杂特征集	fu4 za2 te4 zheng1 zii2	10
+改善性维护	gai3 shan4 sing4 wei2 hu4	10
+改正性活动	gai3 zheng4 sing4 huo2 dong4	10
+根编译程序	gen1 bian1 yi4 cheng2 sv4	10
+公共接地点	gong1 gong4 zie1 di4 dian3	10
+公理复杂性	gong1 li3 fu4 za2 sing4	10
+构造性证明	gou4 zao4 sing4 zheng4 ming2	10
+固定性错误	gu4 ding4 sing4 cuo4 wu4	10
+固有多义性	gu4 you3 duo1 yi4 sing4	10
+固有线电容	gu4 you3 sian4 dian4 rong2	10
+广义序列机	guang3 yi4 sv4 lie4 ji1	10
+过程性知识	guo4 cheng2 sing4 zhi1 shi2	10
+核心映像库	he2 sin1 ying4 siang4 ku4	10
+合法性撤消	he2 fa3 sing4 che4 siao1	10
+合法性取消	he2 fa3 sing4 cv3 siao1	10
+合格性测试	he2 ge2 sing4 ce4 shi4	10
+很小很强大	hen3 siao3 hen3 qiang2 da4	10
+宏处理程序	hong2 chu3 li3 cheng2 sv4	10
+互联网安全	hu4 lian2 wang3 an1 cvan2	10
+环氧黏合剂	huan2 yang3 nian2 he2 zii4	10
+基本优先级	ji1 ben3 you1 sian1 ji2	10
+极限优先级	ji2 xian4 you1 sian1 ji2	10
+集成自动化	zii2 cheng2 zi4 dong4 hua4	10
+几何连续性	ji3 he2 lian2 sv4 sing4	10
+技术可行性	ji4 shu4 ke3 xing2 sing4	10
+计数选择弧	ji4 shu4 svan3 ze2 hu2	10
+计算复杂性	ji4 suan4 fu4 za2 sing4	10
+计算机安全	ji4 suan4 ji1 an1 cvan2	10
+计算机程序	ji4 suan4 ji1 cheng2 sv4	10
+计算机性能	ji4 suan4 ji1 sing4 neng2	10
+结构化程序	jie2 gou4 hua4 cheng2 sv4	10
+结构化分析	jie2 gou4 hua4 fen1 sii1	10
+结构有界性	jie2 gou4 you3 jie4 sing4	10
+紧密一致性	jin3 mi4 yi2 zhi4 sing4	10
+进程间通信	zin4 cheng2 jian1 tong1 sin4	10
+进程优先级	zin4 cheng2 you1 sian1 ji2	10
+经济可行性	jing1 zii4 ke3 xing2 sing4	10
+静电绘图机	zing4 dian4 hui4 tu2 ji1	10
+静电印刷机	zing4 dian4 yin4 shua1 ji1	10
+静态存储器	zing4 tai4 cun2 chu3 qi4	10
+静态缓冲区	zing4 tai4 huan3 chong1 qv1	10
+静态流水线	zing4 tai4 liu2 shui3 sian4	10
+绝对分辨率	zve2 dui4 fen1 bian4 lv4	10
+开发工具箱	kai1 fa1 gong1 jv4 siang1	10
+可达标识集	ke3 da2 biao1 shi2 zii2	10
+可达性关系	ke3 da2 sing4 guan1 xi4	10
+可见性问题	ke3 jian4 sing4 wen4 ti2	10
+可靠性度量	ke3 kao4 sing4 du4 liang4	10
+可靠性分析	ke3 kao4 sing4 fen1 sii1	10
+可靠性工程	ke3 kao4 sing4 gong1 cheng2	10
+可靠性模型	ke3 kao4 sing4 mo2 xing2	10
+可靠性评价	ke3 kao4 sing4 ping2 jia4	10
+可靠性认证	ke3 kao4 sing4 ren4 zheng4	10
+可靠性设计	ke3 kao4 sing4 she4 ji4	10
+可靠性数据	ke3 kao4 sing4 shu4 jv4	10
+可靠性统计	ke3 kao4 sing4 tong3 ji4	10
+可靠性预计	ke3 kao4 sing4 yv4 ji4	10
+可靠性增长	ke3 kao4 sing4 zeng1 zhang3	10
+可能性理论	ke3 neng2 sing4 li3 lun4	10
+可信度函数	ke3 sin4 du4 han2 shu4	10
+可信时间戳	ke3 sin4 shi2 jian1 chuo1	10
+可行性研究	ke3 xing2 sing4 yan2 jiu1	10
+可用性模型	ke3 yong4 sing4 mo2 xing2	10
+可执行程序	ke3 zhi2 xing2 cheng2 sv4	10
+可重写光碟	ke3 zhong4 sie3 guang1 die2	10
+可转换签名	ke3 zhuan3 huan4 cian1 ming2	10
+空间复杂性	kong1 jian1 fu4 za2 sing4	10
+空间局部性	kong1 jian1 jv2 bu4 sing4	10
+控制流分析	kong4 zhi4 liu2 fen1 sii1	10
+控制器接口	kong4 zhi4 qi4 zie1 kou3	10
+离线图灵机	li2 sian4 tu2 ling2 ji1	10
+联想存储器	lian2 siang3 cun2 chu3 qi4	10
+连接装配区	lian2 zie1 zhuang1 pei4 qv1	10
+连续性检验	lian2 sv4 sing4 jian3 yan4	10
+临界负载线	lin2 jie4 fu4 zai4 sian4	10
+邻接表结构	lin2 zie1 biao3 jie2 gou4	10
+领域专指性	ling3 yv4 zhuan1 zhi3 sing4	10
+流水线处理	liu2 shui3 sian4 chu3 li3	10
+流水线控制	liu2 shui3 sian4 kong4 zhi4	10
+流水线排空	liu2 shui3 sian4 pai2 kong1	10
+流水线算法	liu2 shui3 sian4 suan4 fa3	10
+流水线停顿	liu2 shui3 sian4 ting2 dun4	10
+流水线效率	liu2 shui3 sian4 xiao4 lv4	10
+论题选择器	lun4 ti2 svan3 ze2 qi4	10
+逻辑测试笔	luo2 zii2 ce4 shi4 bi3	10
+逻辑格式化	luo2 zii2 ge2 shi4 hua4	10
+逻辑驱动器	luo2 zii2 qv1 dong4 qi4	10
+逻辑设备表	luo2 zii2 she4 bei4 biao3	10
+逻辑设备名	luo2 zii2 she4 bei4 ming2	10
+密封连接器	mi4 feng1 lian2 zie1 qi4	10
+面向对象的	mian4 xiang4 dui4 siang4 de5	10
+描写语言学	miao2 sie3 yv3 yan2 xve2	10
+命令行接口	ming4 ling4 xing2 zie1 kou3	10
+模糊集合论	mo2 hu2 zii2 he2 lun4	10
+模式敏感性	mo2 shi4 min3 gan3 sing4	10
+内联网安全	nei4 lian2 wang3 an1 cvan2	10
+你见即我见	ni3 jian4 zii2 wo3 jian4	10
+逆完全混洗	ni4 wan2 cvan2 hun4 sii3	10
+耦合传输线	ou3 he2 chuan2 shu1 sian4	10
+匹配筛选器	pi3 pei4 shai1 svan3 qi4	10
+屏蔽双绞线	ping2 bi4 shuang1 jiao3 sian4	10
+齐次座标系	cii2 ci4 zuo4 biao1 xi4	10
+启发式程序	qi3 fa1 shi4 cheng2 sv4	10
+启发式信息	qi3 fa1 shi4 sin4 sii1	10
+千禧年危机	cian1 xi3 nian2 wei1 ji1	10
+前端处理器	cian2 duan1 chu3 li3 qi4	10
+嵌套循环法	qian4 tao4 svn2 huan2 fa3	10
+情景自动机	cing2 jing3 zi4 dong4 ji1	10
+请求参数表	cing3 qiu2 can1 shu4 biao3	10
+权标总线网	qvan2 biao1 zong3 sian4 wang3	10
+全动感视频	cvan2 dong4 gan3 shi4 pin2	10
+全局存储器	cvan2 jv2 cun2 chu3 qi4	10
+全双工传输	cvan2 shuang1 gong1 chuan2 shu1	10
+全息存储器	cvan2 sii1 cun2 chu3 qi4	10
+确定性调度	qve4 ding4 sing4 diao4 du4	10
+确定性算法	qve4 ding4 sing4 suan4 fa3	10
+认知心理学	ren4 zhi1 sin1 li3 xve2	10
+软件安全性	ruan3 jian4 an1 cvan2 sing4	10
+软件可靠性	ruan3 jian4 ke3 kao4 sing4	10
+软中断信号	ruan3 zhong1 duan4 sin4 hao4	10
+扫描线算法	sao3 miao2 sian4 suan4 fa3	10
+扫描选择器	sao3 miao2 svan3 ze2 qi4	10
+上下文分析	shang4 xia4 wen2 fen1 sii1	10
+上下文切换	shang4 xia4 wen2 cie4 huan4	10
+摄像机标定	she4 siang4 ji1 biao1 ding4	10
+设计编辑器	she4 ji4 bian1 zii2 qi4	10
+设计多样性	she4 ji4 duo1 yang4 sing4	10
+设计分析器	she4 ji4 fen1 sii1 qi4	10
+申请令牌帧	shen1 cing3 ling4 pai2 zhen1	10
+申请权标帧	shen1 cing3 qvan2 biao1 zhen1	10
+申述性语言	shen1 shu4 sing4 yv3 yan2	10
+生产线方法	sheng1 chan3 sian4 fang1 fa3	10
+实体完整性	shi2 ti3 wan2 zheng3 sing4	10
+时间复杂性	shi2 jian1 fu4 za2 sing4	10
+时间局部性	shi2 jian1 jv2 bu4 sing4	10
+事件独立性	shi4 jian4 du2 li4 sing4	10
+事件依赖性	shi4 jian4 yi1 lai4 sing4	10
+似真性排序	shi4 zhen1 sing4 pai2 sv4	10
+适应性维护	shi4 ying4 sing4 wei2 hu4	10
+首席执行官	shou3 sii2 zhi2 xing2 guan1	10
+输入优先级	shu1 ru4 you1 sian1 ji2	10
+树连接结构	shu4 lian2 zie1 jie2 gou4	10
+树连接语法	shu4 lian2 zie1 yv3 fa3	10
+数据并行性	shu4 jv4 bing4 xing2 sing4	10
+数据独立性	shu4 jv4 du2 li4 sing4	10
+数据多样性	shu4 jv4 duo1 yang4 sing4	10
+数据集中器	shu4 jv4 zii2 zhong1 qi4	10
+数据局部性	shu4 jv4 jv2 bu4 sing4	10
+数据库安全	shu4 jv4 ku4 an1 cvan2	10
+数据库集成	shu4 jv4 ku4 zii2 cheng2	10
+数据流分析	shu4 jv4 liu2 fen1 sii1	10
+数据通信中	shu4 jv4 tong1 sin4 zhong1	10
+数据完整性	shu4 jv4 wan2 zheng3 sing4	10
+数据一致性	shu4 jv4 yi2 zhi4 sing4	10
+数据有效性	shu4 jv4 you3 xiao4 sing4	10
+数字配线架	shu4 zi4 pei4 sian4 jia4	10
+数字照相机	shu4 zi4 zhao4 siang4 ji1	10
+数字字符集	shu4 zi4 zi4 fu2 zii2	10
+双线性曲面	shuang1 sian4 sing4 qv1 mian4	10
+双线性系统	shuang1 sian4 sing4 xi4 tong3	10
+顺序局部性	shun4 sv4 jv2 bu4 sing4	10
+顺序批处理	shun4 sv4 pi1 chu3 li3	10
+顺序推理机	shun4 sv4 tui1 li3 ji1	10
+说明性语言	shuo1 ming2 sing4 yv3 yan2	10
+松散一致性	song1 san3 yi2 zhi4 sing4	10
+算法正确性	suan4 fa3 zheng4 qve4 sing4	10
+随机数序列	sui2 ji1 shu4 sv4 lie4	10
+所见即所得	suo3 jian4 zii2 suo3 de5	10
+调试程序包	tiao2 shi4 cheng2 sv4 bao1	10
+通信处理机	tong1 sin4 chu3 li3 ji1	10
+通信控制器	tong1 sin4 kong4 zhi4 qi4	10
+通信量分析	tong1 sin4 liang4 fen1 sii1	10
+通信量填充	tong1 sin4 liang4 tian2 chong1	10
+通信适配器	tong1 sin4 shi4 pei4 qi4	10
+图像几何学	tu2 siang4 ji3 he2 xve2	10
+图像数据库	tu2 siang4 shu4 jv4 ku4	10
+完全二叉树	wan2 cvan2 er4 cha1 shu4	10
+完全正确性	wan2 cvan2 zheng4 qve4 sing4	10
+完全自检验	wan2 cvan2 zi4 jian3 yan4	10
+完整性检查	wan2 zheng3 sing4 jian3 cha2	10
+完整性检验	wan2 zheng3 sing4 jian3 yan4	10
+完整性控制	wan2 zheng3 sing4 kong4 zhi4	10
+完整性约束	wan2 zheng3 sing4 yve1 shu4	10
+微程序控制	wei1 cheng2 sv4 kong4 zhi4	10
+微程序设计	wei1 cheng2 sv4 she4 ji4	10
+位脉冲拥挤	wei4 mai4 chong1 yong1 zii3	10
+位置透明性	wei4 zhi4 tou4 ming2 sing4	10
+沃伦抽象机	wo4 lun2 chou1 siang4 ji1	10
+无监督学习	wu2 jian1 du1 xve2 sii2	10
+无连接业务	wu2 lian2 zie1 ye4 wu4	10
+无循环设置	wu2 svn2 huan2 she4 zhi4	10
+无用信息区	wu2 yong4 sin4 sii1 qv1	10
+膝上计算机	sii1 shang4 ji4 suan4 ji1	10
+系统高安全	xi4 tong3 gao1 an1 cvan2	10
+系统兼容性	xi4 tong3 jian1 rong2 sing4	10
+系统可靠性	xi4 tong3 ke3 kao4 sing4	10
+系统可行性	xi4 tong3 ke3 xing2 sing4	10
+系统可用性	xi4 tong3 ke3 yong4 sing4	10
+系统任务集	xi4 tong3 ren4 wu4 zii2	10
+系统完整性	xi4 tong3 wan2 zheng3 sing4	10
+细胞自动机	sii4 bao1 zi4 dong4 ji1	10
+细线以太网	sii4 sian4 yi3 tai4 wang3	10
+下拉式选单	xia4 la1 shi4 svan3 dan1	10
+先来先服务	sian1 lai2 sian1 fu2 wu4	10
+先行指令站	sian1 xing2 zhi3 ling4 zhan4	10
+显式并行性	xian3 shi4 bing4 xing2 sing4	10
+线性流水线	sian4 sing4 liu2 shui3 sian4	10
+相关型故障	siang1 guan1 xing2 gu4 zhang4	10
+相似性测度	siang1 si4 sing4 ce4 duo2	10
+橡皮筋方法	siang4 pi2 jin1 fang1 fa3	10
+向后可达性	xiang4 hou4 ke3 da2 sing4	10
+向量流水线	xiang4 liang4 liu2 shui3 sian4	10
+向前可达性	xiang4 cian2 ke3 da2 sing4	10
+小服务程序	siao3 fu2 wu4 cheng2 sv4	10
+小型计算机	siao3 xing2 ji4 suan4 ji1	10
+写更新协议	sie3 geng1 sin1 xie2 yi4	10
+心智心理学	sin1 zhi4 sin1 li3 xve2	10
+新用户免费	sin1 yong4 hu4 mian3 fei4	10
+信号电压降	sin4 hao4 dian4 ya1 jiang4	10
+信号预处理	sin4 hao4 yv4 chu3 li3	10
+信令虚通道	sin4 ling4 xv1 tong1 dao4	10
+信息流模型	sin4 sii1 liu2 mo2 xing2	10
+信息隐形性	sin4 sii1 yin3 xing2 sing4	10
+信元丢失率	sin4 yvan2 diu1 shi1 lv4	10
+修改检测码	siu1 gai3 jian3 ce4 ma3	10
+虚通道连接	xv1 tong1 dao4 lian2 zie1	10
+虚通路连接	xv1 tong1 lu4 lian2 zie1	10
+许可权清单	xv3 ke3 qvan2 cing1 dan1	10
+学习自动机	xve2 sii2 zi4 dong4 ji1	10
+循环不变式	svn2 huan2 bu4 bian4 shi4	10
+液晶印刷机	ye4 zing1 yin4 shua1 ji1	10
+一致性测试	yi2 zhi4 sing4 ce4 shi4	10
+一致性重演	yi2 zhi4 sing4 chong2 yan3	10
+一致性检验	yi2 zhi4 sing4 jian3 yan4	10
+一致性约束	yi2 zhi4 sing4 yve1 shu4	10
+已配准图像	yi3 pei4 zhun3 tu2 siang4	10
+异步并行性	yi4 bu4 bing4 xing2 sing4	10
+隐藏线消除	yin3 cang2 sian4 siao1 chu2	10
+隐式并行性	yin3 shi4 bing4 xing2 sing4	10
+印制板布线	yin4 zhi4 ban3 bu4 sian4	10
+英文缩写词	ying1 wen2 suo1 sie3 ci2	10
+硬件多线程	ying4 jian4 duo1 sian4 cheng2	10
+硬联线控制	ying4 lian2 sian4 kong4 zhi4	10
+硬连线逻辑	ying4 lian2 sian4 luo2 zii2	10
+用户任务集	yong4 hu4 ren4 wu4 zii2	10
+优先级调度	you1 sian1 ji2 diao4 du4	10
+优先级控制	you1 sian1 ji2 kong4 zhi4	10
+优先级调整	you1 sian1 ji2 tiao2 zheng3	10
+优先级选择	you1 sian1 ji2 svan3 ze2	10
+优先级作业	you1 sian1 ji2 zuo4 ye4	10
+有穷性问题	you3 qiong2 sing4 wen4 ti2	10
+有限元分析	you3 xian4 yvan2 fen1 sii1	10
+有效性检查	you3 xiao4 sing4 jian3 cha2	10
+语义相关性	yv3 yi4 siang1 guan1 sing4	10
+预编译程序	yv4 bian1 yi4 cheng2 sv4	10
+预处理程序	yv4 chu3 li3 cheng2 sv4	10
+预防性维护	yv4 fang2 sing4 wei2 hu4	10
+源路由桥接	yvan2 lu4 you2 qiao2 zie1	10
+源语言分析	yvan2 yv3 yan2 fen1 sii1	10
+元编译程序	yvan2 bian1 yi4 cheng2 sv4	10
+元件数小时	yvan2 jian4 shu4 siao3 shi2	10
+元可满足性	yvan2 ke3 man3 zu2 sing4	10
+运算流水线	yvn4 suan4 liu2 shui3 sian4	10
+运行可靠性	yvn4 xing2 ke3 kao4 sing4	10
+运行可行性	yvn4 xing2 ke3 xing2 sing4	10
+噪声消除器	zao4 sheng1 siao1 chu2 qi4	10
+阵列流水线	zhen4 lie4 liu2 shui3 sian4	10
+正逻辑转换	zheng4 luo2 zii2 zhuan3 huan4	10
+正确性证明	zheng4 qve4 sing4 zheng4 ming2	10
+正文编辑器	zheng4 wen2 bian1 zii2 qi4	10
+知识编辑器	zhi1 shi2 bian1 zii2 qi4	10
+知识提取器	zhi1 shi2 ti2 cv3 qi4	10
+知识相容性	zhi1 shi2 siang1 rong2 sing4	10
+直方图修正	zhi2 fang1 tu2 siu1 zheng4	10
+指令流水线	zhi3 ling4 liu2 shui3 sian4	10
+指令相关性	zhi3 ling4 siang1 guan1 sing4	10
+指派优先级	zhi3 pai4 you1 sian1 ji2	10
+智能高清版	zhi4 neng2 gao1 cing1 ban3	10
+终止性证明	zhong1 zhi3 sing4 zheng4 ming2	10
+重汇聚扇出	zhong4 hui4 zv4 shan4 chu1	10
+周期性定义	zhou1 qi1 sing4 ding4 yi4	10
+主调度程序	zhu3 diao4 du4 cheng2 sv4	10
+注意力聚焦	zhu4 yi4 li4 zv4 ziao1	10
+字母字符集	zi4 mu3 zi4 fu2 zii2	10
+自寻优控制	zi4 svn2 you1 kong4 zhi4	10
+自由选择网	zi4 you2 svan3 ze2 wang3	10
+子监控程序	zi5 jian1 kong4 cheng2 sv4	10
+最高优先级	zui4 gao1 you1 sian1 ji2	10
+最高优先数	zui4 gao1 you1 sian1 shu4	10
+最后优先级	zui4 hou4 you1 sian1 ji2	10
+最小生成树	zui4 siao3 sheng1 cheng2 shu4	10
+作业优先级	zuo4 ye4 you1 sian1 ji2	10
+安全操作系统	an1 cvan2 cao1 zuo4 xi4 tong3	10
+安全电子交易	an1 cvan2 dian4 zi5 jiao1 yi4	10
+安全功能评估	an1 cvan2 gong1 neng2 ping2 gu1	10
+安全认证授权	an1 cvan2 ren4 zheng4 shou4 qvan2	10
+安全运行模式	an1 cvan2 yvn4 xing2 mo2 shi4	10
+办公信息系统	ban4 gong1 sin4 sii1 xi4 tong3	10
+报表生成程序	bao4 biao3 sheng1 cheng2 cheng2 sv4	10
+报表书写程序	bao4 biao3 shu1 sie3 cheng2 sv4	10
+便笺式存储器	bian4 zian1 shi4 cun2 chu3 qi4	10
+变迁实施速率	bian4 cian1 shi2 shi1 su4 lv4	10
+表面安装焊接	biao3 mian4 an1 zhuang1 han4 zie1	10
+并发程序设计	bing4 fa1 cheng2 sv4 she4 ji4	10
+并发读并发写	bing4 fa1 du2 bing4 fa1 sie3	10
+并发信息系统	bing4 fa1 sin4 sii1 xi4 tong3	10
+并行程序设计	bing4 xing2 cheng2 sv4 she4 ji4	10
+并行多元连接	bing4 xing2 duo1 yvan2 lian2 zie1	10
+并行二元连接	bing4 xing2 er4 yvan2 lian2 zie1	10
+并行排序算法	bing4 xing2 pai2 sv4 suan4 fa3	10
+并行选择算法	bing4 xing2 svan3 ze2 suan4 fa3	10
+不完全性理论	bu4 wan2 cvan2 sing4 li3 lun4	10
+布局接地规则	bu4 jv2 zie1 di4 gui1 ze2	10
+测试存取端口	ce4 shi4 cun2 cv3 duan1 kou3	10
+测试可重复性	ce4 shi4 ke3 chong2 fu4 sing4	10
+测试驱动程序	ce4 shi4 qv1 dong4 cheng2 sv4	10
+层次分析处理	ceng2 ci4 fen1 sii1 chu3 li3	10
+层次序列键码	ceng2 ci4 sv4 lie4 jian4 ma3	10
+差分电压信号	cha1 fen1 dian4 ya1 sin4 hao4	10
+差分密码分析	cha1 fen1 mi4 ma3 fen1 sii1	10
+常规信息系统	chang2 gui1 sin4 sii1 xi4 tong3	10
+常驻控制程序	chang2 zhu4 kong4 zhi4 cheng2 sv4	10
+超级编译程序	chao1 ji2 bian1 yi4 cheng2 sv4	10
+超流水线结构	chao1 liu2 shui3 sian4 jie2 gou4	10
+程序调度程序	cheng2 sv4 diao4 du4 cheng2 sv4	10
+程序分页功能	cheng2 sv4 fen1 ye4 gong1 neng2	10
+程序界限监控	cheng2 sv4 jie4 xian4 jian1 kong4	10
+程序逻辑单元	cheng2 sv4 luo2 zii2 dan1 yvan2	10
+程序敏感故障	cheng2 sv4 min3 gan3 gu4 zhang4	10
+程序设计环境	cheng2 sv4 she4 ji4 huan2 jing4	10
+程序设计技术	cheng2 sv4 she4 ji4 ji4 shu4	10
+程序设计逻辑	cheng2 sv4 she4 ji4 luo2 zii2	10
+程序设计语言	cheng2 sv4 she4 ji4 yv3 yan2	10
+程序生成程序	cheng2 sv4 sheng1 cheng2 cheng2 sv4	10
+程序体系结构	cheng2 sv4 ti3 xi4 jie2 gou4	10
+程序转换方法	cheng2 sv4 zhuan3 huan4 fang1 fa3	10
+程序装入操作	cheng2 sv4 zhuang1 ru4 cao1 zuo4	10
+程序装入程序	cheng2 sv4 zhuang1 ru4 cheng2 sv4	10
+成本效益分析	cheng2 ben3 xiao4 yi4 fen1 sii1	10
+重复选择排序	chong2 fu4 svan3 ze2 pai2 sv4	10
+抽象数据类型	chou1 siang4 shu4 jv4 lei4 xing2	10
+初始程序装入	chu1 shi3 cheng2 sv4 zhuang1 ru4	10
+出错登记程序	chu1 cuo4 deng1 ji4 cheng2 sv4	10
+纯正可归约性	chun2 zheng4 ke3 gui1 yve1 sing4	10
+伺服道录写器	ci4 fu2 dao4 lu4 sie3 qi4	10
+篡改信道信息	cuan4 gai3 sin4 dao4 sin4 sii1	10
+存储器一致性	cun2 chu3 qi4 yi2 zhi4 sing4	10
+存取管理程序	cun2 cv3 guan3 li3 cheng2 sv4	10
+存取控制机制	cun2 cv3 kong4 zhi4 ji1 zhi4	10
+待续数据标记	dai4 sv4 shu4 jv4 biao1 ji4	10
+代码生成程序	dai4 ma3 sheng1 cheng2 cheng2 sv4	10
+单调曲率螺线	dan1 diao4 qv1 lv4 luo2 sian4	10
+当前默认目录	dang1 cian2 mo4 ren4 mu4 lu4	10
+地理信息系统	di4 li3 sin4 sii1 xi4 tong3	10
+地址解析协议	di4 zhi3 jie3 sii1 xie2 yi4	10
+电压电流曲线	dian4 ya1 dian4 liu2 qv1 sian4	10
+电子消息处理	dian4 zi5 siao1 sii1 chu3 li3	10
+电阻引线电感	dian4 zu3 yin3 sian4 dian4 gan3	10
+定量图像分析	ding4 liang4 tu2 siang4 fen1 sii1	10
+动态生成程序	dong4 tai4 sheng1 cheng2 cheng2 sv4	10
+读写控制电路	du2 sie3 kong4 zhi4 dian4 lu4	10
+对象管理结构	dui4 siang4 guan3 li3 jie2 gou4	10
+对象建模技术	dui4 siang4 jian4 mo2 ji4 shu4	10
+对象请求代理	dui4 siang4 cing3 qiu2 dai4 li3	10
+多道程序分派	duo1 dao4 cheng2 sv4 fen1 pai4	10
+多道程序设计	duo1 dao4 cheng2 sv4 she4 ji4	10
+多点通信服务	duo1 dian3 tong1 sin4 fu2 wu4	10
+多分辨率分析	duo1 fen1 bian4 lv4 fen1 sii1	10
+多分辨率曲线	duo1 fen1 bian4 lv4 qv1 sian4	10
+多重程序装入	duo1 zhong4 cheng2 sv4 zhuang1 ru4	10
+二阶参数连续	er4 jie1 can1 shu4 lian2 sv4	10
+二阶几何连续	er4 jie1 ji3 he2 lian2 sv4	10
+二进制大对象	er4 zin4 zhi4 da4 dui4 siang4	10
+发散束卷积法	fa1 san4 shu4 jvan3 zii1 fa3	10
+反馈桥接故障	fan3 kui4 qiao2 zie1 gu4 zhang4	10
+反向计费接受	fan3 xiang4 ji4 fei4 zie1 shou4	10
+仿真定性推理	fang3 zhen1 ding4 sing4 tui1 li3	10
+非对称选择网	fei1 dui4 chen4 svan3 ze2 wang3	10
+非屏蔽双绞线	fei1 ping2 bi4 shuang1 jiao3 sian4	10
+非线性流水线	fei1 sian4 sing4 liu2 shui3 sian4	10
+分段确定性的	fen1 duan4 qve4 ding4 sing4 de5	10
+分隔安全模式	fen1 ge2 an1 cvan2 mo2 shi4	10
+分时就绪方式	fen1 shi2 ziu4 sv4 fang1 shi4	10
+分时驱动程序	fen1 shi2 qv1 dong4 cheng2 sv4	10
+封闭安全环境	feng1 bi4 an1 cvan2 huan2 jing4	10
+浮动装入程序	fu2 dong4 zhuang1 ru4 cheng2 sv4	10
+服务监控程序	fu2 wu4 jian1 kong4 cheng2 sv4	10
+服务请求中断	fu2 wu4 cing3 qiu2 zhong1 duan4	10
+干线连接单元	gan4 sian4 lian2 zie1 dan1 yvan2	10
+干线耦合单元	gan4 sian4 ou3 he2 dan1 yvan2	10
+高性能计算机	gao1 sing4 neng2 ji4 suan4 ji1	10
+高优先级中断	gao1 you1 sian1 ji2 zhong1 duan4	10
+个人通信系统	ge4 ren2 tong1 sin4 xi4 tong3	10
+更新事务处理	geng1 sin1 shi4 wu4 chu3 li3	10
+工作信道状态	gong1 zuo4 sin4 dao4 zhuang4 tai4	10
+公共对象模型	gong1 gong4 dui4 siang4 mo2 xing2	10
+公共网关接口	gong1 gong4 wang3 guan1 zie1 kou3	10
+构件对象模型	gou4 jian4 dui4 siang4 mo2 xing2	10
+故障安全电路	gu4 zhang4 an1 cvan2 dian4 lu4	10
+故障弱化逻辑	gu4 zhang4 ruo4 hua4 luo2 zii2	10
+故障诊断程序	gu4 zhang4 zhen3 duan4 cheng2 sv4	10
+关键部分优先	guan1 jian4 bu4 fen4 you1 sian1	10
+管道通信机制	guan3 dao4 tong1 sin4 ji1 zhi4	10
+管理程序调用	guan3 li3 cheng2 sv4 diao4 yong4	10
+管理信息系统	guan3 li3 sin4 sii1 xi4 tong3	10
+广度优先搜索	guang3 du4 you1 sian1 sou1 suo3	10
+广义相容运算	guang3 yi4 siang1 rong2 yvn4 suan4	10
+国际权威认证	guo2 zii4 qvan2 wei1 ren4 zheng4	10
+过程程序设计	guo4 cheng2 cheng2 sv4 she4 ji4	10
+函数程序设计	han2 shu4 cheng2 sv4 she4 ji4	10
+汉语信息处理	han4 yv3 sin4 sii1 chu3 li3	10
+汉语言语分析	han4 yv3 yan2 yv3 fen1 sii1	10
+汉语语音分析	han4 yv3 yv3 yin1 fen1 sii1	10
+汉语自动切分	han4 yv3 zi4 dong4 cie1 fen1	10
+汉字公用程序	han4 zi4 gong1 yong4 cheng2 sv4	10
+汉字输入程序	han4 zi4 shu1 ru4 cheng2 sv4	10
+汉字属性字典	han4 zi4 shu3 sing4 zi4 dian3	10
+汉字信息处理	han4 zi4 sin4 sii1 chu3 li3	10
+宏观经济模型	hong2 guan1 jing1 zii4 mo2 xing2	10
+宏流水线算法	hong2 liu2 shui3 sian4 suan4 fa3	10
+后台初启程序	hou4 tai2 chu1 qi3 cheng2 sv4	10
+后台调度程序	hou4 tai2 diao4 du4 cheng2 sv4	10
+后台监控程序	hou4 tai2 jian1 kong4 cheng2 sv4	10
+呼叫接通分组	hu1 jiao4 zie1 tong1 fen1 zu3	10
+呼叫进行信号	hu1 jiao4 zin4 xing2 sin4 hao4	10
+混合集成电路	hun4 he2 zii2 cheng2 dian4 lu4	10
+混洗交换网络	hun4 sii3 jiao1 huan4 wang3 luo4	10
+奇偶归并排序	ji1 ou3 gui1 bing4 pai2 sv4	10
+及时编译程序	ji2 shi2 bian1 yi4 cheng2 sv4	10
+集成数字控制	zii2 cheng2 shu4 zi4 kong4 zhi4	10
+集散控制系统	zii2 san4 kong4 zhi4 xi4 tong3	10
+集中式缓冲池	zii2 zhong1 shi4 huan3 chong1 chi2	10
+计量经济模型	ji4 liang4 jing1 zii4 mo2 xing2	10
+计时分析程序	ji4 shi2 fen1 sii1 cheng2 sv4	10
+计算机可靠性	ji4 suan4 ji1 ke3 kao4 sing4	10
+简单安全特性	jian3 dan1 an1 cvan2 te4 sing4	10
+溅射薄膜磁盘	zian4 she4 bao2 mo2 ci2 pan2	10
+交叉汇编程序	jiao1 cha1 hui4 bian1 cheng2 sv4	10
+交叉链接文件	jiao1 cha1 lian4 zie1 wen2 jian4	10
+接触式磁记录	zie1 chu4 shi4 ci2 ji4 lu4	10
+接口定义语言	zie1 kou3 ding4 yi4 yv3 yan2	10
+接口描述语言	zie1 kou3 miao2 shu4 yv3 yan2	10
+结构查询语言	jie2 gou4 cha2 svn2 yv3 yan2	10
+结构化编辑器	jie2 gou4 hua4 bian1 zii2 qi4	10
+进程定性推理	zin4 cheng2 ding4 sing4 tui1 li3	10
+进化程序设计	zin4 hua4 cheng2 sv4 she4 ji4	10
+经济信息系统	jing1 zii4 sin4 sii1 xi4 tong3	10
+经理信息系统	jing1 li3 sin4 sii1 xi4 tong3	10
+净室软件工程	zing4 shi4 ruan3 jian4 gong1 cheng2	10
+静态存储分配	zing4 tai4 cun2 chu3 fen1 pei4	10
+静态分析程序	zing4 tai4 fen1 sii1 cheng2 sv4	10
+静止图像压缩	zing4 zhi3 tu2 siang4 ya1 suo1	10
+句子歧义消除	jv4 zi5 qi2 yi4 siao1 chu2	10
+卷积投影数据	jvan3 zii1 tou2 ying3 shu4 jv4	10
+决策支持中心	jve2 ce4 zhi1 chi2 zhong1 sin1	10
+绝对机器代码	zve2 dui4 ji1 qi4 dai4 ma3	10
+卡普可归约性	ka3 pu3 ke3 gui1 yve1 sing4	10
+开放安全环境	kai1 fang4 an1 cvan2 huan2 jing4	10
+可计算性理论	ke3 ji4 suan4 sing4 li3 lun4	10
+可满足性问题	ke3 man3 zu2 sing4 wen4 ti2	10
+可视程序设计	ke3 shi4 cheng2 sv4 she4 ji4	10
+空闲信道状态	kong4 xian2 sin4 dao4 zhuang4 tai4	10
+库克可归约性	ku4 ke4 ke3 gui1 yve1 sing4	10
+块优先级控制	kuai4 you1 sian1 ji2 kong4 zhi4	10
+快速编译程序	kuai4 su4 bian1 yi4 cheng2 sv4	10
+快速有序运输	kuai4 su4 you3 sv4 yvn4 shu1	10
+宽度优先分析	kuan1 du4 you1 sian1 fen1 sii1	10
+立方连接结构	li4 fang1 lian2 zie1 jie2 gou4	10
+联机分析过程	lian2 ji1 fen1 sii1 guo4 cheng2	10
+联机分析挖掘	lian2 ji1 fen1 sii1 wa1 jve2	10
+连接编辑程序	lian2 zie1 bian1 zii2 cheng2 sv4	10
+连接单元接口	lian2 zie1 dan1 yvan2 zie1 kou3	10
+连接方式传输	lian2 zie1 fang1 shi4 chuan2 shu1	10
+连接接纳控制	lian2 zie1 zie1 na4 kong4 zhi4	10
+连接装入程序	lian2 zie1 zhuang1 ru4 cheng2 sv4	10
+连续控制系统	lian2 sv4 kong4 zhi4 xi4 tong3	10
+连续模拟语言	lian2 sv4 mo2 ni3 yv3 yan2	10
+连续语音识别	lian2 sv4 yv3 yin1 shi2 bie2	10
+流水线计算机	liu2 shui3 sian4 ji4 suan4 ji1	10
+逻辑程序设计	luo2 zii2 cheng2 sv4 she4 ji4	10
+逻辑访问控制	luo2 zii2 fang3 wen4 kong4 zhi4	10
+逻辑工作单元	luo2 zii2 gong1 zuo4 dan1 yvan2	10
+逻辑链路控制	luo2 zii2 lian4 lu4 kong4 zhi4	10
+逻辑输入设备	luo2 zii2 shu1 ru4 she4 bei4	10
+逻辑信令信道	luo2 zii2 sin4 ling4 sin4 dao4	10
+逻辑验证系统	luo2 zii2 yan4 zheng4 xi4 tong3	10
+媒体控制接口	mei2 ti3 kong4 zhi4 zie1 kou3	10
+媒体相关接口	mei2 ti3 siang1 guan1 zie1 kou3	10
+密码分析攻击	mi4 ma3 fen1 sii1 gong1 ji1	10
+密文分组链接	mi4 wen2 fen1 zu3 lian4 zie1	10
+密钥分配中心	mi4 yao4 fen1 pei4 zhong1 sin1	10
+面向对象表示	mian4 xiang4 dui4 siang4 biao3 shi4	10
+面向对象测试	mian4 xiang4 dui4 siang4 ce4 shi4	10
+面向对象方法	mian4 xiang4 dui4 siang4 fang1 fa3	10
+面向对象分析	mian4 xiang4 dui4 siang4 fen1 sii1	10
+面向对象建模	mian4 xiang4 dui4 siang4 jian4 mo2	10
+面向对象设计	mian4 xiang4 dui4 siang4 she4 ji4	10
+面向对象语言	mian4 xiang4 dui4 siang4 yv3 yan2	10
+面向连接协议	mian4 xiang4 lian2 zie1 xie2 yi4	10
+敏感元件接口	min3 gan3 yvan2 jian4 zie1 kou3	10
+命令处理程序	ming4 ling4 chu3 li3 cheng2 sv4	10
+命令解释程序	ming4 ling4 jie3 shi4 cheng2 sv4	10
+模糊查询语言	mo2 hu2 cha2 svn2 yv3 yan2	10
+模型定性推理	mo2 xing2 ding4 sing4 tui1 li3	10
+墨者安全专家	mo4 zhe3 an1 cvan2 zhuan1 jia1	10
+内务处理程序	nei4 wu4 chu3 li3 cheng2 sv4	10
+排队注册请求	pai2 dui4 zhu4 ce4 cing3 qiu2	10
+平衡归并排序	ping2 heng2 gui1 bing4 pai2 sv4	10
+平均存取时间	ping2 jvn1 cun2 cv3 shi2 jian1	10
+平均性态分析	ping2 jvn1 sing4 tai4 fen1 sii1	10
+平均修复时间	ping2 jvn1 siu1 fu4 shi2 jian1	10
+平行束卷积法	ping2 xing2 shu4 jvan3 zii1 fa3	10
+起始间隔集合	qi3 shi3 jian4 ge2 zii2 he2	10
+前台操作方式	cian2 tai2 cao1 zuo4 fang1 shi4	10
+前台初启程序	cian2 tai2 chu1 qi3 cheng2 sv4	10
+前台调度程序	cian2 tai2 diao4 du4 cheng2 sv4	10
+前台监控程序	cian2 tai2 jian1 kong4 cheng2 sv4	10
+窃取信道信息	cie4 cv3 sin4 dao4 sin4 sii1	10
+情报检索语言	cing2 bao4 jian3 suo3 yv3 yan2	10
+情景行动系统	cing2 jing3 xing2 dong4 xi4 tong3	10
+请求分时处理	cing3 qiu2 fen1 shi2 chu3 li3	10
+求解路径学习	qiu2 jie3 lu4 jing4 xve2 sii2	10
+区间时态逻辑	qv1 jian1 shi2 tai4 luo2 zii2	10
+全局查询优化	cvan2 jv2 cha2 svn2 you1 hua4	10
+全局共享资源	cvan2 jv2 gong4 xiang3 zi1 yvan2	10
+全面质量管理	cvan2 mian4 zhi4 liang4 guan3 li3	10
+全球地址管理	cvan2 qiu2 di4 zhi3 guan3 li3	10
+全球定位系统	cvan2 qiu2 ding4 wei4 xi4 tong3	10
+全自检查电路	cvan2 zi4 jian3 cha2 dian4 lu4	10
+人工信息系统	ren2 gong1 sin4 sii1 xi4 tong3	10
+人际消息处理	ren2 zii4 siao1 sii1 chu3 li3	10
+任务调度程序	ren4 wu4 diao4 du4 cheng2 sv4	10
+任务分派程序	ren4 wu4 fen1 pai4 cheng2 sv4	10
+任务管理程序	ren4 wu4 guan3 li3 cheng2 sv4	10
+任选用户设施	ren4 svan3 yong4 hu4 she4 shi1	10
+认知映像系统	ren4 zhi1 ying4 siang4 xi4 tong3	10
+柔性制造系统	rou2 sing4 zhi4 zao4 xi4 tong3	10
+入侵检测系统	ru4 cin1 jian3 ce4 xi4 tong3	10
+软件监控程序	ruan3 jian4 jian1 kong4 cheng2 sv4	10
+软件可维护性	ruan3 jian4 ke3 wei2 hu4 sing4	10
+软件可移植性	ruan3 jian4 ke3 yi2 zhi2 sing4	10
+软件潜行分析	ruan3 jian4 cian2 xing2 fen1 sii1	10
+软件验证程序	ruan3 jian4 yan4 zheng4 cheng2 sv4	10
+软件易维护性	ruan3 jian4 yi4 wei2 hu4 sing4	10
+软件易移植性	ruan3 jian4 yi4 yi2 zhi2 sing4	10
+瑞星杀毒软件	rui4 sing1 sha1 du2 ruan3 jian4	10
+弱一致性模型	ruo4 yi2 zhi4 sing4 mo2 xing2	10
+上的网际协议	shang4 de5 wang3 zii4 xie2 yi4	10
+射极耦合逻辑	she4 ji2 ou3 he2 luo2 zii2	10
+设备驱动程序	she4 bei4 qv1 dong4 cheng2 sv4	10
+设计编辑程序	she4 ji4 bian1 zii2 cheng2 sv4	10
+设计分析程序	she4 ji4 fen1 sii1 cheng2 sv4	10
+深度优先分析	shen1 du4 you1 sian1 fen1 sii1	10
+深度优先搜索	shen1 du4 you1 sian1 sou1 suo3	10
+实际存储页表	shi2 zii4 cun2 chu3 ye4 biao3	10
+实时执行程序	shi2 shi2 zhi2 xing2 cheng2 sv4	10
+时间序列模型	shi2 jian1 sv4 lie4 mo2 xing2	10
+时态查询语言	shi2 tai4 cha2 svn2 yv3 yan2	10
+时延偏差大小	shi2 yan2 pian1 cha1 da4 siao3	10
+事件检测程序	shi4 jian4 jian3 ce4 cheng2 sv4	10
+事务消息传递	shi4 wu4 siao1 sii1 chuan2 di4	10
+是指信息技术	shi4 zhi3 sin4 sii1 ji4 shu4	10
+手段目的分析	shou3 duan4 mu4 di4 fen1 sii1	10
+手写汉字输入	shou3 sie3 han4 zi4 shu1 ru4	10
+受控安全模式	shou4 kong4 an1 cvan2 mo2 shi4	10
+输入输出接口	shu1 ru4 shu1 chu1 zie1 kou3	10
+数据采集系统	shu4 jv4 cai3 zii2 xi4 tong3	10
+数据存取路径	shu4 jv4 cun2 cv3 lu4 jing4	10
+数据分析系统	shu4 jv4 fen1 sii1 xi4 tong3	10
+数据管理程序	shu4 jv4 guan3 li3 cheng2 sv4	10
+数据库完整性	shu4 jv4 ku4 wan2 zheng3 sing4	10
+数据相关冲突	shu4 jv4 siang1 guan1 chong1 tu1	10
+数字签名标准	shu4 zi4 cian1 ming2 biao1 zhun3	10
+数字图像处理	shu4 zi4 tu2 siang4 chu3 li3	10
+双向交替通信	shuang1 xiang4 jiao1 ti4 tong1 sin4	10
+双向同时通信	shuang1 xiang4 tong2 shi2 tong1 sin4	10
+双元小波变换	shuang1 yvan2 siao3 bo1 bian4 huan4	10
+顺序程序设计	shun4 sv4 cheng2 sv4 she4 ji4	10
+顺序调度系统	shun4 sv4 diao4 du4 xi4 tong3	10
+思想生成系统	si1 siang3 sheng1 cheng2 xi4 tong3	10
+算术逻辑部件	suan4 shu4 luo2 zii2 bu4 jian4	10
+算术运算逻辑	suan4 shu4 yvn4 suan4 luo2 zii2	10
+随机存取机器	sui2 ji1 cun2 cv3 ji1 qi4	10
+随机存取内存	sui2 ji1 cun2 cv3 nei4 cun2	10
+通道调度程序	tong1 dao4 diao4 du4 cheng2 sv4	10
+通信控制字符	tong1 sin4 kong4 zhi4 zi4 fu2	10
+通信流量分析	tong1 sin4 liu2 liang4 fen1 sii1	10
+通用安装程序	tong1 yong4 an1 zhuang1 cheng2 sv4	10
+通用串行总线	tong1 yong4 chuan4 xing2 zong3 sian4	10
+通用接口总线	tong1 yong4 zie1 kou3 zong3 sian4	10
+通用阵列逻辑	tong1 yong4 zhen4 lie4 luo2 zii2	10
+图灵可归约性	tu2 ling2 ke3 gui1 yve1 sing4	10
+图像并行处理	tu2 siang4 bing4 xing2 chu3 li3	10
+图像输入设备	tu2 siang4 shu1 ru4 she4 bei4	10
+图形核心系统	tu2 xing2 he2 sin1 xi4 tong3	10
+团集覆盖问题	tuan2 zii2 fu4 gai4 wen4 ti2	10
+完全函数依赖	wan2 cvan2 han2 shu4 yi1 lai4	10
+网际互连协议	wang3 zii4 hu4 lian2 xie2 yi4	10
+网际协议地址	wang3 zii4 xie2 yi4 di4 zhi3	10
+网络结点接口	wang3 luo4 jie2 dian3 zie1 kou3	10
+网络信息服务	wang3 luo4 sin4 sii1 fu2 wu4	10
+网络信息中心	wang3 luo4 sin4 sii1 zhong1 sin1	10
+网络运行中心	wang3 luo4 yvn4 xing2 zhong1 sin1	10
+网络字节顺序	wang3 luo4 zi4 zie2 shun4 sv4	10
+微诊断微程序	wei1 zhen3 duan4 wei1 cheng2 sv4	10
+维护分析过程	wei2 hu4 fen1 sii1 guo4 cheng2	10
+维护服务程序	wei2 hu4 fu2 wu4 cheng2 sv4	10
+伪多色射线和	wei3 duo1 se4 she4 sian4 he2	10
+伪造信道信息	wei3 zao4 sin4 dao4 sin4 sii1	10
+位置偏差信号	wei4 zhi4 pian1 cha1 sin4 hao4	10
+温度循环试验	wen1 du4 svn2 huan2 shi4 yan4	10
+温切斯特技术	wen1 cie4 si1 te4 ji4 shu4	10
+文本编辑程序	wen2 ben3 bian1 zii2 cheng2 sv4	10
+文化程序设计	wen2 hua4 cheng2 sv4 she4 ji4	10
+文件检验程序	wen2 jian4 jian3 yan4 cheng2 sv4	10
+无我程序设计	wu2 wo3 cheng2 sv4 she4 ji4	10
+无线置标语言	wu2 sian4 zhi4 biao1 yv3 yan2	10
+无源底板总线	wu2 yvan2 di3 ban3 zong3 sian4	10
+物理隔绝网络	wu4 li3 ge2 zve2 wang3 luo4	10
+物理媒体连接	wu4 li3 mei2 ti3 lian2 zie1	10
+物理信令信道	wu4 li3 sin4 ling4 sin4 dao4	10
+物资需求规划	wu4 zi1 sv1 qiu2 gui1 hua4	10
+系统调度程序	xi4 tong3 diao4 du4 cheng2 sv4	10
+系统辅助连接	xi4 tong3 fu3 zhu4 lian2 zie1	10
+系统控制程序	xi4 tong3 kong4 zhi4 cheng2 sv4	10
+系统实用程序	xi4 tong3 shi2 yong4 cheng2 sv4	10
+系统执行程序	xi4 tong3 zhi2 xing2 cheng2 sv4	10
+系统中断请求	xi4 tong3 zhong1 duan4 cing3 qiu2	10
+系统装入程序	xi4 tong3 zhuang1 ru4 cheng2 sv4	10
+先进操作环境	sian1 zin4 cao1 zuo4 huan2 jing4	10
+先进操作系统	sian1 zin4 cao1 zuo4 xi4 tong3	10
+线性控制系统	sian4 sing4 kong4 zhi4 xi4 tong3	10
+线性预测编码	sian4 sing4 yv4 ce4 bian1 ma3	10
+相关控制部件	siang1 guan1 kong4 zhi4 bu4 jian4	10
+向量循环方法	xiang4 liang4 svn2 huan2 fang1 fa3	10
+消息处理系统	siao1 sii1 chu3 li3 xi4 tong3	10
+消息传递接口	siao1 sii1 chuan2 di4 zie1 kou3	10
+消息传送代理	siao1 sii1 chuan2 song4 dai4 li3	10
+消息传送系统	siao1 sii1 chuan2 song4 xi4 tong3	10
+小巨型计算机	siao3 jv4 xing2 ji4 suan4 ji1	10
+小引出线封装	siao3 yin3 chu1 sian4 feng1 zhuang1	10
+斜等轴测投影	sie2 deng3 zhou2 ce4 tou2 ying3	10
+斜二轴测投影	sie2 er4 zhou2 ce4 tou2 ying3	10
+协同操作程序	xie2 tong2 cao1 zuo4 cheng2 sv4	10
+协同操作进程	xie2 tong2 cao1 zuo4 zin4 cheng2	10
+协作信息主体	xie2 zuo4 sin4 sii1 zhu3 ti3	10
+心智信息传送	sin1 zhi4 sin4 sii1 chuan2 song4	10
+信息处理系统	sin4 sii1 chu3 li3 xi4 tong3	10
+信息处理语言	sin4 sii1 chu3 li3 yv3 yan2	10
+信息存储技术	sin4 sii1 cun2 chu3 ji4 shu4	10
+信息管理系统	sin4 sii1 guan3 li3 xi4 tong3	10
+信息净荷容量	sin4 sii1 zing4 he2 rong2 liang4	10
+信息浏览服务	sin4 sii1 liu2 lan3 fu2 wu4	10
+信息冗余检验	sin4 sii1 rong3 yv2 jian3 yan4	10
+信息资源管理	sin4 sii1 zi1 yvan2 guan3 li3	10
+信元传送延迟	sin4 yvan2 chuan2 song4 yan2 chi2	10
+修理延误时间	siu1 li3 yan2 wu4 shi2 jian1	10
+虚拟安全网络	xv1 ni3 an1 cvan2 wang3 luo4	10
+虚拟寻址机制	xv1 ni3 svn2 zhi3 ji1 zhi4	10
+需求规约语言	sv1 qiu2 gui1 yve1 yv3 yan2	10
+选择密文攻击	svan3 ze2 mi4 wen2 gong1 ji1	10
+选择明文攻击	svan3 ze2 ming2 wen2 gong1 ji1	10
+学习简单概念	xve2 sii2 jian3 dan1 gai4 nian4	10
+循环重构技术	svn2 huan2 zhong4 gou4 ji4 shu4	10
+页面存取时间	ye4 mian4 cun2 cv3 shi2 jian1	10
+一阶参数连续	yi1 jie1 can1 shu4 lian2 sv4	10
+一阶几何连续	yi1 jie1 ji3 he2 lian2 sv4	10
+依赖集的覆盖	yi1 lai4 zii2 de5 fu4 gai4	10
+一致性强制器	yi2 zhi4 sing4 qiang2 zhi4 qi4	10
+溢出控制程序	yi4 chu1 kong4 zhi4 cheng2 sv4	10
+易失性存储器	yi4 shi1 sing4 cun2 chu3 qi4	10
+易失性检查点	yi4 shi1 sing4 jian3 cha2 dian3	10
+异常处理程序	yi4 chang2 chu3 li3 cheng2 sv4	10
+异常调度程序	yi4 chang2 diao4 du4 cheng2 sv4	10
+异常分派程序	yi4 chang2 fen1 pai4 cheng2 sv4	10
+异常中止连接	yi4 chang2 zhong1 zhi3 lian2 zie1	10
+异常中止序列	yi4 chang2 zhong1 zhi3 sv4 lie4	10
+因果分析系统	yin1 guo3 fen1 sii1 xi4 tong3	10
+因果消息日志	yin1 guo3 siao1 sii1 ri4 zhi4	10
+引导装入程序	yin3 dao3 zhuang1 ru4 cheng2 sv4	10
+应用程序接口	ying4 yong4 cheng2 sv4 zie1 kou3	10
+应用生成程序	ying4 yong4 sheng1 cheng2 cheng2 sv4	10
+用户定义消息	yong4 hu4 ding4 yi4 siao1 sii1	10
+用户进入时间	yong4 hu4 zin4 ru4 shi2 jian1	10
+用户造词程序	yong4 hu4 zao4 ci2 cheng2 sv4	10
+用户造字程序	yong4 hu4 zao4 zi4 cheng2 sv4	10
+邮件发送清单	you2 jian4 fa1 song4 cing1 dan1	10
+语法分析程序	yv3 fa3 fen1 sii1 cheng2 sv4	10
+语言处理程序	yv3 yan2 chu3 li3 cheng2 sv4	10
+预订维修时间	yv4 ding4 wei2 siu1 shi2 jian1	10
+预先计划分配	yv4 sian1 ji4 hua4 fen1 pei4	10
+圆片规模集成	yvan2 pian4 gui1 mo2 zii2 cheng2	10
+远程进程调用	yvan3 cheng2 zin4 cheng2 diao4 yong4	10
+乐器数字接口	yve4 qi4 shu4 zi4 zie1 kou3	10
+允许信元速率	yvn3 xv3 sin4 yvan2 su4 lv4	10
+运动图像压缩	yvn4 dong4 tu2 siang4 ya1 suo1	10
+正交小波变换	zheng4 jiao1 siao3 bo1 bian4 huan4	10
+知识图像编码	zhi1 shi2 tu2 siang4 bian1 ma3	10
+知识信息处理	zhi1 shi2 sin4 sii1 chu3 li3	10
+知识信息格式	zhi1 shi2 sin4 sii1 ge2 shi4	10
+执行管理程序	zhi2 xing2 guan3 li3 cheng2 sv4	10
+执行控制程序	zhi2 xing2 kong4 zhi4 cheng2 sv4	10
+直接成分语法	zhi2 zie1 cheng2 fen4 yv3 fa3	10
+直接呼叫设施	zhi2 zie1 hu1 jiao4 she4 shi1	10
+直接数字控制	zhi2 zie1 shu4 zi4 kong4 zhi4	10
+直接随机存取	zhi2 zie1 sui2 ji1 cun2 cv3	10
+指令调度程序	zhi3 ling4 diao4 du4 cheng2 sv4	10
+质子层析成像	zhi4 zi5 ceng2 sii1 cheng2 siang4	10
+智能外围接口	zhi4 neng2 wai4 wei2 zie1 kou3	10
+中文信息处理	zhong1 wen2 sin4 sii1 chu3 li3	10
+主体通信语言	zhu3 ti3 tong1 sin4 yv3 yan2	10
+专用安全模式	zhuan1 yong4 an1 cvan2 mo2 shi4	10
+专用集成电路	zhuan1 yong4 zii2 cheng2 dian4 lu4	10
+状态管理程序	zhuang4 tai4 guan3 li3 cheng2 sv4	10
+资源管理程序	zi1 yvan2 guan3 li3 cheng2 sv4	10
+自动安全监控	zi4 dong4 an1 cvan2 jian1 kong4	10
+自动程序设计	zi4 dong4 cheng2 sv4 she4 ji4	10
+自动程序中断	zi4 dong4 cheng2 sv4 zhong1 duan4	10
+自动逻辑推理	zi4 dong4 luo2 zii2 tui1 li3	10
+自动模型获取	zi4 dong4 mo2 xing2 huo4 cv3	10
+综合编辑修改	zong1 he2 bian1 zii2 siu1 gai3	10
+总线隔离模式	zong3 sian4 ge2 li2 mo2 shi4	10
+总线寂静信号	zong3 sian4 zii4 zing4 sin4 hao4	10
+组合逻辑电路	zu3 he2 luo2 zii2 dian4 lu4	10
+组合逻辑综合	zu3 he2 luo2 zii2 zong1 he2	10
+最大最小测试	zui4 da4 zui4 siao3 ce4 shi4	10
+最坏情况分析	zui4 huai4 cing2 kuang4 fen1 sii1	10
+最佳优先搜索	zui4 jia1 you1 sian1 sou1 suo3	10
+最小平方逼近	zui4 siao3 ping2 fang1 bi1 jin4	10
+最小特权原则	zui4 siao3 te4 qvan2 yvan2 ze2	10
+作业控制程序	zuo4 ye4 kong4 zhi4 cheng2 sv4	10
+保留进位加法器	bao3 liu2 zin4 wei4 jia1 fa3 qi4	10
+变换先行缓冲器	bian4 huan4 sian1 xing2 huan3 chong1 qi4	10
+标量数据流分析	biao1 liang4 shu4 jv4 liu2 fen1 sii1	10
+测试码生成程序	ce4 shi4 ma3 sheng1 cheng2 cheng2 sv4	10
+插接兼容计算机	cha1 zie1 jian1 rong2 ji4 suan4 ji1	10
+差动信号驱动器	cha1 dong4 sin4 hao4 qv1 dong4 qi4	10
+超高速集成电路	chao1 gao1 su4 zii2 cheng2 dian4 lu4	10
+超级小型计算机	chao1 ji2 siao3 xing2 ji4 suan4 ji1	10
+沉浸式虚拟现实	chen2 zin4 shi4 xv1 ni3 xian4 shi2	10
+程序存储计算机	cheng2 sv4 cun2 chu3 ji4 suan4 ji1	10
+程序设计方法学	cheng2 sv4 she4 ji4 fang1 fa3 xve2	10
+抽象窗口工具箱	chou1 siang4 chuang1 kou3 gong1 jv4 siang1	10
+词专家句法分析	ci2 zhuan1 jia1 jv4 fa3 fen1 sii1	10
+存储器存取冲突	cun2 chu3 qi4 cun2 cv3 chong1 tu1	10
+存储器存取管理	cun2 chu3 qi4 cun2 cv3 guan3 li3	10
+存储器存取模式	cun2 chu3 qi4 cun2 cv3 mo2 shi4	10
+存储器分配程序	cun2 chu3 qi4 fen1 pei4 cheng2 sv4	10
+存储器交叉存取	cun2 chu3 qi4 jiao1 cha1 cun2 cv3	10
+存储器滞后写入	cun2 chu3 qi4 zhi4 hou4 sie3 ru4	10
+大规模集成电路	da4 gui1 mo2 zii2 cheng2 dian4 lu4	10
+低电平状态特性	di1 dian4 ping2 zhuang4 tai4 te4 sing4	10
+低电压差动信号	di1 dian4 ya1 cha1 dong4 sin4 hao4	10
+点分十进制记法	dian3 fen1 shi2 zin4 zhi4 ji4 fa3	10
+电子数字积分器	dian4 zi5 shu4 zi4 zii1 fen1 qi4	10
+电子照相印刷机	dian4 zi5 zhao4 siang4 yin4 shua1 ji1	10
+调度程序工作区	diao4 du4 cheng2 sv4 gong1 zuo4 qv1	10
+东龙进销存软件	dong1 long2 zin4 siao1 cun2 ruan3 jian4	10
+动态相关性检查	dong4 tai4 siang1 guan1 sing4 jian3 cha2	10
+动态优先级算法	dong4 tai4 you1 sian1 ji2 suan4 fa3	10
+对象式编程语言	dui4 siang4 shi4 bian1 cheng2 yv3 yan2	10
+对象式程序设计	dui4 siang4 shi4 cheng2 sv4 she4 ji4	10
+多工序实体造型	duo1 gong1 sv4 shi2 ti3 zao4 xing2	10
+多级优先级中断	duo1 ji2 you1 sian1 ji2 zhong1 duan4	10
+多媒体信息系统	duo1 mei2 ti3 sin4 sii1 xi4 tong3	10
+多属性决策系统	duo1 shu3 sing4 jve2 ce4 xi4 tong3	10
+多文种信息处理	duo1 wen2 zhong3 sin4 sii1 chu3 li3	10
+多终端监控程序	duo1 zhong1 duan1 jian1 kong4 cheng2 sv4	10
+多重存取存储器	duo1 zhong4 cun2 cv3 cun2 chu3 qi4	10
+二次型性能指标	er4 ci4 xing2 sing4 neng2 zhi3 biao1	10
+反向局域网信道	fan3 xiang4 jv2 yv4 wang3 sin4 dao4	10
+范例依存相似性	fan4 li4 yi1 cun2 siang1 si4 sing4	10
+非接触式磁记录	fei1 zie1 chu4 shi4 ci2 ji4 lu4	10
+非均匀对象模型	fei1 jvn1 yvn2 dui4 siang4 mo2 xing2	10
+非线性控制系统	fei1 sian4 sing4 kong4 zhi4 xi4 tong3	10
+非易失性存储器	fei1 yi4 shi1 sing4 cun2 chu3 qi4	10
+非预定维修时间	fei1 yv4 ding4 wei2 siu1 shi2 jian1	10
+分布式程序设计	fen1 bu4 shi4 cheng2 sv4 she4 ji4	10
+分布式定序算法	fen1 bu4 shi4 ding4 sv4 suan4 fa3	10
+分布式对象技术	fen1 bu4 shi4 dui4 siang4 ji4 shu4	10
+分布式对象计算	fen1 bu4 shi4 dui4 siang4 ji4 suan4	10
+分布式排序算法	fen1 bu4 shi4 pai2 sv4 suan4 fa3	10
+分布式选择算法	fen1 bu4 shi4 svan3 ze2 suan4 fa3	10
+分程序结构语言	fen1 cheng2 sv4 jie2 gou4 yv3 yan2	10
+高电平状态特性	gao1 dian4 ping2 zhuang4 tai4 te4 sing4	10
+高速缓存一致性	gao1 su4 huan3 cun2 yi2 zhi4 sing4	10
+高性能文件系统	gao1 sing4 neng2 wen2 jian4 xi4 tong3	10
+格式化实用程序	ge2 shi4 hua4 shi2 yong4 cheng2 sv4	10
+工作集分派程序	gong1 zuo4 zii2 fen1 pai4 cheng2 sv4	10
+功能性配置审计	gong1 neng2 sing4 pei4 zhi4 shen3 ji4	10
+汉语言语信息库	han4 yv3 yan2 yv3 sin4 sii1 ku4	10
+汉语语音信息库	han4 yv3 yv3 yin1 sin4 sii1 ku4	10
+汉字编码字符集	han4 zi4 bian1 ma3 zi4 fu2 zii2	10
+汉字信息交换码	han4 zi4 sin4 sii1 jiao1 huan4 ma3	10
+基于规则的程序	ji1 yv2 gui1 ze2 de5 cheng2 sv4	10
+计算机层析成像	ji4 suan4 ji1 ceng2 sii1 cheng2 siang4	10
+计算机程序确认	ji4 suan4 ji1 cheng2 sv4 qve4 ren4	10
+计算机程序认证	ji4 suan4 ji1 cheng2 sv4 ren4 zheng4	10
+计算机程序验证	ji4 suan4 ji1 cheng2 sv4 yan4 zheng4	10
+计算机程序摘要	ji4 suan4 ji1 cheng2 sv4 zhai1 yao4	10
+计算机程序注释	ji4 suan4 ji1 cheng2 sv4 zhu4 shi4	10
+计算机辅助分析	ji4 suan4 ji1 fu3 zhu4 fen1 sii1	10
+计算机集成制造	ji4 suan4 ji1 zii2 cheng2 zhi4 zao4	10
+计算机性能评价	ji4 suan4 ji1 sing4 neng2 ping2 jia4	10
+结构化编辑程序	jie2 gou4 hua4 bian1 zii2 cheng2 sv4	10
+结构化程序设计	jie2 gou4 hua4 cheng2 sv4 she4 ji4	10
+进位传递加法器	zin4 wei4 chuan2 di4 jia1 fa3 qi4	10
+静态处理器分配	zing4 tai4 chu3 li3 qi4 fen1 pei4	10
+静态汉字重码率	zing4 tai4 han4 zi4 zhong4 ma3 lv4	10
+静态缓冲区分配	zing4 tai4 huan3 chong1 qv1 fen1 pei4	10
+静态随机存储器	zing4 tai4 sui2 ji1 cun2 chu3 qi4	10
+静态相关性检查	zing4 tai4 siang1 guan1 sing4 jian3 cha2	10
+静态字词重码率	zing4 tai4 zi4 ci2 zhong4 ma3 lv4	10
+局域网管理程序	jv2 yv4 wang3 guan3 li3 cheng2 sv4	10
+句法制导编辑器	jv4 fa3 zhi4 dao3 bian1 zii2 qi4	10
+可编程逻辑器件	ke3 bian1 cheng2 luo2 zii2 qi4 jian4	10
+可编程逻辑阵列	ke3 bian1 cheng2 luo2 zii2 zhen4 lie4	10
+可编程通信接口	ke3 bian1 cheng2 tong1 sin4 zie1 kou3	10
+可编程阵列逻辑	ke3 bian1 cheng2 zhen4 lie4 luo2 zii2	10
+可持续信元速率	ke3 chi2 sv4 sin4 yvan2 su4 lv4	10
+可扩展链接语言	ke3 kuo4 zhan3 lian4 zie1 yv3 yan2	10
+可信计算机系统	ke3 sin4 ji4 suan4 ji1 xi4 tong3	10
+控制计算机接口	kong4 zhi4 ji4 suan4 ji1 zie1 kou3	10
+控制开发工具箱	kong4 zhi4 kai1 fa1 gong1 jv4 siang1	10
+离线累积升级包	li2 sian4 lei3 zii1 sheng1 ji2 bao1	10
+离子沉积印刷机	li2 zi5 chen2 zii1 yin4 shua1 ji1	10
+流水线互锁控制	liu2 shui3 sian4 hu4 suo3 kong4 zhi4	10
+流水线数据冲突	liu2 shui3 sian4 shu4 jv4 chong1 tu1	10
+逻辑定时分析仪	luo2 zii2 ding4 shi2 fen1 sii1 yi2	10
+逻辑数据独立性	luo2 zii2 shu4 jv4 du2 li4 sing4	10
+逻辑探头指示器	luo2 zii2 tan4 tou2 zhi3 shi4 qi4	10
+逻辑状态分析仪	luo2 zii2 zhuang4 tai4 fen1 sii1 yi2	10
+逻辑综合自动化	luo2 zii2 zong1 he2 zi4 dong4 hua4	10
+码独立数据通信	ma3 du2 li4 shu4 jv4 tong1 sin4	10
+码透明数据通信	ma3 tou4 ming2 shu4 jv4 tong1 sin4	10
+媒体接口连接器	mei2 ti3 zie1 kou3 lian2 zie1 qi4	10
+面向对象数据库	mian4 xiang4 dui4 siang4 shu4 jv4 ku4	10
+面向分析的设计	mian4 xiang4 fen1 sii1 de5 she4 ji4	10
+面型图像传感器	mian4 xing2 tu2 siang4 chuan2 gan3 qi4	10
+模块化程序设计	mo2 kuai4 hua4 cheng2 sv4 she4 ji4	10
+逆地址解析协议	ni4 di4 zhi3 jie3 sii1 xie2 yi4	10
+抢先多任务处理	ciang3 sian1 duo1 ren4 wu4 chu3 li3	10
+全高速缓存存取	cvan2 gao1 su4 huan3 cun2 cun2 cv3	10
+全相联高速缓存	cvan2 siang1 lian2 gao1 su4 huan3 cun2	10
+确定性控制系统	qve4 ding4 sing4 kong4 zhi4 xi4 tong3	10
+任务调度优先级	ren4 wu4 diao4 du4 you1 sian1 ji2	10
+任务集装入模块	ren4 wu4 zii2 zhuang1 ru4 mo2 kuai4	10
+软件工程经济学	ruan3 jian4 gong1 cheng2 jing1 zii4 xve2	10
+软件可靠性工程	ruan3 jian4 ke3 kao4 sing4 gong1 cheng2	10
+实寻址高速缓存	shi2 svn2 zhi3 gao1 su4 huan3 cun2	10
+释放一致性模型	shi4 fang4 yi2 zhi4 sing4 mo2 xing2	10
+手写体汉字识别	shou3 sie3 ti3 han4 zi4 shi2 bie2	10
+数据电路透明性	shu4 jv4 dian4 lu4 tou4 ming2 sing4	10
+数据驱动型分析	shu4 jv4 qv1 dong4 xing2 fen1 sii1	10
+数据完整性保护	shu4 jv4 wan2 zheng3 sing4 bao3 hu4	10
+数字信号处理器	shu4 zi4 sin4 hao4 chu3 li3 qi4	10
+双正交小波变换	shuang1 zheng4 jiao1 siao3 bo1 bian4 huan4	10
+顺序一致性模型	shun4 sv4 yi2 zhi4 sing4 mo2 xing2	10
+顺序栈作业控制	shun4 sv4 zhan4 zuo4 ye4 kong4 zhi4	10
+随机数生成程序	sui2 ji1 shu4 sheng1 cheng2 cheng2 sv4	10
+条件项重写系统	tiao2 jian4 xiang4 zhong4 sie3 xi4 tong3	10
+同步和会聚功能	tong2 bu4 he2 hui4 zv4 gong1 neng2	10
+图形使用者接口	tu2 xing2 shi3 yong4 zhe3 zie1 kou3	10
+微诊断装入程序	wei1 zhen3 duan4 zhuang1 ru4 cheng2 sv4	10
+稳定的排序算法	wen3 ding4 de5 pai2 sv4 suan4 fa3	10
+无失真图像压缩	wu2 shi1 zhen1 tu2 siang4 ya1 suo1	10
+无引线芯片载体	wu2 yin3 sian4 sin1 pian4 zai4 ti3	10
+物理数据独立性	wu4 li3 shu4 jv4 du2 li4 sing4	10
+系统高安全方式	xi4 tong3 gao1 an1 cvan2 fang1 shi4	10
+系统性能监视器	xi4 tong3 sing4 neng2 jian1 shi4 qi4	10
+线缆调制解调器	sian4 lan3 tiao2 zhi4 jie3 tiao2 qi4	10
+线性图像传感器	sian4 sing4 tu2 siang4 chuan2 gan3 qi4	10
+相对弦长参数化	siang1 dui4 xian2 zhang3 can1 shu4 hua4	10
+向量优先级中断	xiang4 liang4 you1 sian1 ji2 zhong1 duan4	10
+信息系统安全官	sin4 sii1 xi4 tong3 an1 cvan2 guan1	10
+信元延迟变动量	sin4 yvan2 yan2 chi2 bian4 dong4 liang4	10
+虚寻址高速缓存	xv1 svn2 zhi3 gao1 su4 huan3 cun2	10
+因特网服务清单	yin1 te4 wang3 fu2 wu4 cing1 dan1	10
+因特网接力闲谈	yin1 te4 wang3 zie1 li4 xian2 tan2	10
+因特网商业中心	yin1 te4 wang3 shang1 ye4 zhong1 sin1	10
+有理贝济埃曲线	you3 li3 bei4 zii4 ai1 qv1 sian4	10
+有失真图像压缩	you3 shi1 zhen1 tu2 siang4 ya1 suo1	10
+有仲裁的新闻组	you3 zhong4 cai2 de5 sin1 wen2 zu3	10
+真值表可归约性	zhen1 zhi2 biao3 ke3 gui1 yve1 sing4	10
+正向局域网信道	zheng4 xiang4 jv2 yv4 wang3 sin4 dao4	10
+知识密集型产业	zhi1 shi2 mi4 zii2 xing2 chan3 ye4	10
+直角平面显像管	zhi2 jiao3 ping2 mian4 xian3 siang4 guan3	10
+直接存储器存取	zhi2 zie1 cun2 chu3 qi4 cun2 cv3	10
+直线位移传感器	zhi2 sian4 wei4 yi2 chuan2 gan3 qi4	10
+指令集体系结构	zhi3 ling4 zii2 ti3 xi4 jie2 gou4	10
+质量和性能测试	zhi4 liang4 he2 sing4 neng2 ce4 shi4	10
+终端接入控制器	zhong1 duan1 zie1 ru4 kong4 zhi4 qi4	10
+字母数字字符集	zi4 mu3 shu4 zi4 zi4 fu2 zii2	10
+自相似网络业务	zi4 siang1 si4 wang3 luo4 ye4 wu4	10
+组相联高速缓存	zu3 siang1 lian2 gao1 su4 huan3 cun2	10
+最大开路线长度	zui4 da4 kai1 lu4 sian4 chang2 du4	10
+最短作业优先法	zui4 duan3 zuo4 ye4 you1 sian1 fa3	10
+按内容存取存储器	an4 nei4 rong2 cun2 cv3 cun2 chu3 qi4	10
+比例积分微分控制	bi3 li4 zii1 fen1 wei1 fen1 kong4 zhi4	10
+编译程序规约语言	bian1 yi4 cheng2 sv4 gui1 yve1 yv3 yan2	10
+操作系统管理程序	cao1 zuo4 xi4 tong3 guan3 li3 cheng2 sv4	10
+操作系统监控程序	cao1 zuo4 xi4 tong3 jian1 kong4 cheng2 sv4	10
+测试数据生成程序	ce4 shi4 shu4 jv4 sheng1 cheng2 cheng2 sv4	10
+测试用例生成程序	ce4 shi4 yong4 li4 sheng1 cheng2 cheng2 sv4	10
+程序设计支持环境	cheng2 sv4 she4 ji4 zhi1 chi2 huan2 jing4	10
+处理器一致性模型	chu3 li3 qi4 yi2 zhi4 sing4 mo2 xing2	10
+串行线路网际协议	chuan4 xing2 sian4 lu4 wang3 zii4 xie2 yi4	10
+存储器无冲突存取	cun2 chu3 qi4 wu2 chong1 tu1 cun2 cv3	10
+带注释的图像交换	dai4 zhu4 shi4 de5 tu2 siang4 jiao1 huan4	10
+单程序流多数据流	dan1 cheng2 sv4 liu2 duo1 shu4 jv4 liu2	10
+电子数据交换消息	dian4 zi5 shu4 jv4 jiao1 huan4 siao1 sii1	10
+调度程序等待队列	diao4 du4 cheng2 sv4 deng3 dai4 dui4 lie4	10
+丢失中断处理程序	diu1 shi1 zhong1 duan4 chu3 li3 cheng2 sv4	10
+独立程序装入程序	du2 li4 cheng2 sv4 zhuang1 ru4 cheng2 sv4	10
+多八位编码字符集	duo1 ba1 wei4 bian1 ma3 zi4 fu2 zii2	10
+多媒体延伸指令集	duo1 mei2 ti3 yan2 shen1 zhi3 ling4 zii2	10
+多字节图形字符集	duo1 zi4 zie2 tu2 xing2 zi4 fu2 zii2	10
+非均匀存储器存取	fei1 jvn1 yvn2 cun2 chu3 qi4 cun2 cv3	10
+非抢先多任务处理	fei1 ciang3 sian1 duo1 ren4 wu4 chu3 li3	10
+非确定空间复杂性	fei1 qve4 ding4 kong1 jian1 fu4 za2 sing4	10
+非确定时间复杂性	fei1 qve4 ding4 shi2 jian1 fu4 za2 sing4	10
+非确定性控制系统	fei1 qve4 ding4 sing4 kong4 zhi4 xi4 tong3	10
+非远程存储器存取	fei1 yvan3 cheng2 cun2 chu3 qi4 cun2 cv3	10
+分布式队列双总线	fen1 bu4 shi4 dui4 lie4 shuang1 zong3 sian4	10
+分时调度程序系统	fen1 shi2 diao4 du4 cheng2 sv4 xi4 tong3	10
+分时动态分配程序	fen1 shi2 dong4 tai4 fen1 pei4 cheng2 sv4	10
+复杂指令集计算机	fu4 za2 zhi3 ling4 zii2 ji4 suan4 ji1	10
+高性能计算和通信	gao1 sing4 neng2 ji4 suan4 he2 tong1 sin4	10
+工业标准结构总线	gong1 ye4 biao1 zhun3 jie2 gou4 zong3 sian4	10
+管理程序调用中断	guan3 li3 cheng2 sv4 diao4 yong4 zhong1 duan4	10
+广域信息服务系统	guang3 yv4 sin4 sii1 fu2 wu4 xi4 tong3	10
+归纳逻辑程序设计	gui1 na4 luo2 zii2 cheng2 sv4 she4 ji4	10
+国家信息基础设施	guo2 jia1 sin4 sii1 ji1 chu3 she4 shi1	10
+过程间数据流分析	guo4 cheng2 jian1 shu4 jv4 liu2 fen1 sii1	10
+汉语言语信息处理	han4 yv3 yan2 yv3 sin4 sii1 chu3 li3	10
+汉语语音信息处理	han4 yv3 yv3 yin1 sin4 sii1 chu3 li3	10
+汉字信息处理技术	han4 zi4 sin4 sii1 chu3 li3 ji4 shu4	10
+汉字信息特征编码	han4 zi4 sin4 sii1 te4 zheng1 bian1 ma3	10
+汉字信息压缩技术	han4 zi4 sin4 sii1 ya1 suo1 ji4 shu4	10
+宏观计量经济模型	hong2 guan1 ji4 liang4 jing1 zii4 mo2 xing2	10
+即插即用操作系统	zii2 cha1 zii2 yong4 cao1 zuo4 xi4 tong3	10
+即插即用程序设计	zii2 cha1 zii2 yong4 cheng2 sv4 she4 ji4	10
+集成注入逻辑电路	zii2 cheng2 zhu4 ru4 luo2 zii2 dian4 lu4	10
+计算机安全与保密	ji4 suan4 ji1 an1 cvan2 yv3 bao3 mi4	10
+计算机化小交换机	ji4 suan4 ji1 hua4 siao3 jiao1 huan4 ji1	10
+精简指令集计算机	zing1 jian3 zhi3 ling4 zii2 ji4 suan4 ji1	10
+晶体管电子计算机	zing1 ti3 guan3 dian4 zi5 ji4 suan4 ji1	10
+晶体管晶体管逻辑	zing1 ti3 guan3 zing1 ti3 guan3 luo2 zii2	10
+静态多功能流水线	zing4 tai4 duo1 gong1 neng2 liu2 shui3 sian4	10
+静态汉字平均码长	zing4 tai4 han4 zi4 ping2 jvn1 ma3 zhang3	10
+静态键位分布系数	zing4 tai4 jian4 wei4 fen1 bu4 xi4 shu4	10
+静态字词平均码长	zing4 tai4 zi4 ci2 ping2 jvn1 ma3 zhang3	10
+句法制导编辑程序	jv4 fa3 zhi4 dao3 bian1 zii2 cheng2 sv4	10
+开放的数据库连接	kai1 fang4 de5 shu4 jv4 ku4 lian2 zie1	10
+科摩哥洛夫复杂性	ke1 mo2 ge1 luo4 fu1 fu4 za2 sing4	10
+可编程逻辑控制器	ke3 bian1 cheng2 luo2 zii2 kong4 zhi4 qi4	10
+可扩缩一致性接口	ke3 kuo4 suo1 yi2 zhi4 sing4 zie1 kou3	10
+联机测试执行程序	lian2 ji1 ce4 shi4 zhi2 xing2 cheng2 sv4	10
+连接机制神经网络	lian2 zie1 ji1 zhi4 shen2 jing1 wang3 luo4	10
+连接机制体系结构	lian2 zie1 ji1 zhi4 ti3 xi4 jie2 gou4	10
+连续变量动态系统	lian2 sv4 bian4 liang4 dong4 tai4 xi4 tong3	10
+逻辑句法分析系统	luo2 zii2 jv4 fa3 fen1 sii1 xi4 tong3	10
+逻辑链路控制协议	luo2 zii2 lian4 lu4 kong4 zhi4 xie2 yi4	10
+逻辑输入输出设备	luo2 zii2 shu1 ru4 shu1 chu1 she4 bei4	10
+面向对象编程语言	mian4 xiang4 dui4 siang4 bian1 cheng2 yv3 yan2	10
+面向对象操作系统	mian4 xiang4 dui4 siang4 cao1 zuo4 xi4 tong3	10
+面向对象程序设计	mian4 xiang4 dui4 siang4 cheng2 sv4 she4 ji4	10
+面向对象数据模型	mian4 xiang4 dui4 siang4 shu4 jv4 mo2 xing2	10
+前向显式拥塞指示	cian2 xiang4 xian3 shi4 yong1 se4 zhi3 shi4	10
+嵌入式通信处理器	qian4 ru4 shi4 tong1 sin4 chu3 li3 qi4	10
+全沉浸式虚拟现实	cvan2 chen2 zin4 shi4 xv1 ni3 xian4 shi2	10
+全局一致性存储器	cvan2 jv2 yi2 zhi4 sing4 cun2 chu3 qi4	10
+全球信息基础设施	cvan2 qiu2 sin4 sii1 ji1 chu3 she4 shi1	10
+人工智能程序设计	ren2 gong1 zhi4 neng2 cheng2 sv4 she4 ji4	10
+软件资产管理程序	ruan3 jian4 zi1 chan3 guan3 li3 cheng2 sv4	10
+瑞星卡卡安全助手	rui4 sing1 ka3 ka3 an1 cvan2 zhu4 shou3	10
+实时系统执行程序	shi2 shi2 xi4 tong3 zhi2 xing2 cheng2 sv4	10
+事件驱动执行程序	shi4 jian4 qv1 dong4 zhi2 xing2 cheng2 sv4	10
+数据电路终接设备	shu4 jv4 dian4 lu4 zhong1 zie1 she4 bei4	10
+通用问题求解程序	tong1 yong4 wen4 ti2 qiu2 jie3 cheng2 sv4	10
+通用消息事务协议	tong1 yong4 siao1 sii1 shi4 wu4 xie2 yi4	10
+图表句法分析程序	tu2 biao3 jv4 fa3 fen1 sii1 cheng2 sv4	10
+万用连接端口总线	wan4 yong4 lian2 zie1 duan1 kou3 zong3 sian4	10
+网络新闻传送协议	wang3 luo4 sin1 wen2 chuan2 song4 xie2 yi4	10
+微程序只读存储器	wei1 cheng2 sv4 zhi1 du2 cun2 chu3 qi4	10
+文件传送存取方法	wen2 jian4 chuan2 song4 cun2 cv3 fang1 fa3	10
+问题陈述分析程序	wen4 ti2 chen2 shu4 fen1 sii1 cheng2 sv4	10
+无用信息收集程序	wu2 yong4 sin4 sii1 shou1 zii2 cheng2 sv4	10
+系统管理监控程序	xi4 tong3 guan3 li3 jian1 kong4 cheng2 sv4	10
+系统命令解释程序	xi4 tong3 ming4 ling4 jie3 shi4 cheng2 sv4	10
+系统资源管理程序	xi4 tong3 zi1 yvan2 guan3 li3 cheng2 sv4	10
+线性定常控制系统	sian4 sing4 ding4 chang2 kong4 zhi4 xi4 tong3	10
+线性时变控制系统	sian4 sing4 shi2 bian4 kong4 zhi4 xi4 tong3	10
+现场总线控制系统	xian4 chang3 zong3 sian4 kong4 zhi4 xi4 tong3	10
+相关分析独立生成	siang1 guan1 fen1 sii1 du2 li4 sheng1 cheng2	10
+小计算机系统接口	siao3 ji4 suan4 ji1 xi4 tong3 zie1 kou3	10
+肖特基二极管端接	siao4 te4 ji1 er4 ji2 guan3 duan1 zie1	10
+协作信息系统开发	xie2 zuo4 sin4 sii1 xi4 tong3 kai1 fa1	10
+新因特网知识系统	sin1 yin1 te4 wang3 zhi1 shi2 xi4 tong3	10
+虚拟控制程序接口	xv1 ni3 kong4 zhi4 cheng2 sv4 zie1 kou3	10
+虚拟盘初始化程序	xv1 ni3 pan2 chu1 shi3 hua4 cheng2 sv4	10
+虚拟设备驱动程序	xv1 ni3 she4 bei4 qv1 dong4 cheng2 sv4	10
+依存关系句法分析	yi1 cun2 guan1 xi4 jv4 fa3 fen1 sii1	10
+依赖集的最小覆盖	yi1 lai4 zii2 de5 zui4 siao3 fu4 gai4	10
+依赖集的最优覆盖	yi1 lai4 zii2 de5 zui4 you1 fu4 gai4	10
+阴极射线管显示器	yin1 ji2 she4 sian4 guan3 xian3 shi4 qi4	10
+因特网接入提供者	yin1 te4 wang3 zie1 ru4 ti2 gong1 zhe3	10
+因特网信息服务器	yin1 te4 wang3 sin4 sii1 fu2 wu4 qi4	10
+有穷自动机最小化	you3 qiong2 zi4 dong4 ji1 zui4 siao3 hua4	10
+域际策略路由选择	yv4 zii4 ce4 lve4 lu4 you2 svan3 ze2	10
+远程信息处理信息	yvan3 cheng2 sin4 sii1 chu3 li3 sin4 sii1	10
+远程作业处理程序	yvan3 cheng2 zuo4 ye4 chu3 li3 cheng2 sv4	10
+增强型小设备接口	zeng1 qiang2 xing2 siao3 she4 bei4 zie1 kou3	10
+知识查询操纵语言	zhi1 shi2 cha2 svn2 cao1 zong4 yv3 yan2	10
+知识信息处理系统	zhi1 shi2 sin4 sii1 chu3 li3 xi4 tong3	10
+直接相联高速缓存	zhi2 zie1 siang1 lian2 gao1 su4 huan3 cun2	10
+智能输入输出接口	zhi4 neng2 shu1 ru4 shu1 chu1 zie1 kou3	10
+中断信号互连网络	zhong1 duan4 sin4 hao4 hu4 lian2 wang3 luo4	10
+中文信息处理设备	zhong1 wen2 sin4 sii1 chu3 li3 she4 bei4	10
+中文信息检索系统	zhong1 wen2 sin4 sii1 jian3 suo3 xi4 tong3	10
+专用自动小交换机	zhuan1 yong4 zi4 dong4 siao3 jiao1 huan4 ji1	10
+字节多路转换通道	zi4 zie2 duo1 lu4 zhuan3 huan4 tong1 dao4	10
+自底向上句法分析	zi4 di3 xiang4 shang4 jv4 fa3 fen1 sii1	10
+自顶向下句法分析	zi4 ding3 xiang4 xia4 jv4 fa3 fen1 sii1	10
+自然语言概念分析	zi4 ran2 yv3 yan2 gai4 nian4 fen1 sii1	10
+最高优先级优先法	zui4 gao1 you1 sian1 ji2 you1 sian1 fa3	10
+最近使用字词先见	zui4 jin4 shi3 yong4 zi4 ci2 sian1 jian4	10
+编译程序的编译程序	bian1 yi4 cheng2 sv4 de5 bian1 yi4 cheng2 sv4	10
+编译程序的生成程序	bian1 yi4 cheng2 sv4 de5 sheng1 cheng2 cheng2 sv4	10
+部分沉浸式虚拟现实	bu4 fen4 chen2 zin4 shi4 xv1 ni3 xian4 shi2	10
+存储模块驱动器接口	cun2 chu3 mo2 kuai4 qv1 dong4 qi4 zie1 kou3	10
+递推联想拼音输入法	di4 tui1 lian2 siang3 pin1 yin1 shu1 ru4 fa3	10
+多点二进制文件传送	duo1 dian3 er4 zin4 zhi4 wen2 jian4 chuan2 song4	10
+多点静止图像及注释	duo1 dian3 zing4 zhi3 tu2 siang4 ji2 zhu4 shi4	10
+多语种信息处理系统	duo1 yv3 zhong3 sin4 sii1 chu3 li3 xi4 tong3	10
+防信息泄漏控制范围	fang2 sin4 sii1 sie4 lou4 kong4 zhi4 fan4 wei2	10
+分布式公共对象模型	fen1 bu4 shi4 gong1 gong4 dui4 siang4 mo2 xing2	10
+分布式构件对象模型	fen1 bu4 shi4 gou4 jian4 dui4 siang4 mo2 xing2	10
+分布式系统对象模式	fen1 bu4 shi4 xi4 tong3 dui4 siang4 mo2 shi4	10
+高速缓存一致性协议	gao1 su4 huan3 cun2 yi2 zhi4 sing4 xie2 yi4	10
+光纤分布式数据接口	guang1 sian1 fen1 bu4 shi4 shu4 jv4 zie1 kou3	10
+后精简指令集计算机	hou4 zing1 jian3 zhi3 ling4 zii2 ji4 suan4 ji1	10
+基于代价的查询优化	ji1 yv2 dai4 jia4 de5 cha2 svn2 you1 hua4	10
+基于内容的图像检索	ji1 yv2 nei4 rong2 de5 tu2 siang4 jian3 suo3	10
+基于语法的查询优化	ji1 yv2 yv3 fa3 de5 cha2 svn2 you1 hua4	10
+基于语义的查询优化	ji1 yv2 yv3 yi4 de5 cha2 svn2 you1 hua4	10
+基于知识的咨询系统	ji1 yv2 zhi1 shi2 de5 zi1 svn2 xi4 tong3	10
+计算机程序开发计划	ji4 suan4 ji1 cheng2 sv4 kai1 fa1 ji4 hua4	10
+计算机程序配置标识	ji4 suan4 ji1 cheng2 sv4 pei4 zhi4 biao1 shi2	10
+计算机集成制造系统	ji4 suan4 ji1 zii2 cheng2 zhi4 zao4 xi4 tong3	10
+监控与数据采集系统	jian1 kong4 yv3 shu4 jv4 cai3 zii2 xi4 tong3	10
+结构化程序设计语言	jie2 gou4 hua4 cheng2 sv4 she4 ji4 yv3 yan2	10
+截断二进制指数退避	zie2 duan4 er4 zin4 zhi4 zhi3 shu4 tui4 bi4	10
+进程存储器开关表示	zin4 cheng2 cun2 chu3 qi4 kai1 guan1 biao3 shi4	10
+柯尔莫哥洛夫复杂性	ke1 er3 mo4 ge1 luo4 fu1 fu4 za2 sing4	10
+可安装设备驱动程序	ke3 an1 zhuang1 she4 bei4 qv1 dong4 cheng2 sv4	10
+可重定位程序库模块	ke3 zhong4 ding4 wei4 cheng2 sv4 ku4 mo2 kuai4	10
+控制台命令处理程序	kong4 zhi4 tai2 ming4 ling4 chu3 li3 cheng2 sv4	10
+里诺进销存管理软件	li3 nuo4 zin4 siao1 cun2 guan3 li3 ruan3 jian4	10
+美国信息交换标准码	mei3 guo2 sin4 sii1 jiao1 huan4 biao1 zhun3 ma3	10
+面向对象的体系结构	mian4 xiang4 dui4 siang4 de5 ti3 xi4 jie2 gou4	10
+面向对象数据库语言	mian4 xiang4 dui4 siang4 shu4 jv4 ku4 yv3 yan2	10
+平衡型链路接入规程	ping2 heng2 xing2 lian4 lu4 zie1 ru4 gui1 cheng2	10
+商务因特网交换中心	shang1 wu4 yin1 te4 wang3 jiao1 huan4 zhong1 sin1	10
+实时批处理监控程序	shi2 shi2 pi1 chu3 li3 jian1 kong4 cheng2 sv4	10
+铜线分布式数据接口	tong2 sian4 fen1 bu4 shi4 shu4 jv4 zie1 kou3	10
+同步多媒体集成语言	tong2 bu4 duo1 mei2 ti3 zii2 cheng2 yv3 yan2	10
+同步静态随机存储器	tong2 bu4 zing4 tai4 sui2 ji1 cun2 chu3 qi4	10
+无类别域际路由选择	wu2 lei4 bie2 yv4 zii4 lu4 you2 svan3 ze2	10
+现场可编程逻辑阵列	xian4 chang3 ke3 bian1 cheng2 luo2 zii2 zhen4 lie4	10
+新技术视窗操作系统	sin1 ji4 shu4 shi4 chuang1 cao1 zuo4 xi4 tong3	10
+因特网控制消息协议	yin1 te4 wang3 kong4 zhi4 siao1 sii1 xie2 yi4	10
+正电压射极耦合逻辑	zheng4 dian4 ya1 she4 ji2 ou3 he2 luo2 zii2	10
+直接耦合晶体管逻辑	zhi2 zie1 ou3 he2 zing1 ti3 guan3 luo2 zii2	10
+最小高阈值输入电压	zui4 siao3 gao1 yv4 zhi2 shu1 ru4 dian4 ya1	10
+薄膜晶体管液晶显示器	bao2 mo2 zing1 ti3 guan3 ye4 zing1 xian3 shi4 qi4	10
+宏联通用进销存管理软件	hong2 lian2 tong1 yong4 zin4 siao1 cun2 guan3 li3 ruan3 jian4	10
+青松汽车衡称重管理软件	cing1 song1 qi4 che1 heng2 cheng1 zhong4 guan3 li3 ruan3 jian4	10
+光华反病毒离线累积升级包	guang1 hua2 fan3 bing4 du2 li2 sian4 lei3 zii1 sheng1 ji2 bao1	10
+总管家全能客户关系管理系统	zong3 guan3 jia1 cvan2 neng2 ke4 hu4 guan1 xi4 guan3 li3 xi4 tong3	10

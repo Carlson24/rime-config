@@ -64,15 +64,14 @@ engine:
     - script_translator
     - user_predict_translator
     - calculator_translator
-    - lua_translator@*moran_shijian
-    - lua_translator@*wanxiang.number_translator
+    - lua_translator@*number
     - lua_translator@*input_statistics
     - reverse_lookup_translator@wanxiang_t9reverse
   filters:
     - lua_filter@*wanxiang.super_lookup
     - lua_filter@*wanxiang.super_comment_preedit
     - lua_filter@*wanxiang.super_replacer
-    - lua_filter@*wanxiang.super_filter
+    - lua_filter@*replace_placeholder
     - user_predict_filter
     - simplifier@emoji
     - simplifier@s2t
@@ -111,13 +110,6 @@ super_replacer:
       files:
         - lua/data/english_chinese.txt
         - lua/data/chinese_english.txt
-    - option: true
-      exclude_types: [pinyin]
-      mode: abbrev
-      tags: [abc]
-      prefix: "_abbr_"
-      files:
-        - user_abbrev.txt
 
 translator:
   dictionary: wanxiang.zian
@@ -183,7 +175,6 @@ t9_sym:
 
 key_binder:
   import_preset: default
-  datetime_keys: ["/", "6"]
   bindings:
     - { when: has_menu, accept: 1, send: apostrophe }
     - { when: composing, accept: "Control+Tab", send_sequence: "{Home}{Shift+Right}{1}{Shift+Right}" }

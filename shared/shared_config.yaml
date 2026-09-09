@@ -27,7 +27,6 @@ engine:
     - script_translator
     - user_predict_translator
     - calculator_translator
-    - lua_translator@*shijian
     - lua_translator@*number
     - lua_translator@*unicode
     - lua_translator@*input_statistics

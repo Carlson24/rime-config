@@ -34,4 +34,5 @@ import_tables:
   # 附加词库
   - dicts_extra/pinyin.pro # 拼音词库
   - dicts_extra/zhuaiwen.pro # 转文词库
+  - dicts_extra/computer.pro # 计算机词库
 ...

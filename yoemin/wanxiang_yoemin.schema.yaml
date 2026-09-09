@@ -91,7 +91,6 @@ engine:
     - punct_translator
     - user_predict_translator
     - calculator_translator
-    - lua_translator@*shijian
     - lua_translator@*number
     - lua_translator@*unicode
     - lua_translator@*input_statistics
@@ -243,8 +242,6 @@ punctuator:
 key_binder:
   import_preset: default # 导入Rime默认快捷键(如 -/= 翻页)
   select_name_characters: "asciitilde" # 以词定字_名：波浪线号
-  shijian_keys: ["/"] # 涉及：日期、时间、节日、节气等功能
-  tips_key: "comma" # 超级提示上屏键：逗号
   bindings:
     - { accept: minus, send: minus, when: has_menu }
     - { accept: minus, send: Page_Up, when: paging }

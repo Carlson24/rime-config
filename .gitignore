@@ -1,6 +1,7 @@
 logs
 dist/*
-*.zip
+**/*.zip
+**/*.tar.bz2
 **/build
 **/sync/*
 **/*.userdb
@@ -10,8 +11,9 @@ dist/*
 **/*.gram
 **/*.custom.yaml
 **/*.ocd2
+**/*.hidden
+**/*.nomedia
 shared/dicts/*.dict.yaml
 shared/dicts_zian/*.dict.yaml
 shared/lua/clib/*.so
-themes/backgrounds/**/*.png
-themes/backgrounds/思无邪
+themes/backgrounds

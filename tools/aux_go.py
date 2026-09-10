@@ -1,6 +1,5 @@
 import os
 import re
-import csv
 import shutil
 import unicodedata
 import argparse
@@ -9,7 +8,7 @@ from typing import List
 # ================= 用户配置区 =================
 INPUT_DIR_DEFAULT = "dicts"
 OUTPUT_ROOT_DEFAULT = "."
-CSV_PATH = "tools/aux_code.csv"
+CSV_PATH = "shared/flypy_aux.csv"
 BLACKLIST_FILES = {"mixed.dict.yaml", "en.dict.yaml"}
 # =============================================
 
@@ -92,24 +91,17 @@ def add_suffix_before_extensions(filename: str, suffix: str) -> str:
 
 # ---------- CSV 加载 ----------
 def load_flypy_aux(csv_path: str) -> dict:
-    """从 CSV 加载 flypy 辅助码，返回 {汉字: 辅码}。"""
+    """从 TSV 加载 flypy 辅助码，返回 {汉字: 辅码}。"""
     aux_map = {}
     with open(csv_path, "r", encoding="utf-8-sig", errors="ignore") as f:
-        reader = csv.DictReader(f)
-        headers = [h.strip() for h in reader.fieldnames]
-        print(f"列标题：{headers}")
-
-        col = "辅码"
-        if col not in headers:
-            print(f"警告：CSV 中未找到列 '{col}'")
-            return aux_map
-
-        for row in reader:
-            han = row.get(headers[0], "").strip()
-            if not han:
+        for line in f:
+            line = line.rstrip("\n").rstrip("\r")
+            if not line.strip():
                 continue
-            cell = row.get(col)
-            if cell is None:
+            parts = line.split(None, 1)
+            han = parts[0].strip()
+            cell = parts[1] if len(parts) > 1 else ""
+            if not han:
                 continue
             letters_blocks = re.findall(r"[a-zA-Z]+", cell)
             aux_code = ",".join(block.lower() for block in letters_blocks)

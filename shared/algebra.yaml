@@ -611,7 +611,6 @@ aux:
 t9:
   __append:
     - xform/ⅱ//
-    - xform/^([a-z]+)(\d)?;.*$/$1/ # 只保留拼音
     - derive/^ng$/eng/
     - derive/^([nl])ve$/$1ue/
     - derive/^([jqxy])v/$1u/

@@ -9,8 +9,10 @@ name: wanxiang.zian
 version: "LTS"
 sort: by_weight # 字典初始排序，可選original或by_weight
 use_preset_vocabulary: false
-need_aux: "flypy_aux.csv"
+enable_tone: true
+aux_file: "flypy_aux.csv"
 aux_separator: ";"
+aux_ignore_chars: "，。？！、：～·＆“”（）「」『』…"
 import_tables:
   # 万象词库
   - dicts/zi # 基础字表

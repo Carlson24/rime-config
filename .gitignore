@@ -15,5 +15,6 @@ dist/*
 **/*.nomedia
 shared/dicts/*.dict.yaml
 shared/dicts_zian/*.dict.yaml
+shared/lua/clib/lua-utf8
 shared/lua/clib/*.so
 themes/backgrounds

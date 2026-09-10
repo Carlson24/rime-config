@@ -112,7 +112,7 @@ super_replacer:
         - lua/data/chinese_english.txt
 
 translator:
-  dictionary: wanxiang.zian
+  dictionary: wanxiang.base
   prism: wanxiang_t9
   enable_completion: true
   user_dict: user_t9

@@ -5,14 +5,11 @@
 #
 
 ---
-name: wanxiang
+name: wanxiang.base
 version: "LTS"
 sort: by_weight # 字典初始排序，可選original或by_weight
 use_preset_vocabulary: false
-enable_tone: true
-aux_file: "flypy_aux.csv"
-aux_separator: ";"
-aux_ignore_chars: "，。？！、：～·＆“”（）「」『』…"
+enable_tone: false
 import_tables:
   # 万象词库
   - dicts/zi # 基础字表
@@ -36,7 +33,5 @@ import_tables:
   - dicts/moegirl # 萌娘百科
 
   # 附加词库
-  - dicts_extra/pinyin # 拼音词库
-  - dicts_extra/zhuaiwen # 转文词库
   - dicts_extra/computer # 计算机词库
 ...

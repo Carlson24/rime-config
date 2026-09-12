@@ -31,7 +31,5 @@ import_tables:
   - dicts/fangyan # 收集全国方言
   - dicts/yidu # 异读词库
   - dicts/moegirl # 萌娘百科
-
-  # 附加词库
-  - dicts_extra/computer # 计算机词库
+  - dicts/computer # 计算机词库
 ...

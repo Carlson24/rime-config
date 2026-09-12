@@ -40,9 +40,10 @@ jobs:
 
       - name: Run aux_go.py && zian_go.py
         run: |
-          # Remove comments from suzi.dict.yaml and yidu.dict.yaml
+          # Remove auxiliary data and copy the computer dict to the dicts directory
           sed -Ei 's/;\S*//g' dicts/suzi.dict.yaml
           sed -Ei 's/;\S*//g' dicts/yidu.dict.yaml
+          cp shared/dicts_extra/computer.dict.yaml dicts
           # Run the scripts
           python tools/aux_go.py
           python tools/zian_go.py -o dicts-zian-base dicts-base/*.dict.yaml

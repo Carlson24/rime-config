@@ -34,6 +34,7 @@ import_tables:
   - dicts/fangyan # 收集全国方言
   - dicts/yidu # 异读词库
   - dicts/moegirl # 萌娘百科
+  - dicts/computer # 计算机词库
 
   # 尖音拓展
   - dicts_zian/zi.zian # 基础字表
@@ -55,10 +56,9 @@ import_tables:
   - dicts_zian/fangyan.zian # 收集全国方言
   - dicts_zian/yidu.zian # 异读词库
   - dicts_zian/moegirl.zian # 萌娘百科
+  - dicts_zian/computer.zian # 计算机词库
 
   # 附加词库
   - dicts_extra/pinyin # 拼音词库
   - dicts_extra/zhuaiwen # 转文词库
-  - dicts_extra/computer # 计算机词库
-  - dicts_extra/computer.zian # 计算机词库（尖音拓展）
 ...

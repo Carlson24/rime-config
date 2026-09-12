@@ -5,11 +5,36 @@ local wanxiang                = {}
 
 local t_concat                = table.concat
 
--- x-release-please-start-version
-
 wanxiang.version              = "v114.51.4"
 
--- x-release-please-end
+wanxiang.INPUT_METHOD_MARKERS = {
+  ["Ⅰ"] = "pinyin", -- 全拼
+  ["Ⅱ"] = "zrm", -- 自然码双拼
+  ["Ⅲ"] = "flypy", -- 小鹤双拼
+  ["Ⅽ"] = "lssp", -- 李氏三拼
+  ["ⅱ"] = "t9" -- 拼音九键
+}
+
+-- 基础元音 -> 四个带调符号（顺序即 1-4 声）
+wanxiang.tone_mark_map        = {
+  a = { "ā", "á", "ǎ", "à" },
+  o = { "ō", "ó", "ǒ", "ò" },
+  e = { "ē", "é", "ě", "è" },
+  i = { "ī", "í", "ǐ", "ì" },
+  u = { "ū", "ú", "ǔ", "ù" },
+  ["ü"] = { "ǖ", "ǘ", "ǚ", "ǜ" },
+  n = { "n̄", "ń", "ň", "ǹ" }, -- n̄=n+U+0304
+  m = { "m̄", "ḿ", "m̌", "m̀" }
+}
+
+-- 数字声调键位：1-5 调 -> 6/7/8/9/0
+wanxiang.tone_key_map         = {
+  ["1"] = "6",
+  ["2"] = "7",
+  ["3"] = "8",
+  ["4"] = "9",
+  ["5"] = "0"
+}
 
 -- 全局内容
 ---@alias PROCESS_RESULT ProcessResult
@@ -25,13 +50,11 @@ wanxiang.RIME_PROCESS_RESULTS = {
 function wanxiang.is_pro_scheme(env)
   -- local schema_name = env.engine.schema.schema_name
   -- return schema_name:gsub("PRO$", "") ~= schema_name
-  return env.engine.schema.schema_id == "wanxiang_zrm"
-      or env.engine.schema.schema_id == "wanxiang_zrm_18keys"
-      or env.engine.schema.schema_id == "wanxiang_zrm_14keys"
-      or env.engine.schema.schema_id == "wanxiang_l17keys"
-      or env.engine.schema.schema_id == "wanxiang_flypy"
+  return env.engine.schema.schema_id == "wanxiang_flypy"
       or env.engine.schema.schema_id == "wanxiang_flypy_18keys"
       or env.engine.schema.schema_id == "wanxiang_flypy_14keys"
+      or env.engine.schema.schema_id == "wanxiang_l17keys"
+      or env.engine.schema.schema_id == "wanxiang_yoemin"
 end
 
 -- 以 `tag` 方式检测是否处于反查模式
@@ -53,23 +76,10 @@ function wanxiang.is_function_mode_active(context)
   local seg = context.composition:back()
   if not seg then return false end
 
-  return seg:has_tag("number") or  -- number_translator.lua 数字金额转换 R+数字
+  return seg:has_tag("Snumber") or -- 数字金额转换 S+数字
       seg:has_tag("unicode") or    -- unicode.lua 输出 Unicode 字符 U+小写字母或数字
-      --seg:has_tag("punct") or      -- 标点符号 全角半角提示
-      seg:has_tag("calculator") or -- super_calculator.lua V键计算器
-      seg:has_tag("datetime") or   -- datetime.lua /date /time etc.
-      seg:has_tag("Ndate")         -- datetime.lua N日期功能
-end
-
----判断文件是否存在
-function wanxiang.file_exists(filename)
-  local f = io.open(filename, "r")
-  if f ~= nil then
-    io.close(f)
-    return true
-  else
-    return false
-  end
+      seg:has_tag("calculator") or -- V 键计算器
+      seg:has_tag("Ndate")         -- N 日期功能
 end
 
 -- 判断码点是否为汉字（避免 utf8.char/utf8.codepoint 往返）
@@ -93,54 +103,27 @@ function wanxiang.is_chinese_codepoint(codepoint)
       or (codepoint >= 0x2F00 and codepoint <= 0x2FDF)   -- Kangxi Radicals
 end
 
----按照优先顺序获取文件：用户目录 > 系统目录
+-- 按照优先顺序加载文件：用户目录 > 系统目录 > 原路径兜底
 ---@param filename string 相对路径
----@retur string | nil
--- 辅助函数：检测路径是否为绝对路径（以 / 或盘符开头）
-local function is_absolute_path(path)
-  if not path then return false end
-  if path:sub(1, 1) == "/" or path:sub(1, 1) == "\\" then
-    return true
-  end
-  if path:match("^[a-zA-Z]:[\\/]") then
-    return true
-  end
-  return false
-end
-
-function wanxiang.get_filename_with_fallback(filename)
-  local _path = filename:gsub("^[\\/]+", "")
-
-  local user_dir = rime_api.get_user_data_dir()
-
-  if not is_absolute_path(user_dir) then
-    return filename
-  end
-  local user_path = user_dir .. "/" .. _path
-  if wanxiang.file_exists(user_path) then
-    return user_path
-  end
-
-  local shared_dir = rime_api.get_shared_data_dir()
-
-  if not is_absolute_path(shared_dir) then
-    return filename
-  end
-  local shared_path = shared_dir .. "/" .. _path
-  if wanxiang.file_exists(shared_path) then
-    return shared_path
-  end
-
-  return nil
-end
-
--- 按照优先顺序加载文件：用户目录 > 系统目录
----@param filename string 相对路径
----@retur file* | nil, function
+---@return file* | nil, function, string|nil
 function wanxiang.load_file_with_fallback(filename, mode)
   mode = mode or "r" -- 默认读取模式
 
-  local _filename = wanxiang.get_filename_with_fallback(filename)
+  local _path = filename:gsub("^[\\/]+", "")
+
+  local function is_absolute(path) -- 绝对路径：以 /、\ 或盘符开头
+    return path ~= nil
+        and (path:sub(1, 1) == "/" or path:sub(1, 1) == "\\" or path:match("^[a-zA-Z]:[\\/]"))
+  end
+
+  local function file_exists(path) -- 尝试以读模式打开来判定存在
+    local f = io.open(path, "r")
+    if f then
+      io.close(f)
+      return true
+    end
+    return false
+  end
 
   local file, err
   local function close()
@@ -149,62 +132,57 @@ function wanxiang.load_file_with_fallback(filename, mode)
     file = nil
   end
 
-  if _filename then
-    file, err = io.open(_filename, mode)
+  local candidate
+  local user_dir   = rime_api.get_user_data_dir()
+  local shared_dir = rime_api.get_shared_data_dir()
+
+  if not is_absolute(user_dir) then
+    candidate = filename
+  else
+    local user_path = user_dir .. "/" .. _path
+    if file_exists(user_path) then
+      candidate = user_path
+    elseif not is_absolute(shared_dir) then
+      candidate = filename
+    else
+      local shared_path = shared_dir .. "/" .. _path
+      if file_exists(shared_path) then
+        candidate = shared_path
+      end
+    end
+  end
+
+  if candidate then
+    file, err = io.open(candidate, mode)
   end
 
   return file, close, err
 end
 
-wanxiang.INPUT_METHOD_MARKERS = {
-  ["Ⅰ"] = "pinyin", -- 全拼
-  ["Ⅱ"] = "zrm", -- 自然码双拼
-  ["Ⅲ"] = "flypy", -- 小鹤双拼
-  ["Ⅽ"] = "lssp", -- 李氏三拼
-  ["ⅲ"] = "ⅲ", -- 间接辅助标记：命中则额外返回 md="ⅲ"
-  ["ⅱ"] = "t9" -- 拼音九键
-}
+local __input_type_cache = {} -- 缓存首个命中的 id
 
-local __input_type_cache      = {} -- 缓存首个命中的 id（兼容旧用法）
-local __input_md_cache        = {} -- 新增：是否命中“ⅲ”（若命中则为 "ⅲ"，否则为 nil）
-
---- 根据 speller/algebra 中的特殊符号返回输入类型：
---- - 若未命中“ⅲ”，只返回 id（保持旧行为）
---- - 若命中“ⅲ”，返回两个值：id, "ⅲ"
+--- 根据 speller/algebra 中的特殊符号返回输入类型
 ---@param env Env
----@return string                -- id
----@return string|nil            -- md（仅在命中“ⅲ”时返回 "ⅲ"）
+---@return string
 function wanxiang.get_input_method_type(env)
   local schema_id = env.engine.schema.schema_id or "unknown"
 
-  -- 命中缓存则按是否有 md 决定返回 1 个或 2 个值
   local cached_id = __input_type_cache[schema_id]
   if cached_id then
-    local cached_md = __input_md_cache[schema_id]
-    if cached_md then
-      return cached_id, cached_md -- 返回两个值：id, "ⅲ"
-    else
-      return cached_id            -- 只返回 id
-    end
+    return cached_id
   end
 
   local cfg       = env.engine.schema.config
   local result_id = "unknown"
-  local md        = nil -- 只有命中“ⅲ”时设为 "ⅲ"
 
   local n         = cfg:get_list_size("speller/algebra")
   for i = 0, n - 1 do
     local s = cfg:get_string(("speller/algebra/@%d"):format(i))
     if s then
-      -- 不提前返回：需要把整段都扫描完，才能知道是否命中“ⅲ”
       for symbol, id in pairs(wanxiang.INPUT_METHOD_MARKERS) do
         if s:find(symbol, 1, true) then
-          if symbol == "ⅲ" or id == "ⅲ" then
-            md = "ⅲ" -- 记录辅助标记
-          else
-            if result_id == "unknown" then
-              result_id = id -- 只记录第一个“正常映射”的 id
-            end
+          if result_id == "unknown" then
+            result_id = id -- 只记录第一个命中的 id
           end
         end
       end
@@ -213,38 +191,11 @@ function wanxiang.get_input_method_type(env)
 
   -- 写缓存
   __input_type_cache[schema_id] = result_id
-  __input_md_cache[schema_id]   = md -- 命中则为 "ⅲ"，否则为 nil
 
-  -- 返回：命中“ⅲ”→两个值；否则一个值
-  if md then
-    return result_id, md
-  else
-    return result_id
-  end
+  return result_id
 end
 
 -- === 拼音 / 声调工具 =======================================================
-
--- 基础元音 -> 四个带调符号（顺序即 1-4 声）
-wanxiang.tone_mark_map = {
-  a = { 'ā', 'á', 'ǎ', 'à' },
-  o = { 'ō', 'ó', 'ǒ', 'ò' },
-  e = { 'ē', 'é', 'ě', 'è' },
-  i = { 'ī', 'í', 'ǐ', 'ì' },
-  u = { 'ū', 'ú', 'ǔ', 'ù' },
-  ['ü'] = { 'ǖ', 'ǘ', 'ǚ', 'ǜ' },
-  n = { 'n̄', 'ń', 'ň', 'ǹ' }, -- n̄=n+U+0304
-  m = { 'm̄', 'ḿ', 'm̌', 'm̀' },
-}
-
--- 数字声调键位：1-5 调 -> 6/7/8/9/0
-wanxiang.tone_key_map = {
-  ['1'] = '6',
-  ['2'] = '7',
-  ['3'] = '8',
-  ['4'] = '9',
-  ['5'] = '0',
-}
 
 -- 带调符号 -> 数字键位（由 tone_mark_map 反向生成，单一数据源）
 wanxiang.tone_mark_digit = {}
@@ -328,127 +279,6 @@ function wanxiang.escape_pattern(s)
   return s:gsub("([%.%+%-%*%?%[%]%^%$%(%)%%])", "%%%1")
 end
 
--- === 按键映射展开 ==========================================================
-
-local KEYMAP_SRC = "qwertyuiopasdfghjklzxcvbnm"
-local KEYMAP_TARGETS = {
-  ["18"] = "qwwrryuiipassffhjjlzxxvbbm",
-  ["14"] = "qqeettuuooaaddggjjlzzccbbm",
-  ["t9"] = "79378984672733445559928266"
-}
-
---- 根据 keymap ID 构建字符展开表 (逆xlit)
---- "18" → {w={w,e}, r={r,t}, i={i,o}, s={s,d}, f={f,g}, j={j,k}, x={x,c}, b={b,n}}
---- "14" → {q={q,w}, e={e,r}, t={t,y}, u={u,i}, o={o,p}, a={a,s}, d={d,f}, g={g,h}, j={j,k}, z={z,x}, c={c,v}, b={b,n}}
---- 返回 table<目标字符, {源字符...}> | nil (26键返回 nil)
-function wanxiang.build_keymap_expand(keymap_id)
-  if not KEYMAP_TARGETS[keymap_id] then return nil end
-  local tgt = KEYMAP_TARGETS[keymap_id]
-  local expand = {}
-  for i = 1, #tgt do
-    local tc = tgt:sub(i, i)
-    local sc = KEYMAP_SRC:sub(i, i)
-    if not expand[tc] then expand[tc] = {} end
-    local found = false
-    for _, c in ipairs(expand[tc]) do
-      if c == sc then
-        found = true; break
-      end
-    end
-    if not found then table.insert(expand[tc], sc) end
-  end
-  for c, exps in pairs(expand) do
-    if #exps == 1 and exps[1] == c then
-      expand[c] = nil
-    end
-  end
-  return next(expand) and expand or nil
-end
-
---- 根据 keymap ID 构建字符逆展开表 (输入字符 → 能产生它的按键集合)
---- 与 build_keymap_expand 互为反向：preimage[字母] = {字母} ∪ {p : 字母 ∈ expand[p]}
---- "18" → {e={e,w}, t={t,r}, o={o,i}, d={d,s}, g={g,f}, k={k,j}, c={c,x}, n={n,b}}
---- "t9" → {a={a,2}, b={b,2}, ... , z={z,9}}
---- 返回 table<字母, {可输入字符...}> | nil (26键返回 nil)
-function wanxiang.build_keymap_preimage(keymap_id)
-  local expand = wanxiang.build_keymap_expand(keymap_id)
-  if not expand then return nil end
-  local pre = {}
-  for i = 97, 122 do
-    local l = string.char(i)
-    local set = { l }
-    for p, letters in pairs(expand) do
-      for _, le in ipairs(letters) do
-        if le == l then
-          local dup = false
-          for _, s in ipairs(set) do
-            if s == p then
-              dup = true
-              break
-            end
-          end
-          if not dup then set[#set + 1] = p end
-        end
-      end
-    end
-    pre[l] = set
-  end
-  return pre
-end
-
---- 生成输入码的所有按键展开候选 (笛卡尔积)
---- code: 输入编码, expand: 展开表, max: 候选上限(默认32)
---- 返回有序列表 {原始码, 展开1, 展开2, ...}
-function wanxiang.expand_keymap_code(code, expand, max)
-  if not expand then return { code } end
-  max = max or 64
-
-  -- 一次性预分拆为固定段 / 可展开段交错序列
-  local segs, sn = {}, 0
-  local last = 1
-  for i = 1, #code do
-    local e = expand[code:sub(i, i)]
-    if e then
-      if i > last then
-        sn = sn + 1; segs[sn] = code:sub(last, i - 1)
-      end
-      sn = sn + 1; segs[sn] = e
-      last = i + 1
-    end
-  end
-  if last <= #code then
-    sn = sn + 1; segs[sn] = code:sub(last)
-  end
-  if sn == 0 then return { code } end
-
-  -- 递归时仅操作 buffer，只在叶子节点做一次 concat
-  local results = {}
-  local buf, bn = {}, 0
-
-  local function visit(i)
-    if #results >= max then return end
-    if i > sn then
-      results[#results + 1] = t_concat(buf, "", 1, bn)
-      return
-    end
-    local s = segs[i]
-    if type(s) == "string" then
-      bn = bn + 1; buf[bn] = s
-      visit(i + 1)
-      bn = bn - 1
-    else
-      for _, c in ipairs(s) do
-        bn = bn + 1; buf[bn] = c
-        visit(i + 1)
-        bn = bn - 1
-      end
-    end
-  end
-
-  visit(1)
-  return results
-end
-
 wanxiang._file_signature_cache = setmetatable({}, { __mode = "k" })
 
 local function _hash_bytes(hash, value)
@@ -498,13 +328,13 @@ function wanxiang.get_file_signature(path)
   return cached
 end
 
--- === 只读数据缓存（packed blob + 偏移索引，供 super_replacer / super_tips 共用） ===
+-- === 只读数据缓存（packed blob + 偏移索引，供 user_abbrev / super_tips 共用） ===
 -- 数据几乎不会改变，因此不再使用 LevelDb。为把数据尽量少地放进 Lua 堆，
 -- 将 key->value 映射编码为单个 "key\tvalue\n" 大字符串（按 key 字节序排列），
 -- 用数字偏移索引做二分查找与前缀扫描；缓存文件直接存该 blob，跨运行时可移植。
 
 local STORE_CACHE_MAGIC = "WXRB"
-local STORE_CACHE_VERSION = 1
+local STORE_CACHE_VERSION = 2
 
 local s_find = string.find
 local s_sub = string.sub
@@ -568,7 +398,8 @@ function wanxiang.store_cache_path(kind, schema_id)
   return dir .. "/build/" .. kind .. "_" .. schema_id .. ".lub"
 end
 
---- 写 blob 缓存（头：魔数 + 版本 + 签名长度 + 签名，后接 blob）。
+--- 写 blob 缓存（头：魔数 + 版本 + 签名长度 + 签名 + 换行，后接 blob）。
+--- 换行使首条数据记录独立成行，不与签名粘连。
 --- 任何失败返回 false，调用方静默回退为纯内存构建。
 function wanxiang.write_store_cache(path, signature, blob)
   if not blob then return false end
@@ -576,7 +407,7 @@ function wanxiang.write_store_cache(path, signature, blob)
   if sig_len > 255 then return false end
   local header = STORE_CACHE_MAGIC
       .. string.char(STORE_CACHE_VERSION, sig_len)
-      .. signature
+      .. signature .. "\n"
   local file, err = io.open(path, "wb")
   if not file then return false end
   local written = file:write(header, blob)
@@ -598,8 +429,9 @@ function wanxiang.read_store_cache(path, signature)
   local sig_len = content:byte(6)
   if not sig_len then return nil end
   if content:sub(7, 6 + sig_len) ~= signature then return nil end
+  if content:byte(7 + sig_len) ~= 0x0a then return nil end
 
-  return content:sub(7 + sig_len)
+  return content:sub(8 + sig_len)
 end
 
 return wanxiang

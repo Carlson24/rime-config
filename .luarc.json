@@ -1,0 +1,33 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime.version": "Lua 5.5",
+  "runtime.path": ["?.lua", "?/init.lua"],
+  "workspace.library": ["tools/librime.lua"],
+  "diagnostics.severity": {
+    "undefined-field": "Warning",
+    "missing-parameter": "Error",
+    "inject-field": "Warning",
+    "deprecated": "Warning"
+  },
+  "diagnostics.workspaceEvent": "OnSave",
+  "diagnostics.disable": ["redundant-return"],
+  "hint.enable": true,
+  "hint.paramName": "All",
+  "hint.paramType": true,
+  "hint.setType": false,
+  "hint.arrayIndex": "Auto",
+  "type.castNumberToInteger": true,
+  "format.defaultConfig": {
+    "indent_style": "space",
+    "indent_size": "2",
+    "tab_width": "2",
+    "max_line_length": "120",
+    "quote_style": "double",
+    "align_parameter": "true",
+    "align_table_field_to_first_field": "true",
+    "align_continuous_assign_statement": "true",
+    "align_continuous_inline_comment": "true",
+    "align_chain_expr": "true",
+    "trailing_table_separator": "never"
+  }
+}

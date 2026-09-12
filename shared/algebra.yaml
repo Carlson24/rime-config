@@ -592,7 +592,6 @@ fuzzy:
 
 aux:
   __append:
-    - xform/ⅲ//
     - derive/^([a-z]+)(\d)?;.*$/$1/ # 曦 xi6;og -> xi
     - derive/^([a-z]+)(\d)?;.*$/$1$2/ # 曦 xi6;og -> xi6
     - derive/^([a-z]+)(\d)?;([a-z]).*$/$1\u$3/ # 曦 xi6;og -> xiO

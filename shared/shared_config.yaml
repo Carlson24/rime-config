@@ -27,8 +27,8 @@ engine:
     - script_translator
     - user_predict_translator
     - calculator_translator
-    - lua_translator@*number
     - lua_translator@*unicode
+    - lua_translator@*number_and_datetime
     - lua_translator@*input_statistics
     - table_translator@custom_phrase
     - lua_translator@*wanxiang.super_english*T
@@ -39,8 +39,8 @@ engine:
     - lua_filter@*wanxiang.super_english*F
     - lua_filter@*wanxiang.super_lookup
     - lua_filter@*wanxiang.super_comment_preedit
-    - lua_filter@*wanxiang.super_replacer
-    - lua_filter@*replace_placeholder
+    - lua_filter@*user_abbrev
+    - lua_filter@*placeholder
     - user_predict_filter # 去重、简繁转换之前
     - simplifier@emoji
     - simplifier@s2t
@@ -48,45 +48,8 @@ engine:
     - simplifier@s2tw
     - uniquifier # 候选去重
 
-custom_phrase:
-  dictionary: ""
-  user_dict: user_phrase
-  db_class: stabledb
-  enable_completion: false
-  enable_sentence: false
-  initial_quality: 99
-
-grammar:
-  language: wanxiang-lts-zh-hans
-  collocation_max_length: 6
-  collocation_min_length: 2
-  collocation_penalty: -14
-  non_collocation_penalty: -6
-  weak_collocation_penalty: -100
-  rear_penalty: -18
-
-moran_pin:
-  enable: true
-  # indicator: "📌" # 交给 super_comment 来处理
-  panacea:
-    infix: "//"
-    prompt: "〔加词〕"
-    tip_prefix: ""
-    freestyle: false
-
-user_predict:
-  db_name: "user_predict" # 用户预测数据库
-  predict_style: "all" # 预测样式
-  use_space_to_commit: false # 是否使用空格提交预测
-  max_candidates: 9 # 最大预测候选数
-  max_predictions: 15 # 最大预测条数（S-Gram 不受限制）
-  max_history_entries: 5 # 上文最大历史记录
-  expiry_days: 90 # 预测过期天数（S-Gram 永不过期）
-  decay_rate: 0.85 # 预测衰减率
-  context_timeout: 10000 # 上下文超时（毫秒）
-
 super_comment:
-  candidate_length: 16 # 注释候选长度
+  candidate_length: 4 # 注释候选长度
   cand_type:
     user_phrase: "" # 用户自造词
     sentence: "" # 整句
@@ -97,11 +60,6 @@ super_comment:
     abbrev: "" # 简码
     predict: "" # 预测候选
     pinned: "" # pin 候选
-
-super_processor:
-  enable_tone_fallback: true
-  kp_number_mode: auto
-  select_character: "bracketleft, bracketright"
 
 wanxiang_english:
   dictionary: wanxiang_english
@@ -134,9 +92,6 @@ switches:
   - name: prediction
     states: [预测关, 预测开]
     reset: 1
-  - name: chinese_english
-    states: [翻译关, 翻译开]
-    reset: 0
   - options: [raw_input, tone_display, full_pinyin]
     states: [原编码, 有声调, 无声调]
     reset: 1
@@ -150,19 +105,61 @@ switches:
 
 key_binder:
   import_preset: default
-  datetime_keys: "/"
+  select_first_character: "bracketleft"
+  select_last_character: "bracketright"
   bindings:
     - { when: has_menu, accept: "minus", send: "Page_Up" }
     - { when: has_menu, accept: "equal", send: "Page_Down" }
     - { when: composing, accept: "Alt+Left", send: "Shift+Left" }
     - { when: composing, accept: "Alt+Right", send: "Shift+Right" }
-    - { when: has_menu, accept: "Control+e", toggle: "chinese_english" }
     - { when: has_menu, accept: "Tab", send: "Control+Right" }
     - { when: composing, accept: "Tab", send: "Control+Right" }
     - { when: composing, accept: "Control+Tab", send_sequence: "{Home}{Shift+Right}{1}{Shift+Right}" }
     - { when: has_menu, accept: "semicolon", send: 2 }
 
-opencc:
+shared_config:
+  user_predict:
+    db_name: "user_predict" # 用户预测数据库
+    predict_style: "all" # 预测样式
+    use_space_to_commit: false # 是否使用空格提交预测
+    max_candidates: 9 # 最大预测候选数
+    max_predictions: 15 # 最大预测条数（S-Gram 不受限制）
+    max_history_entries: 5 # 上文最大历史记录
+    expiry_days: 90 # 预测过期天数（S-Gram 永不过期）
+    decay_rate: 0.85 # 预测衰减率
+    context_timeout: 10000 # 上下文超时（毫秒）
+
+  custom_phrase:
+    dictionary: ""
+    user_dict: user_phrase
+    db_class: stabledb
+    enable_completion: false
+    enable_sentence: false
+    initial_quality: 99
+
+  grammar:
+    language: wanxiang-lts-zh-hans
+    collocation_max_length: 6
+    collocation_min_length: 2
+    collocation_penalty: -14
+    non_collocation_penalty: -6
+    weak_collocation_penalty: -100
+    rear_penalty: -18
+
+  moran_pin:
+    enable: true
+    # indicator: "📌" # 交给 super_comment 来处理
+    panacea:
+      infix: "//"
+      prompt: "〔加词〕"
+      tip_prefix: ""
+      freestyle: false
+
+  calculator:
+    prefix: "V"
+    tag: calculator
+    tips: "计算器"
+
   s2t:
     option_name: s2t
     opencc_config: s2t.json
@@ -183,6 +180,7 @@ opencc:
     opencc_config: emoji.json
     tags: [abc]
     tips: all
+
   editor:
     bindings:
       space: confirm
@@ -194,6 +192,7 @@ opencc:
       Control+BackSpace: back_syllable
       Control+Delete: delete_candidate
       Escape: cancel
+
   navigator:
     bindings:
       Left: left_by_char_no_loop

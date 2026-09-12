@@ -1,7 +1,7 @@
 -- lua/super_processor.lua
 -- @amzxyz
 -- https://github.com/amzxyz/rime-wanxiang
--- 全能按键处理器：整合 KP小键盘、字母选词、符号快打、声调回退、以词定字
+-- 全能按键处理器：整合 字母选词、符号快打、声调回退、以词定字
 --
 -- 用法: 在 schema.yaml 中 engine/processors 列表添加 - lua_processor@*super_processor
 
@@ -14,20 +14,6 @@ local K_REJECT, K_ACCEPT, K_NOOP = 0, 1, 2
 
 -- 1. 全局常量定义 (Constants)
 
--- [KpNumber] 小键盘键码映射
-local KP_MAP                     = {
-  [0xFFB1] = 1,
-  [0xFFB2] = 2,
-  [0xFFB3] = 3,
-  [0xFFB4] = 4,
-  [0xFFB5] = 5,
-  [0xFFB6] = 6,
-  [0xFFB7] = 7,
-  [0xFFB8] = 8,
-  [0xFFB9] = 9,
-  [0xFFB0] = 0,
-}
-
 -- [LetterSelector] 字母选词键码映射 (qwert...)
 local LETTER_SEL_MAP             = {
   [0x71] = 1,
@@ -39,7 +25,7 @@ local LETTER_SEL_MAP             = {
   [0x75] = 7,
   [0x69] = 8,
   [0x6F] = 9,
-  [0x70] = 10,
+  [0x70] = 10
 }
 
 -- [QuickSymbol] 默认符号映射表
@@ -74,46 +60,10 @@ local SYMBOL_DEFAULT             = {
 
 -- 2. 核心辅助函数 (Utilities)
 
--- 直接读取 Rime recognizer 的原生正则，不再转换为 Lua Pattern。
-local function load_rime_regex_patterns(config, path)
-  local patterns, seen = {}, {}
-  local map = config and config:get_map(path)
-  if not map then return patterns end
-
-  local keys = map:keys()
-  if not keys then return patterns end
-
-  for i = 1, #keys do
-    local value = map:get_value(keys[i])
-    local regex = value and value.value
-    if type(regex) == "string" and regex ~= "" and not seen[regex] then
-      -- 初始化时只编译验证一次；运行时直接走 rime_api.regex_match。
-      local ok = pcall(rime_api.regex_match, "", regex)
-      if ok then
-        seen[regex] = true
-        patterns[#patterns + 1] = regex
-      end
-    end
-  end
-  return patterns
-end
-
--- 检查数字后是否紧跟功能编码 (KpNumber 使用)
-local function is_function_code_after_digit(env, context, digit_char)
-  if not context or not digit_char or digit_char == "" then return false end
-  local s = (context.input or "") .. digit_char
-  local pats = env.kp_func_patterns
-  if not pats then return false end
-  for _, pat in ipairs(pats) do
-    if rime_api.regex_match(s, pat) then return true end
-  end
-  return false
-end
-
 -- 压缩连续声调 (ToneFallback 使用)
 local function compress_runs_keep_last(text)
   local changed = false
-  local out = text:gsub('([6789])([6789]+)', function(_, tail)
+  local out = text:gsub("([67890])([67890]+)", function(_, tail)
     changed = true
     return tail:sub(-1)
   end)
@@ -125,13 +75,7 @@ local function execute_quick_symbol(env, ctx, text)
   if qkey then
     local symbol = env.qs_mapping[qkey]
     if symbol and symbol ~= "" then
-      if type(symbol) == "string" and symbol:lower() == "repeat" then
-        if env.qs_last_commit ~= "" then
-          env.engine:commit_text(env.qs_last_commit)
-        end
-      else
-        env.engine:commit_text(symbol)
-      end
+      env.engine:commit_text(symbol)
       ctx:clear()
       return true
     end
@@ -147,7 +91,6 @@ function M.init(env)
 
   -- [1] 配置加载 (按功能模块分类)
 
-  env.enable_tone_fallback = true
   env.sc_first_key = nil
   env.sc_last_key = nil
   env.is_t9 = false
@@ -158,56 +101,17 @@ function M.init(env)
     end
   end
   if config then
-    -- 基础开关加载
-    local ok_tf, tf_val = pcall(function() return config:get_bool("super_processor/enable_tone_fallback") end)
-    if ok_tf and tf_val ~= nil then env.enable_tone_fallback = tf_val end
-
-    -- 以词定字配置加载（支持 false, "", "[,]", "bracketleft, bracketright"）
-    local has_new_config = false
-    local ok_sc_bool, sc_bool = pcall(function() return config:get_bool("super_processor/select_character") end)
-    local ok_sc_str, sc_str = pcall(function() return config:get_string("super_processor/select_character") end)
-
-    if ok_sc_bool and sc_bool == false then
-      env.sc_first_key, env.sc_last_key = nil, nil
-      has_new_config = true
-    elseif ok_sc_str and type(sc_str) == "string" then
-      local str_trim = sc_str:match("^%s*(.-)%s*$")
-      if str_trim == "" or str_trim:lower() == "false" then
-        env.sc_first_key, env.sc_last_key = nil, nil
-      else
-        -- 尝试使用逗号分割
-        local p1, p2 = str_trim:match("^(.-),(.-)$")
-        if p1 and p2 then
-          env.sc_first_key = p1:match("^%s*(.-)%s*$")
-          env.sc_last_key  = p2:match("^%s*(.-)%s*$")
-        elseif #str_trim >= 2 then
-          -- 兜底兼容旧的 "[]" 无逗号写法
-          env.sc_first_key = str_trim:sub(1, 1)
-          env.sc_last_key  = str_trim:sub(2, 2)
-        end
-      end
-      has_new_config = true
-    end
-
-    if not has_new_config then
-      -- 兜底：只有在新配置完全缺失时，才去读旧配置
-      env.sc_first_key = config:get_string('key_binder/select_first_character')
-      env.sc_last_key = config:get_string('key_binder/select_last_character')
-    end
+    -- 以词定字配置
+    env.sc_first_key = config:get_string("key_binder/select_first_character")
+    env.sc_last_key = config:get_string("key_binder/select_last_character")
   end
-
-  -- [KpNumber] 小键盘
-  env.kp_page_size = config:get_int("menu/page_size") or 6
-  local m = config:get_string("super_processor/kp_number_mode") or "select"
-  env.kp_mode = (m == "auto" or m == "compose" or m == "select") and m or "select"
-  env.kp_func_patterns = load_rime_regex_patterns(config, "recognizer/patterns")
 
   -- [LetterSelector] 字母选词状态位
   env.ls_active = false
 
   -- [ToneFallback] 声调容错
   env.tone_state = "idle"
-  env.lookup_key = config:get_string('wanxiang_lookup/key') or '`'
+  env.lookup_key = config:get_string("wanxiang_lookup/key") or "`"
 
   -- [QuickSymbol] 符号快打
   env.qs_trigger = "^([a-z])/$"
@@ -223,31 +127,28 @@ function M.init(env)
       end
     end
   end
-  env.qs_last_commit = "欢迎使用万象拼音！"
 
   -- [2] 统一 Update Notifier (状态缓存与自动处理)
 
   env.conn_update = context.update_notifier:connect(function(ctx)
     local input = ctx.input or ""
     -- A. [ToneFallback] 执行声调压缩
-    if env.enable_tone_fallback then
-      local t_state = env.tone_state or "idle"
-      env.tone_state = "idle"
+    local t_state = env.tone_state or "idle"
+    env.tone_state = "idle"
 
-      if t_state == "compress" and input ~= "" then
-        local caret = (ctx.caret_pos ~= nil) and ctx.caret_pos or #input
-        if caret < 0 then caret = 0 end
-        if caret > #input then caret = #input end
+    if t_state == "compress" and input ~= "" then
+      local caret = (ctx.caret_pos ~= nil) and ctx.caret_pos or #input
+      if caret < 0 then caret = 0 end
+      if caret > #input then caret = #input end
 
-        local left              = (caret > 0) and input:sub(1, caret) or ""
-        local left_new, changed = compress_runs_keep_last(left)
+      local left              = (caret > 0) and input:sub(1, caret) or ""
+      local left_new, changed = compress_runs_keep_last(left)
 
-        if changed then
-          if caret > 0 then ctx:pop_input(caret) end
-          if #left_new > 0 then ctx:push_input(left_new) end
-          -- push_input 会自动触发下一次 update_notifier，所以这里可以更新本地 input
-          input = ctx.input or ""
-        end
+      if changed then
+        if caret > 0 then ctx:pop_input(caret) end
+        if #left_new > 0 then ctx:push_input(left_new) end
+        -- push_input 会自动触发下一次 update_notifier，所以这里可以更新本地 input
+        input = ctx.input or ""
       end
     end
 
@@ -255,31 +156,19 @@ function M.init(env)
     env.ls_active = false
     if not ctx.composition:empty() then
       local s = ctx.composition:back()
-      if s and (s:has_tag("number") or s:has_tag("Ndate")) then
+      if s and (s:has_tag("Snumber") or s:has_tag("Ndate")) then
         env.ls_active = true
       end
     end
 
-    -- C. [KpNumber] 缓存状态
-    env.kp_is_composing = ctx:is_composing()
-    env.kp_has_menu = ctx:has_menu()
-
-    -- D. [QuickSymbol] 自动上屏逻辑
+    -- C. [QuickSymbol] 自动上屏逻辑
     execute_quick_symbol(env, ctx, input)
-  end)
-  -- [3] 统一 Commit Notifier (记录上屏)
-  env.conn_commit = context.commit_notifier:connect(function(ctx)
-    local t = ctx:get_commit_text()
-    if t ~= "" then env.qs_last_commit = t end
   end)
 end
 
 function M.fini(env)
   if env.conn_update then
     env.conn_update:disconnect(); env.conn_update = nil
-  end
-  if env.conn_commit then
-    env.conn_commit:disconnect(); env.conn_commit = nil
   end
   env.memory = nil
 end
@@ -362,44 +251,12 @@ local function handle_select_character(key, env, ctx)
   return false
 end
 
--- [KpNumber & ToneFallback] 数字键综合逻辑
-local function handle_number_logic(key, env, ctx)
+-- [ToneFallback] 数字键声调回退逻辑
+local function handle_tone_digit(key, env, ctx)
   local kc = key.keycode
   local input = ctx.input or ""
   local r = key:repr() or ""
 
-  local kp_num = KP_MAP[kc]
-
-  -- A. 小键盘不上屏处理
-  if kp_num ~= nil then
-    if key:ctrl() or key:alt() or key:super() or key:shift() then return false end
-
-    if env.enable_tone_fallback then
-      env.tone_state = "skip"
-    end
-    local ch = tostring(kp_num)
-    if is_function_code_after_digit(env, ctx, ch) then
-      if ctx.push_input then ctx:push_input(ch) else ctx.input = input .. ch end
-      return true
-    end
-
-    if env.kp_mode == "select" then
-      return false
-    end
-
-    if env.kp_mode == "auto" then
-      if env.kp_is_composing then
-        if ctx.push_input then ctx:push_input(ch) else ctx.input = input .. ch end
-      else
-        env.engine:commit_text(ch)
-      end
-    else
-      if ctx.push_input then ctx:push_input(ch) else ctx.input = input .. ch end
-    end
-    return true
-  end
-
-  -- B. 统一数字处理：提取主键盘的数字，或者移动端的小键盘数字
   local digit_str = nil
   if r:match("^[0-9]$") then
     digit_str = r
@@ -410,67 +267,35 @@ local function handle_number_logic(key, env, ctx)
 
     -- 只要是 T9 九键方案，数字键就是打字编码键，放行给底层
     if env.is_t9 then
-      if env.enable_tone_fallback then
-        env.tone_state = "idle"
-      end
+      env.tone_state = "idle"
       return false
     end
 
-    if env.enable_tone_fallback then
-      local is_func_mode = false
-      if wanxiang.is_function_mode_active then
-        is_func_mode = wanxiang.is_function_mode_active(ctx)
-      end
-      local is_first_cand_has_eng = false
-      local cand = ctx:get_selected_candidate()
-      if cand then
-        if cand.text:match("[a-zA-Z]") then
-          is_first_cand_has_eng = true
-        end
-      end
-
-      if input:find(env.lookup_key, 1, true) or is_func_mode or is_first_cand_has_eng then
-        env.tone_state = "idle"
-      else
-        env.tone_state = "compress"
-        local caret = (ctx.caret_pos ~= nil) and ctx.caret_pos or #input
-        if caret > #input then caret = #input end
-        local left = (caret > 0) and input:sub(1, caret) or ""
-        local _, changed = compress_runs_keep_last(left)
-        if changed then return true end
+    local is_func_mode = false
+    if wanxiang.is_function_mode_active then
+      is_func_mode = wanxiang.is_function_mode_active(ctx)
+    end
+    local is_first_cand_has_eng = false
+    local cand = ctx:get_selected_candidate()
+    if cand then
+      if cand.text:match("[a-zA-Z]") then
+        is_first_cand_has_eng = true
       end
     end
 
-    if is_function_code_after_digit(env, ctx, digit_str) then
-      if ctx.push_input then ctx:push_input(digit_str) else ctx.input = input .. digit_str end
-      return true
-    end
-
-    -- 选词逻辑 (桌面端主键盘数字 / 移动端所有数字)
-    if env.kp_has_menu then
-      local d = tonumber(digit_str)
-      if d == 0 then d = 10 end
-      if d and d >= 1 and d <= env.kp_page_size then
-        local comp = ctx.composition
-        if comp and not comp:empty() then
-          local seg = comp:back()
-          local menu = seg and seg.menu
-          if menu and not menu:empty() then
-            local sel_index = seg.selected_index or 0
-            local page_start = math.floor(sel_index / env.kp_page_size) * env.kp_page_size
-            local index = page_start + (d - 1)
-            ctx:select(index)
-            return true
-          end
-        end
-      end
-      return false
+    if input:find(env.lookup_key, 1, true) or is_func_mode or is_first_cand_has_eng then
+      env.tone_state = "idle"
+    else
+      env.tone_state = "compress"
+      local caret = (ctx.caret_pos ~= nil) and ctx.caret_pos or #input
+      if caret > #input then caret = #input end
+      local left = (caret > 0) and input:sub(1, caret) or ""
+      local _, changed = compress_runs_keep_last(left)
+      if changed then return true end
     end
   else
     -- 非数字键重置状态，保证声调压缩不越界
-    if env.enable_tone_fallback then
-      env.tone_state = "idle"
-    end
+    env.tone_state = "idle"
   end
 
   return false
@@ -501,14 +326,12 @@ function M.func(key, env)
     if handle_letter_select(key, env, ctx) then return K_ACCEPT end
   end
 
-  -- 5. 数字键 (小键盘 + 声调 + 选词)[KpNumber & ToneFallback] 数字键综合逻辑
-  if (kc >= 0xFFB0 and kc <= 0xFFB9) or (kc >= 0x30 and kc <= 0x39) then
-    if handle_number_logic(key, env, ctx) then return K_ACCEPT end
+  -- 5. 数字键 (声调回退)
+  if kc >= 0x30 and kc <= 0x39 then
+    if handle_tone_digit(key, env, ctx) then return K_ACCEPT end
   else
     -- 非数字键，重置声调状态
-    if env.enable_tone_fallback then
-      env.tone_state = "idle"
-    end
+    env.tone_state = "idle"
   end
 
   return K_NOOP

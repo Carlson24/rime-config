@@ -20,14 +20,7 @@ schema:
   dependencies:
     - wanxiang_reverse #部件拆字，反查及辅码
 
-grammar:
-  __include: shared_config.yaml:/grammar
-
-custom_phrase:
-  __include: shared_config.yaml:/custom_phrase
-
-user_predict:
-  __include: shared_config.yaml:/user_predict
+__include: shared_config.yaml:/shared_config
 
 super_comment:
   __include: shared_config.yaml:/super_comment
@@ -45,8 +38,6 @@ switches:
   - name: emoji
     states: [, ]
     reset: 1
-  - name: mars #火星文
-    states: [地, 煋]
   - options: [simp, s2t, s2hk, s2tw]
     states: [简体, 繁体, 港繁, 台繁]
     abbrev: [简, 繁, 港, 台]
@@ -91,7 +82,7 @@ engine:
     - punct_translator
     - user_predict_translator
     - calculator_translator
-    - lua_translator@*number
+    - lua_translator@*number_and_datetime
     - lua_translator@*unicode
     - lua_translator@*input_statistics
     - table_translator@custom_phrase
@@ -101,8 +92,8 @@ engine:
   filters: # 过滤器
     - lua_filter@*wanxiang.super_lookup
     - lua_filter@*wanxiang.super_comment_preedit
-    - lua_filter@*wanxiang.super_replacer
-    - lua_filter@*replace_placeholder
+    - lua_filter@*user_abbrev
+    - lua_filter@*placeholder
     - user_predict_filter
     - simplifier@emoji
     - simplifier@s2t
@@ -224,14 +215,12 @@ recognizer:
   patterns: # 再追加方案专有的
     punct: "^/([0-9]|10|[A-Za-z]+)$" # 响应 symbols.yaml 的 symbols
     wanxiang_reverse: "^`[A-Za-z]*$" # 响应部件拆字与笔画的反查，与 radical_lookup/prefix 匹配
-    number: "^R[0-9]+[.]?[0-9]*" # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
-    yymmdd: "^N1[89]?[0-9]?[0-9]?[0-3]?[0-9]?[0-9]?$|^N2[0]?[0-9]?[0-9]?[0-3]?[0-9]?[0-9]?$"
+    Snumber: "^R[0-9]+[.]?[0-9]*" # 脚本将自动获取第 2 个字符 R 作为触发前缀，响应 lua_translator@number_translator，数字金额大写
+    Ndate: "^N[0-9]+"
     calculator: "^(V.*|[0-9]+[\\+\\-\\*].*|[\\+\\-\\*].*)$" #计算器功能引导
     email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
     uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
     url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
-    htj: "^/htj.*$"
-    #stroke_lookup: "~[a-z]*'?$"
 
 # --- 标点符号配置 ---
 punctuator:
@@ -260,50 +249,3 @@ key_binder:
     ##### 鸢鸣万象新增的按键
     - { when: always, toggle: s2tg, accept: Control+Shift+F } # 切换简繁
     - { when: always, toggle: mars, accept: Control+Shift+H } # 切换地煋
-
-# Lua 配置：计算器触发关键字
-calculator:
-  prefix: "V"
-  tag: calculator
-  tips: "计算器"
-
-super_replacer:
-  comment_format: "[%s]"
-  chain: true
-  rules:
-    - option: chinese_english
-      mode: append # <--- 添加注释模式
-      comment_mode: none
-      tags: [abc]
-      prefix: "_en_"
-      files:
-        - lua/data/english_chinese.txt
-        - lua/data/chinese_english.txt
-    - option: mars
-      mode: replace # <--- 替换原候选模式
-      comment_mode: append # <--- 原候选继承注释
-      sentence: true # <--- 句子级别替换
-      tags: [abc]
-      prefix: "_mars_"
-      files: [lua/data/martian.txt]
-
-s2t:
-  option_name: s2t
-  opencc_config: s2t.json
-  tags: [abc]
-  tips: all
-s2hk:
-  option_name: s2hk
-  opencc_config: s2hk.json
-  tags: [abc]
-  tips: all
-s2tw:
-  option_name: s2tw
-  opencc_config: s2tw.json
-  tags: [abc]
-  tips: all
-emoji:
-  option_name: emoji
-  opencc_config: emoji.json
-  tags: [abc]
-  tips: all

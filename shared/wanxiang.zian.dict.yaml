@@ -1,0 +1,64 @@
+# @format
+
+# Rime dictionary
+# encoding: utf-8
+#
+
+---
+name: wanxiang.zian
+version: "LTS"
+sort: by_weight # 字典初始排序，可選original或by_weight
+use_preset_vocabulary: false
+enable_tone: true
+aux_file: "flypy/99_aux.tsv"
+aux_separator: ";"
+aux_ignore_chars: "，。？！、：～·＆“”（）「」『』…"
+import_tables:
+  # 万象词库
+  - dicts/zi # 基础字表
+  - dicts/suzi # 各类简化字、民间俗字扩展包
+  - dicts/jichu # 基础词库
+  - dicts/lianxiang # 联想词库
+  - dicts/cuoyin # 错音错字
+  - dicts/duoyin # 兼容词库
+  - dicts/shici # 诗词
+  - dicts/diming # 地名
+  - dicts/yixue # 医学
+  - dicts/huaxue # 化学
+  - dicts/yaopin # 药品
+  - dicts/mingren # 名人
+  - dicts/yiren # 艺人
+  - dicts/wuzhong # 物种多样性
+  - dicts/renming # 高频人名
+  - dicts/taifeng # 最新台风表
+  - dicts/fangyan # 收集全国方言
+  - dicts/yidu # 异读词库
+  - dicts/moegirl # 萌娘百科
+  - dicts/computer # 计算机词库
+
+  # 尖音拓展
+  - dicts_zian/zi.zian # 基础字表
+  - dicts_zian/suzi.zian # 各类简化字、民间俗字扩展包
+  - dicts_zian/jichu.zian # 基础词库
+  - dicts_zian/lianxiang.zian # 联想词库
+  - dicts_zian/cuoyin.zian # 错音错字
+  - dicts_zian/duoyin.zian # 兼容词库
+  - dicts_zian/shici.zian # 诗词
+  - dicts_zian/diming.zian # 地名
+  - dicts_zian/yixue.zian # 医学
+  - dicts_zian/huaxue.zian # 化学
+  - dicts_zian/yaopin.zian # 药品
+  - dicts_zian/mingren.zian # 名人
+  - dicts_zian/yiren.zian # 艺人
+  - dicts_zian/wuzhong.zian # 物种多样性
+  - dicts_zian/renming.zian # 高频人名
+  - dicts_zian/taifeng.zian # 最新台风表
+  - dicts_zian/fangyan.zian # 收集全国方言
+  - dicts_zian/yidu.zian # 异读词库
+  - dicts_zian/moegirl.zian # 萌娘百科
+  - dicts_zian/computer.zian # 计算机词库
+
+  # 附加词库
+  - dicts_extra/pinyin # 拼音词库
+  - dicts_extra/zhuaiwen # 转文词库
+...

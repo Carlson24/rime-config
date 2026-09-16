@@ -1,0 +1,61 @@
+{
+  "name": "Traditional Chinese (Hong Kong variant) to Simplified Chinese (with phrases)",
+  "normalization": [
+    {
+      "dict": {
+        "type": "text",
+        "file": "CJK_Compatibility_Ideographs.txt"
+      }
+    }
+  ],
+  "segmentation": {
+    "type": "mmseg",
+    "dict": {
+      "type": "text",
+      "file": "TSPhrases.txt"
+    }
+  },
+  "conversion_chain": [
+    {
+      "dict": {
+        "type": "group",
+        "match_policy": "short_circuit",
+        "dicts": [
+          {
+            "type": "text",
+            "file": "HKPhrasesRev.txt"
+          },
+          {
+            "type": "text",
+            "file": "HKVariantsRevPhrases.txt"
+          },
+          {
+            "type": "text",
+            "file": "HKVariantsRev.txt"
+          }
+        ]
+      }
+    },
+    {
+      "dict": {
+        "type": "group",
+        "match_policy": "short_circuit",
+        "dicts": [
+          {
+            "type": "text",
+            "file": "TSPhrases.txt"
+          },
+          {
+            "type": "text",
+            "file": "TSCharactersExt.txt",
+            "may_output_tofu": true
+          },
+          {
+            "type": "text",
+            "file": "TSCharacters.txt"
+          }
+        ]
+      }
+    }
+  ]
+}

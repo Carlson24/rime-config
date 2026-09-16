@@ -1,0 +1,29 @@
+{
+  "name": "Traditional Chinese (Taiwan Standard) to Traditional Chinese (OpenCC Standard)",
+  "normalization": [
+    {
+      "dict": {
+        "type": "text",
+        "file": "CJK_Compatibility_Ideographs.txt"
+      }
+    }
+  ],
+  "conversion_chain": [
+    {
+      "dict": {
+        "type": "group",
+        "match_policy": "short_circuit",
+        "dicts": [
+          {
+            "type": "text",
+            "file": "TWVariantsRevPhrases.txt"
+          },
+          {
+            "type": "text",
+            "file": "TWVariantsRev.txt"
+          }
+        ]
+      }
+    }
+  ]
+}

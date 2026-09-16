@@ -1,0 +1,139 @@
+# @format
+
+# Rime schema
+# encoding: utf-8
+schema:
+  schema_id: wanxiang_t9
+  name: T9·万象拼音
+  version: "LTS"
+  author: amzxyz & morse
+  description: 万象拼音九宫格方案
+  dependencies:
+
+__include: shared_config.yaml:/shared_config
+
+super_comment:
+  __include: shared_config.yaml:/super_comment
+
+switches:
+  __include: shared_config.yaml:/switches
+  __patch:
+    "@8/reset": 2
+    "@9":
+      options: [comment_off, tone_hint, toneless_hint]
+      states: [注释关, 有声调, 无声调]
+      reset: 1
+
+engine:
+  processors:
+    - user_predict_processor # 必须放在第一个
+    - lua_processor@*wanxiang.super_processor
+    - lua_processor@*chaifen_tips
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - affix_segmentor@wanxiang_reverse
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - user_predict_translator
+    - calculator_translator
+    - lua_translator@*number_and_datetime
+    - lua_translator@*input_statistics
+    - reverse_lookup_translator@wanxiang_t9reverse
+  filters:
+    - lua_filter@*wanxiang.super_lookup
+    - lua_filter@*wanxiang.super_comment_preedit
+    - lua_filter@*user_abbrev
+    - lua_filter@*placeholder
+    - user_predict_filter
+    - simplifier@emoji
+    - simplifier@s2t
+    - simplifier@s2hk
+    - simplifier@s2tw
+    - uniquifier
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA9876543210`/
+  initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA9876543210
+  delimiter: " '"
+  visual_delimiter: " "
+  tone_isolate: true
+  algebra:
+    __patch:
+      - "algebra:/fuzzy/in_ing"
+      - "algebra:/t9"
+
+translator:
+  dictionary: wanxiang.base
+  prism: wanxiang_t9
+  enable_completion: true
+  user_dict: user_t9
+  enable_user_dict: true
+  enable_encoder: true
+  enable_sentence: false
+  enable_correction: false
+  encode_commit_history: true
+  contextual_suggestions: false
+  max_homophones: 8
+  core_word_length: 4
+  max_word_length: 7
+  initial_quality: 3
+  spelling_hints: 48
+  always_show_comments: false
+  comment_format:
+  disable_user_dict_for_patterns:
+    - "^[a-zA-Z0-9]{1,6}$"
+
+wanxiang_t9reverse:
+  tag: wanxiang_reverse
+  dictionary: wanxiang_t9reverse
+  prefix: "`"
+  tips: "〔反查：拆分|笔画〕"
+
+wanxiang_lookup:
+  tags: [abc]
+  key: "`"
+  aux_file: "flypy_aux.csv"
+
+recognizer:
+  patterns:
+    punct: "^/([0-9]|10|[A-Za-z]+)$"
+    wanxiang_reverse: "^`[A-Za-z]*$"
+    unicode: "^U[a-fA-F0-9]+"
+    Snumber: "^S[0-9\\.]+"
+    Ndate: "^N[0-9]+"
+    calculator: "^V.*$"
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+
+punctuator:
+  digit_separators: ",."
+  __include: "user_symbols:/symbol_table"
+  __patch:
+    - "user_symbols:/symbols"
+    - "t9_sym"
+
+t9_sym:
+  half_shape/+:
+    "1": [1, "@", ".", "/", ":", "_", "-", "#"]
+    "@": [1, "@", ！, ：, 、, ……, ～]
+    "#": [0, "#", "$", "%", "^", "&", "*", "(", ")"]
+
+key_binder:
+  import_preset: default
+  bindings:
+    - { when: has_menu, accept: 1, send: apostrophe }
+    - { when: composing, accept: "Control+Tab", send_sequence: "{Home}{Shift+Right}{1}{Shift+Right}" }
+    - { when: composing, accept: Return, send: "Shift+Return" }

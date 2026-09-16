@@ -1,0 +1,112 @@
+# @format
+
+# Rime dictionary
+# encoding: utf-8
+# ------ 转文词库 ------
+---
+name: zhuaiwen
+version: "LTS"
+sort: by_weight
+...
+，	of;dh	20
+。	of;jh	19
+？	of;wh	18
+！	of;th	17
+：	of;mh	16
+；	of;fh	15
+“	of;yz	14
+”	of;yy	13
+‘	of;yz	12
+’	of;yy	11
+（	of;kz	10
+）	of;ky	9
+【	of;vz	8
+】	of;vy	7
+「	of;dz	6
+」	of;dy	5
+《	of;uz	4
+》	of;uy	3
+……	of;ul	2
+——	of;pv	1
+# --- zhuaiwen ---
+拊膺	fu3 ying1	10
+华饰	hua2 shi4	10
+榛树	zhen1 shu4	10
+边衬区	bian1 chen4 qv1	10
+苏澜城	su1 lan2 cheng2	10
+苏澜桥	su1 lan2 qiao2	10
+杏花时	xing4 hua1 shi2	10
+杨柳天	yang2 liu3 tian1	10
+鬓丝如银	bin4 si1 ru2 yin2	10
+长谈不倦	chang2 tan2 bu2 jvan4	10
+长谈不厌	chang2 tan2 bu2 yan4	10
+浮生缥缈	fu2 sheng1 piao1 miao3	10
+浮生虽短	fu2 sheng1 sui1 duan3	10
+福泽一方	fu2 ze2 yi4 fang1	10
+鹤衔春雪	he4 xian2 chun1 xve3	10
+鹤衔春雪	he4 xian2 chun1 sve3	10
+好花可看	hao3 hua1 ke3 kan4	10
+椒花柏叶	jiao1 hua1 bai3 ye4	10
+椒花柏叶	ziao1 hua1 bai3 ye4	10
+剪裁时光	jian3 cai2 shi2 guang1	10
+剪裁时光	zian3 cai2 shi2 guang1	10
+椒个朋柚	jiao1 ge4 peng2 you4	10
+椒个朋柚	ziao1 ge4 peng2 you4	10
+鹿覆蕉叶	lu4 fu4 jiao1 ye4	10
+鹿覆蕉叶	lu4 fu4 ziao1 ye4	10
+千家笑语	qian1 jia1 xiao4 yv3	10
+千家笑语	cian1 jia1 siao4 yv3	10
+青绿山川	qing1 lv4 shan1 chuan1	10
+青绿山川	cing1 lv4 shan1 chuan1	10
+清梦可谈	qing1 meng4 ke3 tan2	10
+清梦可谈	cing1 meng4 ke3 tan2	10
+如椒似漆	ru2 jiao1 si4 qi1	10
+如椒似漆	ru2 ziao1 si4 cii1	10
+神官赐福	shen2 guan1 ci4 fu2	10
+山河不改	shan1 he2 bu4 gai3	10
+韶华绵延	shao2 hua2 mian2 yan2	10
+岁长日远	sui4 chang2 ri4 yvan3	10
+三羊开泰	san1 yang2 kai1 tai4	10
+岁岁长安	sui4 sui4 chang2 an1	10
+太平诗卷	tai4 ping2 shi1 jvan4	10
+天遥路远	tian1 yao2 lu4 yvan3	10
+五子夺莲	wu3 zi3 duo2 lian2	10
+行山踏海	xing2 shan1 ta4 hai3	10
+远渡岁月	yvan3 du4 sui4 yve4	10
+赭红石榴	zhe3 hong2 shi2 liu5	10
+朝暮无事	zhao1 mu4 wu2 shi4	10
+赭红明黄	zhe3 hong2 ming2 huang2	10
+长乐亦未央	chang2 le4 yi4 wei4 yang1	10
+七彩绘八仙	qi1 cai3 hui4 ba1 xian1	10
+七彩绘八仙	cii1 cai3 hui4 ba1 sian1	10
+脆弱易碎的平淡	cui4 ruo4 yi4 sui4 de5 ping2 dan4	10
+故人依稀天边去	gu4 ren2 yi1 xi1 tian1 bian1 qv4	10
+孤舟一叶问船家	gu1 zhou1 yi2 ye4 wen4 chuan2 jia1	10
+江湖每逢一夜雨	jiang1 hu2 mei3 feng2 yi2 ye4 yv3	10
+冥思苦想的答案	ming2 si1 ku3 xiang3 de5 da2 an4	10
+冥思苦想的答案	ming2 si1 ku3 siang3 de5 da2 an4	10
+青山远去万里遥	qing1 shan1 yvan3 qv4 wan4 li3 yao2	10
+青山远去万里遥	cing1 shan1 yvan3 qv4 wan4 li3 yao2	10
+十年孤襟迎秋风	shi2 nian2 gu1 jin1 ying2 qiu1 feng1	10
+十年孤襟迎秋风	shi2 nian2 gu1 jin1 ying2 ciu1 feng1	10
+苏澜城外雨潇潇	su1 lan2 cheng2 wai4 yv3 xiao1 xiao1	10
+苏澜城外雨潇潇	su1 lan2 cheng2 wai4 yv3 siao1 siao1	10
+桃花故人长相映	tao2 hua1 gu4 ren2 chang2 xiang1 ying4	10
+桃花故人长相映	tao2 hua1 gu4 ren2 chang2 siang1 ying4	10
+为谁鞍前系灯笼	wei4 shui2 an1 qian2 ji4 deng1 long5	10
+为谁鞍前系灯笼	wei4 shui2 an1 cian2 ji4 deng1 long5	10
+心有不甘的落败	xin1 you3 bu4 gan1 de5 luo4 bai4	10
+心有不甘的落败	sin1 you3 bu4 gan1 de5 luo4 bai4	10
+小小自满的轻唤	xiao3 xiao3 zi4 man3 de5 qing1 huan4	10
+小小自满的轻唤	siao3 siao3 zi4 man3 de5 qing1 huan4	10
+杨柳堆烟依依青	yang2 liu3 dui1 yan1 yi1 yi1 qing1	10
+杨柳堆烟依依青	yang2 liu3 dui1 yan1 yi1 yi1 cing1	10
+别害怕纷扰的明天	bie2 hai4 pa4 fen1 rao3 de5 ming2 tian1	10
+摸不清脉络的未来	mo1 bu4 qing1 mai4 luo4 de5 wei4 lai2	10
+摸不清脉络的未来	mo1 bu4 cing1 mai4 luo4 de5 wei4 lai2	10
+去岁千般皆是如愿	qv4 sui4 qian1 ban1 jie1 shi4 ru2 yvan4	10
+去岁千般皆是如愿	qv4 sui4 cian1 ban1 jie1 shi4 ru2 yvan4	10
+细细回看都与你有关	xi4 xi4 hui2 kan4 dou1 yv2 ni3 you3 guan1	10
+细细回看都与你有关	sii4 sii4 hui2 kan4 dou1 yv2 ni3 you3 guan1	10
+星星点点都与你有关	xing1 xing1 dian3 dian3 dou1 yv2 ni3 you3 guan1	10
+星星点点都与你有关	sing1 sing1 dian3 dian3 dou1 yv2 ni3 you3 guan1	10

@@ -1,0 +1,42 @@
+# @format
+
+# Rime dictionary
+# encoding: utf-8
+#
+
+---
+name: wanxiang
+version: "LTS"
+sort: by_weight # 字典初始排序，可選original或by_weight
+use_preset_vocabulary: false
+enable_tone: true
+aux_file: "flypy/99_aux.tsv"
+aux_separator: ";"
+aux_ignore_chars: "，。？！、：～·＆“”（）「」『』…"
+import_tables:
+  # 万象词库
+  - dicts/zi # 基础字表
+  - dicts/suzi # 各类简化字、民间俗字扩展包
+  - dicts/jichu # 基础词库
+  - dicts/lianxiang # 联想词库
+  - dicts/cuoyin # 错音错字
+  - dicts/duoyin # 兼容词库
+  - dicts/shici # 诗词
+  - dicts/diming # 地名
+  - dicts/yixue # 医学
+  - dicts/huaxue # 化学
+  - dicts/yaopin # 药品
+  - dicts/mingren # 名人
+  - dicts/yiren # 艺人
+  - dicts/wuzhong # 物种多样性
+  - dicts/renming # 高频人名
+  - dicts/taifeng # 最新台风表
+  - dicts/fangyan # 收集全国方言
+  - dicts/yidu # 异读词库
+  - dicts/moegirl # 萌娘百科
+  - dicts/computer # 计算机词库
+
+  # 附加词库
+  - dicts_extra/pinyin # 拼音词库
+  - dicts_extra/zhuaiwen # 转文词库
+...

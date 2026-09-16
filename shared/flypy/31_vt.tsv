@@ -1,0 +1,17 @@
+orq	%Y年%m月%d日
+orq	%F
+orq	%Y/%m/%d
+ouj	%R
+ouj	%H时%M分
+ouj	%T
+ouj	%H时%M分%S秒
+oiso	%Y-%m-%dT%H:%M:%S+08:00
+oiso	%c
+over	魔改版v114.51.4
+xhrm	https://flypy.cc/help
+xhgw	https://flypy.cc
+xhwp	https://flypy.ysepan.com
+wxrm	https://amzxyz.github.io/rime-wanxiang/doc/intro
+wxgw	https://amzxyz.github.io/rime-wanxiang
+wxmx	https://github.com/amzxyz/RIME-LMDG/releases/tag/LTS
+wxxz	https://github.com/amzxyz/rime-wanxiang/releases/latest

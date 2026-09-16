@@ -202,12 +202,10 @@ wanxiang_reverse:
   prefix: "`" # 反查前缀（反查时前缀会消失），与 recognizer/patterns/wanxiang_reverse 匹配
   tips: "〔反查：拆分|笔画〕"
 
-wanxiang_lookup: #设置归属于super_lookup.lua
-  tags: [abc, add_user_dict] # 检索当前tag的候选
-  key: "`" # 输入中反查引导符，要添加到 speller/alphabet
-  lookup: [wanxiang_reverse] #反查滤镜数据库，万象都合并为一个了
-  enable_tone: true #启用声调反查
-  data_source: ["aux", "db"]
+wanxiang_lookup:
+  key: "`"
+  tags: [abc]
+  aux_file: "flypy/99_aux.tsv"
 
 # 处理符合特定规则的输入码，如网址、反查
 recognizer:

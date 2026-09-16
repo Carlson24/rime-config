@@ -2,7 +2,7 @@
 --wanxiang_lookup: #设置归属于super_lookup.lua
 --tags: [ abc ]  # 检索当前tag的候选
 --key: "`"       # 输入中反查引导符
---aux_file: "flypy_aux.csv" # 唯一数据源：字 -> 辅码表
+--aux_file: "flypy/99_aux.tsv" # 唯一数据源：字 -> 辅码表
 
 local wanxiang = require("wanxiang")
 

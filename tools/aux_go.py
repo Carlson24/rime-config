@@ -8,7 +8,7 @@ from typing import List
 # ================= 用户配置区 =================
 INPUT_DIR_DEFAULT = "dicts"
 OUTPUT_ROOT_DEFAULT = "."
-CSV_PATH = "shared/flypy_aux.csv"
+CSV_PATH = "shared/flypy/99_aux.tsv"
 BLACKLIST_FILES = {"mixed.dict.yaml", "en.dict.yaml"}
 # =============================================
 

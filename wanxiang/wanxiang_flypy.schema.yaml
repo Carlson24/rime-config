@@ -86,7 +86,7 @@ wanxiang_flypy_reverse:
 wanxiang_lookup:
   key: "`"
   tags: [abc]
-  aux_file: "flypy_aux.csv"
+  aux_file: "flypy/99_aux.tsv"
 
 recognizer:
   patterns:

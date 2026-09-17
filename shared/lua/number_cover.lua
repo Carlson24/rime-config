@@ -1,4 +1,4 @@
--- moran_number_and_datetime.lua
+-- moran_number_cover.lua
 --
 -- Author: ksqsf
 -- License: GPLv3

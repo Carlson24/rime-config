@@ -49,7 +49,7 @@ engine:
     - script_translator
     - user_predict_translator
     - calculator_translator
-    - lua_translator@*number_and_datetime
+    - lua_translator@*number_cover
     - lua_translator@*input_statistics
     - reverse_lookup_translator@wanxiang_t9reverse
   filters:

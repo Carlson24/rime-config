@@ -32,8 +32,6 @@ switcher:
     - aux_hint
     - tone_hint
     - full_pinyin
-    - chinese_english
-    - abbrev
   fold_options: true
   abbreviate_options: true
   option_list_separator: " / "

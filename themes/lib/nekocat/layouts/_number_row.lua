@@ -4,8 +4,8 @@
 
 ---@type KeyColorStyles
 local S = safe_require("nekocat.colors._key_colors")
-local symoffset = safe_require("nekocat.font_offset").num_key_symbol_offset_y
-local textoffset = safe_require("nekocat.font_offset").num_key_text_offset_y
+local symoffset = safe_require("nekocat.font_offset").num_key_symbol_offset_x
+local hintoffset = safe_require("nekocat.font_offset").num_key_text_offset_y
 
 local NUMS = {
   { "1", "!", "①" }, { "2", "@", "②" }, { "3", "#", "③" }, { "4", "$", "④" }, { "5", "%", "⑤" },
@@ -15,12 +15,14 @@ local NUMS = {
 local function num_key(digit, symbol, down)
   return key(merge(S["num" .. digit], key {
     click = digit,
-    label_symbol = { { text = { "ic@numeric-" .. digit .. "-circle-outline", symbol }, align = { "left", "right" } } },
+    label = { { align = "left" } },
+    label_symbol = { { text = symbol, align = "right" } },
     long_click = symbol,
     swipe_up = symbol,
+    hint = { { text = "ic@numeric-" .. digit .. "-circle-outline", align = "right" } },
     swipe_down = down,
-    key_text_offset_y = textoffset,
-    key_symbol_offset_y = symoffset
+    key_symbol_offset_x = symoffset,
+    key_hint_offset_y = hintoffset
   }))
 end
 

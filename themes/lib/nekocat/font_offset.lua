@@ -13,8 +13,8 @@ M.lsspdynamic = key {
   key_hint_offset_y = 1
 }
 
-M.num_key_symbol_offset_y = -1
-M.num_key_text_offset_y = 2
+M.num_key_symbol_offset_x = -2
+M.num_key_hint_offset_y = -1
 M.func_key_text_size = 23
 M.lssp_key_text_size = 21
 M.lssp_func_key_text_size = 20

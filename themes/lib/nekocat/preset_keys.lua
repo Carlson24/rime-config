@@ -115,16 +115,16 @@ local pk = {
   CandDown           = { label = "ic@pan-down", send = "Control+plus" }, -- 魔然下移选中的 pin 候选
   Calculator         = { label = "ic@calculator-variant", actions = { "KeyboardCalculator", "V" } }, -- 计算器
   CommitPreedit      = { label = "ic@marker", send = "Control+Return" }, -- 上屏 Preedit
-  SelectCandOne      = { label = "〡", send = "1" }, -- 选择第一个候选
-  SelectCandTwo      = { label = "〢", send = "2" }, -- 选择第二个候选
-  SelectCandThree    = { label = "〣", send = "3" }, -- 选择第三个候选
-  SelectCandFour     = { label = "〤", send = "4" }, -- 选择第四个候选
-  SelectCandFive     = { label = "〥", send = "5" }, -- 选择第五个候选
-  SelectToneOne      = { label = "\u{F821}", send = "6" }, -- 音调一声
-  SelectToneTwo      = { label = "\u{F822}", send = "7" }, -- 音调二声
-  SelectToneThree    = { label = "\u{F823}", send = "8" }, -- 音调三声
-  SelectToneFour     = { label = "\u{F824}", send = "9" }, -- 音调四声
-  SelectToneNull     = { label = "\u{F825}", send = "0" }, -- 音调无声
+  SelectCandOne      = { label = { { text = "〡", align = "left" } }, send = "1" }, -- 选择第一个候选
+  SelectCandTwo      = { label = { { text = "〢", align = "left" } }, send = "2" }, -- 选择第二个候选
+  SelectCandThree    = { label = { { text = "〣", align = "left" } }, send = "3" }, -- 选择第三个候选
+  SelectCandFour     = { label = { { text = "〤", align = "left" } }, send = "4" }, -- 选择第四个候选
+  SelectCandFive     = { label = { { text = "〥", align = "left" } }, send = "5" }, -- 选择第五个候选
+  SelectToneOne      = { label = { { text = "\u{F821}", align = "left" } }, send = "6" }, -- 音调一声
+  SelectToneTwo      = { label = { { text = "\u{F822}", align = "left" } }, send = "7" }, -- 音调二声
+  SelectToneThree    = { label = { { text = "\u{F823}", align = "left" } }, send = "8" }, -- 音调三声
+  SelectToneFour     = { label = { { text = "\u{F824}", align = "left" } }, send = "9" }, -- 音调四声
+  SelectToneNull     = { label = { { text = "\u{F825}", align = "left" } }, send = "0" }, -- 音调无声
   Semicolon          = { label = "ic@numeric-2-box-outline", send = ";" }, -- 分号用于次选
 
   -- 计算器函数

@@ -6,9 +6,9 @@ import os
 import argparse
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SOURCE_FILE = os.path.join(BASE_DIR, "shared", "dicts", "zi.pro.dict.yaml")
+SOURCE_FILE = os.path.join(BASE_DIR, "shared", "dicts", "zi.dict.yaml")
 MAP_FILE = os.path.join(BASE_DIR, "tools", "zian_map.csv")
-TARGET_FILE = os.path.join(BASE_DIR, "shared", "dicts_extra", "zhuaiwen.pro.dict.yaml")
+TARGET_FILE = os.path.join(BASE_DIR, "shared", "dicts_extra", "zhuaiwen.dict.yaml")
 SEARCH_DIRS = [
     os.path.join(BASE_DIR, "shared", "dicts"),
     os.path.join(BASE_DIR, "shared", "dicts_extra"),

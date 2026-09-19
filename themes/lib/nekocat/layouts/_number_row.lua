@@ -5,7 +5,7 @@
 ---@type KeyColorStyles
 local S = safe_require("nekocat.colors._key_colors")
 local symoffset = safe_require("nekocat.font_offset").num_key_symbol_offset_x
-local hintoffset = safe_require("nekocat.font_offset").num_key_text_offset_y
+local hintoffset = safe_require("nekocat.font_offset").num_key_hint_offset_y
 
 local NUMS = {
   { "1", "!", "①" }, { "2", "@", "②" }, { "3", "#", "③" }, { "4", "$", "④" }, { "5", "%", "⑤" },

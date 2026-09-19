@@ -192,12 +192,14 @@ local function apply_tone_preedit(env, cand)
 
   do
     local preedit = cand.preedit
-    local converted = preedit:gsub("()([A-Z][A-Z]+)", function(pos, upper)
-      if pos <= 3 then return upper end
-      if preedit:sub(1, pos - 1):match("[A-Z]") then return upper end
-      return "›"
+    -- 隐藏双大写辅助码：开头保护，其余全部转换为 ›
+    local converted = preedit:gsub("^(..?-?)([A-Z][A-Z]+)", function(prefix, upper)
+      if prefix:match("[A-Z]") then return prefix .. upper end
+      return prefix .. "›"
     end)
-    cand.preedit = converted
+    cand.preedit = converted:gsub("([^%s%^])([A-Z][A-Z]+)", function(prev)
+      return prev .. "›"
+    end)
   end
   -- 数字映射逻辑 (上标转换)
   if not env.tone_map then

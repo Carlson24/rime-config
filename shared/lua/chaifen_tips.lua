@@ -9,7 +9,7 @@
 local wanxiang = require("wanxiang")
 
 local DB_FORMAT_VERSION = "4"
-local DEFAULT_FILES = { "flypy/71_if.tsv" }
+local DEFAULT_FILES = { "flypy/99_if.tsv" }
 
 -- 模块私有 store 池：相同签名的数据共享同一份内存 store，引用计数管理生命周期。
 local STORE_CACHE = {}

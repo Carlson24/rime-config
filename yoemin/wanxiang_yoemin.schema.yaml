@@ -38,7 +38,7 @@ switches:
   - name: emoji
     states: [, ]
     reset: 1
-  - options: [simp, s2t, s2hk, s2tw]
+  - options: [conversion_off, s2t_mode, s2hk_mode, s2tw_mode]
     states: [简体, 繁体, 港繁, 台繁]
     abbrev: [简, 繁, 港, 台]
     reset: 0
@@ -92,13 +92,13 @@ engine:
   filters: # 过滤器
     - lua_filter@*wanxiang.super_lookup
     - lua_filter@*wanxiang.super_comment_preedit
-    - lua_filter@*user_abbrev
     - lua_filter@*placeholder
     - user_predict_filter
-    - simplifier@emoji
-    - simplifier@s2t
-    - simplifier@s2hk
-    - simplifier@s2tw
+    - rewriter@emoji
+    - rewriter@others
+    - rewriter@s2t
+    - rewriter@hk_variants
+    - rewriter@tw_variants
     - uniquifier
 
 # --- 拼写规则配置 ---
@@ -205,7 +205,7 @@ wanxiang_reverse:
 wanxiang_lookup:
   key: "`"
   tags: [abc]
-  aux_file: "flypy/99_aux.tsv"
+  aux_file: "flypy_aux.txt"
 
 # 处理符合特定规则的输入码，如网址、反查
 recognizer:

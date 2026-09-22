@@ -105,7 +105,7 @@ wanxiang_t9reverse:
 wanxiang_lookup:
   tags: [abc]
   key: "`"
-  aux_file: "flypy/99_aux.tsv"
+  aux_file: "flypy_aux.txt"
 
 recognizer:
   patterns:

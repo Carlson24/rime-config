@@ -39,14 +39,34 @@ engine:
     - lua_filter@*wanxiang.super_english*F
     - lua_filter@*wanxiang.super_lookup
     - lua_filter@*wanxiang.super_comment_preedit
-    - lua_filter@*user_abbrev
+    - rewriter@flypy
     - lua_filter@*placeholder
     - user_predict_filter # 去重、简繁转换之前
-    - simplifier@emoji
-    - simplifier@s2t
-    - simplifier@s2hk
-    - simplifier@s2tw
+    - rewriter@emoji
+    - rewriter@others
+    - rewriter@s2t
+    - rewriter@hk_variants
+    - rewriter@tw_variants
     - uniquifier # 候选去重
+
+flypy:
+  option: true
+  mode: abbrev
+  insert_position: 1
+  insert_count: 128
+  tags: [abc]
+  files:
+    - rewriter/flypy/00_user.txt
+    - rewriter/flypy/00_xh.txt
+    - rewriter/flypy/11_fl.txt
+    - rewriter/flypy/21_yj.txt
+    - rewriter/flypy/22_ej.txt
+    - rewriter/flypy/31_vt.txt
+    - rewriter/flypy/41_fh.txt
+    - rewriter/flypy/51_qmc.txt
+    - rewriter/flypy/52_upz.txt
+    - rewriter/flypy/53_qmz.txt
+    - rewriter/flypy/61_oc.txt
 
 super_comment:
   candidate_length: 4 # 注释候选长度
@@ -98,7 +118,7 @@ switches:
   - options: [comment_off, aux_hint, tone_hint]
     states: [注释关, 辅助开, 读音开]
     reset: 1
-  - options: [simp, s2t, s2hk, s2tw]
+  - options: [conversion_off, s2t_mode, s2hk_mode, s2tw_mode]
     states: [简体, 繁体, 港繁, 台繁]
     abbrev: [简, 繁, 港, 台]
     reset: 0
@@ -160,26 +180,55 @@ shared_config:
     tag: calculator
     tips: "计算器"
 
-  s2t:
-    option_name: s2t
-    opencc_config: s2t.json
+  others:
+    option: true
     tags: [abc]
-    tips: all
-  s2hk:
-    option_name: s2hk
-    opencc_config: s2hk.json
-    tags: [abc]
-    tips: all
-  s2tw:
-    option_name: s2tw
-    opencc_config: s2tw.json
-    tags: [abc]
-    tips: all
+    mode: derive
+    files: [rewriter/others.txt]
+
   emoji:
-    option_name: emoji
-    opencc_config: emoji.json
+    option: emoji
     tags: [abc]
-    tips: all
+    mode: derive
+    files: [rewriter/emoji.txt]
+
+  kaomoji:
+    option: kaomoji
+    tags: [abc]
+    mode: derive
+    files: [rewriter/kaomoji.txt]
+
+  s2t:
+    # 三个模式都包含 s2t 阶段：任一模式开启即生效
+    option: [s2t_mode, s2hk_mode, s2tw_mode]
+    mode: replace
+    tags: [abc]
+    enable_sentence: true
+    files:
+      - rewriter/opencc/CJK_Compatibility_Ideographs.txt
+      - rewriter/opencc/STPhrases.txt
+      - rewriter/opencc/STPhrases_GeneratedFromRegionalPhrases.txt
+      - rewriter/opencc/STCharacters.txt
+
+  hk_variants:
+    # 仅简转港模式开启（输入为 s2t 阶段输出）
+    option: s2hk_mode
+    mode: replace
+    tags: [abc]
+    enable_sentence: true
+    files:
+      - rewriter/opencc/HKVariantsPhrases.txt
+      - rewriter/opencc/HKVariants.txt
+
+  tw_variants:
+    # 仅简转台模式开启（输入为 s2t 阶段输出）
+    option: s2tw_mode
+    mode: replace
+    tags: [abc]
+    enable_sentence: true
+    files:
+      - rewriter/opencc/TWVariantsPhrases.txt
+      - rewriter/opencc/TWVariants.txt
 
   editor:
     bindings:

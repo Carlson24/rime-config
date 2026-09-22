@@ -30,6 +30,11 @@ switches:
 engine:
   __include: shared_config.yaml:/engine
 
+flypy:
+  __include: shared_config.yaml:/flypy
+  __patch:
+    key_xlit: "qwertyuiopasdfghjklzxcvbnm>qwwrryuiipassffhjjlzxxvbbm"
+
 speller:
   # auto_select: true
   # auto_select_pattern: ^@(\w|@)+|^\w{3}\w+
@@ -43,20 +48,6 @@ speller:
       - "algebra:/flypy_pro"
       - "algebra:/18keys"
       - "algebra:/aux"
-
-user_abbrev:
-  tags: [abc]
-  files:
-    - flypy/00_user.tsv
-    - flypy/00_xh.tsv
-    - flypy/11_fl.tsv
-    - flypy/21_yj.tsv
-    - flypy/22_ej.tsv
-    - flypy/31_vt.tsv
-    - flypy/41_fh.tsv
-    - flypy/51_qmc.tsv
-    - flypy/52_upz.tsv
-    - flypy/53_qmz.tsv
 
 translator:
   dictionary: wanxiang.zian
@@ -86,7 +77,7 @@ wanxiang_flypy_18keys_reverse:
 wanxiang_lookup:
   key: "`"
   tags: [abc]
-  aux_file: "flypy/99_aux.tsv"
+  aux_file: "flypy_aux.txt"
 
 recognizer:
   patterns:

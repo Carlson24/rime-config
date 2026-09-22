@@ -10,7 +10,7 @@ version: "LTS"
 sort: by_weight # 字典初始排序，可選original或by_weight
 use_preset_vocabulary: false
 enable_tone: true
-aux_file: "flypy/99_aux.tsv"
+aux_file: "flypy_aux.txt"
 aux_separator: ";"
 aux_ignore_chars: "，。？！、：～·＆“”（）「」『』…"
 import_tables:

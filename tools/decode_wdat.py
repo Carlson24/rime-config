@@ -112,12 +112,12 @@ def main():
         description="Decode WindInput WDAT v6 dictionary to readable TSV"
     )
     ap.add_argument("wdat", help="path to .wdat file")
-    ap.add_argument("-o", "--out", help="output TSV path (default: <wdat>.tsv)")
+    ap.add_argument("-o", "--out", help="output TSV path (default: <wdat>.txt)")
     ap.add_argument("--stats", action="store_true", help="print stats to stderr")
     args = ap.parse_args()
 
     w = Wdat(args.wdat)
-    out_path = args.out or (args.wdat.rsplit(".", 1)[0] + ".tsv")
+    out_path = args.out or (args.wdat.rsplit(".", 1)[0] + ".txt")
 
     rows = []
     keys = 0

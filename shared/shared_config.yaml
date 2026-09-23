@@ -42,8 +42,9 @@ engine:
     - rewriter@flypy
     - lua_filter@*placeholder
     - user_predict_filter # 去重、简繁转换之前
-    - rewriter@emoji
     - rewriter@others
+    - rewriter@emoji
+    - rewriter@kaomoji
     - rewriter@s2t
     - rewriter@hk_variants
     - rewriter@tw_variants
@@ -69,12 +70,11 @@ flypy:
     - rewriter/flypy/61_oc.txt
 
 super_comment:
-  candidate_length: 4 # 注释候选长度
+  candidate_length: 16 # 注释候选长度
   cand_type:
     user_phrase: "" # 用户自造词
     sentence: "" # 整句
     table: "✬" # 系统码表词
-    typo: "" # 纠错
     user_table: "" # 用户码表词
     completion: "⋙" # 编码补全
     abbrev: "" # 简码
@@ -102,7 +102,7 @@ switches:
     reset: 0
   - name: emoji
     states: [, ]
-    reset: 1
+    reset: 0
   - name: kaomoji
     states: [颜文关, 颜文开]
     reset: 0
@@ -184,18 +184,21 @@ shared_config:
     option: true
     tags: [abc]
     mode: derive
+    comment_source: text
     files: [rewriter/others.txt]
 
   emoji:
     option: emoji
     tags: [abc]
     mode: derive
+    comment_source: text
     files: [rewriter/emoji.txt]
 
   kaomoji:
     option: kaomoji
     tags: [abc]
     mode: derive
+    comment_source: text
     files: [rewriter/kaomoji.txt]
 
   s2t:
@@ -203,6 +206,7 @@ shared_config:
     option: [s2t_mode, s2hk_mode, s2tw_mode]
     mode: replace
     tags: [abc]
+    comment_source: text
     enable_sentence: true
     files:
       - rewriter/opencc/CJK_Compatibility_Ideographs.txt
@@ -215,6 +219,7 @@ shared_config:
     option: s2hk_mode
     mode: replace
     tags: [abc]
+    comment_source: text
     enable_sentence: true
     files:
       - rewriter/opencc/HKVariantsPhrases.txt
@@ -225,6 +230,7 @@ shared_config:
     option: s2tw_mode
     mode: replace
     tags: [abc]
+    comment_source: text
     enable_sentence: true
     files:
       - rewriter/opencc/TWVariantsPhrases.txt

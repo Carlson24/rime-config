@@ -43,11 +43,13 @@ engine:
     - lua_filter@*placeholder
     - user_predict_filter # 去重、简繁转换之前
     - rewriter@others
+    - rewriter@commit
     - rewriter@emoji
     - rewriter@kaomoji
     - rewriter@s2t
     - rewriter@hk_variants
     - rewriter@tw_variants
+    - rewriter@translate
     - uniquifier # 候选去重
 
 flypy:
@@ -112,6 +114,9 @@ switches:
   - name: prediction
     states: [预测关, 预测开]
     reset: 1
+  - name: translate
+    states: [翻译关, 翻译开]
+    reset: 0
   - options: [raw_input, tone_display, full_pinyin]
     states: [原编码, 有声调, 无声调]
     reset: 1
@@ -135,6 +140,7 @@ key_binder:
     - { when: has_menu, accept: "Tab", send: "Control+Right" }
     - { when: composing, accept: "Tab", send: "Control+Right" }
     - { when: composing, accept: "Control+Tab", send_sequence: "{Home}{Shift+Right}{1}{Shift+Right}" }
+    - { when: has_menu, accept: "Control+e", toggle: translate }
     - { when: has_menu, accept: "semicolon", send: 2 }
 
 shared_config:
@@ -180,6 +186,13 @@ shared_config:
     tag: calculator
     tips: "计算器"
 
+  commit:
+    option: true
+    tags: [abc]
+    mode: comment
+    files:
+      - rewriter/english_chinese.txt
+
   others:
     option: true
     tags: [abc]
@@ -200,6 +213,15 @@ shared_config:
     mode: derive
     comment_source: text
     files: [rewriter/kaomoji.txt]
+
+  translate:
+    option: translate
+    tags: [abc]
+    mode: derive
+    comment_source: text
+    files:
+      - rewriter/chinese_english.txt
+      - rewriter/english_chinese.txt
 
   s2t:
     # 三个模式都包含 s2t 阶段：任一模式开启即生效

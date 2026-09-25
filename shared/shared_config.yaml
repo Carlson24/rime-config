@@ -192,6 +192,7 @@ shared_config:
     mode: comment
     files:
       - rewriter/english_chinese.txt
+      - rewriter/flypy_commit.txt
 
   others:
     option: true

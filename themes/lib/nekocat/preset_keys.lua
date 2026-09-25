@@ -52,6 +52,7 @@ local pk = {
   IMESwitch          = { label = "ic@web", send = "LANGUAGE_SWITCH" },                                                                             -- 输入法切换
   OpenLogcat         = { label = "ic@information-outline", command = "run", option = "com.carlson.lyraime/com.osfans.trime.ui.main.LogActivity" }, -- LogCat
   ZiTools            = { label = "ic@ideogram-cjk", command = "run", option = "https://zi.tools/zi/%1$s" },                                        -- 字统网查字
+  FlypyIX            = { label = "ic@ideogram-cjk", command = "run", option = "https://flypy.cc/ix/?q=%1$s" },                                     -- 小鹤拆字查询
 
   -- 编辑键
   SelectAll          = { label = "ic@select-all", send = "Control+a" },    -- 全选
@@ -76,12 +77,8 @@ local pk = {
   KeyboardEditor     = { label = "ic@square-edit-outline", send = "Eisu_toggle", select = "editor" },    -- 编辑键盘
   KeyboardNumber     = { label = "ic@numeric", send = "Eisu_toggle", select = "number" },                -- 数字键盘
   KeyboardSettings   = { label = "ic@cogs", send = "Eisu_toggle", select = "settings" },                 -- 设置键盘
-  KeyboardLayouts    = { label = "ic@keyboard-variant", send = "Eisu_toggle", select = "layouts" },      -- 布局界面
   Keyboard45Eng      = { label = "\u{F840}", send = "Eisu_toggle", select = "english" },                 -- 英文布局
   KeyboardT9Number   = { label = "ic@numeric", send = "Eisu_toggle", select = "t9_number" },             -- T9 用数字
-  Keyboardzrm        = { label = "\u{F842}", send = "Eisu_toggle", select = "wanxiang_zrm" },            -- 自然码布局
-  Keyboardzrm18keys  = { label = "\u{F844}", send = "Eisu_toggle", select = "wanxiang_zrm_18keys" },     -- 自然码 18 键
-  Keyboardzrm14keys  = { label = "\u{F846}", send = "Eisu_toggle", select = "wanxiang_zrm_14keys" },     -- 自然码 14 键
   Keyboardl17keys    = { label = "\u{F845}", send = "Eisu_toggle", select = "wanxiang_l17keys" },        -- 乱序 17
 
   -- 方案切换

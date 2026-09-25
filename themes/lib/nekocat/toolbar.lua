@@ -34,11 +34,10 @@ local tb = toolbar {
     make_button("HideKeyboard", "ic@keyboard-close"),
     make_button("VoiceSwitch", { "ic@microphone", "ic@stop-circle" }),
     make_button("WindowClipboard", "ic@clipboard-list-outline"),
+    make_button("FloatingSwitch", { "ic@dock-window", "ic@keyboard-outline" }),
     make_button("Redo", "ic@rotate-right"),
     make_button("KeyboardEditor", "ic@cursor-move"),
-    make_button("Undo", "ic@rotate-left"),
-    make_button("FloatingSwitch", { "ic@dock-window", "ic@keyboard-outline" }),
-    make_button("KeyboardLayouts", "ic@keyboard-variant")
+    make_button("Undo", "ic@rotate-left")
   }
 }
 

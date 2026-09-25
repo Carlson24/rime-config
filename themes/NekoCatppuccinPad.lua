@@ -30,7 +30,9 @@ local theme = theme {
 
   preset_keys = safe_require("nekocat.preset_keys"),
 
-  preset_keyboards = safe_require("nekocat.textkeyboard"),
+  preset_keyboards = merge(safe_require("nekocat.textkeyboard"), {
+    wanxiang_flypy = safe_require("nekocat.layouts.47keys_hint_flypy")
+  }),
 
   liquid_keyboard = safe_require("nekocat.liquid_keyboard")
 }

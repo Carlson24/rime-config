@@ -126,16 +126,16 @@ function M.func(input, env)
     local skip = env.enable_taichi_filter and cand.comment and cand.comment:find(TAICHI_MARK)
     if not skip then
       local ctype = fast_type(cand)
-      local text_changed = false
-      local comment_changed = false
+      local changed = false
       local new_text = cand.text
-      local genuine = cand:get_genuine()
-      local current_comment = genuine.comment or ""
+      -- 以界面实际显示的注释为基准：rewrite 等滤镜产出的 ShadowCandidate
+      -- 自带注释，genuine.comment 只是底层、写它进不了显示
+      local current_comment = cand.comment or ""
 
       -- 2. 文本替换：仅对目标类型候选
       if TARGET_TYPES[ctype] then
         new_text = replace_formats(cand.text)
-        text_changed = new_text ~= cand.text
+        changed = new_text ~= cand.text
       end
 
       -- 3. 类型符号追加：按真实类型查映射，命中且注释未以该符号结尾才追加
@@ -151,16 +151,13 @@ function M.func(input, env)
           else
             current_comment = symbol
           end
-          comment_changed = true
+          changed = true
         end
       end
 
-      -- 文本变更须重建候选（ShadowCandidate），仅注释变更可直改 genuine.comment
-      if text_changed then
+      -- 文本或注释有变更即重建 ShadowCandidate；无变更原样透传
+      if changed then
         yield(ShadowCandidate(cand, cand.type, new_text, current_comment))
-      elseif comment_changed then
-        genuine.comment = current_comment
-        yield(cand)
       else
         yield(cand)
       end

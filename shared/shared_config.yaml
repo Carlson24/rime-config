@@ -40,16 +40,16 @@ engine:
     - lua_filter@*wanxiang.super_lookup
     - lua_filter@*wanxiang.super_comment_preedit
     - rewriter@flypy
-    - lua_filter@*placeholder
+    - rewriter@commit
     - user_predict_filter # 去重、简繁转换之前
     - rewriter@others
-    - rewriter@commit
     - rewriter@emoji
     - rewriter@kaomoji
     - rewriter@s2t
     - rewriter@hk_variants
     - rewriter@tw_variants
     - rewriter@translate
+    - lua_filter@*placeholder
     - uniquifier # 候选去重
 
 flypy:
@@ -190,6 +190,7 @@ shared_config:
     option: true
     tags: [abc]
     mode: comment
+    comment_append: true
     files:
       - rewriter/english_chinese.txt
       - rewriter/flypy_commit.txt

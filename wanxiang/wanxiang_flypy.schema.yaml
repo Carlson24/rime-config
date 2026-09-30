@@ -42,12 +42,11 @@ speller:
   visual_delimiter: " "
   algebra:
     __patch:
-      - "algebra:/fuzzy/in_ing"
       - "algebra:/flypy_pro"
       - "algebra:/aux"
 
 translator:
-  dictionary: wanxiang.zian
+  dictionary: wanxiang.flypy.zian
   prism: wanxiang_flypy # 多方案唯一标识
   enable_completion: true # 开启编码补全
   enable_user_dict: true # 启用用户词典

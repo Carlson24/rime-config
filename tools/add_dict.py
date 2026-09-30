@@ -1,14 +1,36 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# 添加自定义词条到用户词典（zhuaiwen.dict.yaml），输出 flypy 编码格式。
+#
+# 编码规则:
+#   - 每个字从 zi 源（flypy 编码词库）取其 flypy 码（多音字交互选择）
+#   - 按「字级绑定」查 zian_map.csv：把映射中的原拼音转成 flypy，
+#     与所选 flypy 码同构比对；命中则取得该字的尖音 flypy 码
+#   - 词条追加：标准 flypy 一条；若有尖音码且不同，再追加尖音一条
+#
+# 依赖:
+#   - tools/zian_map.csv       三列：汉字 / 尖音全拼 / 原全拼
+#   - shared/dicts/zi.flypy.dict.yaml  字 → flypy 码（来源可自行配置）
+#
+# 用法:
+#   python3 tools/add_dict.py 词语                 # 单次
+#   python3 tools/add_dict.py 词语 -F 20           # 指定词频
+#   python3 tools/add_dict.py -i words.txt         # 批量（每行: 词语 [词频]）
+#   python3 tools/add_dict.py 词语 --first         # 自动取第一个编码
+#   python3 tools/add_dict.py 词语 -f              # 跳过查重强制追加
 
 import sys
 import os
 import argparse
 
+from pinyin_to_flypy import build_transformer, FLYPY_PRO_RULES
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SOURCE_FILE = os.path.join(BASE_DIR, "shared", "dicts", "zi.dict.yaml")
+SOURCE_FILE = os.path.join(BASE_DIR, "shared", "dicts", "zi.flypy.dict.yaml")
 MAP_FILE = os.path.join(BASE_DIR, "tools", "zian_map.csv")
-TARGET_FILE = os.path.join(BASE_DIR, "shared", "dicts_extra", "zhuaiwen.dict.yaml")
+TARGET_FILE = os.path.join(
+    BASE_DIR, "shared", "dicts_extra", "zhuaiwen.flypy.dict.yaml"
+)
 SEARCH_DIRS = [
     os.path.join(BASE_DIR, "shared", "dicts"),
     os.path.join(BASE_DIR, "shared", "dicts_extra"),
@@ -16,11 +38,14 @@ SEARCH_DIRS = [
 DEFAULT_FREQ = 10
 BODY_MARKER = "# --- zhuaiwen ---"
 
+# flypy 转换器（全拼 → flypy 码），规则硬编码于 pinyin_to_flypy.FLPY_PRO_RULES
+FLYPY = build_transformer(FLYPY_PRO_RULES)
+
 
 def load_zi_dict(filepath):
     """
-    加载读音字库，返回 {字: [编码1, 编码2, ...]}。
-    同一字的编码去重并保留顺序。
+    加载读音字库（flypy 编码），返回 {字: [flypy码1, flypy码2, ...]}。
+    同一字的编码去重并保留顺序；编码中的辅助码后缀（分号部分）剥离。
     """
     zi_dict = {}
     try:
@@ -34,6 +59,7 @@ def load_zi_dict(filepath):
                     char = parts[0].strip()
                     code = parts[1].strip()
                     if char and code:
+                        code = code.split(";", 1)[0]  # 剥离辅助码
                         codes = zi_dict.setdefault(char, [])
                         if code not in codes:
                             codes.append(code)
@@ -52,7 +78,7 @@ def derive_tone5(hanzi, target_pinyin, orig_pinyin):
 
 def load_zian_map(map_file):
     """
-    加载尖音映射表（三列：汉字、尖音、拼音），返回 {字: {原拼音: 尖音}}。
+    加载尖音映射表（三列：汉字、尖音全拼、原全拼），返回 {字: {原全拼: 尖音全拼}}。
     同时为每条派生声调5（轻声）映射。
     """
     mapping = {}
@@ -92,7 +118,10 @@ def load_zian_map(map_file):
     except FileNotFoundError:
         print(f"错误：映射文件不存在：{map_file}", file=sys.stderr)
         sys.exit(1)
-    print(f"加载尖音映射：总条目数 {total_lines}")
+    print(
+        f"加载尖音映射：总条目数 {total_lines}，派生声调5条目 {derived_lines}，"
+        f"不同汉字数 {len(mapping)}，跳过 {skipped_lines} 行"
+    )
     return mapping
 
 
@@ -177,11 +206,15 @@ def sort_dict_file(target_file):
         f.write(text)
 
 
+def to_flypy(pinyin_full):
+    """全拼（带声调数字）转 flypy 码；含分号辅助码时剥离再转。"""
+    if ";" in pinyin_full:
+        pinyin_full = pinyin_full.split(";", 1)[0]
+    return FLYPY(pinyin_full + ";")[:-1]
+
+
 def choose_code_for_char(char, code_list, auto_first=False):
-    """
-    交互式选择或自动取第一个编码。
-    若 auto_first=True，直接返回第一个编码，不交互。
-    """
+    """交互式选择或自动取第一个 flypy 码。"""
     if auto_first:
         return code_list[0]
 
@@ -206,19 +239,46 @@ def choose_code_for_char(char, code_list, auto_first=False):
             print("请输入有效数字。")
 
 
-def replace_with_zian(char, code, zian_map):
+def match_zian_for_flypy(char, flypy_code, zian_map):
     """
-    将单个字的 zi 编码替换为尖音编码。
-    拆分出基础拼音，若在映射中命中则替换基础拼音，保留 ;后缀；否则原样返回。
+    字级绑定：将该字在 zian_map 中所有 (原全拼 → 尖音全拼) 对的原全拼
+    转成 flypy 码，与传入的 flypy 码同构比对，返回所有命中的尖音 flypy 码列表。
+    例如 剪 ji码 jm3，zian_map 键 jian3→flypy jm3 命中 → 尖音 zian3→flypy om3。
     """
-    if ";" in code:
-        pinyin, rest = code.split(";", 1)
-        if char in zian_map and pinyin in zian_map[char]:
-            return zian_map[char][pinyin] + ";" + rest
-        return code
-    if char in zian_map and code in zian_map[char]:
-        return zian_map[char][code]
-    return code
+    if char not in zian_map:
+        return []
+    hits = []
+    for orig_pinyin, zian_pinyin in zian_map[char].items():
+        if to_flypy(orig_pinyin) == flypy_code:
+            hits.append(to_flypy(zian_pinyin))
+    return hits
+
+
+def choose_zian_code(char, flypy_code, zian_map, auto_first=False):
+    """
+    为该字的所选 flypy 码确定尖音 flypy 码。
+    多个命中时交互选择；无命中返回 None。
+    """
+    hits = match_zian_for_flypy(char, flypy_code, zian_map)
+    if not hits:
+        return None
+    if len(hits) == 1 or auto_first:
+        return hits[0]
+
+    print(f"\n字“{char}”（{flypy_code}）有多个尖音编码：")
+    for idx, code in enumerate(hits, start=1):
+        print(f"  {idx}. {code}")
+    while True:
+        try:
+            choice = input("请选择序号 (1-{}): ".format(len(hits))).strip()
+            if not choice:
+                continue
+            num = int(choice)
+            if 1 <= num <= len(hits):
+                return hits[num - 1]
+            print(f"请输入 1 到 {len(hits)} 之间的数字。")
+        except ValueError:
+            print("请输入有效数字。")
 
 
 def process_single_word(
@@ -232,37 +292,39 @@ def process_single_word(
     force=False,
 ):
     """
-    处理单个词条：查重、逐字取编码、追加。
-    每个字取 zi 编码；再按尖音映射替换基础拼音，生成 zian 词条（未命中保持 zi 编码）。
-    若 zi 与 zian 编码不同则追加两条（zi 在前、zian 在后），相同则仅追加一条。
+    处理单个词条：查重、逐字取 flypy 码并绑定尖音、追加。
+    每个字取 flypy 码；再按字级绑定查尖音映射，命中则生成尖音 flypy 码。
+    若整词存在尖音且与标准不同，追加两条（标准在前、尖音在后），否则追加标准一条。
     force=True 时跳过查重，强制追加。
     返回 (成功, 消息)
     """
     if not word:
         return False, "词语为空"
 
-    # 词级查重：先搜索 dicts/ 与 dicts_extra/ 全部词典（强制模式跳过）
     src_file = existing_words.get(word)
     if src_file and not force:
         return False, f"词条“{word}”已存在于 {src_file}，未追加"
 
-    # 逐字取 zi 编码，并生成对应 zian 编码
     zi_codes = []
     zian_codes = []
     for ch in word:
         code_list = zi_dict.get(ch)
         if not code_list:
             return False, f"字“{ch}”在源字典中未找到"
-        chosen = choose_code_for_char(ch, code_list, auto_first=not interactive)
-        zi_codes.append(chosen)
-        zian_codes.append(replace_with_zian(ch, chosen, zian_map))
+        flypy_code = choose_code_for_char(ch, code_list, auto_first=not interactive)
+        zi_codes.append(flypy_code)
+        zian_codes.append(
+            choose_zian_code(ch, flypy_code, zian_map, auto_first=not interactive)
+        )
 
     zi_combined = " ".join(zi_codes)
-    zian_combined = " ".join(zian_codes)
+    # 尖音版本：命中的字替换为尖音码，未命中保持标准码
+    zian_parts = [z if z is not None else c for z, c in zip(zian_codes, zi_codes)]
+    zian_combined = " ".join(zian_parts)
 
-    # 追加：编码不同则两条（zi 在前、zian 在后），相同则仅一条
+    # 追加：有尖音且不同则两条，否则一条
     combined_codes = [zi_combined]
-    if zi_combined != zian_combined:
+    if zian_combined != zi_combined:
         combined_codes.append(zian_combined)
     for combined_code in combined_codes:
         append_word_to_dict(word, combined_code, freq, target_file)
@@ -282,15 +344,14 @@ def process_file(
     force=False,
 ):
     """
-    批量处理文件，每行格式：词语 或 词语 词频
-    批量模式下**支持交互式选择多音字编码**（每个字都会询问）
-    force=True 时跳过查重，所有词条强制追加
+    批量处理文件，每行格式：词语 或 词语 词频。
+    批量模式下多音字/多尖音会交互询问。
     """
     if not os.path.isfile(input_file):
         print(f"错误：输入文件不存在：{input_file}", file=sys.stderr)
         sys.exit(1)
 
-    print("批量模式：每个词条的多音字将依次询问，请准备好输入。")
+    print("批量模式：多音字/多尖音将依次询问，请准备好输入。")
     success_count = 0
     skip_count = 0
     error_count = 0
@@ -301,7 +362,6 @@ def process_file(
             if not line or line.startswith("#"):
                 continue
 
-            # 解析：词语 词频（可选）
             parts = line.split()
             if not parts:
                 continue
@@ -318,7 +378,6 @@ def process_file(
                         file=sys.stderr,
                     )
 
-            # 处理（interactive=True，允许交互）
             print(f"\n--- 处理第 {line_num} 行：{word} ---")
             success, msg = process_single_word(
                 word,
@@ -346,7 +405,7 @@ def process_file(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="添加自定义词条到用户词典，支持单次交互和批量处理（批处理也支持交互选择）。"
+        description="添加自定义词条到用户词典（flypy 编码，自动绑定尖音），支持单次交互和批量处理。"
     )
     parser.add_argument("word", nargs="?", help="要添加的词语（单次模式）")
     parser.add_argument(
@@ -370,7 +429,6 @@ def main():
     )
     args = parser.parse_args()
 
-    # 校验
     if not args.word and not args.input:
         print("错误：请指定词语（单次模式）或使用 -i 指定输入文件", file=sys.stderr)
         sys.exit(1)
@@ -382,15 +440,12 @@ def main():
     if freq < 1:
         freq = 1
 
-    # 加载字库与尖音映射
     zi_dict = load_zi_dict(SOURCE_FILE)
     zian_map = load_zian_map(MAP_FILE)
 
-    # 加载现有词条用于词级查重
     existing_words = load_existing_words(SEARCH_DIRS)
     print(f"已加载 {len(existing_words)} 个现有词条用于查重")
 
-    # 批量模式（交互）
     if args.input:
         process_file(
             args.input,
@@ -404,8 +459,7 @@ def main():
         sort_dict_file(TARGET_FILE)
         sys.exit(0)
 
-    # 单次模式
-    interactive = not args.first  # 若 --first 则非交互
+    interactive = not args.first
     success, msg = process_single_word(
         args.word,
         freq,

@@ -114,15 +114,12 @@ switches:
   - name: prediction
     states: [预测关, 预测开]
     reset: 1
+  - name: aux_hint
+    states: [注释关, 辅助开]
+    reset: 1
   - name: translate
     states: [翻译关, 翻译开]
     reset: 0
-  - options: [raw_input, tone_display, full_pinyin]
-    states: [原编码, 有声调, 无声调]
-    reset: 1
-  - options: [comment_off, aux_hint, tone_hint]
-    states: [注释关, 辅助开, 读音开]
-    reset: 1
   - options: [conversion_off, s2t_mode, s2hk_mode, s2tw_mode]
     states: [简体, 繁体, 港繁, 台繁]
     abbrev: [简, 繁, 港, 台]

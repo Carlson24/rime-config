@@ -50,7 +50,7 @@ speller:
       - "algebra:/aux"
 
 translator:
-  dictionary: wanxiang.zian
+  dictionary: wanxiang.flypy.zian
   prism: wanxiang_flypy_18keys
   enable_completion: true
   enable_user_dict: true # 启用用户词典

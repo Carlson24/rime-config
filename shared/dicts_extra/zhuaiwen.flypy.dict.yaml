@@ -1,0 +1,128 @@
+# @format
+
+# Rime dictionary
+# encoding: utf-8
+# ------ 转文词库 ------
+---
+name: zhuaiwen.flypy
+version: "LTS"
+sort: by_weight
+...
+，	of;dh	20
+。	of;jh	19
+？	of;wh	18
+！	of;th	17
+：	of;mh	16
+；	of;fh	15
+“	of;yz	14
+”	of;yy	13
+‘	of;yz	12
+’	of;yy	11
+（	of;kz	10
+）	of;ky	9
+【	of;vz	8
+】	of;vy	7
+「	of;dz	6
+」	of;dy	5
+《	of;uz	4
+》	of;uy	3
+……	of;ul	2
+——	of;pv	1
+# --- zhuaiwen ---
+拊膺	fu3 yk1	10
+华饰	hx2 ui4	10
+榛树	vf1 uu4	10
+边衬区	bm1 if4 qv1	10
+苏澜城	su1 lj2 ig2	10
+苏澜桥	su1 lj2 qn2	10
+杏花时	xk4 hx1 ui2	10
+杨柳天	yh2 lq3 tm1	10
+鬓丝如银	bb4 si1 ru2 yb2	10
+长谈不倦	ih2 tj2 bu2 jr4	10
+长谈不厌	ih2 tj2 bu2 yj4	10
+浮生缥缈	fu2 ug1 pn1 mn3	10
+浮生虽短	fu2 ug1 sv1 dr3	10
+福泽一方	fu2 ze2 yi4 fh1	10
+鹤衔春雪	he4 xm2 iy1 xt3	10
+鹤衔春雪	he4 xm2 iy1 at3	10
+好花可看	hc3 hx1 ke3 kj4	10
+椒花柏叶	jn1 hx1 bd3 ye4	10
+椒花柏叶	on1 hx1 bd3 ye4	10
+剪裁时光	jm3 cd2 ui2 gl1	10
+剪裁时光	om3 cd2 ui2 gl1	10
+椒个朋柚	jn1 ge4 pg2 yz4	10
+椒个朋柚	on1 ge4 pg2 yz4	10
+鹿覆蕉叶	lu4 fu4 jn1 ye4	10
+鹿覆蕉叶	lu4 fu4 on1 ye4	10
+梨木生香	li2 mu4 ug1 xl1	10
+墨色为骨	mo4 se4 ww2 gu3	10
+千家笑语	qm1 jx1 xn4 yv3	10
+千家笑语	em1 jx1 an4 yv3	10
+青绿山川	qk1 lv4 uj1 ir1	10
+青绿山川	ek1 lv4 uj1 ir1	10
+清梦可谈	qk1 mg4 ke3 tj2	10
+清梦可谈	ek1 mg4 ke3 tj2	10
+浅灰深红	qm3 hv1 uf1 hs2	10
+浅灰深红	em3 hv1 uf1 hs2	10
+如椒似漆	ru2 jn1 si4 qi1	10
+如椒似漆	ru2 on1 si4 ei1	10
+神官赐福	uf2 gr1 ci4 fu2	10
+山河不改	uj1 he2 bu4 gd3	10
+韶华绵延	uc2 hx2 mm2 yj2	10
+岁长日远	sv4 ih2 ri4 yr3	10
+三羊开泰	sj1 yh2 kd1 td4	10
+岁岁长安	sv4 sv4 ih2 an1	10
+三尺台上	sj1 ii3 td2 uh4	10
+太平诗卷	td4 pk2 ui1 jr4	10
+天遥路远	tm1 yc2 lu4 yr3	10
+天亲地睦	tm1 qb1 di4 mu4	10
+天亲地睦	tm1 eb1 di4 mu4	10
+五子夺莲	wu3 zi3 do2 lm2	10
+行山踏海	xk2 uj1 ta4 hd3	10
+宣纸为梁	xr1 vi3 ww2 ll2	10
+宣纸为梁	ar1 vi3 ww2 ll2	10
+远渡岁月	yr3 du4 sv4 yt4	10
+赭红石榴	ve3 hs2 ui2 lq5	10
+朝暮无事	vc1 mu4 wu2 ui4	10
+赭红明黄	ve3 hs2 mk2 hl2	10
+长乐亦未央	ih2 le4 yi4 ww4 yh1	10
+七彩绘八仙	qi1 cd3 hv4 ba1 xm1	10
+七彩绘八仙	ei1 cd3 hv4 ba1 am1	10
+春耕时的温暖	iy1 gg1 ui2 de5 wf1 nr3	10
+秋收时的圆满	qq1 uz1 ui2 de5 yr2 mj3	10
+秋收时的圆满	eq1 uz1 ui2 de5 yr2 mj3	10
+脆弱易碎的平淡	cv4 ro4 yi4 sv4 de5 pk2 dj4	10
+故人依稀天边去	gu4 rf2 yi1 xi1 tm1 bm1 qv4	10
+孤舟一叶问船家	gu1 vz1 yi2 ye4 wf4 ir2 jx1	10
+江湖每逢一夜雨	jl1 hu2 mw3 fg2 yi2 ye4 yv3	10
+冥思苦想的答案	mk2 si1 ku3 xl3 de5 da2 an4	10
+冥思苦想的答案	mk2 si1 ku3 al3 de5 da2 an4	10
+青山远去万里遥	qk1 uj1 yr3 qv4 wj4 li3 yc2	10
+青山远去万里遥	ek1 uj1 yr3 qv4 wj4 li3 yc2	10
+十年孤襟迎秋风	ui2 nm2 gu1 jb1 yk2 qq1 fg1	10
+十年孤襟迎秋风	ui2 nm2 gu1 jb1 yk2 eq1 fg1	10
+苏澜城外雨潇潇	su1 lj2 ig2 wd4 yv3 xn1 xn1	10
+苏澜城外雨潇潇	su1 lj2 ig2 wd4 yv3 an1 an1	10
+桃花故人长相映	tc2 hx1 gu4 rf2 ih2 xl1 yk4	10
+桃花故人长相映	tc2 hx1 gu4 rf2 ih2 al1 yk4	10
+为谁鞍前系灯笼	ww4 uv2 an1 qm2 ji4 dg1 ls5	10
+为谁鞍前系灯笼	ww4 uv2 an1 em2 ji4 dg1 ls5	10
+心有不甘的落败	xb1 yz3 bu4 gj1 de5 lo4 bd4	10
+心有不甘的落败	ab1 yz3 bu4 gj1 de5 lo4 bd4	10
+小小自满的轻唤	xn3 xn3 zi4 mj3 de5 qk1 hr4	10
+小小自满的轻唤	an3 an3 zi4 mj3 de5 qk1 hr4	10
+相隔千年仍渊远	xl1 ge2 qm1 nm2 rg2 yr1 yr3	10
+相隔千年仍渊远	al1 ge2 em1 nm2 rg2 yr1 yr3	10
+相隔千山仍惦念	xl1 ge2 qm1 uj1 rg2 dm4 nm4	10
+相隔千山仍惦念	al1 ge2 em1 uj1 rg2 dm4 nm4	10
+杨柳堆烟依依青	yh2 lq3 dv1 yj1 yi1 yi1 qk1	10
+杨柳堆烟依依青	yh2 lq3 dv1 yj1 yi1 yi1 ek1	10
+别害怕纷扰的明天	bp2 hd4 pa4 ff1 rc3 de5 mk2 tm1	10
+摸不清脉络的未来	mo1 bu4 qk1 md4 lo4 de5 ww4 ld2	10
+摸不清脉络的未来	mo1 bu4 ek1 md4 lo4 de5 ww4 ld2	10
+去岁千般皆是如愿	qv4 sv4 qm1 bj1 jp1 ui4 ru2 yr4	10
+去岁千般皆是如愿	qv4 sv4 em1 bj1 jp1 ui4 ru2 yr4	10
+细细回看都与你有关	xi4 xi4 hv2 kj4 dz1 yv2 ni3 yz3 gr1	10
+细细回看都与你有关	ai4 ai4 hv2 kj4 dz1 yv2 ni3 yz3 gr1	10
+星星点点都与你有关	xk1 xk1 dm3 dm3 dz1 yv2 ni3 yz3 gr1	10
+星星点点都与你有关	ak1 ak1 dm3 dm3 dz1 yv2 ni3 yz3 gr1	10

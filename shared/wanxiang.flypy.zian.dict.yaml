@@ -1,0 +1,64 @@
+# @format
+
+# Rime dictionary
+# encoding: utf-8
+#
+
+---
+name: wanxiang.flypy.zian
+version: "LTS"
+sort: by_weight # 字典初始排序，可選original或by_weight
+use_preset_vocabulary: false
+enable_tone: true
+aux_file: "flypy_aux.txt"
+aux_separator: ";"
+aux_ignore_chars: "，。？！、：～·＆“”（）「」『』…"
+import_tables:
+  # 万象词库
+  - dicts/zi.flypy # 基础字表
+  - dicts/suzi.flypy # 各类简化字、民间俗字扩展包
+  - dicts/jichu.flypy # 基础词库
+  - dicts/lianxiang.flypy # 联想词库
+  - dicts/cuoyin.flypy # 错音错字
+  - dicts/duoyin.flypy # 兼容词库
+  - dicts/shici.flypy # 诗词
+  - dicts/diming.flypy # 地名
+  - dicts/yixue.flypy # 医学
+  - dicts/huaxue.flypy # 化学
+  - dicts/yaopin.flypy # 药品
+  - dicts/mingren.flypy # 名人
+  - dicts/yiren.flypy # 艺人
+  - dicts/wuzhong.flypy # 物种多样性
+  - dicts/renming.flypy # 高频人名
+  - dicts/taifeng.flypy # 最新台风表
+  - dicts/fangyan.flypy # 收集全国方言
+  - dicts/yidu.flypy # 异读词库
+  - dicts/moegirl.flypy # 萌娘百科
+  - dicts/computer.flypy # 计算机词库
+
+  # 尖音拓展
+  - dicts_zian/zi.flypy.zian # 基础字表
+  - dicts_zian/suzi.flypy.zian # 各类简化字、民间俗字扩展包
+  - dicts_zian/jichu.flypy.zian # 基础词库
+  - dicts_zian/lianxiang.flypy.zian # 联想词库
+  - dicts_zian/cuoyin.flypy.zian # 错音错字
+  - dicts_zian/duoyin.flypy.zian # 兼容词库
+  - dicts_zian/shici.flypy.zian # 诗词
+  - dicts_zian/diming.flypy.zian # 地名
+  - dicts_zian/yixue.flypy.zian # 医学
+  - dicts_zian/huaxue.flypy.zian # 化学
+  - dicts_zian/yaopin.flypy.zian # 药品
+  - dicts_zian/mingren.flypy.zian # 名人
+  - dicts_zian/yiren.flypy.zian # 艺人
+  - dicts_zian/wuzhong.flypy.zian # 物种多样性
+  - dicts_zian/renming.flypy.zian # 高频人名
+  - dicts_zian/taifeng.flypy.zian # 最新台风表
+  - dicts_zian/fangyan.flypy.zian # 收集全国方言
+  - dicts_zian/yidu.flypy.zian # 异读词库
+  - dicts_zian/moegirl.flypy.zian # 萌娘百科
+  - dicts_zian/computer.flypy.zian # 计算机词库
+
+  # 附加词库
+  - dicts_extra/pinyin.flypy # 拼音词库
+  - dicts_extra/zhuaiwen.flypy # 转文词库
+...

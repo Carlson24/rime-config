@@ -15,12 +15,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
-          python-version: "3.13"
+          python-version: "3.14"
 
       - name: Download and Extract wanxiang.zip
         run: |
@@ -52,18 +52,21 @@ jobs:
           sed -Ei 's/;\S*//g' dicts/yidu.dict.yaml
           cp shared/dicts_extra/computer.dict.yaml dicts
           # Run the scripts
-          python tools/aux_go.py
-          python tools/zian_go.py -o dicts-zian-base dicts-base/*.dict.yaml
-          python tools/zian_go.py -o dicts-zian-pro  dicts-pro/*.dict.yaml
+          python tools/tone_convert.py    -i dicts/*.dict.yaml           -o dicts-base
+          python tools/zian_go.py         -i dicts-base/*.dict.yaml      -o dicts-zian-base
+          python tools/tone_reverse.py    -i dicts-base/*.dict.yaml      -o dicts-tone
+          python tools/tone_reverse.py    -i dicts-zian-base/*.dict.yaml -o dicts-zian-tone
+          python tools/pinyin_to_flypy.py -i dicts-base/*.dict.yaml      -o dicts-flypy
+          python tools/pinyin_to_flypy.py -i dicts-zian-base/*.dict.yaml -o dicts-zian-flypy
 
       - name: Package dicts
         run: |
           # Create tar.bz2 files for each dicts directory
-          tar -cjf "dicts-base.tar.bz2"      -C "dicts-base" .
-          tar -cjf "dicts-zian-base.tar.bz2" -C "dicts-zian-base" .
-          tar -cjf "dicts-pro.tar.bz2"       -C "dicts-pro" .
-          tar -cjf "dicts-zian-pro.tar.bz2"  -C "dicts-zian-pro" .
-          tar -cjf "NekoCatppuccin.tar.bz2"  -C "themes" .
+          tar -cjf "dicts-tone.tar.bz2"       -C "dicts-tone" .
+          tar -cjf "dicts-zian-tone.tar.bz2"  -C "dicts-zian-tone" .
+          tar -cjf "dicts-flypy.tar.bz2"      -C "dicts-flypy" .
+          tar -cjf "dicts-zian-flypy.tar.bz2" -C "dicts-zian-flypy" .
+          tar -cjf "NekoCatppuccin.tar.bz2"   -C "themes" .
 
       - name: Create Nightly release
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -73,8 +76,8 @@ jobs:
           prerelease: true
           title: "Nightly Build"
           files: |
-            dicts-base.tar.bz2
-            dicts-zian-base.tar.bz2
-            dicts-pro.tar.bz2
-            dicts-zian-pro.tar.bz2
+            dicts-tone.tar.bz2
+            dicts-zian-tone.tar.bz2
+            dicts-flypy.tar.bz2
+            dicts-zian-flypy.tar.bz2
             NekoCatppuccin.tar.bz2

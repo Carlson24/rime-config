@@ -80,6 +80,7 @@ local pk = {
   Keyboard45Eng      = { label = "\u{F840}", send = "Eisu_toggle", select = "english" },                 -- 英文布局
   KeyboardT9Number   = { label = "ic@numeric", send = "Eisu_toggle", select = "t9_number" },             -- T9 用数字
   Keyboardl17keys    = { label = "\u{F845}", send = "Eisu_toggle", select = "wanxiang_l17keys" },        -- 乱序 17
+  Keyboard7columns   = { label = "\u{F840}", send = "Eisu_toggle", select = "wanxiang_pro" },            -- 小鹤 7 列布局
 
   -- 方案切换
   SchemaEnglish      = { label = "\u{F840}", command = "set_schema", option = "wanxiang_english" },      -- 万象英文

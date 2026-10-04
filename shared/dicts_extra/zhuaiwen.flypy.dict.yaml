@@ -31,6 +31,7 @@ sort: by_weight
 # --- zhuaiwen ---
 拊膺	fu3 yk1	10
 华饰	hx2 ui4	10
+神瞳	uf2 ts2	10
 榛树	vf1 uu4	10
 边衬区	bm1 if4 qv1	10
 苏澜城	su1 lj2 ig2	10
@@ -38,14 +39,14 @@ sort: by_weight
 杏花时	xk4 hx1 ui2	10
 杨柳天	yh2 lq3 tm1	10
 鬓丝如银	bb4 si1 ru2 yb2	10
-长谈不倦	ih2 tj2 bu2 jr4	10
-长谈不厌	ih2 tj2 bu2 yj4	10
 浮生缥缈	fu2 ug1 pn1 mn3	10
 浮生虽短	fu2 ug1 sv1 dr3	10
 福泽一方	fu2 ze2 yi4 fh1	10
 鹤衔春雪	he4 xm2 iy1 xt3	10
 鹤衔春雪	he4 xm2 iy1 at3	10
 好花可看	hc3 hx1 ke3 kj4	10
+长谈不倦	ih2 tj2 bu2 jr4	10
+长谈不厌	ih2 tj2 bu2 yj4	10
 椒花柏叶	jn1 hx1 bd3 ye4	10
 椒花柏叶	on1 hx1 bd3 ye4	10
 剪裁时光	jm3 cd2 ui2 gl1	10
@@ -66,9 +67,6 @@ sort: by_weight
 浅灰深红	em3 hv1 uf1 hs2	10
 如椒似漆	ru2 jn1 si4 qi1	10
 如椒似漆	ru2 on1 si4 ei1	10
-神官赐福	uf2 gr1 ci4 fu2	10
-山河不改	uj1 he2 bu4 gd3	10
-韶华绵延	uc2 hx2 mm2 yj2	10
 岁长日远	sv4 ih2 ri4 yr3	10
 三羊开泰	sj1 yh2 kd1 td4	10
 岁岁长安	sv4 sv4 ih2 an1	10
@@ -77,14 +75,18 @@ sort: by_weight
 天遥路远	tm1 yc2 lu4 yr3	10
 天亲地睦	tm1 qb1 di4 mu4	10
 天亲地睦	tm1 eb1 di4 mu4	10
+神官赐福	uf2 gr1 ci4 fu2	10
+山河不改	uj1 he2 bu4 gd3	10
+韶华绵延	uc2 hx2 mm2 yj2	10
+赭红石榴	ve3 hs2 ui2 lq5	10
+朝暮无事	vc1 mu4 wu2 ui4	10
+赭红明黄	ve3 hs2 mk2 hl2	10
 五子夺莲	wu3 zi3 do2 lm2	10
 行山踏海	xk2 uj1 ta4 hd3	10
 宣纸为梁	xr1 vi3 ww2 ll2	10
 宣纸为梁	ar1 vi3 ww2 ll2	10
 远渡岁月	yr3 du4 sv4 yt4	10
-赭红石榴	ve3 hs2 ui2 lq5	10
-朝暮无事	vc1 mu4 wu2 ui4	10
-赭红明黄	ve3 hs2 mk2 hl2	10
+悠悠故里	yz1 yz1 gu4 li3	10
 长乐亦未央	ih2 le4 yi4 ww4 yh1	10
 七彩绘八仙	qi1 cd3 hv4 ba1 xm1	10
 七彩绘八仙	ei1 cd3 hv4 ba1 am1	10
@@ -99,12 +101,12 @@ sort: by_weight
 冥思苦想的答案	mk2 si1 ku3 al3 de5 da2 an4	10
 青山远去万里遥	qk1 uj1 yr3 qv4 wj4 li3 yc2	10
 青山远去万里遥	ek1 uj1 yr3 qv4 wj4 li3 yc2	10
-十年孤襟迎秋风	ui2 nm2 gu1 jb1 yk2 qq1 fg1	10
-十年孤襟迎秋风	ui2 nm2 gu1 jb1 yk2 eq1 fg1	10
 苏澜城外雨潇潇	su1 lj2 ig2 wd4 yv3 xn1 xn1	10
 苏澜城外雨潇潇	su1 lj2 ig2 wd4 yv3 an1 an1	10
 桃花故人长相映	tc2 hx1 gu4 rf2 ih2 xl1 yk4	10
 桃花故人长相映	tc2 hx1 gu4 rf2 ih2 al1 yk4	10
+十年孤襟迎秋风	ui2 nm2 gu1 jb1 yk2 qq1 fg1	10
+十年孤襟迎秋风	ui2 nm2 gu1 jb1 yk2 eq1 fg1	10
 为谁鞍前系灯笼	ww4 uv2 an1 qm2 ji4 dg1 ls5	10
 为谁鞍前系灯笼	ww4 uv2 an1 em2 ji4 dg1 ls5	10
 心有不甘的落败	xb1 yz3 bu4 gj1 de5 lo4 bd4	10

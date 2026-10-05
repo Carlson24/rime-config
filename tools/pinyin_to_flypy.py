@@ -91,6 +91,7 @@ FLYPY_PRO_RULES: List[Tuple[str, str, str]] = [
     ("xform", r"^zh", r"V"),
     ("xform", r"^ch", r"I"),
     ("xform", r"^sh", r"U"),
+    ("xform", r"(\d)", r""),
     ("xlit", r"QWERTYUIOPASDFGHJKLZXCVBNM", r"qwertyuiopasdfghjklzxcvbnm"),
 ]
 # =============================================

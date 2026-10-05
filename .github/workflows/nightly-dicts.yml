@@ -50,7 +50,6 @@ jobs:
           # Remove auxiliary data and copy the computer dict to the dicts directory
           sed -Ei 's/;\S*//g' dicts/suzi.dict.yaml
           sed -Ei 's/;\S*//g' dicts/yidu.dict.yaml
-          cp shared/dicts_extra/computer.dict.yaml dicts
           # Run the scripts
           python tools/tone_convert.py    -i dicts/*.dict.yaml           -o dicts-base
           python tools/zian_go.py         -i dicts-base/*.dict.yaml      -o dicts-zian-base

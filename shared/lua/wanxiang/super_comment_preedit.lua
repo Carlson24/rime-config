@@ -56,6 +56,7 @@ local function get_charset_label(text)
   if cp >= 0x2EBF0 and cp <= 0x2EE5F then return "扩I" end
   if cp >= 0x30000 and cp <= 0x3134F then return "扩G" end
   if cp >= 0x31350 and cp <= 0x323AF then return "扩H" end
+  if cp >= 0x323B0 and cp <= 0x3347F then return "扩J" end
 
   -- 兼容区
   if cp >= 0xF900 and cp <= 0xFAFF then return "兼容" end
@@ -90,19 +91,25 @@ local function get_az_comment(cand, env, initial_comment)
 
       if #pinyins > 0 then
         local pinyin_str = table.concat(pinyins, ",")
-        table.insert(inner_parts, string.format("音%s", pinyin_str))
+        table.insert(inner_parts, string.format("音:%s", pinyin_str))
 
         if aux_code then
-          table.insert(inner_parts, string.format("辅%s", aux_code))
+          table.insert(inner_parts, string.format("辅:%s", aux_code))
         end
       end
     end
   end
 
+  -- U 段 + 区块标签（相邻，不加间隔符）
   if cand and cand.text then
-    local label = get_charset_label(cand.text)
-    if label then
-      table.insert(inner_parts, label)
+    local cp = utf8_codepoint(cand.text)
+    if cp then
+      local u_part = string.format("U+%04X", cp)
+      local label = get_charset_label(cand.text)
+      if label then
+        u_part = u_part .. "[" .. label .. "]"
+      end
+      table.insert(inner_parts, u_part)
     end
   end
 
@@ -150,60 +157,20 @@ local function get_aux_comment(cand, env, initial_comment)
   end
 end
 
--- 对 cand.preedit 应用 tone_preedit/0..9 的映射（数字 -> 上标等）
--- 对 cand.preedit 应用转换：数字转上标，且隐藏双大写辅助码
-local function apply_tone_preedit(env, cand)
+-- 对 cand.preedit 中的大写字母应用带圈字母映射
+local function apply_upper_preedit(cand)
   if not cand or not cand.preedit or cand.preedit == "" then
     return
   end
-
-  local engine = env.engine
-  local ctx = engine and engine.context
-  local input = ctx and ctx.input or ""
-  local is_t9_key = input:match("^%d") ~= nil
-
-  -- 如果是九键场景，或者包含连续数字（如电脑小键盘），直接跳过不转换
-  if is_t9_key or input:match("%d%d") then return end
 
   -- 判断首选是否为纯英文（通过匹配是否全由英文字符组成且不含中文）
   if cand.text:match("^[%a%p%s]+$") then
     return
   end
 
-  do
-    local preedit = cand.preedit
-    -- 隐藏双大写辅助码：开头保护，其余全部转换为 ›
-    local converted = preedit:gsub("^(..?-?)([A-Z][A-Z]+)", function(prefix, upper)
-      if prefix:match("[A-Z]") then return prefix .. upper end
-      return prefix .. "›"
-    end)
-    cand.preedit = converted:gsub("([^%s%^])([A-Z][A-Z]+)", function(prev)
-      return prev .. "›"
-    end)
-  end
-  -- 数字映射逻辑 (上标转换)
-  if not env.tone_map then
-    env.tone_map = {
-      ["6"] = "①",
-      ["7"] = "②",
-      ["8"] = "③",
-      ["9"] = "④",
-      ["0"] = "⑤"
-    }
-  end
-
-  local final_pre = cand.preedit:gsub("([^%d%s]+)(%d+)", function(body, digits)
-    local mapped = digits:gsub("%d", function(d)
-      return env.tone_map[d] or d
-    end)
-    return body .. mapped
-  end)
-
-  final_pre = final_pre:gsub("[A-Z]", function(u)
+  cand.preedit = cand.preedit:gsub("[A-Z]", function(u)
     return upper_map[u] or u
   end)
-
-  cand.preedit = final_pre
 end
 
 -- ----------------------
@@ -245,7 +212,7 @@ function ZH.func(input, env)
       yield(genuine_cand)
       goto continue
     end
-    apply_tone_preedit(env, genuine_cand)
+    apply_upper_preedit(genuine_cand)
     -- 进入注释处理阶段
     -- ① 辅助码注释
     if initial_comment and (string.find(initial_comment, "~") or string.find(initial_comment, "\226\152\175") or cand.type == "datetime") then

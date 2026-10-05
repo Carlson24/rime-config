@@ -38,7 +38,7 @@ flypy:
 speller:
   # auto_select: true # 自动上屏
   # auto_select_pattern: ^@(\w|@)+|^\w{3}\w+ # 自动上屏规则
-  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA67890`/@
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/@`
   initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/@
   delimiter: " '"
   visual_delimiter: " "
@@ -56,7 +56,7 @@ translator:
   enable_user_dict: true # 启用用户词典
   user_dict: user_flypy # 用户词典的文件名称
   disable_user_dict_for_patterns:
-    - "^[a-zA-Z0-9]{1,6}$" # 三字以内不调频
+    - "^[a-z]{1,4}$" # 四码以内不调频
   contextual_suggestions: false # 不好用，还严重影响性能
   max_sentences: 1 # 越多性能越差
   max_homophones: 8

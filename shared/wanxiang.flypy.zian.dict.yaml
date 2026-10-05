@@ -33,7 +33,6 @@ import_tables:
   - dicts/fangyan.flypy # 收集全国方言
   - dicts/yidu.flypy # 异读词库
   - dicts/moegirl.flypy # 萌娘百科
-  - dicts/computer.flypy # 计算机词库
 
   # 尖音拓展
   - dicts_zian/zi.flypy.zian # 基础字表
@@ -55,9 +54,4 @@ import_tables:
   - dicts_zian/fangyan.flypy.zian # 收集全国方言
   - dicts_zian/yidu.flypy.zian # 异读词库
   - dicts_zian/moegirl.flypy.zian # 萌娘百科
-  - dicts_zian/computer.flypy.zian # 计算机词库
-
-  # 附加词库
-  - dicts_extra/pinyin.flypy # 拼音词库
-  - dicts_extra/zhuaiwen.flypy # 转文词库
 ...

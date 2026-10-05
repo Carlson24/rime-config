@@ -6,8 +6,8 @@ engine:
     - lua_processor@*wanxiang.super_processor
     - lua_processor@*chaifen_tips
     - ascii_composer
-    - digit_catcher # 需要在 ascii_composer 之后 recognizer 之前
     - recognizer
+    - digit_catcher
     - key_binder
     - lua_processor@*moran_pin*pin_processor
     - speller

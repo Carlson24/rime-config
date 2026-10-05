@@ -1,7 +1,7 @@
 -- lua/super_processor.lua
 -- @amzxyz
 -- https://github.com/amzxyz/rime-wanxiang
--- 全能按键处理器：整合 字母选词、符号快打、声调回退、以词定字
+-- 全能按键处理器：整合 字母选词、符号快打、以词定字
 --
 -- 用法: 在 schema.yaml 中 engine/processors 列表添加 - lua_processor@*super_processor
 
@@ -60,15 +60,6 @@ local SYMBOL_DEFAULT             = {
 
 -- 2. 核心辅助函数 (Utilities)
 
--- 压缩连续声调 (ToneFallback 使用)
-local function compress_runs_keep_last(text)
-  local changed = false
-  local out = text:gsub("([67890])([67890]+)", function(_, tail)
-    changed = true
-    return tail:sub(-1)
-  end)
-  return out, changed
-end
 -- 执行符号快打 (双端通用)
 local function execute_quick_symbol(env, ctx, text)
   local qkey = string.match(text, env.qs_trigger)
@@ -93,13 +84,6 @@ function M.init(env)
 
   env.sc_first_key = nil
   env.sc_last_key = nil
-  env.is_t9 = false
-  if wanxiang.get_input_method_type then
-    local im_type = wanxiang.get_input_method_type(env)
-    if im_type == "t9" then
-      env.is_t9 = true
-    end
-  end
   if config then
     -- 以词定字配置
     env.sc_first_key = config:get_string("key_binder/select_first_character")
@@ -108,10 +92,6 @@ function M.init(env)
 
   -- [LetterSelector] 字母选词状态位
   env.ls_active = false
-
-  -- [ToneFallback] 声调容错
-  env.tone_state = "idle"
-  env.lookup_key = config:get_string("wanxiang_lookup/key") or "`"
 
   -- [QuickSymbol] 符号快打
   env.qs_trigger = "^([a-z])/$"
@@ -132,27 +112,8 @@ function M.init(env)
 
   env.conn_update = context.update_notifier:connect(function(ctx)
     local input = ctx.input or ""
-    -- A. [ToneFallback] 执行声调压缩
-    local t_state = env.tone_state or "idle"
-    env.tone_state = "idle"
 
-    if t_state == "compress" and input ~= "" then
-      local caret = (ctx.caret_pos ~= nil) and ctx.caret_pos or #input
-      if caret < 0 then caret = 0 end
-      if caret > #input then caret = #input end
-
-      local left              = (caret > 0) and input:sub(1, caret) or ""
-      local left_new, changed = compress_runs_keep_last(left)
-
-      if changed then
-        if caret > 0 then ctx:pop_input(caret) end
-        if #left_new > 0 then ctx:push_input(left_new) end
-        -- push_input 会自动触发下一次 update_notifier，所以这里可以更新本地 input
-        input = ctx.input or ""
-      end
-    end
-
-    -- B. [LetterSelector] 缓存激活状态
+    -- A. [LetterSelector] 缓存激活状态
     env.ls_active = false
     if not ctx.composition:empty() then
       local s = ctx.composition:back()
@@ -161,7 +122,7 @@ function M.init(env)
       end
     end
 
-    -- C. [QuickSymbol] 自动上屏逻辑
+    -- B. [QuickSymbol] 自动上屏逻辑
     execute_quick_symbol(env, ctx, input)
   end)
 end
@@ -251,55 +212,6 @@ local function handle_select_character(key, env, ctx)
   return false
 end
 
--- [ToneFallback] 数字键声调回退逻辑
-local function handle_tone_digit(key, env, ctx)
-  local kc = key.keycode
-  local input = ctx.input or ""
-  local r = key:repr() or ""
-
-  local digit_str = nil
-  if r:match("^[0-9]$") then
-    digit_str = r
-  end
-
-  if digit_str then
-    if key:ctrl() or key:alt() or key:super() then return false end
-
-    -- 只要是 T9 九键方案，数字键就是打字编码键，放行给底层
-    if env.is_t9 then
-      env.tone_state = "idle"
-      return false
-    end
-
-    local is_func_mode = false
-    if wanxiang.is_function_mode_active then
-      is_func_mode = wanxiang.is_function_mode_active(ctx)
-    end
-    local is_first_cand_has_eng = false
-    local cand = ctx:get_selected_candidate()
-    if cand then
-      if cand.text:match("[a-zA-Z]") then
-        is_first_cand_has_eng = true
-      end
-    end
-
-    if input:find(env.lookup_key, 1, true) or is_func_mode or is_first_cand_has_eng then
-      env.tone_state = "idle"
-    else
-      env.tone_state = "compress"
-      local caret = (ctx.caret_pos ~= nil) and ctx.caret_pos or #input
-      if caret > #input then caret = #input end
-      local left = (caret > 0) and input:sub(1, caret) or ""
-      local _, changed = compress_runs_keep_last(left)
-      if changed then return true end
-    end
-  else
-    -- 非数字键重置状态，保证声调压缩不越界
-    env.tone_state = "idle"
-  end
-
-  return false
-end
 -- 5. 主入口函数 (Main Logic Flow)
 function M.func(key, env)
   local ctx = env.engine.context
@@ -324,14 +236,6 @@ function M.func(key, env)
   -- 4. (q-o + 特定 Tag)[Letter Selector] 字母选词
   if env.ls_active and (LETTER_SEL_MAP[kc] ~= nil) then
     if handle_letter_select(key, env, ctx) then return K_ACCEPT end
-  end
-
-  -- 5. 数字键 (声调回退)
-  if kc >= 0x30 and kc <= 0x39 then
-    if handle_tone_digit(key, env, ctx) then return K_ACCEPT end
-  else
-    -- 非数字键，重置声调状态
-    env.tone_state = "idle"
   end
 
   return K_NOOP

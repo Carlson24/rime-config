@@ -117,7 +117,7 @@ function M.init(env)
     env.ls_active = false
     if not ctx.composition:empty() then
       local s = ctx.composition:back()
-      if s and (s:has_tag("Snumber") or s:has_tag("Ndate")) then
+      if s and (s:has_tag("number") or s:has_tag("date")) then
         env.ls_active = true
       end
     end

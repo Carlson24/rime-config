@@ -15,21 +15,6 @@ schema:
 
 __include: shared_config.yaml:/shared_config
 
-key_binder:
-  __include: shared_config.yaml:/key_binder
-
-super_comment:
-  __include: shared_config.yaml:/super_comment
-
-wanxiang_english:
-  __include: shared_config.yaml:/wanxiang_english
-
-switches:
-  __include: shared_config.yaml:/switches
-
-engine:
-  __include: shared_config.yaml:/engine
-
 flypy:
   __include: shared_config.yaml:/flypy
 
@@ -69,24 +54,3 @@ wanxiang_flypy_reverse:
   enable_completion: true
   prefix: "`"
   tips: "〔反查：拆分|笔画〕"
-
-wanxiang_lookup:
-  key: "`"
-  tags: [abc]
-  aux_file: "flypy_aux.txt"
-
-recognizer:
-  patterns:
-    punct: "^/([0-9]|10|[A-Za-z]+)$"
-    wanxiang_reverse: "^`[A-Za-z]*$"
-    unicode: "^U[a-fA-F0-9]+"
-    Snumber: "^S[0-9\\.]+"
-    Ndate: "^N[0-9]+$"
-    calculator: "^(V.*|[0-9]+[\\+\\-\\*].*|[\\+\\-\\*].*)$"
-    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
-    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$"
-
-punctuator:
-  digit_separators: ":,."
-  __include: "user_symbols:/symbol_table"
-  __patch: "user_symbols:/symbols"

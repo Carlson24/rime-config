@@ -1,8 +1,8 @@
--- moran_number_cover.lua
+-- moran_number.lua
 --
 -- Author: ksqsf
 -- License: GPLv3
--- Version: 0.1.1
+-- Version: 0.1.2
 --
 -- You may copy, distribute and modify the software as long as you track
 -- changes/dates in source files. Any modifications to or software including
@@ -10,17 +10,16 @@
 -- along with build & install instructions.
 --
 -- ChangeLog:
+-- 0.1.2: 增加「半角」和「全角」。
 -- 0.1.1: 把「小写」改为日常一般读法。
 -- 0.1: Introduction.
---
--- 功能:
---   S+数字 (如 S100) 数字金额转换
---   N+日期 (如 N2021、N20210101) 输出多种公历格式
 
 local dot              = "点"
 local digitRegular     = { [0] = "零", "一", "二", "三", "四", "五", "六", "七", "八", "九" }
 local digitLower       = { [0] = "〇", "一", "二", "三", "四", "五", "六", "七", "八", "九" }
 local digitUpper       = { [0] = "零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖" }
+local digitHalfWidth   = { [0] = "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+local digitFullWidth   = { [0] = "０", "１", "２", "３", "４", "５", "６", "７", "８", "９" }
 local unitLower        = { "", "十", "百", "千" }
 local unitUpper        = { "", "拾", "佰", "仟" }
 local bigUnit          = { "万", "亿" }
@@ -84,7 +83,7 @@ end
 -- 转换整数部分
 local function translateInt(str, digit, unit, bigUnit)
   local int = tonumber(str)
-  if math.floor(int) ~= int then
+  if not int or math.floor(int) ~= int then
     return "数值超限！"
   end
   if int == 0 then
@@ -143,6 +142,16 @@ local function translateLower(input)
       .. (input.dot ~= "" and (dot .. mapDigits(input.frac, digitLower)) or "")
 end
 
+local function translateHalfWidth(input)
+  return mapDigits(input.int, digitHalfWidth)
+      .. (input.dot ~= "" and ("." .. mapDigits(input.frac, digitHalfWidth)) or "")
+end
+
+local function translateFullWidth(input)
+  return mapDigits(input.int, digitFullWidth)
+      .. (input.dot ~= "" and ("．" .. mapDigits(input.frac, digitFullWidth)) or "")
+end
+
 -- 金额转换
 local function translateCurrency(input, digit, unit, bigUnit)
   local intPart = translateInt(input.int, digit, unit, bigUnit)
@@ -157,30 +166,11 @@ local function translateNumStr(str)
     { "〔编号〕", mapDigits(str, digitLower):gsub("%.", dot) },
     { "〔大写〕", translateUpper(input) },
     { "〔金额大写〕", translateCurrency(input, digitUpper, unitUpper, bigUnit) },
-    { "〔金额小写〕", translateCurrency(input, digitLower, unitLower, bigUnit) }
+    { "〔金额小写〕", translateCurrency(input, digitLower, unitLower, bigUnit) },
+    { "〔半角〕", translateHalfWidth(input) },
+    { "〔全角〕", translateFullWidth(input) }
   }
   return result
-end
-
--- 4~10 位日期补全为 8 位
-local function pad_date(str)
-  local len = #str
-  if len == 4 then
-    str = str .. "010101"
-  elseif len == 5 then
-    str = str .. "10101"
-  elseif len == 6 then
-    str = str .. "0101"
-  elseif len == 7 then
-    str = str .. "101"
-  elseif len == 8 then
-    str = str .. "01"
-  elseif len == 9 then
-    str = str .. "0"
-  else
-    str = string.sub(str, 1, 10)
-  end
-  return str
 end
 
 local function translator(input, seg)
@@ -189,20 +179,6 @@ local function translator(input, seg)
     local conversions = translateNumStr(str)
     for i = 1, #conversions do
       yield(Candidate(input, seg.start, seg._end, conversions[i][2], conversions[i][1]))
-    end
-  elseif string.sub(input, 1, 1) == "N" then
-    local n = string.sub(input, 2)
-    if string.match(n, "^(20)%d%d+$") ~= nil or string.match(n, "^(19)%d%d+$") ~= nil then
-      local str = pad_date(n)
-      local y = tonumber(string.sub(str, 1, 4))
-      local m = tonumber(string.sub(str, 5, 6))
-      local d = tonumber(string.sub(str, 7, 8))
-      if m >= 1 and m <= 12 and d >= 1 and d <= 31 then
-        yield(Candidate(input, seg.start, seg._end, string.format("%d年%d月%d日", y, m, d), "〔公历〕"))
-        yield(Candidate(input, seg.start, seg._end, string.format("%04d-%02d-%02d", y, m, d), "〔公历〕"))
-        yield(Candidate(input, seg.start, seg._end, string.format("%04d/%02d/%02d", y, m, d), "〔公历〕"))
-        yield(Candidate(input, seg.start, seg._end, string.format("%04d.%02d.%02d", y, m, d), "〔公历〕"))
-      end
     end
   end
 end

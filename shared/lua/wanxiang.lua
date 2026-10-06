@@ -42,10 +42,10 @@ function wanxiang.is_function_mode_active(context)
   local seg = context.composition:back()
   if not seg then return false end
 
-  return seg:has_tag("Snumber") or -- 数字金额转换 S+数字
+  return seg:has_tag("number") or  -- 数字金额转换 S+数字
       seg:has_tag("unicode") or    -- unicode.lua 输出 Unicode 字符 U+小写字母或数字
       seg:has_tag("calculator") or -- V 键计算器
-      seg:has_tag("Ndate")         -- N 日期功能
+      seg:has_tag("date")          -- N 日期功能
 end
 
 -- 判断码点是否为汉字（避免 utf8.char/utf8.codepoint 往返）

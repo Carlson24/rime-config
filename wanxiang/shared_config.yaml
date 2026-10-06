@@ -1,57 +1,5 @@
 # @format
 
-engine:
-  processors:
-    - user_predict_processor # 必须放在第一个
-    - lua_processor@*wanxiang.super_processor
-    - lua_processor@*chaifen_tips
-    - ascii_composer
-    - recognizer
-    - digit_catcher
-    - key_binder
-    - lua_processor@*moran_pin*pin_processor
-    - speller
-    - punctuator
-    - selector
-    - navigator
-    - express_editor
-  segmentors:
-    - ascii_segmentor
-    - matcher
-    - abc_segmentor
-    - affix_segmentor@wanxiang_reverse
-    - punct_segmentor
-    - fallback_segmentor
-  translators:
-    - punct_translator
-    - script_translator
-    - user_predict_translator
-    - calculator_translator
-    - lua_translator@*unicode
-    - lua_translator@*number_cover
-    - lua_translator@*input_statistics
-    - table_translator@custom_phrase
-    - lua_translator@*wanxiang.super_english*T
-    - reverse_lookup_translator@wanxiang_flypy_reverse
-    - lua_translator@*moran_pin*panacea_translator
-  filters:
-    - lua_filter@*moran_pin*pin_filter
-    - lua_filter@*wanxiang.super_english*F
-    - lua_filter@*wanxiang.super_lookup
-    - lua_filter@*wanxiang.super_comment_preedit
-    - rewriter@flypy
-    - rewriter@commit
-    - user_predict_filter # 去重、简繁转换之前
-    - rewriter@others
-    - rewriter@emoji
-    - rewriter@kaomoji
-    - rewriter@s2t
-    - rewriter@hk_variants
-    - rewriter@tw_variants
-    - rewriter@translate
-    - lua_filter@*placeholder
-    - uniquifier # 候选去重
-
 flypy:
   option: true
   mode: abbrev
@@ -71,76 +19,131 @@ flypy:
     - rewriter/flypy/53_qmz.txt
     - rewriter/flypy/61_oc.txt
 
-super_comment:
-  candidate_length: 16 # 注释候选长度
-  cand_type:
-    user_phrase: "" # 用户自造词
-    sentence: "" # 整句
-    table: "✬" # 系统码表词
-    user_table: "" # 用户码表词
-    completion: "⋙" # 编码补全
-    abbrev: "" # 简码
-    predict: "" # 预测候选
-    pinned: "" # pin 候选
-
-wanxiang_english:
-  dictionary: wanxiang_english
-  user_dict: user_en
-  enable_completion: true
-  initial_quality: 2.1
-  comment_format:
-    - xform/^~.+$//
-  min_word_length: 3 # 最少三个字母才会查字典，防止巨量候选
-
-switches:
-  - name: ascii_mode
-    states: [, ]
-    reset: 0
-  - name: ascii_punct
-    states: [, ]
-    reset: 0
-  - name: full_shape
-    states: [, ]
-    reset: 0
-  - name: emoji
-    states: [, ]
-    reset: 0
-  - name: kaomoji
-    states: [颜文关, 颜文开]
-    reset: 0
-  - name: chaifen_tips
-    states: [提示关, 提示开]
-    reset: 1
-  - name: prediction
-    states: [预测关, 预测开]
-    reset: 1
-  - name: aux_hint
-    states: [注释关, 辅助开]
-    reset: 1
-  - name: translate
-    states: [翻译关, 翻译开]
-    reset: 0
-  - options: [conversion_off, s2t_mode, s2hk_mode, s2tw_mode]
-    states: [简体, 繁体, 港繁, 台繁]
-    abbrev: [简, 繁, 港, 台]
-    reset: 0
-
-key_binder:
-  import_preset: default
-  select_first_character: "bracketleft"
-  select_last_character: "bracketright"
-  bindings:
-    - { when: has_menu, accept: "minus", send: "Page_Up" }
-    - { when: has_menu, accept: "equal", send: "Page_Down" }
-    - { when: composing, accept: "Alt+Left", send: "Shift+Left" }
-    - { when: composing, accept: "Alt+Right", send: "Shift+Right" }
-    - { when: has_menu, accept: "Tab", send: "Control+Right" }
-    - { when: composing, accept: "Tab", send: "Control+Right" }
-    - { when: composing, accept: "Control+Tab", send_sequence: "{Home}{Shift+Right}{1}{Shift+Right}" }
-    - { when: has_menu, accept: "Control+e", toggle: translate }
-    - { when: has_menu, accept: "semicolon", send: 2 }
-
 shared_config:
+  switches:
+    - name: ascii_mode
+      states: [, ]
+      reset: 0
+    - name: ascii_punct
+      states: [, ]
+      reset: 0
+    - name: full_shape
+      states: [, ]
+      reset: 0
+    - name: emoji
+      states: [, ]
+      reset: 0
+    - name: kaomoji
+      states: [颜文关, 颜文开]
+      reset: 0
+    - name: chaifen_tips
+      states: [提示关, 提示开]
+      reset: 1
+    - name: prediction
+      states: [预测关, 预测开]
+      reset: 1
+    - name: aux_hint
+      states: [注释关, 辅助开]
+      reset: 1
+    - name: translate
+      states: [翻译关, 翻译开]
+      reset: 0
+    - options: [conversion_off, s2t_mode, s2hk_mode, s2tw_mode]
+      states: [简体, 繁体, 港繁, 台繁]
+      abbrev: [简, 繁, 港, 台]
+      reset: 0
+
+  engine:
+    processors:
+      - user_predict_processor # 必须放在第一个
+      - lua_processor@*wanxiang.super_processor
+      - lua_processor@*chaifen_tips
+      - ascii_composer
+      - recognizer
+      - digit_catcher # calculator 数字拦截，需要放在 recognizer 之后
+      - key_binder
+      - lua_processor@*moran_pin*pin_processor
+      - speller
+      - punctuator
+      - selector
+      - navigator
+      - express_editor
+    segmentors:
+      - ascii_segmentor
+      - matcher
+      - abc_segmentor
+      - affix_segmentor@wanxiang_reverse
+      - punct_segmentor
+      - fallback_segmentor
+    translators:
+      - punct_translator
+      - script_translator
+      - user_predict_translator
+      - calculator_translator
+      - lua_translator@*moran_shijian
+      - lua_translator@*moran_number
+      - lua_translator@*unicode
+      - table_translator@custom_phrase
+      - lua_translator@*wanxiang.super_english*T
+      - reverse_lookup_translator@wanxiang_flypy_reverse
+      - lua_translator@*moran_pin*panacea_translator
+      - lua_translator@*input_statistics
+    filters:
+      - lua_filter@*moran_pin*pin_filter
+      - lua_filter@*wanxiang.super_english*F
+      - lua_filter@*wanxiang.super_lookup
+      - lua_filter@*wanxiang.super_comment_preedit
+      - user_predict_filter
+      - rewriter@flypy
+      - rewriter@commit
+      - rewriter@others
+      - rewriter@emoji
+      - rewriter@kaomoji
+      - rewriter@s2t
+      - rewriter@hk_variants
+      - rewriter@tw_variants
+      - rewriter@translate
+      - lua_filter@*placeholder
+      - uniquifier # 候选去重
+
+  super_comment:
+    candidate_length: 16 # 注释候选长度
+    cand_type:
+      user_phrase: "" # 用户自造词
+      sentence: "" # 整句
+      table: "✬" # 系统码表词
+      user_table: "" # 用户码表词
+      completion: "⋙" # 编码补全
+      abbrev: "" # 简码
+      predict: "" # 预测候选
+      pinned: "" # pin 候选
+
+  key_binder:
+    import_preset: default
+    select_first_character: "bracketleft"
+    select_last_character: "bracketright"
+    bindings:
+      - { when: has_menu, accept: "minus", send: "Page_Up" }
+      - { when: has_menu, accept: "equal", send: "Page_Down" }
+      - { when: composing, accept: "Alt+Left", send: "Shift+Left" }
+      - { when: composing, accept: "Alt+Right", send: "Shift+Right" }
+      - { when: has_menu, accept: "Tab", send: "Control+Right" }
+      - { when: composing, accept: "Tab", send: "Control+Right" }
+      - { when: composing, accept: "Control+Tab", send_sequence: "{Home}{Shift+Right}{1}{Shift+Right}" }
+      - { when: has_menu, accept: "Control+e", toggle: translate }
+      - { when: has_menu, accept: "semicolon", send: 2 }
+
+  recognizer:
+    patterns:
+      punct: "^/([0-9]|10|[A-Za-z]+)$"
+      wanxiang_reverse: "^`[A-Za-z]*$"
+      unicode: "^U[a-fA-F0-9]+"
+      number: "^S[0-9\\.]+"
+      date: "^N[0-9]+"
+      calculator: "^(V.*|[0-9]+[\\+\\-\\*].*|[\\+\\-\\*].*)$"
+      email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+      url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$"
+
   user_predict:
     db_name: "user_predict" # 用户预测数据库
     predict_style: "all" # 预测样式
@@ -182,6 +185,15 @@ shared_config:
     prefix: "V"
     tag: calculator
     tips: "计算器"
+
+  wanxiang_english:
+    dictionary: wanxiang_english
+    user_dict: user_en
+    enable_completion: true
+    initial_quality: 2.1
+    comment_format:
+      - xform/^~.+$//
+    min_word_length: 3 # 最少三个字母才会查字典，防止巨量候选
 
   commit:
     option: true
@@ -256,6 +268,16 @@ shared_config:
     files:
       - rewriter/opencc/TWVariantsPhrases.txt
       - rewriter/opencc/TWVariants.txt
+
+  wanxiang_lookup:
+    key: "`"
+    tags: [abc]
+    aux_file: "flypy_aux.txt"
+
+  punctuator:
+    digit_separators: ":,."
+    __include: "user_symbols:/symbol_table"
+    __patch: "user_symbols:/symbols"
 
   editor:
     bindings:

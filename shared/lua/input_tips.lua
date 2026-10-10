@@ -1,15 +1,9 @@
--- 万象家族 Lua：超级提示、表情、化学式、方程式、简码等提示显示，不占用候选位置
--- 采用内存 store + 运行时字节码缓存；数据几乎不变，无需 LevelDb
--- 支持候选匹配和编码匹配，候选支持方向键高亮遍历
--- https://github.com/amzxyz/rime-wanxiang
---
--- chaifen_tips:
---   数据文件路径已写死，见下方 DEFAULT_FILES。
-
 local wanxiang = require("wanxiang")
 
 local DB_FORMAT_VERSION = "4"
-local DEFAULT_FILES = { "flypy_chaifen.txt" }
+local DEFAULT_FILES = {
+  "lua/data/flypy_chaifen.txt",
+  "lua/data/flypy_fixed.txt" }
 
 -- 模块私有 store 池：相同签名的数据共享同一份内存 store，引用计数管理生命周期。
 local STORE_CACHE = {}
@@ -60,7 +54,7 @@ end
 
 local function store_signature(files)
   return wanxiang.digest_parts({
-    "chaifen_tips",
+    "input_tips",
     DB_FORMAT_VERSION,
     files_signature(files)
   })
@@ -134,7 +128,7 @@ end
 local function update_tips_prompt(context, env)
   env.current_tip = nil
 
-  if not context:get_option("chaifen_tips") then return end
+  if not context:get_option("input_tips") then return end
   if not context.input or context.input == "" or context.input:find("^›") then
     return
   end

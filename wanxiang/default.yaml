@@ -25,7 +25,7 @@ switcher:
     - full_shape
     - emoji
     - kaomoji
-    - chaifen_tips
+    - input_tips
     - prediction
     - aux_hint
     - translate

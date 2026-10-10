@@ -36,7 +36,7 @@ shared_config:
     - name: kaomoji
       states: [颜文关, 颜文开]
       reset: 0
-    - name: chaifen_tips
+    - name: input_tips
       states: [提示关, 提示开]
       reset: 1
     - name: prediction
@@ -57,7 +57,7 @@ shared_config:
     processors:
       - user_predict_processor # 必须放在第一个
       - lua_processor@*wanxiang.super_processor
-      - lua_processor@*chaifen_tips
+      - lua_processor@*input_tips
       - ascii_composer
       - recognizer
       - digit_catcher # calculator 数字拦截，需要放在 recognizer 之后
@@ -95,7 +95,6 @@ shared_config:
       - lua_filter@*wanxiang.super_comment_preedit
       - user_predict_filter
       - rewriter@flypy
-      - rewriter@commit
       - rewriter@others
       - rewriter@emoji
       - rewriter@kaomoji
@@ -194,15 +193,6 @@ shared_config:
     comment_format:
       - xform/^~.+$//
     min_word_length: 3 # 最少三个字母才会查字典，防止巨量候选
-
-  commit:
-    option: true
-    tags: [abc]
-    mode: comment
-    comment_append: true
-    files:
-      - rewriter/english_chinese.txt
-      - rewriter/flypy_commit.txt
 
   others:
     option: true

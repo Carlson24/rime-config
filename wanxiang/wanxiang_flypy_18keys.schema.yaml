@@ -1,0 +1,60 @@
+# @format
+
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: wanxiang_flypy_18keys
+  name: 18键·万象小鹤
+  version: "LTS"
+  author: amzxyz & Carlson24
+  description: 小鹤音形+万象拼音Pro
+  dependencies:
+    - wanxiang_english
+    - wanxiang_flypy_18keys_reverse
+
+__include: shared_config.yaml:/shared_config
+
+flypy:
+  __include: shared_config.yaml:/flypy
+  __patch:
+    key_xlit: "qwertyuiopasdfghjklzxcvbnm>qwwrryuiipassffhjjlzxxvbbm"
+
+speller:
+  # auto_select: true
+  # auto_select_pattern: ^@(\w|@)+|^\w{3}\w+
+  alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/@`
+  initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA/@
+  delimiter: " '"
+  visual_delimiter: " "
+  algebra:
+    __patch:
+      - "algebra:/fuzzy/in_ing"
+      - "algebra:/flypy_pro"
+      - "algebra:/18keys"
+      - "algebra:/aux"
+
+translator:
+  dictionary: wanxiang.flypy.zian
+  prism: wanxiang_flypy_18keys
+  enable_completion: true
+  enable_user_dict: true # 启用用户词典
+  user_dict: user_flypy # 用户词典的文件名称
+  disable_user_dict_for_patterns:
+    - "^[a-z]{1,4}$" # 四码以内不调频
+  contextual_suggestions: false
+  max_sentences: 1
+  max_homophones: 8
+  enable_correction: false
+  initial_quality: 4
+  spelling_hints: 48
+  always_show_comments: false
+  comment_format:
+
+wanxiang_flypy_18keys_reverse:
+  tag: wanxiang_reverse
+  dictionary: wanxiang_reverse
+  prism: wanxiang_flypy_18keys_reverse
+  enable_completion: true
+  prefix: "`"
+  tips: "〔反查：拆分|笔画〕"

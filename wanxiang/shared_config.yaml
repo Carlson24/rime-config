@@ -1,0 +1,305 @@
+# @format
+
+flypy:
+  option: true
+  mode: abbrev
+  insert_position: 1
+  insert_count: 128
+  tags: [abc]
+  files:
+    - rewriter/flypy/00_user.txt
+    - rewriter/flypy/00_xh.txt
+    - rewriter/flypy/11_fl.txt
+    - rewriter/flypy/21_yj.txt
+    - rewriter/flypy/22_ej.txt
+    - rewriter/flypy/31_vt.txt
+    - rewriter/flypy/41_fh.txt
+    - rewriter/flypy/51_qmc.txt
+    - rewriter/flypy/52_upz.txt
+    - rewriter/flypy/53_qmz.txt
+    - rewriter/flypy/61_oc.txt
+
+shared_config:
+  switches:
+    - name: ascii_mode
+      states: [, ]
+      reset: 0
+    - name: ascii_punct
+      states: [, ]
+      reset: 0
+    - name: full_shape
+      states: [, ]
+      reset: 0
+    - name: emoji
+      states: [, ]
+      reset: 0
+    - name: kaomoji
+      states: [颜文关, 颜文开]
+      reset: 0
+    - name: input_tips
+      states: [提示关, 提示开]
+      reset: 1
+    - name: prediction
+      states: [预测关, 预测开]
+      reset: 1
+    - name: aux_hint
+      states: [注释关, 辅助开]
+      reset: 1
+    - name: translate
+      states: [翻译关, 翻译开]
+      reset: 0
+    - options: [conversion_off, s2t_mode, s2hk_mode, s2tw_mode]
+      states: [简体, 繁体, 港繁, 台繁]
+      abbrev: [简, 繁, 港, 台]
+      reset: 0
+
+  engine:
+    processors:
+      - user_predict_processor # 必须放在第一个
+      - lua_processor@*wanxiang.super_processor
+      - lua_processor@*input_tips
+      - ascii_composer
+      - recognizer
+      - digit_catcher # calculator 数字拦截，需要放在 recognizer 之后
+      - key_binder
+      - lua_processor@*moran_pin*pin_processor
+      - speller
+      - punctuator
+      - selector
+      - navigator
+      - express_editor
+    segmentors:
+      - ascii_segmentor
+      - matcher
+      - abc_segmentor
+      - affix_segmentor@wanxiang_reverse
+      - punct_segmentor
+      - fallback_segmentor
+    translators:
+      - punct_translator
+      - script_translator
+      - user_predict_translator
+      - calculator_translator
+      - ids_search_translator
+      - lua_translator@*moran_shijian
+      - lua_translator@*moran_number
+      - lua_translator@*unicode
+      - table_translator@custom_phrase
+      - lua_translator@*wanxiang.super_english*T
+      - reverse_lookup_translator@wanxiang_flypy_reverse
+      - lua_translator@*moran_pin*panacea_translator
+      - lua_translator@*input_statistics
+    filters:
+      - lua_filter@*moran_pin*pin_filter
+      - lua_filter@*wanxiang.super_english*F
+      - lua_filter@*wanxiang.super_lookup
+      - lua_filter@*wanxiang.super_comment_preedit
+      - user_predict_filter
+      - rewriter@flypy
+      - rewriter@others
+      - rewriter@emoji
+      - rewriter@kaomoji
+      - rewriter@s2t
+      - rewriter@hk_variants
+      - rewriter@tw_variants
+      - rewriter@translate
+      - lua_filter@*placeholder
+      - uniquifier # 候选去重
+
+  super_comment:
+    candidate_length: 16 # 注释候选长度
+    cand_type:
+      user_phrase: "" # 用户自造词
+      sentence: "" # 整句
+      table: "✬" # 系统码表词
+      user_table: "" # 用户码表词
+      completion: "⋙" # 编码补全
+      abbrev: "" # 简码
+      predict: "" # 预测候选
+      pinned: "" # pin 候选
+
+  key_binder:
+    import_preset: default
+    select_first_character: "bracketleft"
+    select_last_character: "bracketright"
+    bindings:
+      - { when: has_menu, accept: "minus", send: "Page_Up" }
+      - { when: has_menu, accept: "equal", send: "Page_Down" }
+      - { when: composing, accept: "Alt+Left", send: "Shift+Left" }
+      - { when: composing, accept: "Alt+Right", send: "Shift+Right" }
+      - { when: has_menu, accept: "Tab", send: "Control+Right" }
+      - { when: composing, accept: "Tab", send: "Control+Right" }
+      - { when: composing, accept: "Control+Tab", send_sequence: "{Home}{Shift+Right}{1}{Shift+Right}" }
+      - { when: has_menu, accept: "Control+e", toggle: translate }
+      - { when: has_menu, accept: "semicolon", send: 2 }
+
+  recognizer:
+    patterns:
+      punct: "^/([0-9]|10|[A-Za-z]+)$"
+      wanxiang_reverse: "^`[A-Za-z]*$"
+      ids_search: "^I[A-Za-z0-9'/]*"
+      unicode: "^U[a-fA-F0-9]+"
+      number: "^S[0-9\\.]+"
+      date: "^N[0-9]+"
+      calculator: "^(V.*|[0-9]+[\\+\\-\\*].*|[\\+\\-\\*].*)$"
+      email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+      url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$"
+
+  ids_search_translator:
+    # 数据文件：相对路径基于用户数据目录（不存在则回退共享数据目录）；绝对路径直接使用
+    index_file: build/ids_index.bin
+    meta_file: build/ids_meta.bin
+    tag: ids_search # 保持与 recognizer 的 tag 一致
+    prefix: "I" # 触发前缀，需与上方 recognizer 一致
+    tips: "〔部件检字〕" # 引导提示词
+    max_results: 60 # 最大候选数量
+    shuangpin_scheme: "flypy" # 双拼解析方案：flypy (小鹤双拼) 或 zrm (自然码)
+    show_pinyin: true # 是否在候选提示中显示读音
+    show_ids: true # 是否在候选提示中显示IDS结构
+    show_unicode: true # 是否在候选提示中显示Unicode编码
+    show_block: true # 是否在候选提示中显示所属字符分区
+
+  user_predict:
+    db_name: "user_predict" # 用户预测数据库
+    predict_style: "all" # 预测样式
+    use_space_to_commit: false # 是否使用空格提交预测
+    max_candidates: 9 # 最大预测候选数
+    max_predictions: 15 # 最大预测条数（S-Gram 不受限制）
+    max_history_entries: 5 # 上文最大历史记录
+    expiry_days: 90 # 预测过期天数（S-Gram 永不过期）
+    decay_rate: 0.85 # 预测衰减率
+    context_timeout: 10000 # 上下文超时（毫秒）
+
+  custom_phrase:
+    dictionary: ""
+    user_dict: user_phrase
+    db_class: stabledb
+    enable_completion: false
+    enable_sentence: false
+    initial_quality: 99
+
+  grammar:
+    language: wanxiang-lts-zh-hans
+    collocation_max_length: 6
+    collocation_min_length: 2
+    collocation_penalty: -14
+    non_collocation_penalty: -6
+    weak_collocation_penalty: -100
+    rear_penalty: -18
+
+  moran_pin:
+    enable: true
+    # indicator: "📌" # 交给 super_comment 来处理
+    panacea:
+      infix: "//"
+      prompt: "〔加词〕"
+      tip_prefix: ""
+      freestyle: false
+
+  calculator:
+    prefix: "V"
+    tag: calculator
+    tips: "计算器"
+
+  wanxiang_english:
+    dictionary: wanxiang_english
+    user_dict: user_en
+    enable_completion: true
+    initial_quality: 2.1
+    comment_format:
+      - xform/^~.+$//
+    min_word_length: 3 # 最少三个字母才会查字典，防止巨量候选
+
+  others:
+    option: true
+    tags: [abc]
+    mode: derive
+    comment_source: text
+    files: [rewriter/others.txt]
+
+  emoji:
+    option: emoji
+    tags: [abc]
+    mode: derive
+    comment_source: text
+    files: [rewriter/emoji.txt]
+
+  kaomoji:
+    option: kaomoji
+    tags: [abc]
+    mode: derive
+    comment_source: text
+    files: [rewriter/kaomoji.txt]
+
+  translate:
+    option: translate
+    tags: [abc]
+    mode: derive
+    comment_source: text
+    files:
+      - rewriter/chinese_english.txt
+      - rewriter/english_chinese.txt
+
+  s2t:
+    # 三个模式都包含 s2t 阶段：任一模式开启即生效
+    option: [s2t_mode, s2hk_mode, s2tw_mode]
+    mode: replace
+    tags: [abc]
+    comment_source: text
+    enable_sentence: true
+    files:
+      - rewriter/opencc/CJK_Compatibility_Ideographs.txt
+      - rewriter/opencc/STPhrases.txt
+      - rewriter/opencc/STPhrases_GeneratedFromRegionalPhrases.txt
+      - rewriter/opencc/STCharacters.txt
+
+  hk_variants:
+    # 仅简转港模式开启（输入为 s2t 阶段输出）
+    option: s2hk_mode
+    mode: replace
+    tags: [abc]
+    comment_source: text
+    enable_sentence: true
+    files:
+      - rewriter/opencc/HKVariantsPhrases.txt
+      - rewriter/opencc/HKVariants.txt
+
+  tw_variants:
+    # 仅简转台模式开启（输入为 s2t 阶段输出）
+    option: s2tw_mode
+    mode: replace
+    tags: [abc]
+    comment_source: text
+    enable_sentence: true
+    files:
+      - rewriter/opencc/TWVariantsPhrases.txt
+      - rewriter/opencc/TWVariants.txt
+
+  wanxiang_lookup:
+    key: "`"
+    tags: [abc]
+    aux_file: "flypy_aux.txt"
+
+  punctuator:
+    digit_separators: ":,."
+    __include: "user_symbols:/symbol_table"
+    __patch: "user_symbols:/symbols"
+
+  editor:
+    bindings:
+      space: confirm
+      Return: commit_raw_input
+      Control+Return: commit_script_text
+      Control+Shift+Return: commit_comment
+      BackSpace: revert
+      Delete: delete
+      Control+BackSpace: back_syllable
+      Control+Delete: delete_candidate
+      Escape: cancel
+
+  navigator:
+    bindings:
+      Left: left_by_char_no_loop
+      Right: right_by_char_no_loop
+      Shift+Left: left_by_syllable
+      Shift+Right: right_by_syllable

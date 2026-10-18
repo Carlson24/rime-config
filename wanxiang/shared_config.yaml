@@ -72,7 +72,6 @@ shared_config:
       - ascii_segmentor
       - matcher
       - abc_segmentor
-      - affix_segmentor@wanxiang_reverse
       - punct_segmentor
       - fallback_segmentor
     translators:
@@ -86,7 +85,6 @@ shared_config:
       - lua_translator@*unicode
       - table_translator@custom_phrase
       - lua_translator@*wanxiang.super_english*T
-      - reverse_lookup_translator@wanxiang_flypy_reverse
       - lua_translator@*moran_pin*panacea_translator
       - lua_translator@*input_statistics
     filters:
@@ -136,7 +134,6 @@ shared_config:
   recognizer:
     patterns:
       punct: "^/([0-9]|10|[A-Za-z]+)$"
-      wanxiang_reverse: "^`[A-Za-z]*$"
       ids_search: "^I[A-Za-z0-9'/]*"
       unicode: "^U[a-fA-F0-9]+"
       number: "^S[0-9\\.]+"
@@ -145,10 +142,8 @@ shared_config:
       email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
       url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$"
 
-  ids_search_translator:
-    # 数据文件：相对路径基于用户数据目录（不存在则回退共享数据目录）；绝对路径直接使用
-    index_file: build/ids_index.bin
-    meta_file: build/ids_meta.bin
+  ids_search:
+    data_file: build/ids_data.bin
     tag: ids_search # 保持与 recognizer 的 tag 一致
     prefix: "I" # 触发前缀，需与上方 recognizer 一致
     tips: "〔部件检字〕" # 引导提示词

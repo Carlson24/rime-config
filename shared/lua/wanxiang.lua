@@ -27,7 +27,7 @@ wanxiang.RIME_PROCESS_RESULTS = {
 function wanxiang.is_in_radical_mode(env)
   local seg = env.engine.context.composition:back()
   return seg and (
-    seg:has_tag("wanxiang_reverse")
+    seg:has_tag("ids_search")
   ) or false
 end
 

@@ -22,10 +22,10 @@ jobs:
         with:
           python-version: "3.14"
 
-      - name: Download and Extract wanxiang.zip
+      - name: Download and Extract dicts.zip
         run: |
-          curl -L -o wanxiang.zip https://github.com/amzxyz/rime-wanxiang/archive/refs/heads/wanxiang.zip
-          unzip -j wanxiang.zip "rime-wanxiang-wanxiang/dicts/*" -d dicts/
+          curl -L -o dicts.zip https://github.com/amzxyz/rime-wanxiang-data/releases/download/dict-nightly/dicts.zip
+          unzip dicts.zip
           file_list=(
             "dicts/abbrev.dict.yaml"
             "dicts/t9_abbrev.dict.yaml"
@@ -51,12 +51,17 @@ jobs:
           sed -Ei 's/;\S*//g' dicts/suzi.dict.yaml
           sed -Ei 's/;\S*//g' dicts/yidu.dict.yaml
           # Run the scripts
+          echo "转换拼音格式...\n"
           python tools/tone_convert.py    -i dicts/*.dict.yaml           -o dicts-base
+          echo "转换尖音格式...\n"
           python tools/zian_go.py         -i dicts-base/*.dict.yaml      -o dicts-zian-base
+          echo "生成拼音词库...\n"
           python tools/tone_reverse.py    -i dicts-base/*.dict.yaml      -o dicts-tone
           python tools/tone_reverse.py    -i dicts-zian-base/*.dict.yaml -o dicts-zian-tone
+          echo "生成小鹤词库...\n"
           python tools/pinyin_to_flypy.py -i dicts-base/*.dict.yaml      -o dicts-flypy
           python tools/pinyin_to_flypy.py -i dicts-zian-base/*.dict.yaml -o dicts-zian-flypy
+          echo "完成!\n"
 
       - name: Package dicts
         run: |

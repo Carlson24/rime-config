@@ -15,13 +15,13 @@ aux_ignore_chars: "，。？！、：～·＆“”（）「」『』…"
 import_tables:
   # 万象词库
   - dicts/zi.flypy # 基础字表
-  - dicts/suzi.flypy # 各类简化字、民间俗字扩展包
   - dicts/jichu.flypy # 基础词库
-  - dicts/lianxiang.flypy # 联想词库
   - dicts/cuoyin.flypy # 错音错字
   - dicts/duoyin.flypy # 兼容词库
   - dicts/shici.flypy # 诗词
   - dicts/diming.flypy # 地名
+  - dicts/daolu.flypy # 道路
+  - dicts/shiti.flypy # 机构
   - dicts/yixue.flypy # 医学
   - dicts/huaxue.flypy # 化学
   - dicts/yaopin.flypy # 药品
@@ -31,18 +31,19 @@ import_tables:
   - dicts/renming.flypy # 高频人名
   - dicts/taifeng.flypy # 最新台风表
   - dicts/fangyan.flypy # 收集全国方言
+  - dicts/suzi.flypy # 各类简化字、民间俗字扩展包
   - dicts/yidu.flypy # 异读词库
   - dicts/moegirl.flypy # 萌娘百科
 
   # 尖音拓展
   - dicts_zian/zi.flypy.zian # 基础字表
-  - dicts_zian/suzi.flypy.zian # 各类简化字、民间俗字扩展包
   - dicts_zian/jichu.flypy.zian # 基础词库
-  - dicts_zian/lianxiang.flypy.zian # 联想词库
   - dicts_zian/cuoyin.flypy.zian # 错音错字
   - dicts_zian/duoyin.flypy.zian # 兼容词库
   - dicts_zian/shici.flypy.zian # 诗词
   - dicts_zian/diming.flypy.zian # 地名
+  - dicts_zian/daolu.flypy.zian # 道路
+  - dicts_zian/shiti.flypy.zian # 机构
   - dicts_zian/yixue.flypy.zian # 医学
   - dicts_zian/huaxue.flypy.zian # 化学
   - dicts_zian/yaopin.flypy.zian # 药品
@@ -52,6 +53,7 @@ import_tables:
   - dicts_zian/renming.flypy.zian # 高频人名
   - dicts_zian/taifeng.flypy.zian # 最新台风表
   - dicts_zian/fangyan.flypy.zian # 收集全国方言
+  - dicts_zian/suzi.flypy.zian # 各类简化字、民间俗字扩展包
   - dicts_zian/yidu.flypy.zian # 异读词库
   - dicts_zian/moegirl.flypy.zian # 萌娘百科
 ...

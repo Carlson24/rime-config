@@ -1,4 +1,5 @@
 wx	万象
+ea	饿啊
 ee	饿饿
 eeee	饿饿
 ly	灵韵
@@ -24,6 +25,7 @@ lty	洛天依
 jj	椒椒
 jj	椒椒JMJ
 aayr	阿渊
+aahc	阿豪
 mcmc	猫猫
 mcmc	iSilen
 yousa	泠鸢

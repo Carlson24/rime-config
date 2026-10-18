@@ -23,14 +23,6 @@ wanxiang.RIME_PROCESS_RESULTS = {
   kNoop = 2      -- 表示处理器没有处理这个按键，继续传递给下一个处理器
 }
 
--- 以 `tag` 方式检测是否处于反查模式
-function wanxiang.is_in_radical_mode(env)
-  local seg = env.engine.context.composition:back()
-  return seg and (
-    seg:has_tag("ids_search")
-  ) or false
-end
-
 ---判断是否在命令模式
 ---@param context Context | nil
 ---@return boolean

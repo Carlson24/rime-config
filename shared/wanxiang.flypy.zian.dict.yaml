@@ -20,8 +20,6 @@ import_tables:
   - dicts/duoyin.flypy # 兼容词库
   - dicts/shici.flypy # 诗词
   - dicts/diming.flypy # 地名
-  - dicts/daolu.flypy # 道路
-  - dicts/shiti.flypy # 机构
   - dicts/yixue.flypy # 医学
   - dicts/huaxue.flypy # 化学
   - dicts/yaopin.flypy # 药品
@@ -42,8 +40,6 @@ import_tables:
   - dicts_zian/duoyin.flypy.zian # 兼容词库
   - dicts_zian/shici.flypy.zian # 诗词
   - dicts_zian/diming.flypy.zian # 地名
-  - dicts_zian/daolu.flypy.zian # 道路
-  - dicts_zian/shiti.flypy.zian # 机构
   - dicts_zian/yixue.flypy.zian # 医学
   - dicts_zian/huaxue.flypy.zian # 化学
   - dicts_zian/yaopin.flypy.zian # 药品

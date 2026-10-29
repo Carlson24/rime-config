@@ -56,6 +56,7 @@ shared_config:
   engine:
     processors:
       - user_predict_processor # 必须放在第一个
+      - ids_search_processor
       - ids_hybrid_processor
       - lua_processor@*wanxiang.super_processor
       - lua_processor@*input_tips
@@ -71,6 +72,7 @@ shared_config:
       - express_editor
     segmentors:
       - ascii_segmentor
+      - ids_search_segmentor
       - ids_hybrid_segmentor
       - matcher
       - abc_segmentor
@@ -105,6 +107,7 @@ shared_config:
       - rewriter@tw_variants
       - rewriter@translate
       - lua_filter@*placeholder
+      - ids_search_filter
       - ids_hybrid_filter
       - uniquifier # 候选去重
       - ids_hybrid_cleaner
@@ -139,7 +142,6 @@ shared_config:
   recognizer:
     patterns:
       punct: "^/([0-9]|10|[A-Za-z]+)$"
-      ids_search: '^I[^\s0-9,.;=\[\]-]*$'
       unicode: "^U[a-fA-F0-9]+"
       number: "^S[0-9\\.]+"
       date: "^N[0-9]+"

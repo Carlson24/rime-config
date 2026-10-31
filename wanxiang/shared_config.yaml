@@ -56,8 +56,7 @@ shared_config:
   engine:
     processors:
       - user_predict_processor # 必须放在第一个
-      - ids_search_processor
-      - ids_hybrid_processor
+      - ids_reverse_processor
       - lua_processor@*wanxiang.super_processor
       - lua_processor@*input_tips
       - ascii_composer
@@ -72,8 +71,7 @@ shared_config:
       - express_editor
     segmentors:
       - ascii_segmentor
-      - ids_search_segmentor
-      - ids_hybrid_segmentor
+      - ids_reverse_segmentor
       - matcher
       - abc_segmentor
       - punct_segmentor
@@ -83,8 +81,7 @@ shared_config:
       - script_translator
       - user_predict_translator
       - calculator_translator
-      - ids_search_translator
-      - ids_hybrid_translator
+      - ids_reverse_translator
       - lua_translator@*moran_shijian
       - lua_translator@*moran_number
       - lua_translator@*unicode
@@ -107,10 +104,8 @@ shared_config:
       - rewriter@tw_variants
       - rewriter@translate
       - lua_filter@*placeholder
-      - ids_search_filter
-      - ids_hybrid_filter
+      - ids_reverse_filter
       - uniquifier # 候选去重
-      - ids_hybrid_cleaner
 
   super_comment:
     candidate_length: 16 # 注释候选长度
@@ -149,31 +144,21 @@ shared_config:
       email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
       url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$"
 
-  ids_search:
+  ids_reverse:
     data_file: build/ids_data.bin
-    tag: ids_search # 保持与 recognizer 的 tag 一致
-    prefix: "I" # 触发前缀，需与上方 recognizer 一致
-    tips: "〔部件检字〕" # 引导提示词
     max_results: 60 # 最大候选数量
-    ids_format: unicode
+    ids_format: unicode # IDS 显示格式：unicode | bracket | plain
     shuangpin_scheme: "flypy" # 双拼解析方案：flypy (小鹤双拼) 或 zrm (自然码)
     show_pinyin: true # 是否在候选提示中显示读音
     show_ids: true # 是否在候选提示中显示IDS结构
     show_unicode: true # 是否在候选提示中显示Unicode编码
     show_block: true # 是否在候选提示中显示所属字符分区
-
-  ids_hybrid:
-    data_file: build/ids_data.bin
-    tag: ids_hybrid
-    prefix: "O"
-    tips: "〔汉字部件检字〕"
-    max_results: 60
-    ids_format: unicode
-    shuangpin_scheme: flypy
-    show_pinyin: true
-    show_ids: true
-    show_unicode: true
-    show_block: true
+    search_prefix: "I"
+    search_tag: ids_search
+    search_tips: "〔部件检字〕"
+    hybrid_prefix: "O"
+    hybrid_tag: ids_hybrid
+    hybrid_tips: "〔汉字部件检字〕"
 
   user_predict:
     db_name: "user_predict" # 用户预测数据库

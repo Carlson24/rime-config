@@ -7,14 +7,6 @@ local t_concat                = table.concat
 
 wanxiang.version              = "v114.51.4"
 
-wanxiang.INPUT_METHOD_MARKERS = {
-  ["Ⅰ"] = "pinyin", -- 全拼
-  ["Ⅱ"] = "zrm", -- 自然码双拼
-  ["Ⅲ"] = "flypy", -- 小鹤双拼
-  ["Ⅽ"] = "lssp", -- 李氏三拼
-  ["ⅱ"] = "t9" -- 拼音九键
-}
-
 -- 全局内容
 ---@alias PROCESS_RESULT ProcessResult
 wanxiang.RIME_PROCESS_RESULTS = {
@@ -115,42 +107,6 @@ function wanxiang.load_file_with_fallback(filename, mode)
   end
 
   return file, close, err
-end
-
-local __input_type_cache = {} -- 缓存首个命中的 id
-
---- 根据 speller/algebra 中的特殊符号返回输入类型
----@param env Env
----@return string
-function wanxiang.get_input_method_type(env)
-  local schema_id = env.engine.schema.schema_id or "unknown"
-
-  local cached_id = __input_type_cache[schema_id]
-  if cached_id then
-    return cached_id
-  end
-
-  local cfg       = env.engine.schema.config
-  local result_id = "unknown"
-
-  local n         = cfg:get_list_size("speller/algebra")
-  for i = 0, n - 1 do
-    local s = cfg:get_string(("speller/algebra/@%d"):format(i))
-    if s then
-      for symbol, id in pairs(wanxiang.INPUT_METHOD_MARKERS) do
-        if s:find(symbol, 1, true) then
-          if result_id == "unknown" then
-            result_id = id -- 只记录第一个命中的 id
-          end
-        end
-      end
-    end
-  end
-
-  -- 写缓存
-  __input_type_cache[schema_id] = result_id
-
-  return result_id
 end
 
 -- 转义 Lua 模式中的正则魔法字符，返回可直接用于 string.find/gsub/match 的 pattern

@@ -5,7 +5,6 @@
 
 zrm_pro:
   __append:
-    - xform/Ⅱ//
     - xlit/12345/67890/
     # 一些兼容打法
     - derive/^ng(\d);/eng$1;/
@@ -101,7 +100,6 @@ zrm_reverse:
 
 flypy_pro:
   __append:
-    - xform/Ⅲ//
     - derive/^ng;/eg;/ # ng -> eng
     - derive/^([jqxy])v;/$1u;/ # jv -> ju
     - derive/^([gkhzcs])v;/$1u;/ # zv -> zu
@@ -147,7 +145,6 @@ flypy_reverse:
 
 lssp_pro:
   __append:
-    - xform/Ⅽ//
     - derive/^shui2;/shei2;/ # shui -> shei
     - xform/^ng(\d);/eng$1;/ # ng -> eng
     - xform/^m(\d);/mu$1;/ # m -> mu
@@ -239,7 +236,6 @@ lssp_pro:
 
 l17_pro:
   __append:
-    - xform/Ⅼ//
     - xlit/12345/67890/
     - derive/^ng(\d);/eng$1;/
     - xform/^n(\d);/en$1;/ # n 使用 en
@@ -435,7 +431,6 @@ aux:
 
 t9:
   __append:
-    - xform/ⅱ//
     - derive/^ng$/eng/
     - derive/^([nl])ve$/$1ue/
     - derive/^([jqxy])v/$1u/

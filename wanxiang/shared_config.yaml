@@ -88,7 +88,6 @@ shared_config:
       - table_translator@custom_phrase
       - lua_translator@*wanxiang.super_english*T
       - lua_translator@*moran_pin*panacea_translator
-      - lua_translator@*input_statistics
     filters:
       - lua_filter@*moran_pin*pin_filter
       - lua_filter@*wanxiang.super_english*F
@@ -104,8 +103,8 @@ shared_config:
       - rewriter@tw_variants
       - rewriter@translate
       - lua_filter@*placeholder
-      - ids_reverse_filter
       - uniquifier # 候选去重
+      - ids_reverse_filter
 
   super_comment:
     candidate_length: 16 # 注释候选长度

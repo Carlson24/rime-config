@@ -41,6 +41,7 @@
     "liquid",
     "fallback",
     "scheme",
+    "sync_input",
     "pk",
     "merge",
     "insert"

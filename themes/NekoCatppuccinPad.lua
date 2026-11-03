@@ -22,6 +22,8 @@ local theme = theme {
 
   preedit = safe_require("nekocat.preedit"),
 
+  sync_input = safe_require("nekocat.sync_input"),
+
   window = safe_require("nekocat.candidates_windows"),
 
   candidates_tool = safe_require("nekocat.candidates_tool"),

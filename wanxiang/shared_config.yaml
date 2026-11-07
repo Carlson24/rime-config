@@ -152,6 +152,7 @@ shared_config:
     show_ids: true # 是否在候选提示中显示IDS结构
     show_unicode: true # 是否在候选提示中显示Unicode编码
     show_block: true # 是否在候选提示中显示所属字符分区
+    variant_trigger: "/" # 变体触发符号，输入该符号后会显示变体候选
     search_prefix: "I"
     search_tag: ids_search
     search_tips: "〔部件检字〕"

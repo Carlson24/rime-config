@@ -7,17 +7,17 @@ flypy:
   insert_count: 128
   tags: [abc]
   files:
-    - rewriter/flypy/00_user.txt
-    - rewriter/flypy/00_xh.txt
-    - rewriter/flypy/11_fl.txt
-    - rewriter/flypy/21_yj.txt
-    - rewriter/flypy/22_ej.txt
-    - rewriter/flypy/31_vt.txt
-    - rewriter/flypy/41_fh.txt
-    - rewriter/flypy/51_qmc.txt
-    - rewriter/flypy/52_upz.txt
-    - rewriter/flypy/53_qmz.txt
-    - rewriter/flypy/61_oc.txt
+    - flypy/00_user.txt
+    - flypy/00_xh.txt
+    - flypy/11_fl.txt
+    - flypy/21_yj.txt
+    - flypy/22_ej.txt
+    - flypy/31_vt.txt
+    - flypy/41_fh.txt
+    - flypy/51_qmc.txt
+    - flypy/52_upz.txt
+    - flypy/53_qmz.txt
+    - flypy/61_oc.txt
 
 shared_config:
   switches:

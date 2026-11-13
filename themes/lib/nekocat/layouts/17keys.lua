@@ -51,8 +51,7 @@ local keyboard = keyboard {
         key(merge(S.switch, key { click = "Keyboard45Eng", label_symbol = { { text = "]" } }, swipe_up = "]", long_click = "KeyboardList", hint = { { text = "ic@web" } }, swipe_down = "IMESwitch", key_text_size = func_key_text_size, width = 0.13 })),
         key(merge(S.enter, key { label = { { text = "enter_labels" } }, click = "Enter", long_click = "ColorList", key_text_size = func_key_text_size, width = 0.15 }))
       }
-    },
-    safe_require("nekocat.layouts._action_row")({}).extra
+    }
   }
 }
 

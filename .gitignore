@@ -1,5 +1,6 @@
 logs
 dist/*
+**/*.so
 **/*.zip
 **/*.tar.bz2
 **/build
@@ -13,8 +14,7 @@ dist/*
 **/*.ocd2
 **/*.hidden
 **/*.nomedia
-shared/dicts/*.dict.yaml
-shared/dicts_zian/*.dict.yaml
-shared/lua/clib/lua-utf8
-shared/lua/clib/*.so
+**/dicts/*.dict.yaml
+**/dicts_zian/*.dict.yaml
+**/lua/clib/lua-utf8
 themes/backgrounds

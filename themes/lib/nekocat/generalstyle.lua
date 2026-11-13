@@ -13,9 +13,9 @@ local gs = style {
   key_shadow_direction = { "right", "down" }, -- [string] 按键阴影位置
 
   -- 键盘边距（竖屏）
-  keyboard_padding = 2,        -- [int] 左右与屏幕的距离离
-  keyboard_padding_bottom = 0, -- [int] 底部距离（避免触发全面屏手势）
-  keyboard_padding_top = 0,    -- [int] 顶部距离
+  keyboard_padding = 2,         -- [int] 左右与屏幕的距离离
+  keyboard_padding_bottom = 10, -- [int] 底部距离（避免触发全面屏手势）
+  keyboard_padding_top = 0,     -- [int] 顶部距离
 
   -- 键盘边距（横屏）
   keyboard_padding_land = 40,       -- [int] 横屏左右距离

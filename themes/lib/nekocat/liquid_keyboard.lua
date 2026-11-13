@@ -6,7 +6,7 @@
 local lk = liquid {
   columns = 6,
   row = 5,
-  bottom_padding = 20,
+  bottom_padding = 10,
   keyboards = {
     { id = "history", type = "HISTORY", name = "常用" },
     { id = "ascii", type = "SINGLE", name = "英文",

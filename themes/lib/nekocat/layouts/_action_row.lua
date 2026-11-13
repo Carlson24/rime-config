@@ -4,15 +4,9 @@
 ---@type KeyColorStyles
 local S = safe_require("nekocat.colors._key_colors")
 local func_key_text_size = safe_require("nekocat.font_offset").func_key_text_size
-local extra_style = key {
-  key_text_size = 20,
-  key_back_color = "0x00",
-  hilited_key_back_color = "0x00",
-  key_border_color = "0x00"
-}
 
 ---@param opts { mode_switch: boolean? }
----@return { action: KeyboardRow, extra: KeyboardRow }
+---@return { action: KeyboardRow }
 return function(opts)
   local action = row {
     keys = {
@@ -85,16 +79,5 @@ return function(opts)
     }
   }
 
-  local extra = row {
-    height = 0.09,
-    keys = {
-      key(merge(extra_style, { click = "IMESwitch", width = 0.17 })),
-      key(merge(extra_style, { click = "AltLeft", width = 0.1 })),
-      key(merge(extra_style, { click = "SlideCursor" })),
-      key(merge(extra_style, { click = "AltRight", width = 0.1 })),
-      key(merge(extra_style, { click = "WindowClipboard", width = 0.17 }))
-    }
-  }
-
-  return { action = action, extra = extra }
+  return { action = action }
 end

@@ -1,6 +1,5 @@
 local S = safe_require("nekocat.colors._key_colors") -- 按键样式
 local func_key_text_size = safe_require("nekocat.font_offset").func_key_text_size
-local action_rows = safe_require("nekocat.layouts._action_row")({})
 
 local keyboard = keyboard {
   name = "18 键布局",
@@ -44,8 +43,7 @@ local keyboard = keyboard {
         key(merge(S.backspace, key { click = "BackSpace", key_text_size = func_key_text_size, width = 0.15 }))
       }
     },
-    action_rows.action,
-    action_rows.extra
+    safe_require("nekocat.layouts._action_row")({}).action
   }
 }
 

@@ -11,7 +11,7 @@ local theme = theme {
   author = "Carlson24(鹤衔春雪)",
 
   style = merge(safe_require("nekocat.generalstyle"), style {
-    keyboard_height = 270,     -- [int] 竖屏键盘高度 (px)
+    keyboard_height = 255,     -- [int] 竖屏键盘高度 (px)
     keyboard_height_land = 150 -- [int] 横屏键盘高度 (px)
   }),
 

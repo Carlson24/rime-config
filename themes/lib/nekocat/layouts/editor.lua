@@ -53,8 +53,7 @@ local keyboard = keyboard {
         key { label = { { text = "计算" } }, click = "KeyboardCalculator" },
         key(merge(S.enter, { label = { { text = "回车" } }, click = "Enter", key_text_size = 18 }))
       }
-    },
-    safe_require("nekocat.layouts._action_row")({}).extra
+    }
   }
 }
 

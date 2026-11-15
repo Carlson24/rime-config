@@ -80,7 +80,7 @@ local pk = {
   Keyboard45Eng      = { label = "\u{F840}", send = "Eisu_toggle", select = "english" },                 -- 英文布局
   KeyboardT9Number   = { label = "ic@numeric", send = "Eisu_toggle", select = "t9_number" },             -- T9 用数字
   Keyboardl17keys    = { label = "\u{F845}", send = "Eisu_toggle", select = "wanxiang_l17keys" },        -- 乱序 17
-  Keyboard7columns   = { label = "\u{F840}", send = "Eisu_toggle", select = "wanxiang_pro" },            -- 小鹤 7 列布局
+  Keyboard7columns   = { label = "\u{F842}", send = "Eisu_toggle", select = "wanxiang_flypy_26keys" },   -- 小鹤 7 列布局
 
   -- 方案切换
   SchemaEnglish      = { label = "\u{F840}", command = "set_schema", option = "wanxiang_english" },      -- 万象英文
@@ -118,6 +118,10 @@ local pk = {
   SelectCandThree    = { label = { { text = "〣", align = "left" } }, send = "3" }, -- 选择第三个候选
   SelectCandFour     = { label = { { text = "〤", align = "left" } }, send = "4" }, -- 选择第四个候选
   SelectCandFive     = { label = { { text = "〥", align = "left" } }, send = "5" }, -- 选择第五个候选
+  SelectCandSix      = { label = { { text = "〦", align = "left" } }, send = "6" }, -- 选择第六个候选
+  SelectCandSeven    = { label = { { text = "〧", align = "left" } }, send = "7" }, -- 选择第七个候选
+  SelectCandEight    = { label = { { text = "〨", align = "left" } }, send = "8" }, -- 选择第八个候选
+  SelectCandNine     = { label = { { text = "〩", align = "left" } }, send = "9" }, -- 选择第九个候选
   SelectToneOne      = { label = { { text = "\u{F821}", align = "left" } }, send = "6" }, -- 音调一声
   SelectToneTwo      = { label = { { text = "\u{F822}", align = "left" } }, send = "7" }, -- 音调二声
   SelectToneThree    = { label = { { text = "\u{F823}", align = "left" } }, send = "8" }, -- 音调三声

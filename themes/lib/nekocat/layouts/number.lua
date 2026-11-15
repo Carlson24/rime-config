@@ -12,9 +12,9 @@ local keyboard = keyboard {
     row {
       keys = {
         key(merge(S.func, { click = "+", long_click = "%" })),
-        key(merge(S.kp1, { click = "7" })),
-        key(merge(S.kp2, { click = "8" })),
-        key(merge(S.kp3, { click = "9" })),
+        key(merge(S.kp1, { click = "1" })),
+        key(merge(S.kp2, { click = "2" })),
+        key(merge(S.kp3, { click = "3" })),
         key(merge(S.func, { click = "*", long_click = "×" }))
       }
     },
@@ -30,9 +30,9 @@ local keyboard = keyboard {
     row {
       keys = {
         key(merge(S.func, { click = "Paren", long_click = "Bracket" })),
-        key(merge(S.kp7, { click = "1" })),
-        key(merge(S.kp8, { click = "2" })),
-        key(merge(S.kp9, { click = "3" })),
+        key(merge(S.kp7, { click = "7" })),
+        key(merge(S.kp8, { click = "8" })),
+        key(merge(S.kp9, { click = "9" })),
         key(merge(S.backspace, { click = "BackSpace", key_text_size = func_key_text_size }))
       }
     },

@@ -1,15 +1,7 @@
 local keyboard = keyboard(merge(safe_require("nekocat.layouts.38keys3x5b1"), keyboard {
   name = "万象·李氏三拼3x5b1",
   rows = {
-    [1] = row {
-      keys = {
-        [1] = key { composing = "SelectCandOne" },
-        [2] = key { composing = "SelectCandTwo" },
-        [3] = key { composing = "SelectCandThree" },
-        [4] = key { composing = "SelectCandFour" },
-        [5] = key { composing = "SelectCandFive" }
-      }
-    },
+    [1] = safe_require("nekocat.layouts._number_row").composing_row,
     [2] = {
       keys = {
         [2] = key { hint = { { text = "a an ang", color = "blue" } } },

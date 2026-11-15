@@ -45,9 +45,9 @@ local keyboard = keyboard {
       keys = {
         key { spacer = true, width = 0.1 },
         key(merge(settings, key { click = "Schemaflypy", hint = { { text = "小鹤" } } })),
+        key(merge(settings, key { click = "Keyboard7columns", hint = { { text = "小鹤7列" } } })),
         key(merge(settings, key { click = "Schemaflypy18keys", hint = { { text = "小鹤18键" } } })),
         key(merge(settings, key { click = "Schemaflypy14keys", hint = { { text = "小鹤14键" } } })),
-        key(merge(settings, key { click = "Keyboard7columns", hint = { { text = "小鹤7列" } } })),
         key(merge(settings, key { click = "SchemaEnglish", hint = { { text = "English" } } })),
         key { spacer = true, width = 0.1 }
       }

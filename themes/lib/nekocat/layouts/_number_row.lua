@@ -45,11 +45,10 @@ return {
       [3] = key { composing = "SelectCandThree" },
       [4] = key { composing = "SelectCandFour" },
       [5] = key { composing = "SelectCandFive" },
-      [6] = key { composing = "SelectToneOne" },
-      [7] = key { composing = "SelectToneTwo" },
-      [8] = key { composing = "SelectToneThree" },
-      [9] = key { composing = "SelectToneFour" },
-      [10] = key { composing = "SelectToneNull" }
+      [6] = key { composing = "SelectCandSix" },
+      [7] = key { composing = "SelectCandSeven" },
+      [8] = key { composing = "SelectCandEight" },
+      [9] = key { composing = "SelectCandNine" }
     }
   }
 }

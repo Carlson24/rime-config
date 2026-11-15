@@ -5,7 +5,8 @@ local M = {}
 
 M.auxhint = key {
   key_text_offset_y = -4,
-  key_text_size = 18
+  key_text_size = 18,
+  key_hint_offset_y = -1
 }
 
 M.auxhint_7 = key {

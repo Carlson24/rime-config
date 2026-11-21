@@ -72,6 +72,26 @@ jobs:
           tar -cjf "dicts-zian-flypy.tar.bz2" -C "dicts-zian-flypy" .
           tar -cjf "NekoCatppuccin.tar.bz2"   -C "themes" .
 
+      - name: Generate ids_data
+        run: |
+          cd tools/ids_reverse
+          python -m pip install --upgrade pip
+          python -m pip install pypinyin
+          for f in \
+            IDS_raw.TXT \
+            ids_zitools.txt \
+            ids_lv1.txt \
+            EquivalentUnifiedIdeograph.txt \
+            excel_sheet2_pinyin.json \
+            ids_variants.txt \
+            wanxiang_charset.dict.yaml \
+            generate_data_v4.py
+          do
+            test -f "$f" || { echo "missing: $f"; exit 1; }
+          done
+          python generate_data_v4.py
+          mv ids_data.bin ../../
+
       - name: Create Nightly release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -80,6 +100,7 @@ jobs:
           prerelease: true
           title: "Nightly Build"
           files: |
+            ids_data.bin
             dicts-tone.tar.bz2
             dicts-zian-tone.tar.bz2
             dicts-flypy.tar.bz2

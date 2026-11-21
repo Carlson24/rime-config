@@ -2,9 +2,7 @@ wx	万象
 ea	饿啊
 ee	饿饿
 eeee	饿饿
-ly	灵韵
 lkyy	灵韵
-lbyy	灵韵
 fupm	浮生缥缈
 hxix	鹤衔春雪
 qyut	缺月疏桐
@@ -28,6 +26,8 @@ aayr	阿渊
 aahc	阿豪
 mcmc	猫猫
 mcmc	iSilen
+ly	泠鸢
+ly	泠鸢yousa
 yousa	泠鸢
 yousa	yousa
 yousa	泠鸢yousa

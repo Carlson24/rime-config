@@ -36,7 +36,7 @@ local keyboard = keyboard {
         key(merge(S.x, key { label = { { text = "Z X" } }, click = "z", label_symbol = { { text = { "{", "ic@select-all" }, align = "justify" } }, swipe_up = "{", popup = { "SelectAll", "Z", "X", "z", "x" } })),
         key(merge(S.c, key { label = { { text = "C V" } }, click = "c", label_symbol = { { text = { "_", "ic@content-copy" }, align = "justify" } }, swipe_up = "_", popup = { "Copy", "C", "V", "c", "v" } })),
         key(merge(S.v, key { label = { { text = "B N" } }, click = "b", label_symbol = { { text = { "}", "ic@content-paste" }, align = "justify" } }, swipe_up = "}", popup = { "Paste", "B", "N", "b", "n" }, swipe_down = "WindowClipboard" })),
-        key(merge(S.m, key { label = { { text = " M " } }, click = "m", label_symbol = { { text = { "~", "ic@content-cut" }, align = "justify" } }, swipe_up = "|", popup = { "Cut", "M", "m" } })),
+        key(merge(S.m, key { label = { { text = " M " } }, click = "m", label_symbol = { { text = { "~", "ic@content-cut" }, align = "justify" } }, swipe_up = "|", popup = { "Cut", "M", "m", "VariantReplace" } })),
         key(merge(S.backspace, key { click = "BackSpace", key_text_size = func_key_text_size }))
       }
     },

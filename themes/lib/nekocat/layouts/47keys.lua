@@ -45,7 +45,7 @@ local keyboard = keyboard {
         key(merge(S.z, key { click = "z", label_symbol = { { text = { " ", "ic@select-all" }, align = "justify" } }, popup = { "SelectAll", "Z" } })),
         key(merge(S.x, key { click = "x", label_symbol = { { text = { " ", "ic@content-cut" }, align = "justify" } }, popup = { "Cut", "X" } })),
         key(merge(S.c, key { click = "c", label_symbol = { { text = { " ", "ic@content-copy" }, align = "justify" } }, popup = { "Copy", "C" } })),
-        key(merge(S.v, key { click = "v", label_symbol = { { text = { " ", "ic@content-paste" }, align = "justify" } }, popup = { "Paste", "V" }, swipe_down = "WindowClipboard" })),
+        key(merge(S.v, key { click = "v", label_symbol = { { text = { " ", "ic@content-paste" }, align = "justify" } }, popup = { "Paste", "V", "VariantReplace" }, swipe_down = "WindowClipboard" })),
         key(merge(S.b, key { click = "b", label_symbol = { { text = { " ", "ic@ideogram-cjk" }, align = "justify" } }, popup = { "ZiTools", "B" } })),
         key(merge(S.n, key { click = "n", label_symbol = { { text = { " ", "ic@page-first" }, align = "justify" } }, popup = { "Page_Up", "N" } })),
         key(merge(S.m, key { click = "m", label_symbol = { { text = { " ", "ic@page-last" }, align = "justify" } }, popup = { "Page_Down", "M" } })),

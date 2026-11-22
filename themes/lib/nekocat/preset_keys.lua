@@ -113,6 +113,7 @@ local pk = {
   CandDown           = { label = "ic@pan-down", send = "Control+plus" }, -- 魔然下移选中的 pin 候选
   Calculator         = { label = "ic@calculator-variant", actions = { "KeyboardCalculator", "V" } }, -- 计算器
   CommitPreedit      = { label = "ic@marker", send = "Control+Return" }, -- 上屏 Preedit
+  VariantReplace     = { label = "ic@swap-vertical-circle-outline", send = "Shift+v" }, -- IDS 异体字替换
   SelectCandOne      = { label = { { text = "〡", align = "left" } }, send = "1" }, -- 选择第一个候选
   SelectCandTwo      = { label = { { text = "〢", align = "left" } }, send = "2" }, -- 选择第二个候选
   SelectCandThree    = { label = { { text = "〣", align = "left" } }, send = "3" }, -- 选择第三个候选

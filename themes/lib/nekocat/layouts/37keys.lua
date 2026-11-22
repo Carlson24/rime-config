@@ -37,7 +37,7 @@ local keyboard = keyboard {
         key(merge(S.shift, key { click = "Shift", double_click = "CapsLock", label_symbol = { { text = "ic@keyboard-caps" } }, key_text_size = func_key_text_size, width = 0.15 })),
         key(merge(S.x, key { label = { { text = " Z " } }, click = "z", label_symbol = { { text = { "{", "ic@select-all" }, align = "justify" } }, swipe_up = "{", popup = { "SelectAll", "Z", "z" } })),
         key(merge(S.c, key { label = { { text = "X C" } }, click = "x", label_symbol = { { text = { "_", "ic@content-copy" }, align = "justify" } }, swipe_up = "_", popup = { "Copy", "X", "C", "x", "c" } })),
-        key(merge(S.v, key { label = { { text = " V " } }, click = "v", label_symbol = { { text = { "}", "ic@content-paste" }, align = "justify" } }, swipe_up = "}", popup = { "Paste", "V", "v" }, swipe_down = "WindowClipboard" })),
+        key(merge(S.v, key { label = { { text = " V " } }, click = "v", label_symbol = { { text = { "}", "ic@content-paste" }, align = "justify" } }, swipe_up = "}", popup = { "Paste", "V", "v", "VariantReplace" }, swipe_down = "WindowClipboard" })),
         key(merge(S.b, key { label = { { text = "B N" } }, click = "b", label_symbol = { { text = { "|", "ic@content-cut" }, align = "justify" } }, swipe_up = "|", popup = { "Cut", "B", "N", "b", "n" } })),
         key(merge(S.n, key { label = { { text = " M " } }, click = "m", label_symbol = { { text = { "~", "ic@ideogram-cjk" }, align = "justify" } }, swipe_up = "~", popup = { "ZiTools", "M", "m" } })),
         key(merge(S.backspace, key { click = "BackSpace", key_text_size = func_key_text_size, width = 0.15 }))

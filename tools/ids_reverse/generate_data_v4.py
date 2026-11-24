@@ -1114,6 +1114,17 @@ def main():
             h ^= (t >> 8) & 0xFF; h = (h * 16777619) & 0xFFFFFFFF
         return h
 
+    def leaf_struct_hash(tokens):
+        """顶层叶子多重集 hash：长度 + 已排序 token，必须与 C++/Lua 一致。"""
+        h = 2166136261
+        n = len(tokens)
+        h ^= (n & 0xFF); h = (h * 16777619) & 0xFFFFFFFF
+        h ^= ((n >> 8) & 0xFF); h = (h * 16777619) & 0xFFFFFFFF
+        for t in tokens:
+            h ^= (t & 0xFF); h = (h * 16777619) & 0xFFFFFFFF
+            h ^= ((t >> 8) & 0xFF); h = (h * 16777619) & 0xFFFFFFFF
+        return h
+
     # ---- runtime AtomicComponents()，必须逐字一致 ----
     ATOMIC_COMPONENTS = {
         "木", "氵", "水", "火", "灬", "土", "金", "钅", "日", "月", "目", "口",
@@ -1158,8 +1169,7 @@ def main():
     leaves_orig = {}    # cp -> [原始字形]
     leaves_canon = {}   # cp -> [Canon 后字形]
     for cp in chars:
-        raw = [c for c in primary_ids.get(cp, "")
-               if not (0x2FF0 <= ord(c) <= 0x2FFB)]
+        raw = [c for c in primary_ids.get(cp, "") if c not in idc]
         if not raw:
             raw = [chr(cp)]
         leaves_orig[cp] = raw
@@ -1379,6 +1389,20 @@ def main():
     for t in atomic_ids:
         AS += struct.pack('<H', t)
 
+    # ---- LEAF_STRUCT: 顶层叶子多重集 -> 字 id ----
+    leaf_struct_records = []
+    for i, cp in enumerate(chars):
+        toks = sorted(tok_id[c] for c in leaves_canon[cp])
+        leaf_struct_records.append((leaf_struct_hash(toks), i))
+    leaf_struct_records.sort()
+    assert len(leaf_struct_records) == N
+    LS = bytearray()
+    LS += struct.pack('<I', len(leaf_struct_records))
+    for h, cid in leaf_struct_records:
+        LS += struct.pack('<II', h, cid)
+    print(f"LEAF_STRUCT: {len(leaf_struct_records)} records, "
+          f"{len({h for h, _ in leaf_struct_records})} unique hashes.")
+
     # ---- PY ----
     py_items = sorted(pinyin_to_comps.items())
     PB = bytearray()
@@ -1461,7 +1485,7 @@ def main():
         (3, bytes(CHAR)), (1, bytes(CP2ID)),
         (12, KL), (13, bytes(KEY_REC)),
         (10, bytes(TB)), (17, CANON), (18, bytes(AS)), (11, bytes(PB)),
-        (6, bytes(LEAVES)), (7, bytes(ATOMS)),
+        (6, bytes(LEAVES)), (7, bytes(ATOMS)), (19, bytes(LS)),
         (5, bytes(ALTS)), (8, bytes(CS)),
         (14, bytes(POST)),
         (4, bytes(COLD_IDX)), (9, bytes(COLD)),
@@ -1480,7 +1504,7 @@ def main():
         table += struct.pack('<IIQQ', sec_type, 0, offset, len(data))
         blobs.append((offset, data))
         offset += len(data)
-    header = struct.pack('<4sHHIIIIII', b'IDS4', 1, 0, MAX_CP, N,
+    header = struct.pack('<4sHHIIIIII', b'IDS4', 2, 0, MAX_CP, N,
                          len(KEY_REC) // 20, len(sections), 0, 0)
 
     out = "ids_data.bin"

@@ -147,7 +147,40 @@ shared_config:
     data_file: build/ids_data.bin
     max_results: 60 # 最大候选数量
     ids_format: unicode # IDS 显示格式：unicode | bracket | plain
-    shuangpin_scheme: "flypy" # 双拼解析方案：flypy (小鹤双拼) 或 zrm (自然码)
+    algebra: # 输入编码：Rime 拼写代数规则；留空 = 全拼。
+      - xform/^ng/eng$1/
+      - xform/^n/en$1/
+      - xform/^m/me$1/
+      - derive/^([jqxy])u$/$1v/
+      - derive/^([aoe])([ioun])$/$1$1$2/
+      - xform/^([aoe])(ng)?$/$1$1$2/
+      - xform/iu$/Q/
+      - xform/(.)ei$/$1W/
+      - xform/uan$/R/
+      - xform/[uv]e$/T/
+      - xform/un$/Y/
+      - xform/^sh/U/
+      - xform/^ch/I/
+      - xform/^zh/V/
+      - xform/uo$/O/
+      - xform/ie$/P/
+      - xform/(.)i?ong$/$1S/
+      - xform/(ing|uai)$/K/
+      - xform/(.)ai$/$1D/
+      - xform/(.)eng$/$1G/
+      - xform/(.)en$/$1F/
+      - xform/[iu]ang$/L/
+      - xform/(.)ang$/$1H/
+      - xform/ian$/M/
+      - xform/(.)an$/$1J/
+      - xform/(.)ou$/$1Z/
+      - xform/[iu]a$/X/
+      - xform/iao$/N/
+      - xform/(.)ao$/$1C/
+      - xform/ui$/V/
+      - xform/in$/B/
+      - xlit/QWERTYUIOPASDFGHJKLZXCVBNM/qwertyuiopasdfghjklzxcvbnm/
+    algebra_notation: rpn # infix（默认）| rpn
     show_pinyin: true # 是否在候选提示中显示读音
     show_ids: true # 是否在候选提示中显示IDS结构
     show_unicode: true # 是否在候选提示中显示Unicode编码
